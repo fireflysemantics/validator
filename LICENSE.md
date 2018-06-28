@@ -1,6 +1,8 @@
 MIT License
 
-Copyright (c) 2018 fireflysemantics
+Copyright (c) 2018 Firefly Semantics Corporation
+
+Copyright (c) 2018 Ole Ersoy
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
