@@ -13,7 +13,7 @@ export class ValidationContainer {
   /**
    * The index for all of the ValidationContext instances.
    * Not meant to be accessed directly.  Only decorators should
-   * be modifying the state of the cache by using the addValidationContext() method.
+   * be modifying the state of the cache by using the @see addValidationContext method.
    */
   static cache: IValidationContextsIndex = {};
 

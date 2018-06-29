@@ -3,7 +3,6 @@ import { ValidationContext } from '@fireflysemantics/container/validation/Valida
  * Options used to pass to validation decorators.
  */
 export interface ValidationOptions {
-
     /**
      * Error message created on validation fail.
      */

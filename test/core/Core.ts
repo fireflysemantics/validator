@@ -1,7 +1,7 @@
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-
+import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 /**
  * Used to perform checks that should be true across 
  * all decorator use cases.
@@ -15,6 +15,7 @@ export function Core(validationOptions?: ValidationOptions) {
       Core.name, //Decorator name
       propertyName,
       () => true, //Always valid
+      () => [],
       true, //Stop in the even the validation fails
       errorMessage,
       validationOptions);
@@ -23,12 +24,16 @@ export function Core(validationOptions?: ValidationOptions) {
 }
 
 /**
- * The core sample default error message function.
- * Uses the message similar to the IsDefined validation.
+ * The core default error message example function.
  * @param vc The ValidationContext
- * @param value The value(s) (Could be an array) being validated
+ * @param o The object being validated
+ * @return The error message.
  */
-function errorMessage(vc: ValidationContext, value:any):string {
-  const propertyName = vc.propertyName;
-  return `Value(s) assigned to ${propertyName} must be defined.`
+function errorMessage(vc: ValidationContext, o: any):string {
+  const messageLiteral: string = "must be valid";
+
+  if (o[vc.propertyName] instanceof Array) {
+    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
+  }
+  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
 }

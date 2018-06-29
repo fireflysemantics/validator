@@ -1,7 +1,9 @@
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { EACH, isDefined } from "@fireflysemantics/utilities/utilities";
+import { isDefined } from "@fireflysemantics/utilities/utilities";
+import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
+
 
 /**
  * Checks if given value is defined (!== undefined, !== null).
@@ -13,7 +15,8 @@ export function IsDefined(validationOptions?: ValidationOptions) {
       object.constructor,
       IsDefined.name,
       propertyName,
-      isDefined,
+      validateValue,
+      validateArray,
       true,
       errorMessage,
       validationOptions
@@ -22,11 +25,38 @@ export function IsDefined(validationOptions?: ValidationOptions) {
   };
 }
 
-function errorMessage(vc: ValidationContext, value: any):string {
+/**
+ * @param vc 
+ * @param o 
+ * @return True if the value is valid.
+ */
+export function validateValue(vc:ValidationContext, o:any):boolean {
+  return isDefined(o[vc.propertyName]);
+}
+
+export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
+  const errorIndex:Array<Number> = [];
+  values.forEach((v, i)=>{
+    if (!isDefined(v)) {
+      errorIndex.push(i);
+    }
+  });
+  return errorIndex;
+}
+
+/**
+ * The generated error message string indicating 
+ * that the value is not valid according to {@link IsDefined}.
+ * 
+ * @param vc The validation context
+ * @param o The object being validated
+ * @return The error message. 
+ */
+export function errorMessage(vc: ValidationContext, o: any):string {
   const messageLiteral: string = "should not be null or undefined";
 
-  if (value instanceof Array) {
-    return `${EACH} ${vc.propertyName} ${messageLiteral}`;
+  if (o[vc.propertyName] instanceof Array) {
+    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
   }
-  return `The value contained by ${vc.propertyName} ${messageLiteral}`;
+  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
 }

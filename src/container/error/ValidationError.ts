@@ -1,48 +1,48 @@
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { isDefined } from "@fireflysemantics/utilities/utilities";
 
 /**
  * Validation error description.
  */
 export class ValidationError {
+
   /**
    * The object containing the invalid property.
    */
   object: any;
+
+  /**
+   * The name of the property containing the value that
+   * did not pass the validation check.
+   */
+  propertyName: string;
+
   /**
    * The value that failed the validation check.
    */
   value: any;
 
   /**
-   * Indexes of values that failed the check.
+   * If {@link ValidationError.isValueArray} is true,
+   * this property stores the indexes of the values that 
+   * failed validation.  
    */
-  indexes?:Array<Number>;
-
-  /** The validation context */
-  vc: ValidationContext;
-
-  constructor(object: any, vc: ValidationContext, value: any) {
-    this.object = object;
-    this.value = value;
-    this.vc = vc;
-  }
-  
-  private pushIndexIfAbsent(index:Number):void {
-    if (!isDefined(this.indexes)) {
-      this.indexes = new Array<Number>();
-      this.indexes.push(index);
-    }
-    else {
-      this.indexes.push(index);
-    }
-  }
+  errorIndex?: Number[];
 
   /**
-   * Update the indexes array with the index of the invalid value.
-   * @param index 
+   * Whether the value is an array.
    */
-  public addErrorIndex(index:Number):void {
-    this.pushIndexIfAbsent(index);
-  }
+  isValueArray: boolean;
+
+  /** 
+   * The validation context 
+   */
+  vc: ValidationContext;
+
+  constructor(vc: ValidationContext, object: any,  propertyName:string, value: any, errorIndex?: Number[]) {
+    this.vc = vc;
+    this.propertyName = propertyName;
+    this.object = object;
+    this.value = value;
+    this.errorIndex = errorIndex;
+  }  
 }

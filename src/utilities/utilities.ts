@@ -2,13 +2,6 @@ import { ValidationContainer } from "@fireflysemantics/container/validation/Vali
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ErrorContainer } from "@fireflysemantics/container/error/ErrorContainer";
 import { ValidationError } from "@fireflysemantics/container/error/ValidationError";
-import { IValidationContextIndex } from "@fireflysemantics/container/validation/IValidationContextIndex";
-
-/**
- * Constant string literal used for message completion
- * when property values are stored in arrays.
- */
-export const EACH:string = "Each value in";
 
 /**
  * @param value The value being checked to ensure that it is not null or undefined.
@@ -53,31 +46,32 @@ export function validate(o: Array<any> | any): void {
 export function validateProperty(o: any, propertyName: string): boolean {
   let valid = true;
   const key = getValidationContextKey(o.constructor.name, propertyName);
-  const vci = ValidationContainer.getValidationContextValues(key);
+  const vcs = ValidationContainer.getValidationContextValues(key);
 
   const propertyValue = o[propertyName];
 
-  vci.every((vc:ValidationContext)=> {
-    const ve:ValidationError = new ValidationError(o, vc, propertyValue);
+  vcs.every((vc:ValidationContext)=> {
     if (propertyValue instanceof Array) {
-      propertyValue.forEach((v:any, index:Number)=>{
-        if (!vc.validate(v)) {
-          ve.addErrorIndex(index);
-          ErrorContainer.addValidationError(ve);
-          valid = false;
-        }
-      });
+      const result: Number[] = vc.validateArray(vc, propertyValue);
+      if (!isArrayEmpty(result)) {
+        const ve:ValidationError = 
+              new ValidationError(vc, o, propertyName, propertyValue, result);
+              ErrorContainer.addValidationError(ve);
+              valid = false;    
+      } 
     }
     else {
-      if (!vc.validate(propertyValue)) {
-        ErrorContainer.addValidationError(ve);
+      if (!vc.validateValue(vc, o)) {
+        const ve:ValidationError = 
+              new ValidationError(vc, o, propertyName, propertyValue);
+              ErrorContainer.addValidationError(ve);
         valid = false;
       }
     }
     if (!valid && vc.stop) {
-      return false;
+      return false; //Stops the every loop from executing any other decorator validation contexts present
     }
-    else return true;
+    else return true; //Continue validation the property
   });
   return valid;
 }
@@ -88,4 +82,13 @@ export function validateProperty(o: any, propertyName: string): boolean {
 */
 export function getValidationContextSignature(decorator: string, targetName:string, propertyName:string):string {
  return `${decorator}_${targetName}_${propertyName}`;
+}
+
+/**
+ * Checks if an array contains any items.
+ * @param a The array
+ * @return True if the array is empty and false otherwise.
+ */
+export function isArrayEmpty(a:any[]) {
+  return a.length == 0 ? true : false; 
 }

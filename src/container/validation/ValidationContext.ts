@@ -1,6 +1,23 @@
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 
 /**
+ * The type api signature for the validation function that validates single values.
+ */
+export type ValidationValueFunctionType = (vc: ValidationContext, object:any)=>boolean;
+
+/**
+ * The type api signature for the validation function that validates single values.
+ */
+export type ValidationArrayFunctionType = (vc: ValidationContext, values:Array<any>)=>Array<Number>;
+
+/**
+ * The type api signature for the error message function.
+ * @param vc The validation context
+ * @param o The object being validated
+ */
+export type ErrorMessageType = (vc: ValidationContext, o: any) => string;
+
+/**
  * Constructor arguments used by to lookup the validation function
  * via the ValidationContainer.
  */
@@ -28,9 +45,15 @@ export class ValidationContext {
   propertyName: string;
 
   /**
-   * Function that performs the validation.
+   * Function that performs the validation of single values.
    */
-  validate: Function;
+  validateValue: ValidationValueFunctionType;
+
+  /**
+   * Function that performs the validation of properties 
+   * containing arrays.
+   */
+  validateArray: ValidationArrayFunctionType;
 
   /**
    * Indicates whether validation should continue in the
@@ -43,7 +66,7 @@ export class ValidationContext {
   /**
    * The default error message function
    */
-  errorMessage: ((vc: ValidationContext, value: any) => string);
+  errorMessage: ErrorMessageType;
 
   /**
    * Validation options.
@@ -65,9 +88,10 @@ export class ValidationContext {
     target: Function,
     decorator: string,
     propertyName: string,
-    validate: Function,
+    validateValue: ValidationValueFunctionType,
+    validateArray: ValidationArrayFunctionType,
     stop: boolean,
-    errorMessage: ((vc: ValidationContext, value: any) => string),
+    errorMessage: ErrorMessageType,
     validationOptions?: ValidationOptions,
     validationParameters?: any[],
     validationTypeOptions?: any
@@ -76,7 +100,8 @@ export class ValidationContext {
     this.target = target;
     this.decorator = decorator;
     this.propertyName = propertyName;
-    this.validate = validate;
+    this.validateValue = validateValue;
+    this.validateArray = validateArray;
     this.stop = stop;
     this.errorMessage = errorMessage;
     this.validationOptions = validationOptions;
