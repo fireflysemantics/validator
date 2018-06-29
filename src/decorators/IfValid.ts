@@ -37,11 +37,8 @@ function validateValue(vc:ValidationContext, o:any) {
   return validateProperty(o, propertyName);
 }
 
-function errorMessage(vc: ValidationContext, value: any):string {
-  const messageLiteral: string = "should not be null or undefined";
-
-  if (value instanceof Array) {
-    return `${vc.propertyName} ${messageLiteral}`;
-  }
-  return `The value contained by ${vc.propertyName} ${messageLiteral}`;
+function errorMessage(vc: ValidationContext, o: any):string {
+  return `The target property ${vc.validationParameters[0]}
+          has an invalid value therefore the validation of the 
+          property ${vc.propertyName} will not proceed.` 
 }

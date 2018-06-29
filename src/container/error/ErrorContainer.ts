@@ -10,7 +10,7 @@ export class ErrorContainer {
   /**
    * The index for all of the ValidationContext instances.
    */
-  private static cache: IValidationErrorIndex = {};
+  static cache: IValidationErrorIndex = {};
 
   /**
    * If the context array is absent it is created, otherwise
@@ -47,18 +47,25 @@ export class ErrorContainer {
   public static getValidationErrors(key: string): Array<ValidationError> {
     return ErrorContainer.cache[key];
   }
+}
+
+/**
+ * Helper methods for the error container.
+ */
+export class ErrorContainerHelper {
  /**
    * Gets all ErrorContainer keys.
    * @returns All the error container keys
    */
   public static getErrorContainerKeys(key: string): Array<string> {
     return Object.keys(<any> ErrorContainer.cache);
-  }  
- /**
+  }
+
+  /**
    * Gets all ErrorContainer values.
    * @returns All the error container values
    */
-  public static getErrorContainerValues(key: string): Array<Array<ValidationError>> {
+  public static getErrorContainerValues(): Array<Array<ValidationError>> {
     return Object.values(<any> ErrorContainer.cache);
   }      
 }
