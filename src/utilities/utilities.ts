@@ -2,17 +2,7 @@ import { ValidationContainer } from "@fireflysemantics/container/validation/Vali
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ErrorContainer } from "@fireflysemantics/container/error/ErrorContainer";
 import { ValidationError } from "@fireflysemantics/container/error/ValidationError";
-
-/**
- * @param value The value being checked to ensure that it is not null or undefined.
- * @returns boolean True if the value is not null or undefined, false otherwise.
- *
- * See https://stackoverflow.com/questions/51003292/exporting-utility-functions-in-typescript/51004236#51004236
- * for an implementation reference.
- */
-export function isDefined<T>(value: T | null | undefined): value is T {
-  return value != null; //This checks for undefined automatically.
-}
+import { isArrayEmpty} from "@fireflysemantics/is";
 
 /**
  * Creates the validation context key used to lookup the validation context for the property.
@@ -76,19 +66,10 @@ export function validateProperty(o: any, propertyName: string): boolean {
   return valid;
 }
 
-   /**
-* The signature for the decorator, class, and class property 
-* combination.
-*/
+/**
+ * The signature for the decorator, class, 
+ * and class property combination.
+ */
 export function getValidationContextSignature(decorator: string, targetName:string, propertyName:string):string {
  return `${decorator}_${targetName}_${propertyName}`;
-}
-
-/**
- * Checks if an array contains any items.
- * @param a The array
- * @return True if the array is empty and false otherwise.
- */
-export function isArrayEmpty(a:any[]) {
-  return a.length == 0 ? true : false; 
 }

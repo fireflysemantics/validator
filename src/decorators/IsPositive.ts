@@ -1,24 +1,24 @@
+import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { isDefined } from "@fireflysemantics/is";
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
+import { isPositive } from "@fireflysemantics/is";
 
 /**
- * Decorator that checks if the property is defined
- * (Not null or undefined).  
+ * Decorator that checks if the property is positive.  
  * 
- * See {@link isDefined} for a description of the method
+ * See {@link isPositive} for a description of the method
  * performing the validation.
  * 
  * @param validationOptions The validation options
  */
-export function IsDefined(validationOptions?: ValidationOptions) {
+export function IsPositive(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
+    
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsDefined.name,
+      IsPositive.name,
       propertyName,
       validateValue,
       validateArray,
@@ -31,14 +31,14 @@ export function IsDefined(validationOptions?: ValidationOptions) {
 }
 
 /**
- * Value is valid if it passes the {@link isDefined} check.
+ * Value is valid if it passes the {@link isPositive} check.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
- * @return True if the value is not null or undefined, false otherwise.
+ * @return The result of the call to {@link isPositive}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isDefined(o[vc.propertyName]);
+  return isPositive(o[vc.propertyName]);
 }
 /**
  * 
@@ -46,10 +46,10 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
  * @param values The array of values. 
  * @return An empty array if valid, an array of indexes otherwise.
  */
-export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
-  const errorIndex:Array<Number> = [];
+export function validateArray(vc:ValidationContext, values:any[]):Array<number> {
+  const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isDefined(v)) {
+    if (!isPositive(v)) {
       errorIndex.push(i);
     }
   });
@@ -58,14 +58,15 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
 /**
  * The generated error message string indicating 
- * that the value is not valid according to {@link IsDefined}.
+ * that the value is not valid according to {@link isPositive}.
  * 
  * @param vc The validation context
  * @param o The object being validated
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should not be null or undefined";
+
+  const messageLiteral: string = "should be positive ";
 
   if (o[vc.propertyName] instanceof Array) {
     return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;

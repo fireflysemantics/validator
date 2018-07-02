@@ -7,10 +7,9 @@ import { expect } from "chai";
 import "mocha";
 
 class IfValidTest {
-  @IsDefined() 
-  p0: any = null;
-  @IsDefined() 
+  @IsDefined() p0: any = null;
   @IfValid("p0")
+  @IsDefined() 
   p1: any = "Should not validate";
 }
 
@@ -21,6 +20,6 @@ describe("IfValid Validation", () => {
     expect(validateProperty(ivt, "p1")).to.be.false;
     const key = getValidationContextKey(ivt.constructor.name, "p1");
     expect(ErrorContainer.getValidationErrors(key).length).to.equal(1);
-    //console.dir(ErrorContainer.getValidationErrors(key));
+//    console.dir(ErrorContainer.getValidationErrors(key));
   });
 });

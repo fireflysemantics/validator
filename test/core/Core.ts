@@ -2,6 +2,27 @@ import { ValidationOptions } from "@fireflysemantics/container/validation/Valida
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
 import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
+
+/**
+ * Function that always returns true regardless
+ * of the argument.
+ * 
+ * @param value 
+ */
+function isAlwaysTrue(value:any) {
+  return true
+};
+
+/**
+ * Decorator that checks on the property value.
+ * Always return true.
+ *
+ * See {@link isAlwaysTrue} for a description of the method
+ * performing the validation.
+ * 
+ * @param validationOptions The validation options
+ */
+
 /**
  * Used to perform checks that should be true across 
  * all decorator use cases.
@@ -14,7 +35,7 @@ export function Core(validationOptions?: ValidationOptions) {
       object.constructor, //Decorator constructor
       Core.name, //Decorator name
       propertyName,
-      () => true, //Always valid
+      isAlwaysTrue, //Always valid
       () => [],
       true, //Stop in the even the validation fails
       errorMessage,

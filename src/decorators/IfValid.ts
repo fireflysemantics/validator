@@ -2,13 +2,14 @@ import { ValidationOptions } from "@fireflysemantics/container/validation/Valida
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
 import { validateProperty } from "@fireflysemantics/utilities/utilities";
+
 /**
- * Checks if the propertyName value attached to the 
- * property name provided passes the validation checks
- * of all decorators attached to that property.
+ * Decorator that checks if the target argument is a valid property
+ * before proceeding with the validation of the property that the 
+ * {@link IfValid} decorator decorates.
  * 
- * If the checks to not pass then this decorator stops the validation
- * process for this specific property.
+ * @param target The name of the property that should be valid.
+ * @param validationOptions The validation options
  */
 export function IfValid(target: string, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
@@ -32,9 +33,16 @@ export function IfValid(target: string, validationOptions?: ValidationOptions) {
   };
 }
 
+/**
+ * Validation continues if the the {@link validateProperty} check
+ * passes on the target property.
+ * 
+ * @param vc The validation context
+ * @param o The object containing the property referenced by the validation parameter
+ */
 function validateValue(vc:ValidationContext, o:any) {
-  const propertyName = vc.validationParameters[0];
-  return validateProperty(o, propertyName);
+  const target = vc.validationParameters[0];
+  return validateProperty(o, target);
 }
 
 function errorMessage(vc: ValidationContext, o: any):string {

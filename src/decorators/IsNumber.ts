@@ -1,44 +1,50 @@
+import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { isDefined } from "@fireflysemantics/is";
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
+import { isNumber,IsNumberOptions  } from "@fireflysemantics/is";
 
 /**
- * Decorator that checks if the property is defined
- * (Not null or undefined).  
+ * Decorator that checks if the property is a Number.  
  * 
- * See {@link isDefined} for a description of the method
+ * See {@link IsNumberOptions}
+ * for the options configuration details.
+ * 
+ * See {@link isNumber} for a description of the method
  * performing the validation.
  * 
+ * @param IsNumberOptions The configuration interface for the options.
  * @param validationOptions The validation options
  */
-export function IsDefined(validationOptions?: ValidationOptions) {
+export function IsNumber(options: IsNumberOptions = {}, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
+    
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsDefined.name,
+      IsNumber.name,
       propertyName,
       validateValue,
       validateArray,
       true,
       errorMessage,
-      validationOptions
+      validationOptions,
+      null,
+      options
     );
     ValidationContainer.addValidationContext(vc);
   };
 }
 
 /**
- * Value is valid if it passes the {@link isDefined} check.
+ * Value is valid if it passes the {@link isNumber} check.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
- * @return True if the value is not null or undefined, false otherwise.
+ * @return The result of the call to {@link isNumber}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isDefined(o[vc.propertyName]);
+  return isNumber(o[vc.propertyName], vc.validationTypeOptions);
 }
 /**
  * 
@@ -49,7 +55,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isDefined(v)) {
+    if (!isNumber(v, vc.validationTypeOptions)) {
       errorIndex.push(i);
     }
   });
@@ -58,14 +64,15 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
 /**
  * The generated error message string indicating 
- * that the value is not valid according to {@link IsDefined}.
+ * that the value is not valid according to {@link isNumber}.
  * 
  * @param vc The validation context
  * @param o The object being validated
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should not be null or undefined";
+
+  const messageLiteral: string = "should be a number";
 
   if (o[vc.propertyName] instanceof Array) {
     return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
