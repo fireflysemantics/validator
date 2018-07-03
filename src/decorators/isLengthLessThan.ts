@@ -6,7 +6,7 @@ import { maxLength } from "@fireflysemantics/is";
 
 /**
  * Decorator that checks if the property value
- * is less than the argument.  
+ * is less than the argument.
  * 
  * See {@link maxLength} for 
  * a description of the method
@@ -15,7 +15,7 @@ import { maxLength } from "@fireflysemantics/is";
  * @param target The maximum length.
  * @param validationOptions The validation options
  */
-export function HasMinLength(target: number, validationOptions?: ValidationOptions) {
+export function IsLengthLessThan(target: number, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(target);
@@ -23,7 +23,7 @@ export function HasMinLength(target: number, validationOptions?: ValidationOptio
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      HasMinLength.name,
+      IsLengthLessThan.name,
       propertyName,
       validateValue,
       validateArray,

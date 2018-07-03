@@ -43,7 +43,9 @@ export class ValidationContainer {
    * IValidationContextIndex).
    * @returns An array of ValidationContext instances contained in the cache that corresponds to a specific Object_property key or null if it does not exist.
    */
-  public static getValidationContextValues(key: any): null | Array<ValidationContext> {
+  public static getValidationContextValues(
+    key: any
+  ): null | Array<ValidationContext> {
     if (typeof key === `string`) {
       const vci = ValidationContainer.cache[<string>key];
       return vci ? Object.values(<any>vci) : null;

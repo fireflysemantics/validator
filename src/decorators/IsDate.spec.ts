@@ -1,25 +1,24 @@
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { getValidationContextKey } from "@fireflysemantics/utilities/utilities";
-import { IsDefined } from "@fireflysemantics/decorators/IsDefined";
+import { IsDate } from "@fireflysemantics/decorators/IsDate";
 import { expect } from "chai";
 import "mocha";
 const { getOwnPropertyNames } = Object;
 const { getValidationContextValues } = ValidationContainer;
 
-class IsDefinedValid {
-  @IsDefined() p0: any = "";
+class IsDateValid {
+  @IsDate() p1: Date = new Date();
 }
+const IDV: any = new IsDateValid();
 
-const IDV: any = new IsDefinedValid();
-
-describe("IsDefined Validation", () => {
-  it(`should return true when using the 
-      ValidationContext.validate method 
-      to check valid values`, () => {
-    getOwnPropertyNames(IDI).forEach(pn => {
+describe("IsDate Validation", () => {
+  it(`should return true when using 
+      the ValidationContext.validate 
+      method to check valid values`, () => {
+    getOwnPropertyNames(IDV).forEach(pn => {
       const key: string = getValidationContextKey(IDV.constructor.name, pn);
-      const validators = getValidationContextValues(key);
+      const validators = getValidationContextValues(key)
 
       const vc: ValidationContext = validators[0];
       expect(vc.propertyName).to.equal(pn);
@@ -29,21 +28,20 @@ describe("IsDefined Validation", () => {
     });
   });
 
-  class IsDefinedInvalid {
-    @IsDefined() p0: any = null;
+  class IsDateInvalid {
+    @IsDate() p0: Date = null;
   }
-  
-  const IDI: any = new IsDefinedInvalid();
-  
-  
+  const INI: any = new IsDateInvalid();  
+
   it(`should return false when using the 
-      ValidationContext.validate method to check invalid values`, () => {    
-    Object.getOwnPropertyNames(IDI).forEach(pn => {
-      const key: string = getValidationContextKey(IDI.constructor.name, pn);
+      ValidationContext.validate method 
+      to check invalid values`, () => {    
+    Object.getOwnPropertyNames(INI).forEach(pn => {
+      const key: string = getValidationContextKey(INI.constructor.name, pn);
       const validators = getValidationContextValues(key);
 
       const vc: ValidationContext = validators[0];
-      expect(vc.validateValue(vc, IDI)).to.be.false;
+      expect(vc.validateValue(vc, INI)).to.be.false;
     });
   });
 });
