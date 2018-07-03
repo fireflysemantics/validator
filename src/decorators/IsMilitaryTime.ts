@@ -2,23 +2,23 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { isDateString } from "@fireflysemantics/is";
+import { isMilitaryTime } from "@fireflysemantics/is";
 
 /**
- * Decorator that checks if the property is a Date string.  
+ * Decorator that checks if the value is in military time format.  
  * 
- * See {@link isDateString} for a description of the method
+ * See {@link isMilitaryTime} for a description of the method
  * performing the validation.
  * 
  * @param validationOptions The validation options
  */
-export function IsDateString(validationOptions?: ValidationOptions) {
+export function IsMilitaryTime(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsDateString.name,
+      IsMilitaryTime.name,
       propertyName,
       validateValue,
       validateArray,
@@ -31,14 +31,14 @@ export function IsDateString(validationOptions?: ValidationOptions) {
 }
 
 /**
- * Value is valid if it passes the {@link isDateString} check.
+ * Value is valid if it passes the {@link isMilitaryTime} check.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
- * @return The result of the call to {@link isDateString}
+ * @return The result of the call to {@link isMilitaryTime}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isDateString(o[vc.propertyName]);
+  return isMilitaryTime(o[vc.propertyName]);
 }
 /**
  * 
@@ -49,7 +49,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isDateString(v)) {
+    if (!isMilitaryTime(v)) {
       errorIndex.push(i);
     }
   });
@@ -58,7 +58,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
 /**
  * The generated error message string indicating 
- * that the value is not valid according to {@link IsDateString}.
+ * that the value is not valid according to {@link isMilitaryTime}.
  * 
  * @param vc The validation context
  * @param o The object being validated
@@ -66,7 +66,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
 
-  const messageLiteral: string = "should be a ISOString date";
+  const messageLiteral: string = "should be in military time format";
 
   if (o[vc.propertyName] instanceof Array) {
     return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;

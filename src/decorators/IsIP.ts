@@ -2,18 +2,19 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { isDivisibleBy } from "@fireflysemantics/is";
+import { isIP } from "@fireflysemantics/is";
 
 /**
- * Decorator that checks if the property is divisible by the argument.  
+ * Decorator that checks if the property value
+ * is less than the argument.  
  * 
- * See {@link isDivisibleBy} for a description of the method
+ * See {@link isIP} for a description of the method
  * performing the validation.
  * 
- * @param target The number that the value should be divisible by.
+ * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options
  */
-export function IsDivisibleBy(target: number, validationOptions?: ValidationOptions) {
+export function IsIP(target: number, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(target);
@@ -21,7 +22,7 @@ export function IsDivisibleBy(target: number, validationOptions?: ValidationOpti
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsDivisibleBy.name,
+      IsIP.name,
       propertyName,
       validateValue,
       validateArray,
@@ -35,16 +36,20 @@ export function IsDivisibleBy(target: number, validationOptions?: ValidationOpti
 }
 
 /**
- * Value is valid if it passes the {@link isDivisibleBy} check.
+ * Value is valid if it passes the {@link isIP} check.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
- * @return The result of the call to {@link isDivisibleBy}
+ * @return The result of the call to {@link isIP}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  const target:number = vc.validationParameters[0];
-  return isDivisibleBy(o[vc.propertyName], target);
+  let target:any = null;
+  if (vc.validationParameters[0] !== undefined) {
+    const target:4|6 = vc.validationParameters[0];
+  }
+  return isIP(o[vc.propertyName], target);
 }
+
 /**
  * 
  * @param vc  The validation context.
@@ -52,10 +57,13 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
  * @return An empty array if valid, an array of indexes otherwise.
  */
 export function validateArray(vc:ValidationContext, values:any[]):Array<number> {
-  const target:number = vc.validationParameters[0];
+  let target:any = null;
+  if (vc.validationParameters[0] !== undefined) {
+    const target:4|6 = vc.validationParameters[0];
+  }
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isDivisibleBy(v, target)) {
+    if (!isIP(v, target)) {
       errorIndex.push(i);
     }
   });
@@ -64,7 +72,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
 
 /**
  * The generated error message string indicating 
- * that the value is not valid according to {@link isDivisibleBy}.
+ * that the value is not valid according to {@link isIP}.
  * 
  * @param vc The validation context
  * @param o The object being validated
@@ -72,7 +80,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
 
-  const messageLiteral: string = `should be a divisible by ${vc.validationParameters[0]}`;
+  const messageLiteral: string = "should be an IP address";
 
   if (o[vc.propertyName] instanceof Array) {
     return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;

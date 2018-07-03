@@ -1,6 +1,6 @@
 {
   "name": "@fireflysemantics/validator",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Typescript Validation Decorators and Executor",
   "main": "index.ts",
   "scripts": {
@@ -40,7 +40,7 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "@fireflysemantics/is": "^1.0.2",
+    "@fireflysemantics/is": "^1.4.0",
     "@types/validator": "^9.4.1",
     "validator": "^10.4.0"
   }

@@ -1,19 +1,19 @@
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { isIn } from "@fireflysemantics/is";
+import { arrayContains } from "@fireflysemantics/is";
 import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 
 /**
- * Decorator that checks if the property value
- * is in array of allowed values.  
+ * Decorator that checks if the array valued property value
+ * is in the array of allowed values.  
  * 
- * See {@link isIn} for a description of the method
+ * See {@link arrayContains} for a description of the method
  * performing the validation.
  * 
  * @param validationOptions The validation options
  */
-export function IsIn(target: any[], validationOptions?: ValidationOptions) {
+export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) {
 
   const validationParameters:any[] = [];
   validationParameters.push(target);
@@ -22,7 +22,7 @@ export function IsIn(target: any[], validationOptions?: ValidationOptions) {
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsIn.name,
+      IsArrayIn.name,
       propertyName,
       validateValue,
       null,
@@ -35,7 +35,7 @@ export function IsIn(target: any[], validationOptions?: ValidationOptions) {
 }
 
 /**
- * Value is valid if it passes the {@link isIn} check.
+ * Value is valid if it passes the {@link arrayContains} check.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
@@ -43,7 +43,7 @@ export function IsIn(target: any[], validationOptions?: ValidationOptions) {
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return isIn(o[vc.propertyName], target);
+  return arrayContains(o[vc.propertyName], target);
 }
 
 /**
@@ -56,7 +56,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isIn(v, target)) {
+    if (!arrayContains(v, target)) {
       errorIndex.push(i);
     }
   });
@@ -65,14 +65,14 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
 /**
  * The generated error message string indicating 
- * that the value is not valid according to {@link isIn}.
+ * that the value is not valid according to {@link arrayContains}.
  * 
  * @param vc The validation context
  * @param o The object being validated
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should be in the target array";
+  const messageLiteral: string = "should be contained in the target array";
 
   if (o[vc.propertyName] instanceof Array) {
     return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
