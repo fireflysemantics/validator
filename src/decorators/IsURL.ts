@@ -32,6 +32,7 @@ export function IsURL(options?: ValidatorJS.IsURLOptions, validationOptions?: Va
       null,
       options
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

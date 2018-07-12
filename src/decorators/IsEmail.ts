@@ -28,6 +28,7 @@ export function IsEmail(options?: IsEmailOptions, validationOptions?: Validation
       null,
       options
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

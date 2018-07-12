@@ -31,6 +31,7 @@ export function IsUUID(target: number, validationOptions?: ValidationOptions) {
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

@@ -1,11 +1,10 @@
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { getValidationContextKey } from "@fireflysemantics/utilities/utilities";
+import { getValidationContextContainerKey } from "@fireflysemantics/utilities/utilities";
 import { IsDate } from "@fireflysemantics/decorators/IsDate";
 import { expect } from "chai";
 import "mocha";
 const { getOwnPropertyNames } = Object;
-const { getValidationContextValues } = ValidationContainer;
 
 class IsDateValid {
   @IsDate() p1: Date = new Date();
@@ -17,8 +16,8 @@ describe("IsDate Validation", () => {
       the ValidationContext.validate 
       method to check valid values`, () => {
     getOwnPropertyNames(IDV).forEach(pn => {
-      const key: string = getValidationContextKey(IDV.constructor.name, pn);
-      const validators = getValidationContextValues(key)
+      const key: string = getValidationContextContainerKey(IDV.constructor.name, pn);
+      const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
       expect(vc.propertyName).to.equal(pn);
@@ -37,8 +36,8 @@ describe("IsDate Validation", () => {
       ValidationContext.validate method 
       to check invalid values`, () => {    
     Object.getOwnPropertyNames(INI).forEach(pn => {
-      const key: string = getValidationContextKey(INI.constructor.name, pn);
-      const validators = getValidationContextValues(key);
+      const key: string = getValidationContextContainerKey(INI.constructor.name, pn);
+      const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
       expect(vc.validateValue(vc, INI)).to.be.false;

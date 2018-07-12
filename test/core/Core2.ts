@@ -6,12 +6,12 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 /**
  * Function that always returns true regardless
  * of the argument.
- * 
- * @param value 
+ *
+ * @param value
  */
-function isAlwaysTrue(value:any) {
-  return true
-};
+function isAlwaysTrue(value: any) {
+  return true;
+}
 
 /**
  * Decorator that checks on the property value.
@@ -19,27 +19,28 @@ function isAlwaysTrue(value:any) {
  *
  * See {@link isAlwaysTrue} for a description of the method
  * performing the validation.
- * 
+ *
  * @param validationOptions The validation options
  */
 
 /**
- * Used to perform checks that should be true across 
+ * Used to perform checks that should be true across
  * all decorator use cases.
  */
-export function Core(validationOptions?: ValidationOptions) {
+export function Core2(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
-
     const vc = new ValidationContext(
       object, //decorator
       object.constructor, //Decorator constructor
-      Core.name, //Decorator name
+      Core2.name, //Decorator name
       propertyName,
       isAlwaysTrue, //Always valid
       () => [],
       true, //Stop in the even the validation fails
       errorMessage,
-      validationOptions);
+      validationOptions
+    );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }
@@ -50,7 +51,7 @@ export function Core(validationOptions?: ValidationOptions) {
  * @param o The object being validated
  * @return The error message.
  */
-function errorMessage(vc: ValidationContext, o: any):string {
+function errorMessage(vc: ValidationContext, o: any): string {
   const messageLiteral: string = "must be valid";
 
   if (o[vc.propertyName] instanceof Array) {

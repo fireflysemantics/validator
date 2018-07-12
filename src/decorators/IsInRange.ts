@@ -2,13 +2,13 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { length, isDefined } from "@fireflysemantics/is"; 
+import { isLengthInRange, isDefined } from "@fireflysemantics/is"; 
 
 /**
  * Decorator that checks if the string length
  * is in range.  
  * 
- * See {@link length} for a description of the method
+ * See {@link isLengthInRange} for a description of the method
  * performing the validation.
  * 
  * @param min The minimum length.
@@ -38,6 +38,7 @@ export function IsInRange(min: number, max?: number, validationOptions?: Validat
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }
@@ -55,7 +56,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
   if (vc.validationParameters[1] !== undefined) {
     max = vc.validationParameters[1];
   }
-  return length(o[vc.propertyName], min, max);
+  return isLengthInRange(o[vc.propertyName], min, max);
 }
 
 /**
@@ -71,7 +72,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
   }
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!length(v, min, max)) {
+    if (!isLengthInRange(v, min, max)) {
       errorIndex.push(i);
     }
   });

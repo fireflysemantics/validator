@@ -1,14 +1,14 @@
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { arrayNotContains } from "@fireflysemantics/is";
+import { isNotIn } from "@fireflysemantics/is";
 import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 
 /**
  * Decorator that checks if the array value
- * is in not array of allowed values.  
+ * is not in the array of values.
  * 
- * See {@link arrayNotContains} for a description of the method
+ * See {@link isNotIn} for a description of the method
  * performing the validation.
  * 
  * @param validationOptions The validation options
@@ -31,11 +31,12 @@ export function IsIn(target: any[], validationOptions?: ValidationOptions) {
       validationOptions
     );
     ValidationContainer.addValidationContext(vc);
+    ValidationContainer.addValidationContext(vc);
   };
 }
 
 /**
- * Value is valid if it passes the {@link arrayNotContains} check.
+ * Value is valid if it passes the {@link isNotIn} check.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
@@ -43,7 +44,7 @@ export function IsIn(target: any[], validationOptions?: ValidationOptions) {
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return arrayNotContains(o[vc.propertyName], target);
+  return isNotIn(o[vc.propertyName], target);
 }
 
 /**
@@ -56,7 +57,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!arrayNotContains(v, target)) {
+    if (!isNotIn(v, target)) {
       errorIndex.push(i);
     }
   });
@@ -65,7 +66,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
 /**
  * The generated error message string indicating 
- * that the value is not valid according to {@link arrayNotContains}.
+ * that the value is not valid according to {@link isNotIn}.
  * 
  * @param vc The validation context
  * @param o The object being validated

@@ -40,7 +40,7 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
-    "@fireflysemantics/is": "^1.7.0",
+    "@fireflysemantics/is": "^1.8.0",
     "@types/validator": "^9.4.1",
     "validator": "^10.4.0"
   }

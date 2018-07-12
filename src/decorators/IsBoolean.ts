@@ -25,6 +25,7 @@ export function IsBoolean(validationOptions?: ValidationOptions) {
       errorMessage,
       validationOptions
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

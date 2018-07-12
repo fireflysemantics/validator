@@ -1,14 +1,10 @@
-import { validateProperty, getValidationContextKey } from "@fireflysemantics/utilities/utilities";
-import { ValidationContainerHelper } from "@fireflysemantics/container/validation/ValidationContainer";
+import { validate, validateProperty, getValidationContextContainerKey } from "@fireflysemantics/utilities/utilities";
 import { ErrorContainer } from "@fireflysemantics/container/error/ErrorContainer";
+import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
+import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { IsDefined } from '@fireflysemantics/decorators/IsDefined'
 import { expect } from "chai";
 import "mocha";
-const { getValidationContextIndex } = ValidationContainerHelper;
-
-class UtilitiesInvalid {
-  @IsDefined() p0: any = null;
-}
 
 export class UtilitiesValid {
   @IsDefined() p1: String = "";
@@ -16,30 +12,44 @@ export class UtilitiesValid {
   @IsDefined() p3: Number = 0;
 }
 
-const uiv = new UtilitiesValid();
+const UIV = new UtilitiesValid();
 const uiv_p1 = 'p1';
-const ui = new UtilitiesInvalid();
-const ui_p0 = 'p0';
-
 
 describe("Utilities  getValidationContextKey", () => {
-  it("It should return a working ValidationContext key", () => {
-    const key = getValidationContextKey(uiv.constructor.name, uiv_p1);
-    let vcs = getValidationContextIndex(key);
+  it(`should return a working ValidationContext key`, () => {
+    const key1 = getValidationContextContainerKey(UIV.constructor.name, uiv_p1);
+    const key2 = getValidationContextContainerKey(UIV, uiv_p1);
+    expect(key1).to.equal(key2);
+    let vcs:Array<ValidationContext> = ValidationContainer.cache[key1].vcs;
     expect(vcs).to.exist;
   });
 });
+
+class UtilitiesInvalid {
+  @IsDefined() p0: any = null;
+}
+
+const UI = new UtilitiesInvalid();
+const ui_p0 = 'p0';
 
 /**
  * Unit tests for validateProperty.
  */
 describe("Utilities validateProperty", () => {
   it("should return false when validating an invalid property", () => {
-    expect(validateProperty(ui, ui_p0)).to.be.false;
-    const key = getValidationContextKey(ui.constructor.name, ui_p0);
-    expect(ErrorContainer.getValidationErrors(key).length).to.equal(1);
+    expect(validateProperty(UI, ui_p0)).to.be.false;
+    const key = getValidationContextContainerKey(UI, ui_p0);
+    expect(ErrorContainer.getValidationErrors(key).length).to.be.greaterThan(0);
   });
-  it("should return true when validating the p0 property", () => {
-    expect(validateProperty(uiv, uiv_p1)).to.be.true;
+});
+
+/**
+ * Unit tests for validateProperty.
+ */
+describe("Utilities validate", () => {
+  it("should return false when validating an invalid object", () => {
+    expect(validate(UI)).to.be.false;
+    const key = getValidationContextContainerKey(UI, ui_p0);
+    expect(ErrorContainer.getValidationErrors(key).length).to.be.greaterThan(0);
   });
 });

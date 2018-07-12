@@ -29,6 +29,7 @@ export function IsNotEqualTo(target: any, validationOptions?: ValidationOptions)
       errorMessage,
       validationOptions
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

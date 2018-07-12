@@ -1,7 +1,7 @@
 import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { ValidationContainer, ValidationContainerHelper } from "@fireflysemantics/container/validation/ValidationContainer";
+import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
 import { isDate } from "@fireflysemantics/is";
 
 /**
@@ -26,6 +26,7 @@ export function IsDate(validationOptions?: ValidationOptions) {
       errorMessage,
       validationOptions
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

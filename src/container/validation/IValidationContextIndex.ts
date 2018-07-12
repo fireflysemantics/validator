@@ -1,13 +1,11 @@
-import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
+import { ValidationContextContainer } from "@fireflysemantics/container/validation/ValidationContextContainer";
 
 /**
  * Interface representing the ValidationContainer cache.
+ * 
+ * Use the objectPropertyKey to get the IValidationContextIndex
+ * and then the validationContextKey to get a ValidationContext instance.
  */
 export interface IValidationContextsIndex {
-    [objectPropertyKey: string]: IValidationContextIndex;
+    [objectPropertyKey: string]: ValidationContextContainer;
 }
-
-export interface IValidationContextIndex {
-    [validationContextKey: string]: ValidationContext;
-}
-

@@ -26,6 +26,7 @@ export function IsMilitaryTime(validationOptions?: ValidationOptions) {
       errorMessage,
       validationOptions
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

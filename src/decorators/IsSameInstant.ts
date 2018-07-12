@@ -30,6 +30,7 @@ export function IsSameInstant(target: Date, validationOptions?: ValidationOption
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

@@ -30,6 +30,7 @@ export function IsAfterInstant(target: Date, validationOptions?: ValidationOptio
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

@@ -31,6 +31,7 @@ export function IsEnum(entity: Object, validationOptions?: ValidationOptions) {
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

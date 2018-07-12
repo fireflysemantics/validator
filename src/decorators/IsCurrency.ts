@@ -28,6 +28,7 @@ export function IsCurrency(options?: IsCurrencyOptions, validationOptions?: Vali
       null,
       options
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

@@ -32,6 +32,7 @@ export function IsNumber(options: IsNumberOptions = {}, validationOptions?: Vali
       null,
       options
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

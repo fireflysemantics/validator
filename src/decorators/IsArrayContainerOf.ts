@@ -30,6 +30,7 @@ export function IsArrayContainerOf(target: any[], validationOptions?: Validation
       errorMessage,
       validationOptions
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

@@ -1,7 +1,7 @@
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { arrayContains } from "@fireflysemantics/is";
+import { isIn } from "@fireflysemantics/is";
 import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 
 /**
@@ -30,6 +30,7 @@ export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) 
       errorMessage,
       validationOptions
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }
@@ -43,7 +44,7 @@ export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) 
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return arrayContains(o[vc.propertyName], target);
+  return isIn(o[vc.propertyName], target);
 }
 
 /**
@@ -56,7 +57,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!arrayContains(v, target)) {
+    if (!isIn(v, target)) {
       errorIndex.push(i);
     }
   });

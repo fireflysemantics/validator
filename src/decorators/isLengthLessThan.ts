@@ -2,13 +2,13 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { maxLength } from "@fireflysemantics/is";
+import { isLengthLessThan } from "@fireflysemantics/is";
 
 /**
  * Decorator that checks if the property value
  * is less than the argument.
  * 
- * See {@link maxLength} for 
+ * See {@link isLengthLessThan} for 
  * a description of the method
  * performing the validation.
  * 
@@ -32,20 +32,21 @@ export function IsLengthLessThan(target: number, validationOptions?: ValidationO
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }
 
 /**
- * Value is valid if it passes the {@link maxLength} check.
+ * Value is valid if it passes the {@link isLengthLessThan} check.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
- * @return The result of the call to {@link maxLength }
+ * @return The result of the call to {@link isLengthLessThan }
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:number = vc.validationParameters[0];
-  return maxLength(o[vc.propertyName], target);
+  return isLengthLessThan(o[vc.propertyName], target);
 }
 /**
  * 
@@ -57,7 +58,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
   const target:number = vc.validationParameters[0];
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!maxLength(v, target)) {
+    if (!isLengthLessThan(v, target)) {
       errorIndex.push(i);
     }
   });
@@ -66,7 +67,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
 /**
  * The generated error message string indicating 
- * that the value is not valid according to {@link maxLength}.
+ * that the value is not valid according to {@link isLengthLessThan}.
  * 
  * @param vc The validation context
  * @param o The object being validated

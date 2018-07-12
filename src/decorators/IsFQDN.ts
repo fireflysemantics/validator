@@ -29,6 +29,7 @@ export function IsFQDN(options?: IsFQDNOptions, validationOptions?: ValidationOp
       null,
       options
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

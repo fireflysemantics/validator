@@ -31,6 +31,7 @@ export function IsSuperString(target: string, validationOptions?: ValidationOpti
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

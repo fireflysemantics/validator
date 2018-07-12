@@ -1,11 +1,10 @@
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { getValidationContextKey } from "@fireflysemantics/utilities/utilities";
+import { getValidationContextContainerKey } from "@fireflysemantics/utilities/utilities";
 import { IsDefined } from "@fireflysemantics/decorators/IsDefined";
 import { expect } from "chai";
 import "mocha";
 const { getOwnPropertyNames } = Object;
-const { getValidationContextValues } = ValidationContainer;
 
 class IsDefinedValid {
   @IsDefined() p0: any = "";
@@ -18,8 +17,8 @@ describe("IsDefined Validation", () => {
       ValidationContext.validate method 
       to check valid values`, () => {
     getOwnPropertyNames(IDI).forEach(pn => {
-      const key: string = getValidationContextKey(IDV.constructor.name, pn);
-      const validators = getValidationContextValues(key);
+      const key: string = getValidationContextContainerKey(IDV, pn);
+      const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
       expect(vc.propertyName).to.equal(pn);
@@ -39,8 +38,8 @@ describe("IsDefined Validation", () => {
   it(`should return false when using the 
       ValidationContext.validate method to check invalid values`, () => {    
     Object.getOwnPropertyNames(IDI).forEach(pn => {
-      const key: string = getValidationContextKey(IDI.constructor.name, pn);
-      const validators = getValidationContextValues(key);
+      const key: string = getValidationContextContainerKey(IDI, pn);
+      const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
       expect(vc.validateValue(vc, IDI)).to.be.false;

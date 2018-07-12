@@ -2,13 +2,13 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
 import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
 import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
 import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { minLength } from "@fireflysemantics/is";
+import { isLengthGreaterThan } from "@fireflysemantics/is";
 
 /**
  * Decorator that checks if the property value
  * is greater than the argument.  
  * 
- * See {@link minLength} for 
+ * See {@link isLengthGreaterThan} for 
  * a description of the method
  * performing the validation.
  * 
@@ -32,20 +32,21 @@ export function HasMinLength(target: number, validationOptions?: ValidationOptio
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }
 
 /**
- * Value is valid if it passes the {@link minLength} check.
+ * Value is valid if it passes the {@link isLengthGreaterThan} check.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
- * @return The result of the call to {@link minLength}
+ * @return The result of the call to {@link isLengthGreaterThan}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:number = vc.validationParameters[0];
-  return minLength(o[vc.propertyName], target);
+  return isLengthGreaterThan(o[vc.propertyName], target);
 }
 /**
  * 
@@ -57,7 +58,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
   const target:number = vc.validationParameters[0];
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!minLength(v, target)) {
+    if (!isLengthGreaterThan(v, target)) {
       errorIndex.push(i);
     }
   });
@@ -66,7 +67,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
 /**
  * The generated error message string indicating 
- * that the value is not valid according to {@link minLength}.
+ * that the value is not valid according to {@link isLengthGreaterThan}.
  * 
  * @param vc The validation context
  * @param o The object being validated

@@ -1,5 +1,5 @@
 import { ValidationError } from "@fireflysemantics/container/error/ValidationError";
-import { getValidationContextKey } from "@fireflysemantics/utilities/utilities";
+import { getValidationContextContainerKey } from "@fireflysemantics/utilities/utilities";
 import { IValidationErrorIndex} from '@fireflysemantics/container/error/IValidationErrorIndex'
 
 /**
@@ -32,7 +32,7 @@ export class ErrorContainer {
    * @param ve Add a ValidationContext instance.
    */
   public static addValidationError(ve: ValidationError) {
-    const key: string = getValidationContextKey(
+    const key: string = getValidationContextContainerKey(
       ve.vc.target.name,
       ve.vc.propertyName
     );

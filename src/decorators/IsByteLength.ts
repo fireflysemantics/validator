@@ -38,6 +38,7 @@ export function IsByteLength(min: number, max?: number, validationOptions?: Vali
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

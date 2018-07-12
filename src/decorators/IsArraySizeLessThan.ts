@@ -30,6 +30,7 @@ export function IsDivisibleBy(target: number, validationOptions?: ValidationOpti
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

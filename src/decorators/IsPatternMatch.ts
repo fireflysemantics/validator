@@ -38,6 +38,7 @@ export function IsPatternMatch(pattern: number, modifiers?: number, validationOp
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

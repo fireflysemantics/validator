@@ -25,6 +25,7 @@ export function IsEmpty(validationOptions?: ValidationOptions) {
       errorMessage,
       validationOptions
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

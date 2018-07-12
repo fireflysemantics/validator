@@ -33,6 +33,7 @@ export function IsMobilePhone(target: ValidatorJS.MobilePhoneLocale, validationO
       errorMessage,
       validationOptions
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }

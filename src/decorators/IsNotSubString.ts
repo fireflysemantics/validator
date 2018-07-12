@@ -31,6 +31,7 @@ export function IsNotSubString(target: string, validationOptions?: ValidationOpt
       validationOptions,
       validationParameters
     );
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
   };
 }
