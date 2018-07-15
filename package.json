@@ -1,13 +1,15 @@
 {
   "name": "@fireflysemantics/validator",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "Typescript Validation Decorators and Executor",
   "main": "index.ts",
   "scripts": {
+    "clean": "del-cli target && del-cli dist && del-cli doc",
     "unit-test": "mocha -r ts-node/register src/**/*.spec.ts",
     "test": "nyc mocha",
-    "doc": "typedoc --out doc ./src/",
-    "testdoc": "typedoc --out doc/test ./test/"
+    "doc": "typedoc --out doc --exclude **/*.spec.ts ./src/",
+    "compile": "del-cli target && tsc",
+    "dist": "npm run compile && del-cli dist && node createdist"
   },
   "repository": {
     "type": "git",
@@ -30,9 +32,13 @@
     "@types/mocha": "^5.2.2",
     "@types/node": "^10.3.4",
     "chai": "^4.1.2",
+    "cpy": "^7.0.1",
+    "del-cli": "^1.1.0",
     "istanbul": "^0.4.5",
+    "mkdirp": "^0.5.1",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
+    "recursive-copy": "^2.0.9",
     "source-map-support": "^0.5.6",
     "ts-node": "^6.1.2",
     "tsconfig-paths": "^3.4.0",
