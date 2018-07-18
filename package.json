@@ -21,6 +21,9 @@
     "Validation",
     "Validator"
   ],
+  "_moduleAliases": {
+    "@fireflysemantics/*": ".target/src/*"
+  },
   "author": "Ole Ersoy",
   "license": "MIT",
   "bugs": {
@@ -34,6 +37,7 @@
     "chai": "^4.1.2",
     "cpy": "^7.0.1",
     "del-cli": "^1.1.0",
+    "globby": "^8.0.1",
     "istanbul": "^0.4.5",
     "mkdirp": "^0.5.1",
     "mocha": "^5.2.0",

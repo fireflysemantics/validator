@@ -1,8 +1,8 @@
-import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
-import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
+import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
 import { isArrayContainerOf } from "@fireflysemantics/is";
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
+import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
 
 /**
  * Decorator that checks if the array valued property

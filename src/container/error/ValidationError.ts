@@ -1,4 +1,4 @@
-import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
 
 /**
  * Validation error description.

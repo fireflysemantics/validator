@@ -1,7 +1,7 @@
-import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { getValidationContextContainerKey } from "@fireflysemantics/utilities/utilities";
-import { IsDate } from "@fireflysemantics/decorators/IsDate";
+import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { getValidationContextContainerKey } from "@fs/utilities/utilities";
+import { IsDate } from "@fs/decorators/IsDate";
 import { expect } from "chai";
 import "mocha";
 const { getOwnPropertyNames } = Object;

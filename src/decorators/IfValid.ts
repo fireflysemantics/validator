@@ -1,7 +1,7 @@
-import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
-import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { validateProperty } from "@fireflysemantics/utilities/utilities";
+import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { validateProperty } from "@fs/utilities/utilities";
 
 /**
  * Decorator that checks if the target argument is a valid property

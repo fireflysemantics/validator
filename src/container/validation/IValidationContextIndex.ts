@@ -1,4 +1,4 @@
-import { ValidationContextContainer } from "@fireflysemantics/container/validation/ValidationContextContainer";
+import { ValidationContextContainer } from "@fs/container/validation/ValidationContextContainer";
 
 /**
  * Interface representing the ValidationContainer cache.

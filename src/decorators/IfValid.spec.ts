@@ -1,8 +1,8 @@
-import { IsDefined } from "@fireflysemantics/decorators/IsDefined";
-import { IfValid } from "@fireflysemantics/decorators/IfValid";
-import { ErrorContainer } from "@fireflysemantics/container/error/ErrorContainer";
-import { getValidationContextContainerKey } from "@fireflysemantics/utilities/utilities";
-import { validateProperty } from "@fireflysemantics/utilities/utilities";
+import { IsDefined } from "@fs/decorators/IsDefined";
+import { IfValid } from "@fs/decorators/IfValid";
+import { ErrorContainer } from "@fs/container/error/ErrorContainer";
+import { getValidationContextContainerKey } from "@fs/utilities/utilities";
+import { validateProperty } from "@fs/utilities/utilities";
 import { expect } from "chai";
 import "mocha";
 

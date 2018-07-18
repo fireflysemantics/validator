@@ -1,7 +1,7 @@
-import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
-import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fireflysemantics/constants";
+import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
 
 /**
  * Function that always returns true regardless

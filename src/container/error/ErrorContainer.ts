@@ -1,6 +1,6 @@
-import { ValidationError } from "@fireflysemantics/container/error/ValidationError";
-import { getValidationContextContainerKey } from "@fireflysemantics/utilities/utilities";
-import { IValidationErrorIndex} from '@fireflysemantics/container/error/IValidationErrorIndex'
+import { ValidationError } from "@fs/container/error/ValidationError";
+import { getValidationContextContainerKey } from "@fs/utilities/utilities";
+import { IValidationErrorIndex} from '@fs/container/error/IValidationErrorIndex'
 
 /**
  * Validation error container holding all validation errors.

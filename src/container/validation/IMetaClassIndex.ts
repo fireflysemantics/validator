@@ -1,4 +1,4 @@
-import { MetaClass } from "@fireflysemantics/container/validation/MetaClass";
+import { MetaClass } from "@fs/container/validation/MetaClass";
 
 export interface IMetaClassIndex {
     [validationContextKey: string]: MetaClass;

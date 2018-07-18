@@ -1,14 +1,14 @@
-import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { ValidationOptions } from "@fireflysemantics/container/validation/ValidationOptions";
+import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
 
 import { Core1 } from "@test/core/Core1";
 import { Core2 } from "@test/core/Core2";
-import { getValidationContextContainerKey } from "@fireflysemantics/utilities/utilities";
+import { getValidationContextContainerKey } from "@fs/utilities/utilities";
 
 import { expect } from "chai";
 import "mocha";
-import { PREFIX_SINGLE, PREFIX_EACH } from "@fireflysemantics/constants";
+import { PREFIX_SINGLE, PREFIX_EACH } from "@fs/constants";
 const { getOwnPropertyNames } = Object;
 
 const cno_p0_array = "p0";

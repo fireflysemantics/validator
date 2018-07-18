@@ -1,8 +1,8 @@
-import { validate, validateProperty, getValidationContextContainerKey } from "@fireflysemantics/utilities/utilities";
-import { ErrorContainer } from "@fireflysemantics/container/error/ErrorContainer";
-import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { IsDefined } from '@fireflysemantics/decorators/IsDefined'
+import { validate, validateProperty, getValidationContextContainerKey } from "@fs/utilities/utilities";
+import { ErrorContainer } from "@fs/container/error/ErrorContainer";
+import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { IsDefined } from '@fs/decorators/IsDefined'
 import { expect } from "chai";
 import "mocha";
 

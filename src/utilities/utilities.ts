@@ -1,9 +1,9 @@
-import { ValidationContainer } from "@fireflysemantics/container/validation/ValidationContainer";
-import { ValidationContextContainer } from "@fireflysemantics/container/validation/ValidationContextContainer";
-import { MetaClass } from "@fireflysemantics/container/validation/MetaClass";
-import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { ErrorContainer } from "@fireflysemantics/container/error/ErrorContainer";
-import { ValidationError } from "@fireflysemantics/container/error/ValidationError";
+import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { ValidationContextContainer } from "@fs/container/validation/ValidationContextContainer";
+import { MetaClass } from "@fs/container/validation/MetaClass";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { ErrorContainer } from "@fs/container/error/ErrorContainer";
+import { ValidationError } from "@fs/container/error/ValidationError";
 import { isArrayEmpty } from "@fireflysemantics/is";
 import { isString } from "@fireflysemantics/is";
 

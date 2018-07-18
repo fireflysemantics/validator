@@ -1,4 +1,4 @@
-import { ValidationError} from '@fireflysemantics/container/error/ValidationError';
+import { ValidationError} from '@fs/container/error/ValidationError';
 
 /**
  * Interface representing the ValidationContainer cache.
