@@ -15,6 +15,29 @@ Decorator based validation for Typescript classes.
 
 ## Use Cases
 
+### General Usage
+
+```
+import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
+import { IsGreaterThan } from "@fireflysemantics/decorators/IsGreaterThan";
+import { ErrorContainer } from "@fireflysemantics/container/error/ErrorContainer";
+import { getValidationContextContainerKey } from "@fireflysemantics/utilities/utilities";
+import { validateProperty, validate } from "@fireflysemantics/utilities/utilities";
+
+class IsGreaterThanTest0 {
+  @IsGreaterThan(30)
+  secondNumber: number = 20;
+}
+
+const IGTT0 = new IsGreaterThanTest0();
+
+expect(validate(IGTT0)).to.be.false;
+const key:string = getValidationContextContainerKey(IGTT0, "secondNumber");
+const vc:ValidationContext = ErrorContainer.getValidationErrors(key)[0].vc;
+console.log(vc.errorMessage(vc, IGTT0)); //The value contained by secondNumber should be greater than 30
+
+```
+
 ### Dependent Validation of a Property
 
 In some cases we want to validate something else only when a corresponding property

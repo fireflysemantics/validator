@@ -108,7 +108,7 @@ describe("Core Validation Context Initialization", () => {
     const validators = ValidationContainer.cache[key].vcs;
 
     const vc = validators[0];
-    expect(vc.validationOptions).to.be.exist;
+    expect(vc.validationOptions).to.exist;
   });
 });
 
