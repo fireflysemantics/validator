@@ -56,7 +56,7 @@ export class ValidationContext {
   validateArray: ValidationArrayFunctionType;
 
   /**
-   * Indicates whether validation should continue in the
+   * Whether validation should continue in the
    * event of an error.  For example is a value is undefined,
    * then there's little point trying to apply the other validators.
    */
@@ -83,6 +83,13 @@ export class ValidationContext {
    */
   validationTypeOptions?: any;
 
+  /**
+   * Whether validation should continue in the
+   * event of an error.  For example is a value is undefined,
+   * then there's little point trying to apply the other validators.
+   */
+  skipErrorGeneration?: boolean;
+
   constructor(
     object: any,
     target: Function,
@@ -94,8 +101,8 @@ export class ValidationContext {
     errorMessage: ErrorMessageType,
     validationOptions?: ValidationOptions,
     validationParameters?: any[],
-    validationTypeOptions?: any
-  ) {
+    validationTypeOptions?: any, 
+    skipErrorGeneration?:boolean ) {
     this.object = object;
     this.target = target;
     this.decorator = decorator;
@@ -107,6 +114,7 @@ export class ValidationContext {
     this.validationOptions = validationOptions;
     this.validationParameters = validationParameters;
     this.validationTypeOptions = validationTypeOptions;
+    this.skipErrorGeneration = skipErrorGeneration;
   }
 
   /**

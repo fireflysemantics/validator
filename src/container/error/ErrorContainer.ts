@@ -47,18 +47,13 @@ export class ErrorContainer {
   public static getValidationErrors(key: string): Array<ValidationError> {
     return ErrorContainer.cache[key];
   }
-}
 
-/**
- * Helper methods for the error container.
- */
-export class ErrorContainerHelper {
  /**
    * Gets all ErrorContainer keys.
    * @returns All the error container keys
    */
   public static getErrorContainerKeys(key: string): Array<string> {
-    return Object.keys(<any> ErrorContainer.cache);
+    return Object.keys(ErrorContainer.cache);
   }
 
   /**
@@ -66,6 +61,13 @@ export class ErrorContainerHelper {
    * @returns All the error container values
    */
   public static getErrorContainerValues(): Array<Array<ValidationError>> {
-    return Object.values(<any> ErrorContainer.cache);
-  }      
+    return Object.values(ErrorContainer.cache);
+  }
+  
+  /**
+   * 
+   */
+  public static clear(): void {
+    ErrorContainer.cache = {};
+  }
 }

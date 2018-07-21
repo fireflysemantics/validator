@@ -26,7 +26,9 @@ export function IfValid(target: string, validationOptions?: ValidationOptions) {
       true,
       errorMessage,
       validationOptions,
-      validationParameters
+      validationParameters,
+      null,
+      true
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
@@ -36,13 +38,16 @@ export function IfValid(target: string, validationOptions?: ValidationOptions) {
 /**
  * Validation continues if the the {@link validateProperty} check
  * passes on the target property.
+ * 
+ * This does not generate any errors, because it will produce duplicate
+ * errors.
  *
  * @param vc The validation context
  * @param o The object containing the property referenced by the validation parameter
  */
 function validateValue(vc: ValidationContext, o: any) {
   const target = vc.validationParameters[0];
-  return validateProperty(o, target);
+  return validateProperty(o, target, true);
 }
 
 function errorMessage(vc: ValidationContext, o: any): string {

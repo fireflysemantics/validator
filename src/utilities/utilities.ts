@@ -6,6 +6,8 @@ import { ErrorContainer } from "@fs/container/error/ErrorContainer";
 import { ValidationError } from "@fs/container/error/ValidationError";
 import { isArrayEmpty } from "@fireflysemantics/is";
 import { isString } from "@fireflysemantics/is";
+import { ErrorType } from 'typescript-logging';
+import { ValidateLogger } from "@fs/logging-config";
 
 /**
  * Validates the <code>target</code> object.
@@ -16,7 +18,7 @@ import { isString } from "@fireflysemantics/is";
  * @return True if the object is valid, false otherwise.
  */
 export function validate(target: any): boolean {
-  let valid = true;
+  let valid:boolean = true;
   const cn: string = target.constructor.name;
   const mc: MetaClass = ValidationContainer.metaClasses[cn];
   if (mc) {
@@ -31,29 +33,40 @@ export function validate(target: any): boolean {
 
 /**
  * Validates a property contained on the object.
- * Errors are added to the ErrorContainer.
+ * Errors are added to the ErrorContainer, unless skipErrorGeneration
+ * is true.
+ *  
  * @param o The object being validated
  * @param propertyName The name of the property holding the value being validated
+ * @param skipErrorGeneration Skips the generation of validation errors
  * @return True if the property is valid, false otherwise.
  * @throws An exception if the ValidationContextContainer instance for the object and property does not exist.
  */
-export function validateProperty(o: any, propertyName: string): boolean {
+export function validateProperty(o: any, propertyName: string, skipErrorGeneration: boolean = false): boolean {
+
+  ValidateLogger.trace(`Validating the property ${propertyName} of ${o.constructor.name}`);
+  ValidateLogger.trace(`The parameter skipErrorGeneration is ${skipErrorGeneration}`);
 
   let valid = true;
   const key = getValidationContextContainerKey(o, propertyName);
   const vcc:ValidationContextContainer = ValidationContainer.cache[key]; 
+
   if (!vcc) {
     const errorMessage:string = `A validation context container for the key 
     ${key} does not exist.`;
-    throw new Error(errorMessage);
+
+    const error: ErrorType = new Error(errorMessage);
+    ValidateLogger.error(errorMessage, error);
+    throw error;
   }
 
   const propertyValue = o[propertyName];
 
   vcc.vcs.every((vc: ValidationContext) => {
-    if (propertyValue instanceof Array) {
+
+    if ( propertyValue instanceof Array ) {
       const result: Number[] = vc.validateArray(vc, propertyValue);
-      if (!isArrayEmpty(result)) {
+      if (!isArrayEmpty(result) && !skipErrorGeneration && !vc.skipErrorGeneration) {
         const ve: ValidationError = new ValidationError(
           vc,
           o,
@@ -65,7 +78,12 @@ export function validateProperty(o: any, propertyName: string): boolean {
         valid = false;
       }
     } else {
-      if (!vc.validateValue(vc, o)) {
+      valid = vc.validateValue(vc, o); 
+
+      if (!valid && !skipErrorGeneration && !vc.skipErrorGeneration) {
+
+        ValidateLogger.trace(`The property ${propertyName} of ${o.constructor.name} validated by ${vc.decorator} has invalid value ${propertyValue}`);
+
         const ve: ValidationError = new ValidationError(
           vc,
           o,
@@ -73,12 +91,15 @@ export function validateProperty(o: any, propertyName: string): boolean {
           propertyValue
         );
         ErrorContainer.addValidationError(ve);
-        valid = false;
       }
     }
     if (!valid && vc.stop) {
-      return false; //Stops the every loop from executing any other decorator validation contexts present
-    } else return true; //Continue validation the property
+
+      ValidateLogger.trace(`The property ${propertyName} of ${o.constructor.name} is invalid therefore validation of the property is being discontinued`);
+      
+      return valid;
+    } 
+    else return true; //Continue validation of the property
   });
   return valid;
 }

@@ -52,6 +52,7 @@
   "dependencies": {
     "@fireflysemantics/is": "^1.8.0",
     "@types/validator": "^9.4.1",
+    "typescript-logging": "^0.6.2",
     "validator": "^10.4.0"
   }
 }
