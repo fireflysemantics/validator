@@ -6,7 +6,7 @@ Decorator based validation for Typescript classes.
 
 ## Features
 
-- Has decorators for most of the methods in [@fireflysemantics/is]
+- Has decorators for most of the methods in [@fireflysemantics/is](https://www.npmjs.com/package/@fireflysemantics/is)
 - Allows the definition of dependencies between validators
 - Uses [typescript-logging](https://www.npmjs.com/package/typescript-logging) to capture traces and error logs
 - Access to the entire [ValidationContext](https://github.com/fireflysemantics/validator/blob/master/src/container/validation/ValidationContext.ts) enabling the customization of validation messages post validation
