@@ -1,10 +1,10 @@
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { getValidationContextContainerKey } from "@fs/utilities/utilities";
-import { IValidationContextsIndex } from "@fs/container/validation/IValidationContextIndex";
-import { IMetaClassIndex } from "@fs/container/validation/IMetaClassIndex";
+import { ValidationContext } from "./ValidationContext";
+import { getValidationContextContainerKey } from "../../utilities/utilities";
+import { IValidationContextsIndex } from "./IValidationContextIndex";
+import { IMetaClassIndex } from "./IMetaClassIndex";
 import { isDefined } from "@fireflysemantics/is";
-import { MetaClass } from "@fs/container/validation/MetaClass";
-import { ValidationContextContainer } from "@fs/container/validation/ValidationContextContainer";
+import { MetaClass } from "./MetaClass";
+import { ValidationContextContainer } from "./ValidationContextContainer";
 
 /**
  * Validation container holding all validation contexts

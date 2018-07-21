@@ -1,11 +1,11 @@
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { ValidationOptions } from "../container/validation/ValidationOptions";
+import { ValidationContext } from "../container/validation/ValidationContext";
+import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { isNotIn } from "@fireflysemantics/is";
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
+import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
- * Decorator that checks if the property value
+ * Decorator that checks if the array value
  * is not in array of allowed values.  
  * 
  * See {@link isNotIn} for a description of the method
@@ -13,7 +13,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
  * 
  * @param validationOptions The validation options
  */
-export function IsNotIn(target: any[], validationOptions?: ValidationOptions) {
+export function IsArrayNotIn(target: any[], validationOptions?: ValidationOptions) {
 
   const validationParameters:any[] = [];
   validationParameters.push(target);
@@ -22,7 +22,7 @@ export function IsNotIn(target: any[], validationOptions?: ValidationOptions) {
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsNotIn.name,
+      IsArrayNotIn.name,
       propertyName,
       validateValue,
       null,

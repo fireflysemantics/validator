@@ -1,7 +1,7 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
+import { ValidationOptions } from "../container/validation/ValidationOptions";
+import { ValidationContext } from "../container/validation/ValidationContext";
+import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { isLengthGreaterThan } from "@fireflysemantics/is";
 
 /**
@@ -15,7 +15,7 @@ import { isLengthGreaterThan } from "@fireflysemantics/is";
  * @param target The minimum length.
  * @param validationOptions The validation options
  */
-export function HasMinLength(target: number, validationOptions?: ValidationOptions) {
+export function IsLengthGreaterThan(target: number, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(target);
@@ -23,7 +23,7 @@ export function HasMinLength(target: number, validationOptions?: ValidationOptio
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      HasMinLength.name,
+      IsLengthGreaterThan.name,
       propertyName,
       validateValue,
       validateArray,

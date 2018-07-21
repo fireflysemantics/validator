@@ -1,8 +1,8 @@
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { IsGreaterThan } from "@fs/decorators/IsGreaterThan";
-import { ErrorContainer } from "@fs/container/error/ErrorContainer";
-import { getValidationContextContainerKey } from "@fs/utilities/utilities";
-import { validateProperty, validate } from "@fs/utilities/utilities";
+import { ValidationContext } from "../container/validation/ValidationContext";
+import { IsGreaterThan } from "./IsGreaterThan";
+import { ErrorContainer } from "../container/error/ErrorContainer";
+import { getValidationContextContainerKey } from "../utilities/utilities";
+import { validateProperty, validate } from "../utilities/utilities";
 
 import { expect } from "chai";
 import "mocha";
@@ -55,7 +55,7 @@ describe("IfGreaterThan Validation", () => {
     expect(validate(IGTT0)).to.be.false;
     const key:string = getValidationContextContainerKey(IGTT0, "secondNumber");
     const vc:ValidationContext = ErrorContainer.getValidationErrors(key)[0].vc;
-    console.log(vc.errorMessage(vc, IGTT0));
+
   });  
 
   it("should work for string property key arguments", () => {

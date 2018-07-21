@@ -1,4 +1,4 @@
-import { MetaClass } from "@fs/container/validation/MetaClass";
+import { MetaClass } from "./MetaClass";
 
 export interface IMetaClassIndex {
     [validationContextKey: string]: MetaClass;

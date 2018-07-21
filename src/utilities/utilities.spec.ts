@@ -1,8 +1,8 @@
-import { validate, validateProperty, getValidationContextContainerKey } from "@fs/utilities/utilities";
-import { ErrorContainer } from "@fs/container/error/ErrorContainer";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { IsDefined } from '@fs/decorators/IsDefined'
+import { validate, validateProperty, getValidationContextContainerKey } from "./utilities";
+import { ErrorContainer } from "../container/error/ErrorContainer";
+import { ValidationContainer } from "../container/validation/ValidationContainer";
+import { ValidationContext } from "../container/validation/ValidationContext";
+import { IsDefined } from '../decorators/IsDefined'
 import { expect } from "chai";
 import "mocha";
 

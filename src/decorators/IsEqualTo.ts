@@ -1,8 +1,8 @@
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { ValidationOptions } from "../container/validation/ValidationOptions";
+import { ValidationContext } from "../container/validation/ValidationContext";
+import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { isEqualTo } from "@fireflysemantics/is";
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
+import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
  * Decorator that checks if the property is equal to the argument.  

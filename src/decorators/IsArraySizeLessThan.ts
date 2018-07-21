@@ -1,7 +1,7 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
+import { ValidationOptions } from "../container/validation/ValidationOptions";
+import { ValidationContext } from "../container/validation/ValidationContext";
+import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { isArraySizeLessThan } from "@fireflysemantics/is";
 
 /**
@@ -13,7 +13,7 @@ import { isArraySizeLessThan } from "@fireflysemantics/is";
  * @param target The number that the array is being checked against.
  * @param validationOptions The validation options
  */
-export function IsDivisibleBy(target: number, validationOptions?: ValidationOptions) {
+export function IsArraySizeLessThan(target: number, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(target);
@@ -21,7 +21,7 @@ export function IsDivisibleBy(target: number, validationOptions?: ValidationOpti
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsDivisibleBy.name,
+      IsArraySizeLessThan.name,
       propertyName,
       validateValue,
       validateArray,

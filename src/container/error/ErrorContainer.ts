@@ -1,6 +1,6 @@
-import { ValidationError } from "@fs/container/error/ValidationError";
-import { getValidationContextContainerKey } from "@fs/utilities/utilities";
-import { IValidationErrorIndex} from '@fs/container/error/IValidationErrorIndex'
+import { ValidationError } from "./ValidationError";
+import { getValidationContextContainerKey } from "../../utilities/utilities";
+import { IValidationErrorIndex} from './IValidationErrorIndex'
 
 /**
  * Validation error container holding all validation errors.

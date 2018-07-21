@@ -1,13 +1,13 @@
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
-import { ValidationContextContainer } from "@fs/container/validation/ValidationContextContainer";
-import { MetaClass } from "@fs/container/validation/MetaClass";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ErrorContainer } from "@fs/container/error/ErrorContainer";
-import { ValidationError } from "@fs/container/error/ValidationError";
+import { ValidationContainer } from "../container/validation/ValidationContainer";
+import { ValidationContextContainer } from "../container/validation/ValidationContextContainer";
+import { MetaClass } from "../container/validation/MetaClass";
+import { ValidationContext } from "../container/validation/ValidationContext";
+import { ErrorContainer } from "../container/error/ErrorContainer";
+import { ValidationError } from "../container/error/ValidationError";
 import { isArrayEmpty } from "@fireflysemantics/is";
 import { isString } from "@fireflysemantics/is";
 import { ErrorType } from 'typescript-logging';
-import { ValidateLogger } from "@fs/logging-config";
+import { ValidateLogger } from "../logging-config";
 
 /**
  * Validates the <code>target</code> object.

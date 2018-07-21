@@ -1,4 +1,4 @@
-import { ValidationError} from '@fs/container/error/ValidationError';
+import { ValidationError} from './ValidationError';
 
 /**
  * Interface representing the ValidationContainer cache.

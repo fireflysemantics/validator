@@ -1,6 +1,6 @@
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
 import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
 
 import { Core1 } from "@test/core/Core1";
 import { Core2 } from "@test/core/Core2";

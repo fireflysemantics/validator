@@ -1,7 +1,7 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
+import { ValidationOptions } from "../container/validation/ValidationOptions";
+import { ValidationContext } from "../container/validation/ValidationContext";
+import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { isNegative } from "@fireflysemantics/is";
 
 /**
@@ -12,13 +12,13 @@ import { isNegative } from "@fireflysemantics/is";
  * 
  * @param validationOptions The validation options
  */
-export function IsPositive(validationOptions?: ValidationOptions) {
+export function IsNegative(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsPositive.name,
+      IsNegative.name,
       propertyName,
       validateValue,
       validateArray,

@@ -1,7 +1,7 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
+import { ValidationOptions } from "../container/validation/ValidationOptions";
+import { ValidationContext } from "../container/validation/ValidationContext";
+import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { isInstanceOf } from "@fireflysemantics/is";
 
 /**
@@ -13,7 +13,7 @@ import { isInstanceOf } from "@fireflysemantics/is";
  * @param target The target constructor that the value is being checked against.
  * @param validationOptions The validation options
  */
-export function IsDivisibleBy(target: number, validationOptions?: ValidationOptions) {
+export function IsInstanceOf(target: number, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(target);
@@ -21,7 +21,7 @@ export function IsDivisibleBy(target: number, validationOptions?: ValidationOpti
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsDivisibleBy.name,
+      IsInstanceOf.name,
       propertyName,
       validateValue,
       validateArray,
@@ -65,7 +65,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
 
 /**
  * The generated error message string indicating 
- * that the value is not valid according to {@link isEnum}.
+ * that the value is not valid according to {@link isInstanceOf}.
  * 
  * @param vc The validation context
  * @param o The object being validated

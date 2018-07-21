@@ -1,4 +1,4 @@
-import { ValidationContextContainer } from "@fs/container/validation/ValidationContextContainer";
+import { ValidationContextContainer } from "./ValidationContextContainer";
 
 /**
  * Interface representing the ValidationContainer cache.

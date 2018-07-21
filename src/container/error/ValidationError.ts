@@ -1,4 +1,4 @@
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { ValidationContext } from "../validation/ValidationContext";
 
 /**
  * Validation error description.

@@ -1,4 +1,4 @@
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
+import { ValidationOptions } from "./ValidationOptions";
 
 /**
  * The type api signature for the validation function that validates single values.

@@ -1,30 +1,36 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
-import { isUppercase } from "@fireflysemantics/is";
+import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
+import { ValidationOptions } from "../container/validation/ValidationOptions";
+import { ValidationContext } from "../container/validation/ValidationContext";
+import { ValidationContainer } from "../container/validation/ValidationContainer";
+import { isLengthLessThan } from "@fireflysemantics/is";
 
 /**
- * Decorator that checks if the property is lowercase.  
+ * Decorator that checks if the property value
+ * is less than the argument.
  * 
- * See {@link isUppercase} for a description of the method
+ * See {@link isLengthLessThan} for 
+ * a description of the method
  * performing the validation.
  * 
+ * @param target The maximum length.
  * @param validationOptions The validation options
  */
-export function IsUppercase(validationOptions?: ValidationOptions) {
+export function IsLengthLessThan(target: number, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
-    
+    const validationParameters:any[] = [];
+    validationParameters.push(target);
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsUppercase.name,
+      IsLengthLessThan.name,
       propertyName,
       validateValue,
       validateArray,
       true,
       errorMessage,
-      validationOptions
+      validationOptions,
+      validationParameters
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
@@ -32,25 +38,27 @@ export function IsUppercase(validationOptions?: ValidationOptions) {
 }
 
 /**
- * Value is valid if it passes the {@link isUppercase} check.
+ * Value is valid if it passes the {@link isLengthLessThan} check.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
- * @return The result of the call to {@link isUppercase}
+ * @return The result of the call to {@link isLengthLessThan }
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isUppercase(o[vc.propertyName]);
+  const target:number = vc.validationParameters[0];
+  return isLengthLessThan(o[vc.propertyName], target);
 }
 /**
  * 
- * @param vc  The validation context.
+ * @param vc The validation context.
  * @param values The array of values. 
  * @return An empty array if valid, an array of indexes otherwise.
  */
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
+  const target:number = vc.validationParameters[0];
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isUppercase(v)) {
+    if (!isLengthLessThan(v, target)) {
       errorIndex.push(i);
     }
   });
@@ -59,7 +67,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
 /**
  * The generated error message string indicating 
- * that the value is not valid according to {@link isUppercase}.
+ * that the value is not valid according to {@link isLengthLessThan}.
  * 
  * @param vc The validation context
  * @param o The object being validated
@@ -67,7 +75,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
 
-  const messageLiteral: string = "should be uppercase";
+  const messageLiteral: string = `should be less than ${vc.validationParameters[0]}`;
 
   if (o[vc.propertyName] instanceof Array) {
     return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;

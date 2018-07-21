@@ -1,7 +1,7 @@
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { getValidationContextContainerKey } from "@fs/utilities/utilities";
-import { IsEmail } from "@fs/decorators/IsEmail";
+import { ValidationContainer } from "../container/validation/ValidationContainer";
+import { ValidationContext } from "../container/validation/ValidationContext";
+import { getValidationContextContainerKey } from "../utilities/utilities";
+import { IsEmail } from "./IsEmail";
 import { expect } from "chai";
 import "mocha";
 const { getOwnPropertyNames } = Object;
