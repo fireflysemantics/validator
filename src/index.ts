@@ -1,3 +1,21 @@
+// ========================================================
+// Utilities
+// ========================================================
+
+export { validate } from "./utilities/utilities";
+export { validateProperty } from "./utilities/utilities";
+
+// ========================================================
+// CONTAINTERS
+// ========================================================
+
+export { ErrorContainer } from "./container/error/ErrorContainer";
+export { ValidationContext } from "./container/validation/ValidationContext";
+
+// ========================================================
+// DECORATORS
+// ========================================================
+
 export { IsDefined } from "./decorators/IsDefined";
 export { IfValid } from "./decorators/IfValid";
 export { IsAfterInstant } from "./decorators/IsAfterInstant";
