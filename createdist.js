@@ -1,7 +1,9 @@
 const fs = require("fs");
 const globby = require("globby");
+const cpy = require("cpy"); 
 require("mkdirp").sync("dist");
-require("cpy")("package.json", "dist");
+cpy("package.json", "dist");
+cpy("README.md", "dist");
 const options = { overwrite: true };
 const rc = require("recursive-copy");
 rc("target/src/", "dist", options).then(() => {

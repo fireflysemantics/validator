@@ -51,7 +51,7 @@ describe("IsEmail Validation", () => {
       ValidationContext.validate method 
       to check invalid values`, () => {    
     Object.getOwnPropertyNames(IEI).forEach(pn => {
-      const key: string = getValidationContextContainerKey(IEI.constructor.name, pn);
+      const key: string = getValidationContextContainerKey(IEI, pn);
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];

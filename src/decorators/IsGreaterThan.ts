@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
 import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
 import { ValidationContext } from "@fs/container/validation/ValidationContext";
 import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
-import { isGreaterThan } from "@fireflysemantics/is";
+import { isGreaterThan, isString } from "@fireflysemantics/is";
 
 /**
  * Decorator that checks if the property value
@@ -14,7 +14,7 @@ import { isGreaterThan } from "@fireflysemantics/is";
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options
  */
-export function IsGreaterThan(target: number, validationOptions?: ValidationOptions) {
+export function IsGreaterThan(target: number | string, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(target);
@@ -44,9 +44,13 @@ export function IsGreaterThan(target: number, validationOptions?: ValidationOpti
  * @return The result of the call to {@link isGreaterThan}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  const target:number = vc.validationParameters[0];
-  return isGreaterThan(o[vc.propertyName], target);
+  let target:number | string = vc.validationParameters[0];
+  if (isString(target)) {
+    target = o[target];
+  }
+  return isGreaterThan(o[vc.propertyName], <number>target);
 }
+
 /**
  * 
  * @param vc  The validation context.

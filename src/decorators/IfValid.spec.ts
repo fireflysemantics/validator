@@ -5,7 +5,6 @@ import { getValidationContextContainerKey } from "@fs/utilities/utilities";
 import { validateProperty } from "@fs/utilities/utilities";
 import { expect } from "chai";
 import "mocha";
-import { ErrorContainerHelper } from "dist/container/error/ErrorContainer";
 
 class IfValidNotTest1 {
   @IsDefined() 
