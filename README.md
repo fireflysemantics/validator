@@ -21,11 +21,7 @@ Decorator based validation for Typescript classes.
 ### General Usage
 
 ```
-import { ValidationContext } from "@fireflysemantics/container/validation/ValidationContext";
-import { IsGreaterThan } from "@fireflysemantics/decorators/IsGreaterThan";
-import { ErrorContainer } from "@fireflysemantics/container/error/ErrorContainer";
-import { getValidationContextContainerKey } from "@fireflysemantics/utilities/utilities";
-import { validateProperty, validate } from "@fireflysemantics/utilities/utilities";
+import { IsDefined, IsGreaterThan, ValidationContext, ErrorContainer, getValidationContextContainerKey, validateProperty, validate } from "@fireflysemantics/validator";
 
 class IsGreaterThanTest0 {
   @IsGreaterThan(30)
