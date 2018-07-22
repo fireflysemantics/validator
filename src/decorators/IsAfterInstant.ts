@@ -3,9 +3,10 @@ import { ValidationOptions } from "../container/validation/ValidationOptions";
 import { ValidationContext } from "../container/validation/ValidationContext";
 import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { isAfterInstant } from "@fireflysemantics/is";
+import { isDate } from "util";
 
 /**
- * Decorator that checks if the property is after by the argument.  
+ * Decorator that checks if the property is after the argument.  
  * 
  * See {@link isAfterInstant} for a description of the method
  * performing the validation.
@@ -13,7 +14,7 @@ import { isAfterInstant } from "@fireflysemantics/is";
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options
  */
-export function IsAfterInstant(target: Date, validationOptions?: ValidationOptions) {
+export function IsAfterInstant(target: Date | string, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(target);
@@ -43,8 +44,12 @@ export function IsAfterInstant(target: Date, validationOptions?: ValidationOptio
  * @return The result of the call to {@link isAfterInstant}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  const target:Date = vc.validationParameters[0];
-  return isAfterInstant(o[vc.propertyName], target);
+  let target = vc.validationParameters[0];
+  if ( isDate(target)) {
+    return isAfterInstant(o[vc.propertyName], target);  
+  }
+  target = o[target];
+  return isAfterInstant(o[vc.propertyName], target);  
 }
 /**
  * 

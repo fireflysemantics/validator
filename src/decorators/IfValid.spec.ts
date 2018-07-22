@@ -30,6 +30,7 @@ const IVT2 = new IfValidNotTest2();
 
 describe("IfValid Validation", () => {
   it("should validate p1 since p0 is invalid", () => {
+    ErrorContainer.clear();
 
     const key_p0 = getValidationContextContainerKey(IVT1, "p0");
     const key_p1 = getValidationContextContainerKey(IVT1, "p1");
