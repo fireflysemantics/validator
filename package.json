@@ -3,6 +3,7 @@
   "version": "1.0.12",
   "description": "Typescript Validation Decorators and Executor",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "clean": "del-cli target && del-cli dist && del-cli doc",
     "test": "jest",
