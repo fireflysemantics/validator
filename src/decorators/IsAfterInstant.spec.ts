@@ -3,11 +3,8 @@ import { ErrorContainer } from "../container/error/ErrorContainer";
 import { getValidationContextContainerKey } from "../utilities/utilities";
 import { validateProperty, validate } from "../utilities/utilities";
 
-import { expect } from "chai";
-import "mocha";
 import { IsDate } from "./IsDate";
 import { IsAfterInstant } from "./IsAfterInstant";
-
 
 class IsAfterInstant1 {
   @IsDate() 
@@ -46,23 +43,23 @@ describe("IsAfterInstant Validation", () => {
     let key_p0 = getValidationContextContainerKey(IAI1, "p0");
     let key_p1 = getValidationContextContainerKey(IAI1, "p1");
 
-    expect(validateProperty(IAI1, "p1")).to.be.true;
-    expect(ErrorContainer.getValidationErrors(key_p0)).to.be.undefined;
-    expect(ErrorContainer.getValidationErrors(key_p1)).to.be.undefined;
+    expect(validateProperty(IAI1, "p1")).toBeTruthy();
+    expect(ErrorContainer.getValidationErrors(key_p0)).toBeUndefined();
+    expect(ErrorContainer.getValidationErrors(key_p1)).toBeUndefined();
 
-    expect(validate(IAI1)).to.be.true;
-    expect(ErrorContainer.getValidationErrors(key_p0)).to.be.undefined;
-    expect(ErrorContainer.getValidationErrors(key_p1)).to.be.undefined;
-    expect(ErrorContainer.getErrorContainerValues().length).to.equal(0);
+    expect(validate(IAI1)).toBeTruthy();
+    expect(ErrorContainer.getValidationErrors(key_p0)).toBeUndefined();
+    expect(ErrorContainer.getValidationErrors(key_p1)).toBeUndefined();
+    expect(ErrorContainer.getErrorContainerValues().length).toEqual(0);
 
     key_p0 = getValidationContextContainerKey(IAI2, "p0");
     key_p1 = getValidationContextContainerKey(IAI2, "p1");
 
-    expect(validate(IAI2)).to.be.false;
-    expect(ErrorContainer.getValidationErrors(key_p0)).to.be.undefined;
-    expect(ErrorContainer.getValidationErrors(key_p1)).to.exist;
-    expect(ErrorContainer.getErrorContainerValues().length).to.equal(1);
+    expect(validate(IAI2)).toBeFalsy();
+    expect(ErrorContainer.getValidationErrors(key_p0)).toBeUndefined();
+    expect(ErrorContainer.getValidationErrors(key_p1)).not.toBeNull();
+    expect(ErrorContainer.getErrorContainerValues().length).toEqual(1);
 
-    expect(validate(IAI3)).to.be.true;
+    expect(validate(IAI3)).toBeTruthy();
   });
 });

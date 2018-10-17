@@ -2,8 +2,6 @@ import { ValidationContainer } from "../container/validation/ValidationContainer
 import { ValidationContext } from "../container/validation/ValidationContext";
 import { getValidationContextContainerKey } from "../utilities/utilities";
 import { IsDefined } from "./IsDefined";
-import { expect } from "chai";
-import "mocha";
 const { getOwnPropertyNames } = Object;
 
 class IsDefinedValid {
@@ -21,10 +19,10 @@ describe("IsDefined Validation", () => {
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
-      expect(vc.propertyName).to.equal(pn);
-      expect(vc.target.name).to.equal(IDV.constructor.name);
+      expect(vc.propertyName).toEqual(pn);
+      expect(vc.target.name).toEqual(IDV.constructor.name);
 
-      expect(vc.validateValue(vc, IDV)).to.be.true;
+      expect(vc.validateValue(vc, IDV)).toBeTruthy();
     });
   });
 
@@ -33,8 +31,7 @@ describe("IsDefined Validation", () => {
   }
   
   const IDI: any = new IsDefinedInvalid();
-  
-  
+    
   it(`should return false when using the 
       ValidationContext.validate method to check invalid values`, () => {    
     Object.getOwnPropertyNames(IDI).forEach(pn => {
@@ -42,7 +39,7 @@ describe("IsDefined Validation", () => {
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
-      expect(vc.validateValue(vc, IDI)).to.be.false;
+      expect(vc.validateValue(vc, IDI)).toBeFalsy();
     });
   });
 });

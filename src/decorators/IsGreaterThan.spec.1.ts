@@ -63,7 +63,7 @@ describe("IfGreaterThan Validation", () => {
     expect(validate(IGTT4)).toBeFalsy();
   });
   it("should work for number property key arguments", () => {
-    expect(validateProperty(IGTT2, "secondNumber")).toBeTruthy();
+    expect(validateProperty(IGTT2, "secondNumber")).toBeTruthy());
     expect(validate(IGTT2)).toBeTruthy();
   });  
 });

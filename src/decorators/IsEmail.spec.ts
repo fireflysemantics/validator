@@ -2,8 +2,6 @@ import { ValidationContainer } from "../container/validation/ValidationContainer
 import { ValidationContext } from "../container/validation/ValidationContext";
 import { getValidationContextContainerKey } from "../utilities/utilities";
 import { IsEmail } from "./IsEmail";
-import { expect } from "chai";
-import "mocha";
 const { getOwnPropertyNames } = Object;
 
 class IsEmailValid {
@@ -28,13 +26,12 @@ describe("IsEmail Validation", () => {
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
-      expect(vc.propertyName).to.equal(pn);
-      expect(vc.target.name).to.equal(IEV.constructor.name);
+      expect(vc.propertyName).toEqual(pn);
+      expect(vc.target.name).toEqual(IEV.constructor.name);
 
-      expect(vc.validateValue(vc, IEV)).to.be.true;
+      expect(vc.validateValue(vc, IEV)).toBeTruthy();
     });
   });
-
 
   class IsEmailInvalid {
     @IsEmail() e0: string = 'null';
@@ -55,7 +52,7 @@ describe("IsEmail Validation", () => {
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
-      expect(vc.validateValue(vc, IEI)).to.be.false;
+      expect(vc.validateValue(vc, IEI)).toBeFalsy();
     });
   });
 });

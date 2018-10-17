@@ -3,8 +3,6 @@ import { ErrorContainer } from "../container/error/ErrorContainer";
 import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { ValidationContext } from "../container/validation/ValidationContext";
 import { IsDefined } from '../decorators/IsDefined'
-import { expect } from "chai";
-import "mocha";
 
 export class UtilitiesValid {
   @IsDefined() p1: String = "";
@@ -19,9 +17,9 @@ describe("Utilities  getValidationContextKey", () => {
   it(`should return a working ValidationContext key`, () => {
     const key1 = getValidationContextContainerKey(UIV.constructor.name, uiv_p1);
     const key2 = getValidationContextContainerKey(UIV, uiv_p1);
-    expect(key1).to.equal(key2);
+    expect(key1).toEqual(key2);
     let vcs:Array<ValidationContext> = ValidationContainer.cache[key1].vcs;
-    expect(vcs).to.exist;
+    expect(vcs).not.toBeNull();
   });
 });
 
@@ -37,9 +35,9 @@ const ui_p0 = 'p0';
  */
 describe("Utilities validateProperty", () => {
   it("should return false when validating an invalid property", () => {
-    expect(validateProperty(UI, ui_p0)).to.be.false;
+    expect(validateProperty(UI, ui_p0)).toBeFalsy();
     const key = getValidationContextContainerKey(UI, ui_p0);
-    expect(ErrorContainer.getValidationErrors(key).length).to.be.greaterThan(0);
+    expect(ErrorContainer.getValidationErrors(key).length).toBeGreaterThan(0);
   });
 });
 
@@ -48,8 +46,8 @@ describe("Utilities validateProperty", () => {
  */
 describe("Utilities validate", () => {
   it("should return false when validating an invalid object", () => {
-    expect(validate(UI)).to.be.false;
+    expect(validate(UI)).toBeFalsy();
     const key = getValidationContextContainerKey(UI, ui_p0);
-    expect(ErrorContainer.getValidationErrors(key).length).to.be.greaterThan(0);
+    expect(ErrorContainer.getValidationErrors(key).length).toBeGreaterThan(0);
   });
 });

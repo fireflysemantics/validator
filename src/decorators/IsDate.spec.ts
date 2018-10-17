@@ -2,8 +2,6 @@ import { ValidationContainer } from "../container/validation/ValidationContainer
 import { ValidationContext } from "../container/validation/ValidationContext";
 import { getValidationContextContainerKey } from "../utilities/utilities";
 import { IsDate } from "./IsDate";
-import { expect } from "chai";
-import "mocha";
 const { getOwnPropertyNames } = Object;
 
 class IsDateValid {
@@ -20,10 +18,10 @@ describe("IsDate Validation", () => {
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
-      expect(vc.propertyName).to.equal(pn);
-      expect(vc.target.name).to.equal(IDV.constructor.name);
+      expect(vc.propertyName).toEqual(pn);
+      expect(vc.target.name).toEqual(IDV.constructor.name);
 
-      expect(vc.validateValue(vc, IDV)).to.be.true;
+      expect(vc.validateValue(vc, IDV)).toBeTruthy();
     });
   });
 
@@ -40,7 +38,7 @@ describe("IsDate Validation", () => {
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
-      expect(vc.validateValue(vc, INI)).to.be.false;
+      expect(vc.validateValue(vc, INI)).toBeFalsy();
     });
   });
 });

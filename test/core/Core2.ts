@@ -1,7 +1,7 @@
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
+import { ValidationOptions } from "../../src/container/validation/ValidationOptions";
+import { ValidationContext } from "../../src/container/validation/ValidationContext";
+import { ValidationContainer } from "../../src/container/validation/ValidationContainer";
+import { PREFIX_EACH, PREFIX_SINGLE } from "../../src/constants";
 
 /**
  * Function that always returns true regardless

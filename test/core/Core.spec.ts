@@ -1,14 +1,12 @@
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { ValidationOptions } from "../../src/container/validation/ValidationOptions";
+import { ValidationContext } from "../../src/container/validation/ValidationContext";
+import { ValidationContainer } from "../../src/container/validation/ValidationContainer";
 
-import { Core1 } from "@test/core/Core1";
-import { Core2 } from "@test/core/Core2";
-import { getValidationContextContainerKey } from "@fs/utilities/utilities";
+import { Core1 } from "./Core1";
+import { Core2 } from "./Core2";
+import { getValidationContextContainerKey } from "../../src/utilities/utilities";
 
-import { expect } from "chai";
-import "mocha";
-import { PREFIX_SINGLE, PREFIX_EACH } from "@fs/constants";
+import { PREFIX_SINGLE, PREFIX_EACH } from "../../src/constants";
 const { getOwnPropertyNames } = Object;
 
 const cno_p0_array = "p0";
@@ -37,8 +35,8 @@ describe("ValidationContextContainer", ()=> {
   it("should guarantee the sequence of the validation decorators", ()=>{
     let key: string = getValidationContextContainerKey(cs, "p3");
     const validators = ValidationContainer.cache[key];
-    expect(validators.vcs[0].decorator).to.equal(Core1.name);
-    expect(validators.vcs[1].decorator).to.equal(Core2.name);
+    expect(validators.vcs[0].decorator).toEqual(Core1.name);
+    expect(validators.vcs[1].decorator).toEqual(Core2.name);
   });
 });
 
@@ -62,12 +60,12 @@ const cno: any = new CoreNoOptions();
 
 describe("MetaClass cache initializaiton", ()=> {
   it("should create MetaClass instances", ()=>{
-    expect(cno.constructor.name).to.equal('CoreNoOptions');
-    expect(ValidationContainer.metaClasses['CoreNoOptions']).to.exist;
-    expect(ValidationContainer.metaClasses[cu.constructor.name]).to.not.exist;
-    expect(ValidationContainer.metaClasses['CoreNoOptions'].properties.length).to.equal(2);
-    expect(ValidationContainer.metaClasses['CoreWithOptions'].properties.length).to.equal(1);
-    expect(ValidationContainer.metaClasses['CoreWithOptions'].properties.includes("p3")).to.be.true;    
+    expect(cno.constructor.name).toEqual('CoreNoOptions');
+    expect(ValidationContainer.metaClasses['CoreNoOptions']).not.toBeNull();
+    expect(ValidationContainer.metaClasses[cu.constructor.name]).toBeUndefined();
+    expect(ValidationContainer.metaClasses['CoreNoOptions'].properties.length).toEqual(2);
+    expect(ValidationContainer.metaClasses['CoreWithOptions'].properties.length).toEqual(1);
+    expect(ValidationContainer.metaClasses['CoreWithOptions'].properties.includes("p3")).toBeTruthy();    
   });
 });
 
@@ -76,15 +74,15 @@ describe("Core Validation Context Initialization", () => {
     getOwnPropertyNames(cno).forEach(pn => {
       const key: string = getValidationContextContainerKey(cno, pn);
       const validators = ValidationContainer.cache[key].vcs;
-      expect(validators.length).to.equal(1);
-      expect(validators[0] instanceof ValidationContext).to.be.true;
+      expect(validators.length).toEqual(1);
+      expect(validators[0] instanceof ValidationContext).toBeTruthy();
     });
   });
 
   it("should not generate a ValidationContexts if the property is not decorated.", () => {
     let key: string = getValidationContextContainerKey(cu.constructor.name, cu_p2);
     const validators = ValidationContainer.cache[key];
-    expect(validators).to.be.undefined;
+    expect(validators).toBeUndefined();
   });
 
   it("should have accurately mapped ValidationContext values.", () => {
@@ -94,21 +92,20 @@ describe("Core Validation Context Initialization", () => {
       const validators = ValidationContainer.cache[key].vcs;
       const vc = validators[0];
 
-      expect(vc.object.constructor.name).to.equal(cno.constructor.name);
-      expect(vc.decorator).to.equal(Core1.name);
-      expect(vc.propertyName).to.equal(pn);
-      expect(vc.target.name).to.equal(cno.constructor.name);
-      expect(vc.validationOptions).to.be.undefined;
-      expect(vc.validationParameters).to.be.undefined;
-      expect(vc.validationTypeOptions).to.be.undefined;
-
+      expect(vc.object.constructor.name).toEqual(cno.constructor.name);
+      expect(vc.decorator).toEqual(Core1.name);
+      expect(vc.propertyName).toEqual(pn);
+      expect(vc.target.name).toEqual(cno.constructor.name);
+      expect(vc.validationOptions).toBeUndefined();
+      expect(vc.validationParameters).toBeUndefined();
+      expect(vc.validationTypeOptions).toBeUndefined();
     });
 
     const key: string = getValidationContextContainerKey(cwo.constructor.name, cwo_p3);
     const validators = ValidationContainer.cache[key].vcs;
 
     const vc = validators[0];
-    expect(vc.validationOptions).to.exist;
+    expect(vc.validationOptions).not.toBeNull();
   });
 });
 
@@ -118,7 +115,7 @@ describe("Core Messages", () => {
     const validators = ValidationContainer.cache[key].vcs;
 
     let vc = validators[0];
-    expect(vc.errorMessage(vc, cno)).to.contain(PREFIX_SINGLE);
+    expect(vc.errorMessage(vc, cno)).toContain(PREFIX_SINGLE);
   });
 
   it("should prefix the message string with the PREFIX_EACH is an array", () => {
@@ -128,6 +125,6 @@ describe("Core Messages", () => {
     );
     const validators = ValidationContainer.cache[key].vcs;
     let vc = validators[0];
-    expect(vc.errorMessage(vc, cno)).to.contain(PREFIX_EACH);
+    expect(vc.errorMessage(vc, cno)).toContain(PREFIX_EACH);
   });
 });
