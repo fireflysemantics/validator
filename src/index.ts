@@ -4,6 +4,9 @@
 
 export { validate } from "./utilities/utilities";
 export { validateProperty } from "./utilities/utilities";
+export { getValidationContextContainerKey } from "./utilities/utilities";
+export { getValidationContextSignature } from "./utilities/utilities";
+
 
 // ========================================================
 // CONTAINTERS

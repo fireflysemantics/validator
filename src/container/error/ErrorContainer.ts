@@ -1,6 +1,6 @@
 import { ValidationError } from "./ValidationError";
 import { getValidationContextContainerKey } from "../../utilities/utilities";
-import { IValidationErrorIndex} from './IValidationErrorIndex'
+import { IValidationErrorIndex} from './IValidationErrorIndex';
 
 /**
  * Validation error container holding all validation errors.
