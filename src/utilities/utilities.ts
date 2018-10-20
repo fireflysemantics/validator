@@ -37,6 +37,7 @@ export function validate(target: any): ObjectErrors {
  *
  * @param o The object being validated
  * @param propertyName The name of the property holding the value being validated
+ * @param oes The {@link ObjectErrors} instance used to collect validation errors
  * @param skipErrorGeneration Skips the generation of validation errors
  * @return true if the property is valid, false otherwise.
  * @throws An exception if the ValidationContextContainer instance for the object and property does not exist.
@@ -50,15 +51,17 @@ export function validateProperty(
   let valid = true;
   const key = getObjectPropertyKey(o, propertyName);
   const vcc: ValidationContextContainer = ValidationContainer.cache[key];
-
+ 
   if (!vcc) {
     const errorMessage: string = `A validation context container for the key 
     ${key} does not exist.`;
     const error: ErrorType = new Error(errorMessage);
     throw error;
   }
-
+ 
   const propertyValue = o[propertyName];
+
+  console.log("OES LINE 64: ", oes);
 
   vcc.vcs.every((vc: ValidationContext) => {
     if (propertyValue instanceof Array) {
@@ -89,7 +92,9 @@ export function validateProperty(
           propertyValue
         );
         console.log("THIS IS THE FUNCTION: ", oes.addValidationError);
-        oes.addValidationError(ve);
+//        oes.addValidationError(ve);
+console.log("OES.VALID: ", oes.valid);
+//console.log("OES.VALID: ", oes.valid);
         oes.valid = false;
       }
     }
