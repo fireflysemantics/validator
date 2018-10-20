@@ -2,6 +2,7 @@ import { ValidationOptions } from "../container/validation/ValidationOptions";
 import { ValidationContext } from "../container/validation/ValidationContext";
 import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { validateProperty } from "../utilities/utilities";
+import { ObjectErrors } from "../container/error/ObjectErrors";
 
 /**
  * Decorator that checks if the target argument is a valid property
@@ -57,9 +58,9 @@ export function IfValid(target: string, validationOptions?: ValidationOptions) {
  * @param vc The validation context
  * @param o The object containing the property referenced by the validation parameter
  */
-function validateValue(vc: ValidationContext, o: any) {
+function validateValue(vc: ValidationContext, o: any, oe:ObjectErrors) {
   const target = vc.validationParameters[0];
-  return validateProperty(o, target, true);
+  return validateProperty(o, target, oe, true);
 }
 
 function errorMessage(vc: ValidationContext, o: any): string {

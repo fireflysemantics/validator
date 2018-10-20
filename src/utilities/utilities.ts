@@ -65,7 +65,7 @@ export function validateProperty(
 
   vcc.vcs.every((vc: ValidationContext) => {
     if (propertyValue instanceof Array) {
-      const result: Number[] = vc.validateArray(vc, propertyValue);
+      const result: Number[] = vc.validateArray(vc, propertyValue, oes);
       if (
         !isArrayEmpty(result) &&
         !skipErrorGeneration &&
@@ -82,7 +82,7 @@ export function validateProperty(
         oes.valid = false;
       }
     } else {
-      valid = vc.validateValue(vc, o);
+      valid = vc.validateValue(vc, o, oes);
 
       if (!valid && !skipErrorGeneration) {
         const ve: ValidationError = new ValidationError(
