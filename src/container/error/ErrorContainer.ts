@@ -1,6 +1,5 @@
 import { ValidationError } from "./ValidationError";
-import { getValidationContextContainerKey } from "../../utilities/utilities";
-import { IValidationErrorIndex} from './IValidationErrorIndex';
+import { getObjectPropertyKey } from "../../utilities/utilities";
 
 /**
  * Validation error container holding all validation errors.
@@ -8,7 +7,7 @@ import { IValidationErrorIndex} from './IValidationErrorIndex';
 export class ErrorContainer {
 
   /**
-   * The index for all of the ValidationContext instances.
+   * The index for all of the ValidationError instances.
    */
   static cache: IValidationErrorIndex = {};
 
@@ -20,19 +19,19 @@ export class ErrorContainer {
    */
   private static pushtIfAbsent(key: string, error: ValidationError):void {
     if (this.cache[key] == null) {
-      const validationContextArray: Array<ValidationError> = [];
-      validationContextArray.push(error);
-      this.cache[key] = validationContextArray;
+      const vea: Array<ValidationError> = [];
+      vea.push(error);
+      this.cache[key] = vea;
     } else {
       this.cache[key].push(error);
     }
   }
 
   /**
-   * @param ve Add a ValidationContext instance.
+   * @param ve The ValidationError instance.
    */
   public static addValidationError(ve: ValidationError) {
-    const key: string = getValidationContextContainerKey(
+    const key: string = getObjectPropertyKey(
       ve.vc.target.name,
       ve.vc.propertyName
     );
@@ -70,4 +69,11 @@ export class ErrorContainer {
   public static clear(): void {
     ErrorContainer.cache = {};
   }
+}
+
+/**
+ * Interface representing the ValidationError cache.
+ */
+export interface IValidationErrorIndex {
+  [errorKey: string]: Array<ValidationError>;
 }

@@ -1,7 +1,7 @@
 import { IsDefined } from "./IsDefined";
 import { IfValid } from "./IfValid";
-import { ErrorContainer } from "../container/error/ErrorContainer";
-import { getValidationContextContainerKey } from "../utilities/utilities";
+import { ObjectErrors } from "../container/error/ObjectErrors";
+import { getObjectPropertyKey } from "../utilities/utilities";
 import { validateProperty } from "../utilities/utilities";
 
 class IfValidNotTest1 {
@@ -28,27 +28,30 @@ const IVT2 = new IfValidNotTest2();
 
 describe("IfValid Validation", () => {
   it("should validate p1 since p0 is invalid", () => {
-    ErrorContainer.clear();
+    const key_p0 = getObjectPropertyKey(IVT1, "p0");
+    const key_p1 = getObjectPropertyKey(IVT1, "p1");
+    let oes = new ObjectErrors();
+    validateProperty(IVT1, "p1", oes);
+    expect(oes.valid).toBeFalsy();
+    expect(oes.getErrors(key_p0)).toBeUndefined();
+    expect(oes.getErrors(key_p1)).toBeUndefined();
 
-    const key_p0 = getValidationContextContainerKey(IVT1, "p0");
-    const key_p1 = getValidationContextContainerKey(IVT1, "p1");
-    expect(validateProperty(IVT1, "p1")).toBeFalsy();
-    expect(ErrorContainer.getValidationErrors(key_p0)).toBeUndefined();
-    expect(ErrorContainer.getValidationErrors(key_p1)).toBeUndefined();
-
-    expect(validateProperty(IVT1, "p0")).toBeFalsy();
-    expect(ErrorContainer.getValidationErrors(key_p0).length).toEqual(1);
-    expect(ErrorContainer.getErrorContainerValues().length).toEqual(1);
+    oes = new ObjectErrors();
+    validateProperty(IVT1, "p0", oes);
+    expect(oes.valid).toBeFalsy();
+    expect(oes.getErrors(key_p0).length).toEqual(1);
   });
 
   it("should validate p1 since p0 is valid", () => {
-    ErrorContainer.clear();
-    const key_p0 = getValidationContextContainerKey(IVT2, "p0");
-    const key_p1 = getValidationContextContainerKey(IVT2, "p1");
+    const key_p0 = getObjectPropertyKey(IVT2, "p0");
+    const key_p1 = getObjectPropertyKey(IVT2, "p1");
 
-    expect(validateProperty(IVT2, "p0")).toBeTruthy();
-    expect(validateProperty(IVT2, "p1")).toBeFalsy();
-    expect(ErrorContainer.getValidationErrors(key_p0)).toBeUndefined();
-    expect(ErrorContainer.getValidationErrors(key_p1)).not.toBeNull();
+    let oes = new ObjectErrors();
+    validateProperty(IVT2, "p0", oes);
+    expect(oes.valid).toBeTruthy();
+    expect(oes.getErrors(key_p0)).toBeUndefined();
+    validateProperty(IVT2, "p1", oes);
+    expect(oes.valid).toBeFalsy();
+    expect(oes.getErrors(key_p1)).not.toBeNull();
   });
 });

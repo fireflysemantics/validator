@@ -1,6 +1,6 @@
 import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { ValidationContext } from "../container/validation/ValidationContext";
-import { getValidationContextContainerKey } from "../utilities/utilities";
+import { getObjectPropertyKey } from "../utilities/utilities";
 import { IsDate } from "./IsDate";
 const { getOwnPropertyNames } = Object;
 
@@ -14,7 +14,7 @@ describe("IsDate Validation", () => {
       the ValidationContext.validate 
       method to check valid values`, () => {
     getOwnPropertyNames(IDV).forEach(pn => {
-      const key: string = getValidationContextContainerKey(IDV.constructor.name, pn);
+      const key: string = getObjectPropertyKey(IDV.constructor.name, pn);
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
@@ -34,7 +34,7 @@ describe("IsDate Validation", () => {
       ValidationContext.validate method 
       to check invalid values`, () => {    
     Object.getOwnPropertyNames(INI).forEach(pn => {
-      const key: string = getValidationContextContainerKey(INI.constructor.name, pn);
+      const key: string = getObjectPropertyKey(INI.constructor.name, pn);
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];

@@ -1,7 +1,16 @@
 import { ValidationContext } from "../validation/ValidationContext";
 
 /**
- * Validation error description.
+ * There can be multiple `ValidationError` instances per 
+ * object property, since each `ValidationError` is created 
+ * when property value fails the decorators validation test
+ * contained on the corresponding `ValidationContext`.
+ * 
+ * Instances of `ValidationError` contain the:
+ * - The `object` and `objectProperty` that was validated 
+ * - {@link ValidationContext} used to perform the validation
+ * - The `value` being validated
+ * - An `errorIndex` (When the value being validated is an array)
  */
 export class ValidationError {
 
@@ -18,20 +27,23 @@ export class ValidationError {
 
   /**
    * The value that failed the validation check.
+   * 
+   * If this is an array of values, then the 
+   * {@link ValidationError.errorIndex} stores
+   * the indices of the values that did not pass validation.
+   * 
+   * Check if the value is an array using `value instanceof Array`.
    */
   value: any;
 
   /**
-   * If {@link ValidationError.isValueArray} is true,
-   * this property stores the indexes of the values that 
-   * failed validation.  
+   * Stores the indexes of the values that 
+   * failed validation when the value property is an array.  
+   * 
+   * Use [@fireflysemantics/is/isArray](https://fireflysemantics.github.io/is/doc/modules/_is_.html#isarray)
+   * to check whether {@link ValidationError.value} is an array.
    */
   errorIndex?: Number[];
-
-  /**
-   * Whether the value is an array.
-   */
-  isValueArray: boolean;
 
   /** 
    * The validation context 

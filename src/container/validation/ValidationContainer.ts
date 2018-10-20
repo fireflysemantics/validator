@@ -1,7 +1,6 @@
 import { ValidationContext } from "./ValidationContext";
-import { getValidationContextContainerKey } from "../../utilities/utilities";
+import { getObjectPropertyKey } from "../../utilities/utilities";
 import { IValidationContextsIndex } from "./IValidationContextIndex";
-import { IMetaClassIndex } from "./IMetaClassIndex";
 import { isDefined } from "@fireflysemantics/is";
 import { MetaClass } from "./MetaClass";
 import { ValidationContextContainer } from "./ValidationContextContainer";
@@ -18,20 +17,27 @@ export class ValidationContainer {
    * be modifying the state of the cache by using the @see addValidationContext method.
    */
   static cache: IValidationContextsIndex = {};
+
+  /**
+   * Meta classes which have a one to one
+   * correspondence with each decorated class.
+   */
   static metaClasses: IMetaClassIndex = {};
 
   /**
    * Adds the MetaClass instance corresponding to 
    * the <code>target</code> parameter if it does 
-   * not already exist.  Also adds the <code>propertyName</code> 
+   * not already exist.  
+   * 
+   * Also adds the <code>propertyName</code> 
    * parameter to the MetaClass instance if that does not exist.
    * 
    * @param target 
    * @param propertyName 
-   * 
    */
   public static addMetaClassAndPropertyIfAbsent(target: any, propertyName: string) {    
 
+    //The constructor name of the decorated class
     const constructorName = target.constructor.name;
 
     if (!isDefined(this.metaClasses[constructorName])) {
@@ -47,7 +53,7 @@ export class ValidationContainer {
    * @param vc Add a ValidationContext instance.
    */
   public static addValidationContext(vc: ValidationContext): void {
-    const key: string = getValidationContextContainerKey(
+    const key: string = getObjectPropertyKey(
       vc.target.name,
       vc.propertyName
     );
@@ -63,4 +69,8 @@ export class ValidationContainer {
       this.cache[key] = vcc;
     }
   }
+}
+
+export interface IMetaClassIndex {
+  [validationContextKey: string]: MetaClass;
 }

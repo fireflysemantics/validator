@@ -1,7 +1,7 @@
 import { ValidationContext } from "../container/validation/ValidationContext";
 import { IsGreaterThan } from "./IsGreaterThan";
 import { ErrorContainer } from "../container/error/ErrorContainer";
-import { getValidationContextContainerKey } from "../utilities/utilities";
+import { getObjectPropertyKey } from "../utilities/utilities";
 import { validateProperty, validate } from "../utilities/utilities";
 
 class IsGreaterThanTest0 {
@@ -50,7 +50,7 @@ const IGTT4 = new IsGreaterThanTest4();
 describe("IfGreaterThan Validation", () => {
   it("should work like this", () => {
     expect(validate(IGTT0)).toBeFalsy();
-    const key:string = getValidationContextContainerKey(IGTT0, "secondNumber");
+    const key:string = getObjectPropertyKey(IGTT0, "secondNumber");
     const vc:ValidationContext = ErrorContainer.getValidationErrors(key)[0].vc;
   });  
 

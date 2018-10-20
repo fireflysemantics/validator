@@ -1,6 +1,6 @@
 import { IfValid } from "./IfValid";
 import { ErrorContainer } from "../container/error/ErrorContainer";
-import { getValidationContextContainerKey } from "../utilities/utilities";
+import { getObjectPropertyKey } from "../utilities/utilities";
 import { validateProperty, validate } from "../utilities/utilities";
 
 import { IsDate } from "./IsDate";
@@ -40,8 +40,8 @@ describe("IsAfterInstant Validation", () => {
   it("should work like this", () => {
     ErrorContainer.clear();
 
-    let key_p0 = getValidationContextContainerKey(IAI1, "p0");
-    let key_p1 = getValidationContextContainerKey(IAI1, "p1");
+    let key_p0 = getObjectPropertyKey(IAI1, "p0");
+    let key_p1 = getObjectPropertyKey(IAI1, "p1");
 
     expect(validateProperty(IAI1, "p1")).toBeTruthy();
     expect(ErrorContainer.getValidationErrors(key_p0)).toBeUndefined();
@@ -52,8 +52,8 @@ describe("IsAfterInstant Validation", () => {
     expect(ErrorContainer.getValidationErrors(key_p1)).toBeUndefined();
     expect(ErrorContainer.getErrorContainerValues().length).toEqual(0);
 
-    key_p0 = getValidationContextContainerKey(IAI2, "p0");
-    key_p1 = getValidationContextContainerKey(IAI2, "p1");
+    key_p0 = getObjectPropertyKey(IAI2, "p0");
+    key_p1 = getObjectPropertyKey(IAI2, "p1");
 
     expect(validate(IAI2)).toBeFalsy();
     expect(ErrorContainer.getValidationErrors(key_p0)).toBeUndefined();

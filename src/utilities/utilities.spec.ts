@@ -1,4 +1,4 @@
-import { validate, validateProperty, getValidationContextContainerKey } from "./utilities";
+import { validate, validateProperty, getObjectPropertyKey } from "./utilities";
 import { ErrorContainer } from "../container/error/ErrorContainer";
 import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { ValidationContext } from "../container/validation/ValidationContext";
@@ -14,9 +14,9 @@ const UIV = new UtilitiesValid();
 const uiv_p1 = 'p1';
 
 describe("Utilities  getValidationContextKey", () => {
-  it(`should return a working ValidationContext key`, () => {
-    const key1 = getValidationContextContainerKey(UIV.constructor.name, uiv_p1);
-    const key2 = getValidationContextContainerKey(UIV, uiv_p1);
+  it.only(`should return a working ValidationContext key`, () => {
+    const key1 = getObjectPropertyKey(UIV.constructor.name, uiv_p1);
+    const key2 = getObjectPropertyKey(UIV, uiv_p1);
     expect(key1).toEqual(key2);
     let vcs:Array<ValidationContext> = ValidationContainer.cache[key1].vcs;
     expect(vcs).not.toBeNull();
@@ -36,7 +36,7 @@ const ui_p0 = 'p0';
 describe("Utilities validateProperty", () => {
   it("should return false when validating an invalid property", () => {
     expect(validateProperty(UI, ui_p0)).toBeFalsy();
-    const key = getValidationContextContainerKey(UI, ui_p0);
+    const key = getObjectPropertyKey(UI, ui_p0);
     expect(ErrorContainer.getValidationErrors(key).length).toBeGreaterThan(0);
   });
 });
@@ -47,7 +47,7 @@ describe("Utilities validateProperty", () => {
 describe("Utilities validate", () => {
   it("should return false when validating an invalid object", () => {
     expect(validate(UI)).toBeFalsy();
-    const key = getValidationContextContainerKey(UI, ui_p0);
+    const key = getObjectPropertyKey(UI, ui_p0);
     expect(ErrorContainer.getValidationErrors(key).length).toBeGreaterThan(0);
   });
 });

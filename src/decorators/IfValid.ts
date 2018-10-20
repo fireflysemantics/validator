@@ -8,6 +8,18 @@ import { validateProperty } from "../utilities/utilities";
  * before proceeding with the validation of the property that the
  * {@link IfValid} decorator decorates.
  *
+ * The property p0 is not valid hence p1 will not be validated:
+ * @example 
+   class IfValidNotTest1 {
+   @IsDefined() 
+   p0: any = null; //Property not valid
+
+   @IsDefined() 
+   @IfValid("p0")
+   p1: any = null;
+   }
+ * 
+ *
  * @param target The name of the property that should be valid.
  * @param validationOptions The validation options
  */

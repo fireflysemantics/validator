@@ -6,5 +6,5 @@ export interface ValidationOptions {
     /**
      * Error message created on validation fail.
      */
-    message?: ((vc: ValidationContext, value: string) => string);
+    message?: (vc: ValidationContext, value: string) => string;
 }

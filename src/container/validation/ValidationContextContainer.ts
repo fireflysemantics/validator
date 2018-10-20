@@ -1,9 +1,18 @@
 import { ValidationContext } from "./ValidationContext";
 
 /**
- * Class that holds validation container instances representing the ValidationContainer cache.
+ * Instances of this class are used to 
+ * store {@link ValidationContext} instances
+ * created per for each class property that has been
+ * decorated with validation annotations.
+ * 
+ * After being constructed, the {@link ValidationContextContainer}s 
+ * are stored in the {@link ValidationContainer} cache. 
+ * 
+ * This allows us to retrieve a {@link ValidationContextContainer}
+ * per property and use it to perform all the validation for that property.
  *
- * Use the objectPropertyKey to get the IValidationContextIndex
+ * Use the `objectPropertyKey` to get the IValidationContextIndex
  * and then the validationContextKey to get a ValidationContext instance.
  */
 export class ValidationContextContainer {

@@ -1,29 +1,16 @@
 import { ValidationOptions } from "./ValidationOptions";
 
 /**
- * The type api signature for the validation function that validates single values.
- */
-export type ValidationValueFunctionType = (vc: ValidationContext, object:any)=>boolean;
-
-/**
- * The type api signature for the validation function that validates single values.
- */
-export type ValidationArrayFunctionType = (vc: ValidationContext, values:Array<any>)=>Array<Number>;
-
-/**
- * The type api signature for the error message function.
- * @param vc The validation context
- * @param o The object being validated
- */
-export type ErrorMessageType = (vc: ValidationContext, o: any) => string;
-
-/**
- * Constructor arguments used by to lookup the validation function
- * via the ValidationContainer.
+ * The `ValidationContext` instance for a certain annotation
+ * and property combination is created when the run time loads
+ * the class that has been annotated.
+ * 
+ * The `ValidationContext` by the validation API to perform
+ * the validation of the property.
  */
 export class ValidationContext {
 
-    /**
+  /**
    * An instance of the class that has been decorated.  Typescript passes
    * in this instance when the decorated class is loaded.
    */
@@ -120,8 +107,45 @@ export class ValidationContext {
   /**
    * The signature for the decorator, class, and class property 
    * combination.
+   * 
+   * Below is a getSignature example of what would be produced
+   * when the {@link ValidationContext} were formed from the
+   * {@link IfValid} annotation applied to the `purchasePrice`
+   * property of a `SalesOrder` instance.
+   * 
+   * @example
+   * 
+   * ```ts
+   * IfValid_SalesOrder_purchasePrice
+   * ```
    */
   public getSignature():string {
     return `${this.decorator}_${this.target.name}_${this.propertyName}`;
   }
 }
+
+/**
+ * The api signature for the validation function that validates a single value.
+ * 
+ * @param vc The validation context
+ * @param object The value being validated.
+ * @return The array of indices that corresponding to the values that are invalid.
+ */
+export type ValidationValueFunctionType = (vc: ValidationContext, object:any)=>boolean;
+
+/**
+ * The api signature for the validation function that validates multiple values.
+ * 
+ * @param vc The validation context
+ * @param values The array of values being validated.
+ * @return The array of indices that corresponding to the values that are invalid.
+ */
+export type ValidationArrayFunctionType = (vc: ValidationContext, values:Array<any>)=>Array<Number>;
+
+/**
+ * The api signature for the error message function.
+ * @param vc The validation context
+ * @param o The object being validated
+ * @return The string message that the function produced.
+ */
+export type ErrorMessageType = (vc: ValidationContext, o: any) => string;
