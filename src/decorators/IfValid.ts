@@ -2,7 +2,6 @@ import { ValidationOptions } from "../container/validation/ValidationOptions";
 import { ValidationContext } from "../container/validation/ValidationContext";
 import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { validateProperty } from "../utilities/utilities";
-import { ObjectErrors } from "../container/error/ObjectErrors";
 
 /**
  * Decorator that checks if the target argument is a valid property
@@ -11,6 +10,7 @@ import { ObjectErrors } from "../container/error/ObjectErrors";
  *
  * The property p0 is not valid hence p1 will not be validated:
  * @example 
+ * ```ts
    class IfValidNotTest1 {
    @IsDefined() 
    p0: any = null; //Property not valid
@@ -19,6 +19,7 @@ import { ObjectErrors } from "../container/error/ObjectErrors";
    @IfValid("p0")
    p1: any = null;
    }
+   ```
  * 
  *
  * @param target The name of the property that should be valid.
@@ -58,9 +59,9 @@ export function IfValid(target: string, validationOptions?: ValidationOptions) {
  * @param vc The validation context
  * @param o The object containing the property referenced by the validation parameter
  */
-function validateValue(vc: ValidationContext, o: any, oe:ObjectErrors) {
+function validateValue(vc: ValidationContext, o: any) {
   const target = vc.validationParameters[0];
-  return validateProperty(o, target, oe, true);
+  return validateProperty(o, target);
 }
 
 function errorMessage(vc: ValidationContext, o: any): string {

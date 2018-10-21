@@ -1,27 +1,16 @@
 import { IfValid } from "./IfValid";
-import { ErrorContainer } from "../container/error/ErrorContainer";
 import { getObjectPropertyKey } from "../utilities/utilities";
 import { validateProperty, validate } from "../utilities/utilities";
+import { ObjectErrors } from "../container/error";
 
 import { IsDate } from "./IsDate";
 import { IsAfterInstant } from "./IsAfterInstant";
 
-class IsAfterInstant1 {
-  @IsDate() 
-  p0: Date = new Date(0);
-
-  @IsAfterInstant("p0") 
-  @IfValid("p0")
-  p1: Date = new Date(1);
-}
-
-const IAI1 = new IsAfterInstant1();
-
 class IsAfterInstant2 {
-  @IsDate() 
+  @IsDate()
   p0: Date = new Date(1);
 
-  @IsAfterInstant("p0") 
+  @IsAfterInstant("p0")
   @IfValid("p0")
   p1: Date = new Date(0);
 }
@@ -29,37 +18,48 @@ class IsAfterInstant2 {
 const IAI2 = new IsAfterInstant2();
 
 class IsAfterInstant3 {
-  @IsAfterInstant(new Date(0)) 
+  @IsAfterInstant(new Date(0))
   p0: Date = new Date(1);
 }
 
 const IAI3 = new IsAfterInstant3();
 
-
 describe("IsAfterInstant Validation", () => {
-  it("should work like this", () => {
-    ErrorContainer.clear();
+  class IsAfterInstant1 {
+    @IsDate()
+    p0: Date = new Date(0);
 
+    @IsAfterInstant("p0")
+    @IfValid("p0")
+    p1: Date = new Date(1);
+  }
+
+  const IAI1 = new IsAfterInstant1();
+
+  it("should work like this", () => {
     let key_p0 = getObjectPropertyKey(IAI1, "p0");
     let key_p1 = getObjectPropertyKey(IAI1, "p1");
 
-    expect(validateProperty(IAI1, "p1")).toBeTruthy();
-    expect(ErrorContainer.getValidationErrors(key_p0)).toBeUndefined();
-    expect(ErrorContainer.getValidationErrors(key_p1)).toBeUndefined();
+    let oes = new ObjectErrors();
+    validateProperty(IAI1, "p1", oes);
 
-    expect(validate(IAI1)).toBeTruthy();
-    expect(ErrorContainer.getValidationErrors(key_p0)).toBeUndefined();
-    expect(ErrorContainer.getValidationErrors(key_p1)).toBeUndefined();
-    expect(ErrorContainer.getErrorContainerValues().length).toEqual(0);
+    expect(oes.valid).toBeTruthy();
+    expect(oes.getErrors(key_p0)).toBeUndefined();
+    expect(oes.getErrors(key_p1)).toBeUndefined();
 
+    oes = validate(IAI1);
+    expect(oes.valid).toBeTruthy();
+
+    expect(oes.getErrors(key_p0)).toBeUndefined();
+    expect(oes.getErrors(key_p1)).toBeUndefined();
     key_p0 = getObjectPropertyKey(IAI2, "p0");
     key_p1 = getObjectPropertyKey(IAI2, "p1");
 
-    expect(validate(IAI2)).toBeFalsy();
-    expect(ErrorContainer.getValidationErrors(key_p0)).toBeUndefined();
-    expect(ErrorContainer.getValidationErrors(key_p1)).not.toBeNull();
-    expect(ErrorContainer.getErrorContainerValues().length).toEqual(1);
+    oes = validate(IAI2);
+    expect(oes.valid).toBeFalsy();
+    expect(oes.getErrors(key_p0)).toBeUndefined();
+    expect(oes.getErrors(key_p1)).not.toBeNull();
 
-    expect(validate(IAI3)).toBeTruthy();
+    expect(validate(IAI3).valid).toBeTruthy();
   });
 });

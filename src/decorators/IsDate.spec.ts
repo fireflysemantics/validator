@@ -28,17 +28,17 @@ describe("IsDate Validation", () => {
   class IsDateInvalid {
     @IsDate() p0: Date = null;
   }
-  const INI: any = new IsDateInvalid();  
+  const IDI: any = new IsDateInvalid();  
 
   it(`should return false when using the 
       ValidationContext.validate method 
       to check invalid values`, () => {    
-    Object.getOwnPropertyNames(INI).forEach(pn => {
-      const key: string = getObjectPropertyKey(INI.constructor.name, pn);
+      getOwnPropertyNames(IDI).forEach(pn => {
+      const key: string = getObjectPropertyKey(IDI.constructor.name, pn);
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
-      expect(vc.validateValue(vc, INI)).toBeFalsy();
+      expect(vc.validateValue(vc, IDI)).toBeFalsy();
     });
   });
 });

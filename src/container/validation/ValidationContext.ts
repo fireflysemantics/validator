@@ -132,7 +132,7 @@ export class ValidationContext {
  * @param object The value being validated.
  * @return The array of indices that corresponding to the values that are invalid.
  */
-export type ValidationValueFunctionType = (vc: ValidationContext, object:any, oes:ObjectErrors)=>boolean;
+export type ValidationValueFunctionType = (vc: ValidationContext, object:any)=>boolean;
 
 /**
  * The api signature for the validation function that validates multiple values.
@@ -141,7 +141,7 @@ export type ValidationValueFunctionType = (vc: ValidationContext, object:any, oe
  * @param values The array of values being validated.
  * @return The array of indices that corresponding to the values that are invalid.
  */
-export type ValidationArrayFunctionType = (vc: ValidationContext, values:Array<any>, oes:ObjectErrors)=>Array<Number>;
+export type ValidationArrayFunctionType = (vc: ValidationContext, values:Array<any>)=>Array<Number>;
 
 /**
  * The api signature for the error message function.

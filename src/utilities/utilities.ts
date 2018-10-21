@@ -45,7 +45,7 @@ export function validate(target: any): ObjectErrors {
 export function validateProperty(
   o: any,
   propertyName: string,
-  oes:ObjectErrors,
+  oes?:ObjectErrors,
   skipErrorGeneration: boolean = false
 ): boolean {
   let valid = true;
@@ -57,15 +57,11 @@ export function validateProperty(
     ${key} does not exist.`;
     const error: ErrorType = new Error(errorMessage);
     throw error;
-  }
- 
+  } 
   const propertyValue = o[propertyName];
-
-  console.log("OES LINE 64: ", oes);
-
   vcc.vcs.every((vc: ValidationContext) => {
     if (propertyValue instanceof Array) {
-      const result: Number[] = vc.validateArray(vc, propertyValue, oes);
+      const result: Number[] = vc.validateArray(vc, propertyValue);
       if (
         !isArrayEmpty(result) &&
         !skipErrorGeneration &&
@@ -78,12 +74,14 @@ export function validateProperty(
           propertyValue,
           result
         );
-        oes.addValidationError(ve);
-        oes.valid = false;
+        if (oes) {
+          oes.addValidationError(ve);
+          oes.valid = false;  
+        }
       }
     } else {
-      valid = vc.validateValue(vc, o, oes);
-
+      valid = vc.validateValue(vc, o);
+      
       if (!valid && !skipErrorGeneration) {
         const ve: ValidationError = new ValidationError(
           vc,
@@ -91,16 +89,15 @@ export function validateProperty(
           propertyName,
           propertyValue
         );
-        console.log("THIS IS THE FUNCTION: ", oes.addValidationError);
-//        oes.addValidationError(ve);
-console.log("OES.VALID: ", oes.valid);
-//console.log("OES.VALID: ", oes.valid);
-        oes.valid = false;
+        if (oes) {
+          oes.addValidationError(ve);
+          oes.valid = false;  
+        }
       }
     }
     if (!valid && vc.stop) {
       //Discontinue validation
-      return valid;
+      return false;
     } else return true; //Continue validation of the property
   });
   return valid;
