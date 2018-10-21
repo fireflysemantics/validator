@@ -6,7 +6,6 @@ import { ValidationError } from "../container/error/ValidationError";
 import { isArrayEmpty } from "@fireflysemantics/is";
 import { isString } from "@fireflysemantics/is";
 import { ObjectErrors } from "../container/error/ObjectErrors"; 
-import { ErrorType } from "typescript-logging";
 
 /**
  * Validates the <code>target</code> object.
@@ -55,8 +54,7 @@ export function validateProperty(
   if (!vcc) {
     const errorMessage: string = `A validation context container for the key 
     ${key} does not exist.`;
-    const error: ErrorType = new Error(errorMessage);
-    throw error;
+    throw new Error(errorMessage);
   } 
   const propertyValue = o[propertyName];
   vcc.vcs.every((vc: ValidationContext) => {

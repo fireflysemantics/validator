@@ -1,8 +1,8 @@
 import { validate, validateProperty, getObjectPropertyKey } from "./utilities";
-import { ErrorContainer } from "../container/error/ErrorContainer";
 import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { ValidationContext } from "../container/validation/ValidationContext";
 import { IsDefined } from '../decorators/IsDefined'
+import { ObjectErrors } from '../container/error'
 
 export class UtilitiesValid {
   @IsDefined() p1: String = "";
@@ -35,9 +35,10 @@ const ui_p0 = 'p0';
  */
 describe("Utilities validateProperty", () => {
   it("should return false when validating an invalid property", () => {
-    expect(validateProperty(UI, ui_p0)).toBeFalsy();
+    let oes = new ObjectErrors();
+    expect(validateProperty(UI, ui_p0, oes)).toBeFalsy();
     const key = getObjectPropertyKey(UI, ui_p0);
-    expect(ErrorContainer.getValidationErrors(key).length).toBeGreaterThan(0);
+    expect(oes.getErrors(key).length).toBeGreaterThan(0);
   });
 });
 
@@ -46,8 +47,9 @@ describe("Utilities validateProperty", () => {
  */
 describe("Utilities validate", () => {
   it("should return false when validating an invalid object", () => {
+    let oes = validate(UI);
     expect(validate(UI)).toBeFalsy();
     const key = getObjectPropertyKey(UI, ui_p0);
-    expect(ErrorContainer.getValidationErrors(key).length).toBeGreaterThan(0);
+    expect(oes.getErrors(key).length).toBeGreaterThan(0);
   });
 });
