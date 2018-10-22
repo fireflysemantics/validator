@@ -7,13 +7,12 @@ export { validateProperty } from "./utilities/utilities";
 export { getObjectPropertyKey } from "./utilities/utilities";
 export { getValidationContextSignature } from "./utilities/utilities";
 
-
 // ========================================================
 // CONTAINTERS
 // ========================================================
 
-export { ErrorContainer } from "./container/error/ErrorContainer";
 export { ValidationContext } from "./container/validation/ValidationContext";
+export { ObjectErrors } from "./container/error";
 
 // ========================================================
 // DECORATORS

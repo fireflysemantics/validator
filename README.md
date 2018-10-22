@@ -8,20 +8,19 @@ Decorator based validation for Typescript classes.
 
 ## Features
 
-- See the typedoc for [all decorators provided](https://fireflysemantics.github.io/validator/doc/)
-- Allows the definition of dependencies between validators
-- Uses [typescript-logging](https://www.npmjs.com/package/typescript-logging) to capture traces and error logs
+- [Many Decorators](https://fireflysemantics.github.io/validator/doc/) for all your needs 4
+- Progressive validation (Only check if the date is valid if the property is non null)
+- Cross property validation (Does the start date come before the end date?)
+- Conditional validation with `@IfValid` stops validation when appropriate to minimize validation noise.
 - Access to the entire [ValidationContext](https://github.com/fireflysemantics/validator/blob/master/src/container/validation/ValidationContext.ts) enabling the customization of validation messages post validation
-- Executes the annotations in an ordered sequence
-- Stops validation when appropriate to minimize validation noise.
-- Delegates validation to the [@fireflysemantics/is](https://www.npmjs.com/package/@fireflysemantics/is) library
+- Executes the decorators is a predictable ordered sequence
 
 ## Use Cases
 
 ### General Usage
 
 ```
-import { IsDefined, IsGreaterThan, ValidationContext, ErrorContainer, getValidationContextContainerKey, validateProperty, validate } from "@fireflysemantics/validator";
+import { IsDefined, IsGreaterThan, ValidationContext, getObjectPropertyKey, validateProperty, validate } from "@fireflysemantics/validator";
 
 class IsGreaterThanTest0 {
   @IsGreaterThan(30)
