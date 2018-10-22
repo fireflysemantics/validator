@@ -11,32 +11,20 @@ Decorator based validation for Typescript classes.
 - [Many Decorators](https://fireflysemantics.github.io/validator/doc/) for all your needs 4
 - Progressive validation (Only check if the date is valid if the property is non null)
 - Cross property validation (Does the start date come before the end date?)
-- Conditional validation with `@IfValid` stops validation when appropriate to minimize validation noise.
+- Cross Property Conditional Validation with `@IfValid` stops cross property validation a dependent property is invalid.
 - Access to the entire [ValidationContext](https://github.com/fireflysemantics/validator/blob/master/src/container/validation/ValidationContext.ts) enabling the customization of validation messages post validation
 - Executes the decorators is a predictable ordered sequence
 
 ## Use Cases
 
-### General Usage
+### Progressive Validation
 
-```
-import { IsDefined, IsGreaterThan, ValidationContext, getObjectPropertyKey, validateProperty, validate } from "@fireflysemantics/validator";
+[See this article for an overview of how progressive validation works.](https://medium.com/@ole.ersoy/minimizing-validation-noise-with-fireflysemantics-validator-efef4c95efd4).
 
-class IsGreaterThanTest0 {
-  @IsGreaterThan(30)
-  secondNumber: number = 20;
-}
+[There's also a Stackblitz demo here](https://stackblitz.com/edit/validator-progressive-validation).
 
-const IGTT0 = new IsGreaterThanTest0();
 
-expect(validate(IGTT0)).to.be.false;
-const key:string = getValidationContextContainerKey(IGTT0, "secondNumber");
-const vc:ValidationContext = ErrorContainer.getValidationErrors(key)[0].vc;
-console.log(vc.errorMessage(vc, IGTT0)); //The value contained by secondNumber should be greater than 30
-
-```
-
-### Dependent Validation of a Property
+### Cross Property Conditional Validation
 
 In some cases we want to validate something else only when a corresponding property
 on the instances is valid.  For example:
@@ -53,7 +41,7 @@ class GreaterThanCheck {
 }
 ```
 
-In this case the validation of `secondNumber` depends on the first number.  Thus in order to minimize validation noise, we would like to validate the `secondNumber` only if the first number is valid.
+In this case the validation of `secondNumber` depends on the first number.  Thus in order to minimize validation noise, we would like to validate the `secondNumber` only if the first number is valid.  The `@IfValid('firstNumber)` ensures that this will be the case.
 
 ## Runtime
 
