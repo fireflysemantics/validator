@@ -57,4 +57,11 @@ export class ValidationError {
     this.value = value;
     this.errorIndex = errorIndex;
   }  
+
+  /**
+   * Get the validation error message.
+   */
+  get errorMessage():string {
+    return this.vc.errorMessage(this.vc, this.object);
+  }
 }

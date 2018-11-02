@@ -14,7 +14,7 @@ const UIV = new UtilitiesValid();
 const uiv_p1 = 'p1';
 
 describe("Utilities  getValidationContextKey", () => {
-  it.only(`should return a working ValidationContext key`, () => {
+  it(`should return a working ValidationContext key`, () => {
     const key1 = getObjectPropertyKey(UIV.constructor.name, uiv_p1);
     const key2 = getObjectPropertyKey(UIV, uiv_p1);
     expect(key1).toEqual(key2);
@@ -48,8 +48,9 @@ describe("Utilities validateProperty", () => {
 describe("Utilities validate", () => {
   it("should return false when validating an invalid object", () => {
     let oes = validate(UI);
-    expect(validate(UI)).toBeFalsy();
+    expect(validate(UI).valid).toBeFalsy();
     const key = getObjectPropertyKey(UI, ui_p0);
     expect(oes.getErrors(key).length).toBeGreaterThan(0);
+    expect(oes.errors[0].errorMessage).toContain('p0');
   });
 });
