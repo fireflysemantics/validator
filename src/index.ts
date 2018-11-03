@@ -12,7 +12,7 @@ export { getValidationContextSignature } from "./utilities/utilities";
 // ========================================================
 
 export { ValidationContext } from "./container/validation/ValidationContext";
-export { ObjectErrors } from "./container/error";
+export {ValidationError, ObjectErrors } from "./container/error";
 
 // ========================================================
 // DECORATORS
