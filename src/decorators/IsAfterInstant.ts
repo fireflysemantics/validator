@@ -22,7 +22,7 @@ export function IsAfterInstant(target: Date | string, validationOptions?: Valida
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      isAfterInstant.name,
+      IsAfterInstant.name,
       propertyName,
       validateValue,
       validateArray,

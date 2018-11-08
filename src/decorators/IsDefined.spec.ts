@@ -1,6 +1,6 @@
 import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { ValidationContext } from "../container/validation/ValidationContext";
-import { getObjectPropertyKey } from "../utilities/utilities";
+import { getObjectPropertyKey, validate } from "../utilities/utilities";
 import { IsDefined } from "./IsDefined";
 const { getOwnPropertyNames } = Object;
 
@@ -8,7 +8,12 @@ class IsDefinedValid {
   @IsDefined() p0: any = "";
 }
 
+class IsDefinedInvalid {
+  @IsDefined() p0: any = null;
+}
+
 const IDV: any = new IsDefinedValid();
+const IDI: any = new IsDefinedInvalid();
 
 describe("IsDefined Validation", () => {
   it(`should return true when using the 
@@ -25,12 +30,6 @@ describe("IsDefined Validation", () => {
       expect(vc.validateValue(vc, IDV)).toBeTruthy();
     });
   });
-
-  class IsDefinedInvalid {
-    @IsDefined() p0: any = null;
-  }
-  
-  const IDI: any = new IsDefinedInvalid();
     
   it(`should return false when using the 
       ValidationContext.validate method to check invalid values`, () => {    
@@ -42,4 +41,10 @@ describe("IsDefined Validation", () => {
       expect(vc.validateValue(vc, IDI)).toBeFalsy();
     });
   });
+});
+
+it(`should create an error when using validate`, ()=>{
+  let IDI = new IsDefinedInvalid();
+  let e = validate(IDI);
+  expect(e.valid).toBeFalsy();
 });
