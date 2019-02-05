@@ -28,7 +28,7 @@ export class ObjectErrors {
    * @param key 
    * @param context 
    */
-  private pushtIfAbsent(key: string, error: ValidationError):void {
+  private pushIfAbsent(key: string, error: ValidationError):void {
     if (this.cache[key] == null) {
       const vea: Array<ValidationError> = [];
       vea.push(error);
@@ -47,7 +47,7 @@ export class ObjectErrors {
       ve.vc.propertyName
     );
     this.errors.push(ve);
-    this.pushtIfAbsent(key, ve);
+    this.pushIfAbsent(key, ve);
   }
 
   /**
