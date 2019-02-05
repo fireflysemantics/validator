@@ -1,5 +1,5 @@
 import { ValidationError } from "./ValidationError";
-import { getObjectPropertyKey } from "../../utilities/utilities";
+import { getPropertyKey } from "../../utilities/utilities";
 
 /**
  * Validation error container holding all validation errors.
@@ -42,7 +42,7 @@ export class ObjectErrors {
    * @param ve The ValidationError instance.
    */
   public addValidationError(ve: ValidationError) {
-    const key: string = getObjectPropertyKey(
+    const key: string = getPropertyKey(
       ve.vc.target.name,
       ve.vc.propertyName
     );

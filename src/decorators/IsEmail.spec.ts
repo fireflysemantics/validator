@@ -1,6 +1,6 @@
 import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { ValidationContext } from "../container/validation/ValidationContext";
-import { getObjectPropertyKey } from "../utilities/utilities";
+import { getPropertyKey } from "../utilities/utilities";
 import { IsEmail } from "./IsEmail";
 const { getOwnPropertyNames } = Object;
 
@@ -22,7 +22,7 @@ describe("IsEmail Validation", () => {
       the ValidationContext.validate 
       method to check valid values`, () => {
     getOwnPropertyNames(IEV).forEach(pn => {
-      const key: string = getObjectPropertyKey(IEV.constructor.name, pn);
+      const key: string = getPropertyKey(IEV.constructor.name, pn);
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
@@ -48,7 +48,7 @@ describe("IsEmail Validation", () => {
       ValidationContext.validate method 
       to check invalid values`, () => {    
     Object.getOwnPropertyNames(IEI).forEach(pn => {
-      const key: string = getObjectPropertyKey(IEI, pn);
+      const key: string = getPropertyKey(IEI, pn);
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];

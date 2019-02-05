@@ -1,6 +1,6 @@
 import { ValidationContainer } from "../container/validation/ValidationContainer";
 import { ValidationContext } from "../container/validation/ValidationContext";
-import { getObjectPropertyKey, validate } from "../utilities/utilities";
+import { getPropertyKey, validate } from "../utilities/utilities";
 import { IsDefined } from "./IsDefined";
 const { getOwnPropertyNames } = Object;
 
@@ -20,7 +20,7 @@ describe("IsDefined Validation", () => {
       ValidationContext.validate method 
       to check valid values`, () => {
     getOwnPropertyNames(IDI).forEach(pn => {
-      const key: string = getObjectPropertyKey(IDV, pn);
+      const key: string = getPropertyKey(IDV, pn);
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];
@@ -34,7 +34,7 @@ describe("IsDefined Validation", () => {
   it(`should return false when using the 
       ValidationContext.validate method to check invalid values`, () => {    
     Object.getOwnPropertyNames(IDI).forEach(pn => {
-      const key: string = getObjectPropertyKey(IDI, pn);
+      const key: string = getPropertyKey(IDI, pn);
       const validators = ValidationContainer.cache[key].vcs;
 
       const vc: ValidationContext = validators[0];

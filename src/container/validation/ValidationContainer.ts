@@ -1,5 +1,5 @@
 import { ValidationContext } from "./ValidationContext";
-import { getObjectPropertyKey } from "../../utilities/utilities";
+import { getPropertyKey } from "../../utilities/utilities";
 import { IValidationContextsIndex } from "./IValidationContextIndex";
 import { isDefined } from "@fireflysemantics/is";
 import { MetaClass } from "./MetaClass";
@@ -53,7 +53,7 @@ export class ValidationContainer {
    * @param vc Add a ValidationContext instance.
    */
   public static addValidationContext(vc: ValidationContext): void {
-    const key: string = getObjectPropertyKey(
+    const key: string = getPropertyKey(
       vc.target.name,
       vc.propertyName
     );

@@ -1,5 +1,5 @@
 import { IfValid } from "./IfValid";
-import { getObjectPropertyKey } from "../utilities/utilities";
+import { getPropertyKey } from "../utilities/utilities";
 import { validateProperty, validate } from "../utilities/utilities";
 import { ObjectErrors } from "../container/error";
 
@@ -37,8 +37,8 @@ describe("IsAfterInstant Validation", () => {
   const IAI1 = new IsAfterInstant1();
 
   it("should work like this", () => {
-    let key_p0 = getObjectPropertyKey(IAI1, "p0");
-    let key_p1 = getObjectPropertyKey(IAI1, "p1");
+    let key_p0 = getPropertyKey(IAI1, "p0");
+    let key_p1 = getPropertyKey(IAI1, "p1");
 
     let oes = new ObjectErrors();
     validateProperty(IAI1, "p1", oes);
@@ -52,8 +52,8 @@ describe("IsAfterInstant Validation", () => {
 
     expect(oes.getErrors(key_p0)).toBeUndefined();
     expect(oes.getErrors(key_p1)).toBeUndefined();
-    key_p0 = getObjectPropertyKey(IAI2, "p0");
-    key_p1 = getObjectPropertyKey(IAI2, "p1");
+    key_p0 = getPropertyKey(IAI2, "p0");
+    key_p1 = getPropertyKey(IAI2, "p1");
 
     oes = validate(IAI2);
     expect(oes.valid).toBeFalsy();

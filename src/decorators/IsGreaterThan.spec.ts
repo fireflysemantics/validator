@@ -1,6 +1,6 @@
 import { ValidationContext } from "../container/validation/ValidationContext";
 import { IsGreaterThan } from "./IsGreaterThan";
-import { getObjectPropertyKey } from "../utilities/utilities";
+import { getPropertyKey } from "../utilities/utilities";
 import { validateProperty, validate } from "../utilities/utilities";
 import { ObjectErrors } from "@fs/container/error";
 
@@ -52,7 +52,7 @@ describe("IfGreaterThan Validation", () => {
     let oes = validate(IGTT0);
 
     expect(oes.valid).toBeFalsy();
-    const key:string = getObjectPropertyKey(IGTT0, "secondNumber");
+    const key:string = getPropertyKey(IGTT0, "secondNumber");
     const vc:ValidationContext = oes.getErrors(key)[0].vc;
   });  
   it("should work for string property key arguments", () => {

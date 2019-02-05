@@ -1,7 +1,7 @@
 import { IsDefined } from "./IsDefined";
 import { IfValid } from "./IfValid";
 import { ObjectErrors } from "../container/error/";
-import { getObjectPropertyKey } from "../utilities/utilities";
+import { getPropertyKey } from "../utilities/utilities";
 import { validateProperty } from "../utilities/utilities";
 
 describe("IfValid Validation", () => {
@@ -19,8 +19,8 @@ describe("IfValid Validation", () => {
 
   it("should not perform @IsDefined validation on p1 since p0 is invalid", () => {
     
-    const key_p0 = getObjectPropertyKey(IVT1, "p0");
-    const key_p1 = getObjectPropertyKey(IVT1, "p1");
+    const key_p0 = getPropertyKey(IVT1, "p0");
+    const key_p1 = getPropertyKey(IVT1, "p1");
 
     let oes = new ObjectErrors();    
     validateProperty(IVT1, "p1", oes);
@@ -51,8 +51,8 @@ describe("IfValid Validation", () => {
   
   const IVT2 = new IfValidNotTest2();
   it("should execute @IsDefined validation on p1 since p0 is valid", () => {
-    const key_p0 = getObjectPropertyKey(IVT2, "p0");
-    const key_p1 = getObjectPropertyKey(IVT2, "p1");
+    const key_p0 = getPropertyKey(IVT2, "p0");
+    const key_p1 = getPropertyKey(IVT2, "p1");
 
     let oes = new ObjectErrors();
     validateProperty(IVT2, "p0", oes);

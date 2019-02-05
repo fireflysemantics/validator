@@ -48,7 +48,7 @@ export function validateProperty(
   skipErrorGeneration: boolean = false
 ): boolean {
   let valid = true;
-  const key = getObjectPropertyKey(o, propertyName);
+  const key = getPropertyKey(o, propertyName);
   const vcc: ValidationContextContainer = ValidationContainer.cache[key];
  
   if (!vcc) {
@@ -120,7 +120,7 @@ export function validateProperty(
  * @param propertyName
  * @return The key for the array of ValidationContext instances.
  */
-export function getObjectPropertyKey(
+export function getPropertyKey(
   target: string | any,
   propertyName: string
 ): string {
