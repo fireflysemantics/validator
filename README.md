@@ -6,6 +6,10 @@
 
 Decorator based validation for Typescript classes.
 
+## Typedoc
+
+[Typedoc Documentation](https://fireflysemantics.github.io/validator/doc/)
+
 ## Features
 
 - Progressive validation (Only check if the date is valid if the property is non null)
