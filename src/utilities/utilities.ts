@@ -23,7 +23,7 @@ import { ObjectErrors } from "../container/error/ObjectErrors";
 export function validate(target: any): ObjectErrors {
   let oes: ObjectErrors = new ObjectErrors();
   const cn: string = target.constructor.name;
-  const mc: MetaClass = ValidationContainer.metaClasses[cn];
+  const mc: MetaClass = ValidationContainer.metaClasses.get(cn);
   if (mc) {
     mc.properties.forEach(p => {
       if (!validateProperty(target, p, oes)) {

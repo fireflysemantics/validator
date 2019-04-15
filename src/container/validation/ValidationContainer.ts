@@ -21,7 +21,7 @@ export class ValidationContainer {
    * Meta classes which have a one to one
    * correspondence with each decorated class.
    */
-  static metaClasses: IMetaClassIndex = {};
+  static metaClasses: Map<string, MetaClass> = new Map();
 
   /**
    * Adds the MetaClass instance corresponding to 
@@ -39,12 +39,12 @@ export class ValidationContainer {
     //The constructor name of the decorated class
     const constructorName = target.constructor.name;
 
-    if (!isDefined(this.metaClasses[constructorName])) {
-      this.metaClasses[constructorName] = new MetaClass(target);
-      this.metaClasses[constructorName].addProperty(propertyName);
+    if (!isDefined(this.metaClasses.get(constructorName))) {
+      this.metaClasses.set(constructorName, new MetaClass(target));
+      this.metaClasses.get(constructorName).addProperty(propertyName);
     }
     else {
-      this.metaClasses[constructorName].addProperty(propertyName);
+      this.metaClasses.get(constructorName).addProperty(propertyName);
     }
   }
 
@@ -68,8 +68,4 @@ export class ValidationContainer {
       this.cache.set(key, vcc);
     }
   }
-}
-
-export interface IMetaClassIndex {
-  [validationContextKey: string]: MetaClass;
 }

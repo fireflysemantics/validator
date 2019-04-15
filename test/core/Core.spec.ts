@@ -61,11 +61,11 @@ const cno: any = new CoreNoOptions();
 describe("MetaClass cache initializaiton", ()=> {
   it("should create MetaClass instances", ()=>{
     expect(cno.constructor.name).toEqual('CoreNoOptions');
-    expect(ValidationContainer.metaClasses['CoreNoOptions']).not.toBeNull();
-    expect(ValidationContainer.metaClasses[cu.constructor.name]).toBeUndefined();
-    expect(ValidationContainer.metaClasses['CoreNoOptions'].properties.length).toEqual(2);
-    expect(ValidationContainer.metaClasses['CoreWithOptions'].properties.length).toEqual(1);
-    expect(ValidationContainer.metaClasses['CoreWithOptions'].properties.includes("p3")).toBeTruthy();    
+    expect(ValidationContainer.metaClasses.get('CoreNoOptions')).not.toBeNull();
+    expect(ValidationContainer.metaClasses.get(cu.constructor.name)).toBeUndefined();
+    expect(ValidationContainer.metaClasses.get('CoreNoOptions').properties.length).toEqual(2);
+    expect(ValidationContainer.metaClasses.get('CoreWithOptions').properties.length).toEqual(1);
+    expect(ValidationContainer.metaClasses.get('CoreWithOptions').properties.includes("p3")).toBeTruthy();    
   });
 });
 
@@ -127,4 +127,4 @@ describe("Core Messages", () => {
     let vc = validators[0];
     expect(vc.errorMessage(vc, cno)).toContain(PREFIX_EACH);
   });
-});
+}); 
