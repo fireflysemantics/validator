@@ -15,7 +15,7 @@ describe("IsDate Validation", () => {
       method to check valid values`, () => {
     getOwnPropertyNames(IDV).forEach(pn => {
       const key: string = getPropertyKey(IDV.constructor.name, pn);
-      const validators = ValidationContainer.cache[key].vcs;
+      const validators = ValidationContainer.cache.get(key).vcs;
 
       const vc: ValidationContext = validators[0];
       expect(vc.propertyName).toEqual(pn);
@@ -35,7 +35,7 @@ describe("IsDate Validation", () => {
       to check invalid values`, () => {    
       getOwnPropertyNames(IDI).forEach(pn => {
       const key: string = getPropertyKey(IDI.constructor.name, pn);
-      const validators = ValidationContainer.cache[key].vcs;
+      const validators = ValidationContainer.cache.get(key).vcs;
 
       const vc: ValidationContext = validators[0];
       expect(vc.validateValue(vc, IDI)).toBeFalsy();

@@ -1,6 +1,5 @@
 import { ValidationContext } from "./ValidationContext";
 import { getPropertyKey } from "../../utilities/utilities";
-import { IValidationContextsIndex } from "./IValidationContextIndex";
 import { isDefined } from "@fireflysemantics/is";
 import { MetaClass } from "./MetaClass";
 import { ValidationContextContainer } from "./ValidationContextContainer";
@@ -16,7 +15,7 @@ export class ValidationContainer {
    * Not meant to be accessed directly.  Only decorators should
    * be modifying the state of the cache by using the @see addValidationContext method.
    */
-  static cache: IValidationContextsIndex = {};
+  static cache:Map<string, ValidationContextContainer> = new Map();
 
   /**
    * Meta classes which have a one to one
@@ -58,7 +57,7 @@ export class ValidationContainer {
       vc.propertyName
     );
     
-    const vcc:ValidationContextContainer = this.cache[key];
+    const vcc:ValidationContextContainer = this.cache.get(key);
 
     if (vcc) {
       vcc.add(vc);
@@ -66,7 +65,7 @@ export class ValidationContainer {
     else {
       const vcc:ValidationContextContainer = new ValidationContextContainer(key);
       vcc.add(vc);
-      this.cache[key] = vcc;
+      this.cache.set(key, vcc);
     }
   }
 }

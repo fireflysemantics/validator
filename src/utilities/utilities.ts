@@ -13,7 +13,12 @@ import { ObjectErrors } from "../container/error/ObjectErrors";
  * Errors are collected by the {@link ErrorContainer}.
  *
  * @param target The object being validated.
- * @return True if the object is valid, false otherwise.
+ * @return The {@link ObjectErrors} instance
+ * @example
+```
+
+
+```
  */
 export function validate(target: any): ObjectErrors {
   let oes: ObjectErrors = new ObjectErrors();
@@ -49,7 +54,7 @@ export function validateProperty(
 ): boolean {
   let valid = true;
   const key = getPropertyKey(o, propertyName);
-  const vcc: ValidationContextContainer = ValidationContainer.cache[key];
+  const vcc: ValidationContextContainer = ValidationContainer.cache.get(key);
  
   if (!vcc) {
     const errorMessage: string = `A validation context container for the key 
