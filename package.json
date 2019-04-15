@@ -1,6 +1,6 @@
 {
   "name": "@fireflysemantics/validator",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "Typescript Validation Decorators and Executor",
   "main": "index.js",
   "types": "index.d.ts",
@@ -10,7 +10,7 @@
     "doc": "typedoc --out doc --exclude **/*.spec.ts ./src/",
     "compile": "del-cli target && tsc",
     "dist": "npm run compile && del-cli dist && node createdist",
-    "update": "ncu -a && npm i"
+    "update": "ncu -u && npm i"
   },
   "repository": {
     "type": "git",
@@ -30,25 +30,25 @@
   "homepage": "https://github.com/fireflysemantics/validator/#readme",
   "devDependencies": {
     "@types/jest": "^24.0.11",
-    "@types/node": "^11.12.0",
-    "cpy": "^7.1.0",
+    "@types/node": "^11.13.4",
+    "cpy": "^7.2.0",
     "del-cli": "^1.1.0",
-    "globby": "^9.1.0",
-    "jest": "^24.5.0",
+    "globby": "^9.2.0",
+    "jest": "^24.7.1",
     "mkdirp": "^0.5.1",
-    "npm-check-updates": "^3.1.2",
+    "npm-check-updates": "^3.1.8",
     "recursive-copy": "^2.0.10",
-    "source-map-support": "^0.5.11",
-    "ts-jest": "^24.0.0",
-    "ts-node": "^8.0.3",
+    "source-map-support": "^0.5.12",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.1.0",
     "tsconfig-paths": "^3.8.0",
     "typedoc": "^0.14.2",
-    "typescript": "^3.3.4000",
-    "typescript-transform-paths": "^1.0.0"
+    "typescript": "^3.4.3",
+    "typescript-transform-paths": "^1.0.1"
   },
   "dependencies": {
     "@fireflysemantics/is": "^1.8.15",
-    "@types/validator": "^10.9.0",
+    "@types/validator": "^10.11.0",
     "validator": "^10.11.0"
   }
 }
