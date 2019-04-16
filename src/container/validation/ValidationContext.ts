@@ -1,13 +1,24 @@
 import { ValidationOptions } from "./ValidationOptions";
-import { ObjectErrors } from "../error/ObjectErrors";
 
 /**
  * The `ValidationContext` instance for a certain annotation
  * and property combination is created when the run time loads
  * the class that has been annotated.
  * 
- * The `ValidationContext` by the validation API to perform
- * the validation of the property.
+ * For example suppose we have a `name` property decorated with the 
+ * the `IsAlpha` annotation like this:
+ * ```
+ * public class Person {
+ *     @IsAlpha()
+ *     public name:string;
+ * }
+ * ``` 
+ * 
+ * When that annotation runs it creates a validation context instance
+ * with the signature `IsAlpha_Person_name` that is specific to the `Person`
+ * class and the `name` property, The `ValidationContext` instance is initialized
+ * with the context necessary to perform an `IsAlpha` validation on the `name` property
+ * of `Person`. 
  */
 export class ValidationContext {
 

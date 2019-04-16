@@ -2,12 +2,24 @@ import { ValidationContext } from "../validation/ValidationContext";
 
 /**
  * There can be multiple `ValidationError` instances per 
- * object property, since each `ValidationError` is created 
- * when property value fails the decorators validation test
- * contained on the corresponding `ValidationContext`.
+ * object property.
+ * 
+ * For example suppose we have a `name` property decorated with the 
+ * the `IsAlpha` annotation like this:
+ * ```
+ * public class Person {
+ *     @IsAlpha()
+ *     @IsDefined()
+ *     public name:string;
+ * }
+ * ``` 
+ * If the `name` property is violates the `IsAlpha` constraint
+ * then a `ValidationError` instance will be created for that 
+ * constraint violation.  If the `IsDefined` constraint is violated
+ * then a separate `ValidationError` instance is created for that constraint.
  * 
  * Instances of `ValidationError` contain the:
- * - The `object` and `objectProperty` that was validated 
+ * - The `object` and the name of the  `objectProperty` that was validated 
  * - {@link ValidationContext} used to perform the validation
  * - The `value` being validated
  * - An `errorIndex` (When the value being validated is an array)
@@ -60,6 +72,13 @@ export class ValidationError {
 
   /**
    * Get the validation error message.
+   * 
+   * Note that the implementation here is a little strange
+   * since we are passing in the `vc` to `vc.errorMessage`,
+   * which seems redundant, but we have to do it because
+   * the `errorMessage` function comes from the decorator
+   * and is different for each `ValidationContext` instance,
+   * since each is specific to a class and property context.
    */
   get errorMessage():string {
     return this.vc.errorMessage(this.vc, this.object);

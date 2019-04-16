@@ -20,21 +20,21 @@ export class ObjectErrors {
   /**
    * The property name index for all of the ValidationError instances.
    */
-  cache: IErrorIndex = {};
+  cache: Map<string, Array<ValidationError>> = new Map();
 
   /**
    * If the context array is absent it is created, otherwise
    * the context is placed at the end of the existing context array.
-   * @param key 
-   * @param context 
+   * @param key The signature used to lookup the array of `ValidationError` instances.
+   * @param error The `ValidationError` instance 
    */
   private push(key: string, error: ValidationError):void {
-    if (this.cache[key] == null) {
+    if (this.cache.get(key) == null) {
       const vea: Array<ValidationError> = [];
       vea.push(error);
-      this.cache[key] = vea;
+      this.cache.set(key, vea);
     } else {
-      this.cache[key].push(error);
+      this.cache.get(key).push(error);
     }
   }
 
@@ -58,13 +58,6 @@ export class ObjectErrors {
    * @returns Array<ValidationErrors> The array of validation errors 
    */
   public getErrors(key: string): Array<ValidationError> {
-    return this.cache[key];
+    return this.cache.get(key);
   }
-}
-
-/**
- * Interface representing the ValidationError cache.
- */
-export interface IErrorIndex {
-  [errorKey: string]: Array<ValidationError>;
 }
