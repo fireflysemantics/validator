@@ -16,7 +16,16 @@ import { ObjectErrors } from "../container/error/ObjectErrors";
  * @return The {@link ObjectErrors} instance
  * @example
 ```
+class Invalid {
+  @IsDefined() p0: any = null;
+}
+const I = new Invalid();
 
+let oes = validate(I);
+expect(validate(I).valid).toBeFalsy();
+const key = getPropertyKey(I, 'p0');//Invalid_p0
+expect(oes.getErrors(key).length).toBeGreaterThan(0);
+expect(oes.errors[0].errorMessage).toContain('p0');
 
 ```
  */
@@ -110,16 +119,13 @@ export function validateProperty(
  * Creates the validation context key used to
  * lookup the array of ValidationContext instances.
  * 
+ * For example if the class name of the instance being
+ * validated is `Order` and the property being validated is
+ * `date` then the value return is `Order_date`.
+ * 
  * @example 
  * ```ts
  * getValidationContextContainerKey('Order', 'date')//returns `Order_date`.
- * ```
- * 
- * 
- * For example if the class name of the instance being
- * validated is `Order` and the property being validated is
- * `date` then the value produced by the `
- * is `Order_date`.
  *
  * @param target The object or name of the object constructor
  * @param propertyName
@@ -149,7 +155,6 @@ export function getPropertyKey(
  * ```ts
  * IfValid_SalesOrder_purchasePrice
  * ```
- *
  */
 export function getValidationContextSignature(
   decorator: string,
