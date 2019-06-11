@@ -8,7 +8,7 @@
     "clean": "del-cli target && del-cli dist && del-cli doc",
     "test": "jest",
     "doc": "typedoc --out doc --exclude **/*.spec.ts ./src/",
-    "compile": "del-cli target && tsc",
+    "compile": "del-cli target && ttsc",
     "dist": "npm run compile && del-cli dist && node createdist",
     "update": "ncu -u && npm i"
   },
@@ -29,26 +29,27 @@
   },
   "homepage": "https://github.com/fireflysemantics/validator/#readme",
   "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "@types/node": "^11.13.4",
-    "cpy": "^7.2.0",
-    "del-cli": "^1.1.0",
+    "@types/jest": "^24.0.13",
+    "@types/node": "^12.0.8",
+    "cpy": "^7.3.0",
+    "del-cli": "^2.0.0",
     "globby": "^9.2.0",
-    "jest": "^24.7.1",
+    "jest": "^24.8.0",
     "mkdirp": "^0.5.1",
-    "npm-check-updates": "^3.1.8",
+    "npm-check-updates": "^3.1.10",
     "recursive-copy": "^2.0.10",
     "source-map-support": "^0.5.12",
     "ts-jest": "^24.0.2",
-    "ts-node": "^8.1.0",
+    "ts-node": "^8.2.0",
     "tsconfig-paths": "^3.8.0",
     "typedoc": "^0.14.2",
-    "typescript": "^3.4.3",
-    "typescript-transform-paths": "^1.0.1"
+    "typescript": "^3.5.1",
+    "ttypescript": "^1.5.7",
+    "typescript-transform-paths": "^1.1.4"
   },
   "dependencies": {
-    "@fireflysemantics/is": "^1.8.15",
-    "@types/validator": "^10.11.0",
-    "validator": "^10.11.0"
+    "@fireflysemantics/is": "^1.8.21",
+    "@types/validator": "^10.11.1",
+    "validator": "^11.0.0"
   }
 }

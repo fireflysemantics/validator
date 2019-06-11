@@ -1,8 +1,8 @@
 import { IsDefined } from "./IsDefined";
 import { IfValid } from "./IfValid";
-import { ObjectErrors } from "../container/error/";
-import { getPropertyKey } from "../utilities/utilities";
-import { validateProperty } from "../utilities/utilities";
+import { ObjectErrors } from "@fs/container/error/";
+import { getPropertyKey } from "@fs/utilities/utilities";
+import { validateProperty } from "@fs/utilities/utilities";
 
 describe("IfValid Validation", () => {
 
