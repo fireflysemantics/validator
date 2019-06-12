@@ -1,5 +1,4 @@
 import { ValidationContainer } from "../container/validation/ValidationContainer";
-import { ValidationContextContainer } from "../container/validation/ValidationContextContainer";
 import { MetaClass } from "../container/validation/MetaClass";
 import { ValidationContext } from "../container/validation/ValidationContext";
 import { ValidationError } from "../container/error/ValidationError";
@@ -63,15 +62,16 @@ export function validateProperty(
 ): boolean {
   let valid = true;
   const key = getPropertyKey(o, propertyName);
-  const vcc: ValidationContextContainer = ValidationContainer.cache.get(key);
+  const vca: ValidationContext[] = ValidationContainer.cache.get(key);
  
-  if (!vcc) {
-    const errorMessage: string = `A validation context container for the key 
+  if (!vca) {
+    const errorMessage: string = `A validation context array for the key 
     ${key} does not exist.`;
     throw new Error(errorMessage);
   } 
+
   const propertyValue = o[propertyName];
-  vcc.vcs.every((vc: ValidationContext) => {
+  vca.every((vc: ValidationContext) => {
     if (propertyValue instanceof Array) {
       const result: Number[] = vc.validateArray(vc, propertyValue);
       if (

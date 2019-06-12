@@ -2,7 +2,6 @@ import { ValidationContext } from "@fs/container/validation";
 import { getPropertyKey } from "@fs/utilities/utilities";
 import { isDefined } from "@fireflysemantics/is";
 import { MetaClass } from "@fs/container/validation";
-import { ValidationContextContainer } from "@fs/container/validation";
 
 /**
  * The `ValidationContainer` holds all validation contexts
@@ -17,7 +16,7 @@ export class ValidationContainer {
    * 
    * The `key` of the cache consists of the class name and prperty name.
    */
-  static cache:Map<string, ValidationContextContainer> = new Map();
+  static cache:Map<string, ValidationContext[]> = new Map();
 
   /**
    * Meta classes which have a one to one
@@ -51,23 +50,43 @@ export class ValidationContainer {
   }
 
   /**
-   * @param vc Add a ValidationContext instance.
+   * @param target Add a ValidationContext instance.
+   * @throws Error if attempting to add a ValidationContext with a signature that duplicates that of an instance already contained.
+   * 
+   * If an exception thrown it indicates that a duplicate class definition exist
+   * in the runtime.  In other words the same class definition is loaded more
+   * than once because it exists in multiple files.
+   * 
    */
-  public static addValidationContext(vc: ValidationContext): void {
-    const key: string = getPropertyKey(
-      vc.target.name,
-      vc.propertyName
-    );
-    
-    const vcc:ValidationContextContainer = this.cache.get(key);
+  public static addValidationContext(target: ValidationContext): void {
 
-    if (vcc) {
-      vcc.add(vc);
+    const key: string = getPropertyKey(
+      target.target.name,
+      target.propertyName
+    );
+
+    const vca:ValidationContext[] = this.cache.get(key);
+
+    let notAdded = true;
+
+    if (vca) {
+      notAdded = vca.every(vc => {
+        //Every will return the first false.
+        return vc.getSignature() != target.getSignature();
+      });  
+    }
+    if (!notAdded) {
+      const errorString = `The ValidationContainer 
+      already contains context with signature ${target.getSignature()}.`;
+      throw new Error(errorString);
+    }
+    if (vca) {
+      vca.push(target);
     }
     else {
-      const vcc:ValidationContextContainer = new ValidationContextContainer(key);
-      vcc.add(vc);
-      this.cache.set(key, vcc);
+      const vca:ValidationContext[] = [];
+      vca.push(target);
+      this.cache.set(key, vca);
     }
   }
 }

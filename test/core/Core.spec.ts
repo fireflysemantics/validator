@@ -1,12 +1,12 @@
-import { ValidationOptions } from "../../src/container/validation/ValidationOptions";
-import { ValidationContext } from "../../src/container/validation/ValidationContext";
-import { ValidationContainer } from "../../src/container/validation/ValidationContainer";
+import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
 
 import { Core1 } from "./Core1";
 import { Core2 } from "./Core2";
-import { getPropertyKey } from "../../src/utilities/utilities";
+import { getPropertyKey } from "@fs/utilities/utilities";
 
-import { PREFIX_SINGLE, PREFIX_EACH } from "../../src/constants";
+import { PREFIX_SINGLE, PREFIX_EACH } from "@fs/constants";
 const { getOwnPropertyNames } = Object;
 
 const cno_p0_array = "p0";
@@ -35,8 +35,8 @@ describe("ValidationContextContainer", ()=> {
   it("should guarantee the sequence of the validation decorators", ()=>{
     let key: string = getPropertyKey(cs, "p3");
     const validators = ValidationContainer.cache.get(key);
-    expect(validators.vcs[0].decorator).toEqual(Core1.name);
-    expect(validators.vcs[1].decorator).toEqual(Core2.name);
+    expect(validators[0].decorator).toEqual(Core1.name);
+    expect(validators[1].decorator).toEqual(Core2.name);
   });
 });
 
@@ -73,7 +73,7 @@ describe("Core Validation Context Initialization", () => {
   it("should generate a ValidationContext instance for each property decorated.", () => {
     getOwnPropertyNames(cno).forEach(pn => {
       const key: string = getPropertyKey(cno, pn);
-      const validators = ValidationContainer.cache.get(key).vcs;
+      const validators = ValidationContainer.cache.get(key);
       expect(validators.length).toEqual(1);
       expect(validators[0] instanceof ValidationContext).toBeTruthy();
     });
@@ -89,7 +89,7 @@ describe("Core Validation Context Initialization", () => {
     getOwnPropertyNames(cno).forEach(pn => {
 
       let key: string = getPropertyKey(cno.constructor.name, pn);
-      const validators = ValidationContainer.cache.get(key).vcs;
+      const validators = ValidationContainer.cache.get(key);
       const vc = validators[0];
 
       expect(vc.object.constructor.name).toEqual(cno.constructor.name);
@@ -102,7 +102,7 @@ describe("Core Validation Context Initialization", () => {
     });
 
     const key: string = getPropertyKey(cwo.constructor.name, cwo_p3);
-    const validators = ValidationContainer.cache.get(key).vcs;
+    const validators = ValidationContainer.cache.get(key);
 
     const vc = validators[0];
     expect(vc.validationOptions).not.toBeNull();
@@ -112,7 +112,7 @@ describe("Core Validation Context Initialization", () => {
 describe("Core Messages", () => {
   it("should prefix the error message with PREFIX_SINGLE when the value is not an array", () => {
     let key: string = getPropertyKey(cno.constructor.name, cno_p1);
-    const validators = ValidationContainer.cache.get(key).vcs;
+    const validators = ValidationContainer.cache.get(key);
 
     let vc = validators[0];
     expect(vc.errorMessage(vc, cno)).toContain(PREFIX_SINGLE);
@@ -123,7 +123,7 @@ describe("Core Messages", () => {
       cno.constructor.name,
       cno_p0_array
     );
-    const validators = ValidationContainer.cache.get(key).vcs;
+    const validators = ValidationContainer.cache.get(key);
     let vc = validators[0];
     expect(vc.errorMessage(vc, cno)).toContain(PREFIX_EACH);
   });

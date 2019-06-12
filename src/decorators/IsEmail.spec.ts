@@ -1,6 +1,6 @@
-import { ValidationContainer } from "../container/validation/ValidationContainer";
-import { ValidationContext } from "../container/validation/ValidationContext";
-import { getPropertyKey } from "../utilities/utilities";
+import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { getPropertyKey } from "@fs/utilities/utilities";
 import { IsEmail } from "./IsEmail";
 const { getOwnPropertyNames } = Object;
 
@@ -23,7 +23,7 @@ describe("IsEmail Validation", () => {
       method to check valid values`, () => {
     getOwnPropertyNames(IEV).forEach(pn => {
       const key: string = getPropertyKey(IEV.constructor.name, pn);
-      const validators = ValidationContainer.cache.get(key).vcs;
+      const validators = ValidationContainer.cache.get(key);
 
       const vc: ValidationContext = validators[0];
       expect(vc.propertyName).toEqual(pn);
@@ -49,7 +49,7 @@ describe("IsEmail Validation", () => {
       to check invalid values`, () => {    
     Object.getOwnPropertyNames(IEI).forEach(pn => {
       const key: string = getPropertyKey(IEI, pn);
-      const validators = ValidationContainer.cache.get(key).vcs;
+      const validators = ValidationContainer.cache.get(key);
 
       const vc: ValidationContext = validators[0];
       expect(vc.validateValue(vc, IEI)).toBeFalsy();

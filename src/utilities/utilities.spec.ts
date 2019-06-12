@@ -1,8 +1,8 @@
 import { validate, validateProperty, getPropertyKey } from "./utilities";
-import { ValidationContainer } from "../container/validation/ValidationContainer";
-import { ValidationContext } from "../container/validation/ValidationContext";
-import { IsDefined } from '../decorators/IsDefined'
-import { ObjectErrors } from '../container/error'
+import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { ValidationContext } from "@fs/container/validation/ValidationContext";
+import { IsDefined } from '@fs/decorators/IsDefined'
+import { ObjectErrors } from '@fs/container/error'
 
 export class Valid {
   @IsDefined() p1: String = "";
@@ -13,12 +13,12 @@ export class Valid {
 const V = new Valid();
 const v_p1 = 'p1';
 
-describe("Utilities  getValidationContextKey", () => {
+describe("Utilities getValidationContextKey", () => {
   it(`should return a working ValidationContext key`, () => {
     const key1 = getPropertyKey(V.constructor.name, v_p1);
     const key2 = getPropertyKey(V, v_p1);
     expect(key1).toEqual(key2);
-    let vca:Array<ValidationContext> = ValidationContainer.cache.get(key1).vcs;
+    let vca:Array<ValidationContext> = ValidationContainer.cache.get(key1);
     expect(vca).not.toBeNull();
   });
 });

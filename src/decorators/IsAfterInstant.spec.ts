@@ -1,7 +1,7 @@
 import { IfValid } from "./IfValid";
-import { getPropertyKey } from "../utilities/utilities";
-import { validateProperty, validate } from "../utilities/utilities";
-import { ObjectErrors } from "../container/error";
+import { getPropertyKey } from "@fs/utilities/utilities";
+import { validateProperty, validate } from "@fs/utilities/utilities";
+import { ObjectErrors } from "@fs/container/error";
 
 import { IsDate } from "./IsDate";
 import { IsAfterInstant } from "./IsAfterInstant";
