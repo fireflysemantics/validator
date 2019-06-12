@@ -13,7 +13,7 @@ import { ValidationContext } from "@fs/container/validation";
  *     public name:string;
  * }
  * ``` 
- * If the `name` property is violates the `IsAlpha` constraint
+ * If the `name` property violates the `IsAlpha` constraint
  * then a `ValidationError` instance will be created for that 
  * constraint violation.  If the `IsDefined` constraint is violated
  * then a separate `ValidationError` instance is created for that constraint.

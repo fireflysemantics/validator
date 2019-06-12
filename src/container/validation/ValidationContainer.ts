@@ -5,7 +5,7 @@ import { MetaClass } from "@fs/container/validation";
 import { ValidationContextContainer } from "@fs/container/validation";
 
 /**
- * Validation container holding all validation contexts
+ * The `ValidationContainer` holds all validation contexts
  * created by the validation decorators.
  */
 export class ValidationContainer {
@@ -14,6 +14,8 @@ export class ValidationContainer {
    * The index for all of the ValidationContext instances.
    * Not meant to be accessed directly.  Only decorators should
    * be modifying the state of the cache by using the @see addValidationContext method.
+   * 
+   * The `key` of the cache consists of the class name and prperty name.
    */
   static cache:Map<string, ValidationContextContainer> = new Map();
 
