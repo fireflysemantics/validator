@@ -1,2 +1,2 @@
-export { ObjectErrors} from "./ObjectErrors";
-export { ValidationError} from "./ValidationError";
+export { ObjectErrors} from "@fs/container/error/ObjectErrors";
+export { ValidationError} from "@fs/container/error/ValidationError";
