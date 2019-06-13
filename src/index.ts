@@ -85,3 +85,4 @@ export { IsUUID } from "./decorators/IsUUID";
 export { IsValueIn } from "./decorators/IsValueIn";
 export { IsValueNotIn } from "./decorators/IsValueNotIn";
 export { IsVariableWidth } from "./decorators/IsVariableWidth";
+export { getPropertyKey } from '@fs/utilities/utilities';
