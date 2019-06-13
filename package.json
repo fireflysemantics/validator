@@ -1,6 +1,6 @@
 {
   "name": "@fireflysemantics/validator",
-  "version": "1.1.16",
+  "version": "1.1.17",
   "description": "Typescript Validation Decorators and Executor",
   "main": "index.js",
   "types": "index.d.ts",
