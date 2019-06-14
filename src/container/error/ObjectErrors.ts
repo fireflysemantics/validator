@@ -60,4 +60,12 @@ export class ObjectErrors {
   public getErrors(key: string): Array<ValidationError> {
     return this.cache.get(key);
   }
+
+  /**
+   * Get the properties that have errors.
+   * @return Array of properties that are invalid.
+   */
+  public getPropertiesWithErrors():string[] {
+    return Array.from(this.cache.keys());
+  }
 }
