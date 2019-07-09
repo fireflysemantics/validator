@@ -1,5 +1,5 @@
-import { ValidationContext } from "@fs/container/validation";
-import { getPropertyKey } from "@fs/utilities/utilities";
+import { ValidationContext } from "./";
+import { getPropertyKey } from "../../utilities/utilities";
 import { isDefined } from "@fireflysemantics/is";
 import { MetaClass } from "@fs/container/validation";
 
