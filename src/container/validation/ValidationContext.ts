@@ -1,4 +1,4 @@
-import { ValidationOptions } from "./ValidationOptions";
+import { ValidationOptions } from "@fs/container/validation";
 
 /**
  * The `ValidationContext` instance for a certain annotation
