@@ -1,6 +1,6 @@
 {
   "name": "@fireflysemantics/validator",
-  "version": "1.1.20",
+  "version": "1.1.21",
   "description": "Typescript Validation Decorators and Executor",
   "main": "index.js",
   "types": "index.d.ts",
@@ -42,10 +42,10 @@
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "tsconfig-paths": "^3.8.0",
+    "ttypescript": "^1.5.7",
     "typedoc": "^0.14.2",
     "typescript": "^3.5.3",
-    "ttypescript": "^1.5.7",
-    "typescript-transform-paths": "^1.1.5"
+    "typescript-transform-paths": "file:../typescript-transform-paths"
   },
   "dependencies": {
     "@fireflysemantics/is": "^1.8.21",
