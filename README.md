@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/fireflysemantics/validator.svg?branch=master)](https://travis-ci.org/fireflysemantics/validator)
 
+![Validator](logo/pnglogo.png)
+
 # Firefly Semantics Validator
 
 ## Overview
