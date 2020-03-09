@@ -9,7 +9,7 @@
     "w": "del-cli target && del-cli doc",
     "d": "typedoc --out doc --exclude **/*.spec.ts ./src/",
     "c": "del-cli target && tsc",
-    "p": "bump patch && del-cli target && npm run c && npm publish",
+    "p": "bump patch && npm run c && npm publish",
     "u": "ncu -u && npm i && npm-install-peers"
   },
   "repository": {

@@ -4,7 +4,7 @@ node_js:
   - "stable"
 script:
   - npm test
-  - npm run doc
+  - npm run d
 deploy:
   provider: pages
   skip_cleanup: true
