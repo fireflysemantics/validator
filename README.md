@@ -17,7 +17,7 @@ Decorator based validation for Typescript classes.
 - Progressive validation (Only check if the date is valid if the property is non null)
 - Cross property validation (Does the start date come before the end date?)
 - Cross Property Conditional Validation with `@IfValid` stops cross property validation a dependent property is invalid.
-- Access to the entire [ValidationContext](https://github.com/fireflysemantics/validator/blob/master/src/container/validation/ValidationContext.ts) enabling the customization of validation messages post validation
+- Access to the entire [ValidationContext](https://github.com/fireflysemantics/validator/blob/master/src/ValidationContext.ts) enabling the customization of validation messages post validation
 - Executes the decorators is a predictable ordered sequence
 
 The following decorators:

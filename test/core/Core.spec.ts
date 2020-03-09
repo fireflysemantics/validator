@@ -1,12 +1,12 @@
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { ValidationOptions } from "../../src/ValidationOptions";
+import { ValidationContext } from "../../src/ValidationContext";
+import { ValidationContainer } from "../../src/ValidationContainer";
 
 import { Core1 } from "./Core1";
 import { Core2 } from "./Core2";
-import { getPropertyKey } from "@fs/utilities/utilities";
+import { getPropertyKey } from "../../src/utilities";
 
-import { PREFIX_SINGLE, PREFIX_EACH } from "@fs/constants";
+import { PREFIX_SINGLE, PREFIX_EACH } from "../../src/constants";
 const { getOwnPropertyNames } = Object;
 
 const cno_p0_array = "p0";

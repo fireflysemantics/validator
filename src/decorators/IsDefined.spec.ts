@@ -1,6 +1,6 @@
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { getPropertyKey, validate } from "@fs/utilities/utilities";
+import { ValidationContainer } from "../ValidationContainer";
+import { ValidationContext } from "../ValidationContext";
+import { getPropertyKey, validate } from "../utilities";
 import { IsDefined } from "./IsDefined";
 const { getOwnPropertyNames } = Object;
 

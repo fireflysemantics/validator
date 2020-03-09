@@ -1,16 +1,16 @@
 {
   "name": "@fireflysemantics/validator",
-  "version": "1.1.29",
+  "version": "2.0.0",
   "description": "Typescript Validation Decorators and Executor",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "target/index.js",
+  "types": "target/index.d.ts",
   "scripts": {
-    "clean": "del-cli target && del-cli dist && del-cli doc",
     "test": "jest",
-    "doc": "typedoc --out doc --exclude **/*.spec.ts ./src/",
-    "compile": "del-cli target && ttsc",
-    "dist": "bump patch && npm run clean && npm run compile && del-cli dist && node createdist",
-    "update": "ncu -u && npm i"
+    "w": "del-cli target && del-cli doc",
+    "d": "typedoc --out doc --exclude **/*.spec.ts ./src/",
+    "c": "del-cli target && tsc",
+    "p": "bump patch && del-cli target && npm run compile && npm publish",
+    "u": "ncu -u && npm i && npm-install-peers"
   },
   "repository": {
     "type": "git",
@@ -29,27 +29,29 @@
   },
   "homepage": "https://github.com/fireflysemantics/validator/#readme",
   "devDependencies": {
-    "@types/jest": "^24.0.18",
-    "@types/node": "^12.7.2",
-    "cpy": "^7.3.0",
-    "del-cli": "^2.0.0",
-    "globby": "^10.0.1",
-    "jest": "^24.9.0",
-    "mkdirp": "^0.5.1",
-    "npm-check-updates": "^3.1.21",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.0",
+    "cpy": "^8.1.0",
+    "del-cli": "^3.0.0",
+    "globby": "^11.0.0",
+    "jest": "^25.1.0",
+    "mkdirp": "^1.0.3",
     "recursive-copy": "^2.0.10",
-    "source-map-support": "^0.5.13",
-    "ts-jest": "^24.0.2",
-    "ts-node": "^8.3.0",
-    "tsconfig-paths": "^3.8.0",
-    "ttypescript": "^1.5.7",
-    "typedoc": "^0.15.0",
-    "typescript": "^3.5.3",
-    "typescript-transform-paths": "^1.1.8"
+    "source-map-support": "^0.5.16",
+    "ts-jest": "^25.2.1",
+    "ts-node": "^8.6.2",
+    "tsconfig-paths": "^3.9.0",
+    "typedoc": "^0.16.11",
+    "typescript": "^3.8.3"
   },
-  "dependencies": {
-    "@fireflysemantics/is": "^1.8.22",
-    "@types/validator": "^10.11.3",
-    "validator": "^11.1.0"
+  "peerDependencies": {
+    "@fireflysemantics/is": "*"
+  },
+  "comments": {
+    "global dependencies": {
+      "@jsdevtools/version-bump-prompt global install": "npm i -g @jsdevtools/version-bump-prompt",
+      "npm-check-updates": "npm i -g npm-check-updates",
+      "npm-install-peers": "npm i -g npm-install-peers"
+    }
   }
 }

@@ -1,7 +1,7 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "@fs/constants";
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
+import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
+import { ValidationOptions } from "../ValidationOptions";
+import { ValidationContext } from "../ValidationContext";
+import { ValidationContainer } from "../ValidationContainer";
 import { isAfterInstant } from "@fireflysemantics/is";
 import { isDate } from "util";
 

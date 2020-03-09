@@ -1,6 +1,6 @@
-import { ValidationOptions } from "../../src/container/validation/ValidationOptions";
-import { ValidationContext } from "../../src/container/validation/ValidationContext";
-import { ValidationContainer } from "../../src/container/validation/ValidationContainer";
+import { ValidationOptions } from "../../src/ValidationOptions";
+import { ValidationContext } from "../../src/ValidationContext";
+import { ValidationContainer } from "../../src/ValidationContainer";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../../src/constants";
 
 /**

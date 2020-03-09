@@ -1,8 +1,8 @@
 import { validate, validateProperty, getPropertyKey } from "./utilities";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { IsDefined } from '@fs/decorators/IsDefined'
-import { ObjectErrors } from '@fs/container/error'
+import { ValidationContainer } from "./ValidationContainer";
+import { ValidationContext } from "./ValidationContext";
+import { IsDefined } from './decorators/IsDefined'
+import { ObjectErrors } from './ObjectErrors'
 
 export class Valid {
   @IsDefined() p1: String = "";

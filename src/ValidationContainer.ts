@@ -1,7 +1,7 @@
-import { ValidationContext } from "@fs/container/validation";
-import { getPropertyKey } from "@fs/utilities/utilities";
-import { isDefined } from "@fireflysemantics/is";
-import { MetaClass } from "@fs/container/validation";
+import { ValidationContext } from "./ValidationContext"
+import { getPropertyKey } from "./utilities"
+import { isDefined } from "@fireflysemantics/is"
+import { MetaClass } from "./MetaClass"
 
 /**
  * The `ValidationContainer` holds all validation contexts

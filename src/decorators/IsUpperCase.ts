@@ -1,7 +1,7 @@
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
-import { ValidationOptions } from "../container/validation/ValidationOptions";
-import { ValidationContext } from "../container/validation/ValidationContext";
-import { ValidationContainer } from "../container/validation/ValidationContainer";
+import { ValidationOptions } from "../ValidationOptions";
+import { ValidationContext } from "../ValidationContext";
+import { ValidationContainer } from "../ValidationContainer";
 import { isUppercase } from "@fireflysemantics/is";
 
 /**

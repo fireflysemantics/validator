@@ -1,5 +1,5 @@
-import { getPropertyKey } from "@fs/utilities/utilities";
-import { ValidationError } from "@fs/container/error/ValidationError";
+import { getPropertyKey } from "./utilities";
+import { ValidationError } from "./ValidationError";
 
 /**
  * Validation error container holding all validation errors.

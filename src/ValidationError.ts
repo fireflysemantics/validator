@@ -1,4 +1,4 @@
-import { ValidationContext } from "@fs/container/validation";
+import { ValidationContext } from "./ValidationContext";
 
 /**
  * There can be multiple `ValidationError` instances per

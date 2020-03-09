@@ -1,7 +1,7 @@
-import { ValidationOptions } from "@fs/container/validation/ValidationOptions";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
-import { validateProperty } from "@fs/utilities/utilities";
+import { ValidationOptions } from "../ValidationOptions"
+import { ValidationContext } from "../ValidationContext"
+import { ValidationContainer } from "../ValidationContainer"
+import { validateProperty } from "../utilities"
 
 /**
  * Decorator that checks if the target argument is a valid property

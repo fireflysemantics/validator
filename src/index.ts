@@ -1,18 +1,24 @@
+export * from "./MetaClass"
+export * from "./ObjectErrors"
+
+
 // ========================================================
 // Utilities
 // ========================================================
 
-export { validate } from "./utilities/utilities";
-export { validateProperty } from "./utilities/utilities";
-export { getPropertyKey as getObjectPropertyKey } from "./utilities/utilities";
-export { getValidationContextSignature } from "./utilities/utilities";
+export * from "./constants"
+export { validate } from "./utilities";
+export { validateProperty } from "./utilities";
+export { getPropertyKey as getObjectPropertyKey } from "./utilities";
+export { getValidationContextSignature } from "./utilities";
 
 // ========================================================
 // CONTAINTERS
 // ========================================================
 
-export { ValidationContext } from "./container/validation/ValidationContext";
-export {ValidationError, ObjectErrors } from "./container/error";
+export { ValidationContext } from "./ValidationContext";
+export { ValidationError } from "./ValidationError";
+export { ObjectErrors } from './ObjectErrors'
 
 // ========================================================
 // DECORATORS
@@ -85,4 +91,4 @@ export { IsUUID } from "./decorators/IsUUID";
 export { IsValueIn } from "./decorators/IsValueIn";
 export { IsValueNotIn } from "./decorators/IsValueNotIn";
 export { IsVariableWidth } from "./decorators/IsVariableWidth";
-export { getPropertyKey } from './utilities/utilities';
+export { getPropertyKey } from './utilities';

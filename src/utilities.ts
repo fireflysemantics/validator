@@ -1,10 +1,10 @@
-import { ValidationContainer } from "@fs/container/validation/ValidationContainer";
-import { MetaClass } from "@fs/container/validation/MetaClass";
-import { ValidationContext } from "@fs/container/validation/ValidationContext";
-import { ValidationError } from "@fs/container/error/ValidationError";
-import { isArrayEmpty } from "@fireflysemantics/is";
-import { isString } from "@fireflysemantics/is";
-import { ObjectErrors } from "@fs/container/error/ObjectErrors"; 
+import { ValidationContainer } from "./ValidationContainer"
+import { MetaClass } from "./MetaClass"
+import { ValidationContext } from "./ValidationContext";
+import { ValidationError } from "./ValidationError";
+import { isArrayEmpty, isString } from "@fireflysemantics/is";
+import {  } from "@fireflysemantics/is";
+import { ObjectErrors } from "./ObjectErrors"; 
 
 /**
  * Validates the <code>target</code> object.

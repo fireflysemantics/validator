@@ -1,4 +1,5 @@
-import { ValidationContext } from '@fs/container/validation';
+import { ValidationContext } from './ValidationContext'
+
 /**
  * Options used to pass to validation decorators.
  */
