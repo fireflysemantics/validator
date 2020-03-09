@@ -15,7 +15,10 @@
    version="1.1"
    id="svg934"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="va.svg">
+   sodipodi:docname="va.svg"
+   inkscape:export-filename="/home/ole/Github/validator/logo/pnglogo.png"
+   inkscape:export-xdpi="768"
+   inkscape:export-ydpi="768">
   <defs
      id="defs928" />
   <sodipodi:namedview
@@ -25,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="-442.85715"
-     inkscape:cy="360"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="13.444643"
+     inkscape:cy="79.608329"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -54,32 +57,23 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-270.54165)">
-    <g
-       id="g1498"
-       transform="matrix(0.21212122,0,0,0.21212122,-104.26989,165.09378)"
-       inkscape:export-xdpi="480"
-       inkscape:export-ydpi="480">
-      <g
-         id="g1492">
-        <rect
-           style="opacity:1;fill:#93ac93;fill-opacity:0.7462692;stroke:none;stroke-width:0.52916664;stroke-miterlimit:4;stroke-dasharray:1.05833333, 0.52916667;stroke-dashoffset:0;stroke-opacity:0.2956522"
-           id="rect815"
-           width="124.73214"
-           height="124.73214"
-           x="-125.86607"
-           y="88.168137" />
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:104.11738586px;line-height:1.25;font-family:'mont seerat';-inkscape-font-specification:'mont seerat';letter-spacing:0px;word-spacing:0px;fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:2.60293412"
-           x="-106.43317"
-           y="183.17255"
-           id="text819"><tspan
-             sodipodi:role="line"
-             id="tspan817"
-             x="-106.43317"
-             y="183.17255"
-             style="fill:#ff2a2a;stroke-width:2.60293412">⋐</tspan></text>
-      </g>
-    </g>
+    <rect
+       style="opacity:1;fill:#ececec;fill-opacity:1;stroke:none;stroke-width:0.11224747;stroke-miterlimit:4;stroke-dasharray:0.22449496, 0.11224748000000000;stroke-dashoffset:0;stroke-opacity:0.2956522"
+       id="rect815"
+       width="26.458334"
+       height="26.458334"
+       x="-1.1748047e-05"
+       y="270.54367" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.98070335px;line-height:1.25;font-family:'mont seerat';-inkscape-font-specification:'mont seerat';letter-spacing:0px;word-spacing:0px;fill:#ff5555;fill-opacity:1;stroke:none;stroke-width:0.6495176;"
+       x="2.3446538"
+       y="291.91718"
+       id="text872"><tspan
+         sodipodi:role="line"
+         id="tspan870"
+         x="2.3446538"
+         y="291.91718"
+         style="fill:#ff5555;stroke-width:0.6495176;">⋖</tspan></text>
   </g>
 </svg>
