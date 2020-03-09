@@ -2,12 +2,12 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isAlphanumeric } from "@fireflysemantics/is";
+import { isAlphaNumeric } from "@fireflysemantics/is";
 
 /**
  * Decorator that checks if the string contains only letters (a-zA-Z).  
  * 
- * See {@link isAlphanumeric} for a description of the method
+ * See {@link isAlphaNumeric} for a description of the method
  * performing the validation.
  * 
  * @param validationOptions The validation options
@@ -39,7 +39,7 @@ export function IsAlphaNumeric(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isAlphanumeric}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isAlphanumeric(o[vc.propertyName]);
+  return isAlphaNumeric(o[vc.propertyName]);
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isAlphanumeric(v)) {
+    if (!isAlphaNumeric(v)) {
       errorIndex.push(i);
     }
   });

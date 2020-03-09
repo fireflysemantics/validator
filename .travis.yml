@@ -3,7 +3,7 @@ sudo: false
 node_js:
   - "stable"
 script:
-  - npm test
+  - npm t
   - npm run d
 deploy:
   provider: pages
