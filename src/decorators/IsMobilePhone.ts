@@ -1,13 +1,13 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
-import { ValidationOptions } from "../ValidationOptions";
-import { ValidationContext } from "../ValidationContext";
-import { ValidationContainer } from "../ValidationContainer";
-import { isMobilePhone  } from "@fireflysemantics/is";
+import { PREFIX_EACH, PREFIX_SINGLE } from "../constants"
+import { ValidationOptions } from "../ValidationOptions"
+import { ValidationContext } from "../ValidationContext"
+import { ValidationContainer } from "../ValidationContainer"
+import { isMobilePhone, MobilePhoneLocale  } from "@fireflysemantics/is"
 
 /**
  * Decorator that checks if the property is a mobile phone number.  
  * 
- * See {@link ValidatorJS.MobilePhoneLocale}
+ * See {@link MobilePhoneLocale}
  * for the locale options.
  * 
  * See {@link isMobilePhone} for a description of the method
@@ -16,11 +16,11 @@ import { isMobilePhone  } from "@fireflysemantics/is";
  * @param target The target locale for the phone number.
  * @param validationOptions The validation options
  */
-export function IsMobilePhone(target: ValidatorJS.MobilePhoneLocale, validationOptions?: ValidationOptions) {
+export function IsMobilePhone( target: MobilePhoneLocale, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
 
-    const validationParameters:any[] = [];
-    validationParameters.push(target);  
+    const validationParameters:any[] = []
+    validationParameters.push(target)  
     
     const vc: ValidationContext = new ValidationContext(
       object,
@@ -32,10 +32,10 @@ export function IsMobilePhone(target: ValidatorJS.MobilePhoneLocale, validationO
       true,
       errorMessage,
       validationOptions
-    );
-    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
-    ValidationContainer.addValidationContext(vc);
-  };
+    )
+    ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName)
+    ValidationContainer.addValidationContext(vc)
+  }
 }
 
 /**
@@ -48,7 +48,7 @@ export function IsMobilePhone(target: ValidatorJS.MobilePhoneLocale, validationO
 export function validateValue(vc:ValidationContext, o:any):boolean {
   return isMobilePhone(
     o[vc.propertyName], 
-    vc.validationParameters[0]);
+    vc.validationParameters[0])
 }
 
 /**
@@ -57,13 +57,13 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
  * @return An empty array if valid, an array of indexes otherwise.
  */
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
-  const errorIndex:Array<Number> = [];
+  const errorIndex:Array<Number> = []
   values.forEach((v, i)=>{
     if (!isMobilePhone(v, vc.validationParameters[0])) {
-      errorIndex.push(i);
+      errorIndex.push(i)
     }
-  });
-  return errorIndex;
+  })
+  return errorIndex
 }
 
 /**
@@ -76,10 +76,10 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
 
-  const messageLiteral: string = "should be a number";
+  const messageLiteral: string = "should be a number"
 
   if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
+    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`
   }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
+  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`
 }

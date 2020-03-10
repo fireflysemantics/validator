@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isURL } from "@fireflysemantics/is";
+import { isURL, IsURLOptions } from "@fireflysemantics/is";
 
 /**
  * Decorator that checks if the property value a URL.  
@@ -16,7 +16,7 @@ import { isURL } from "@fireflysemantics/is";
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options
  */
-export function IsURL(options?: ValidatorJS.IsURLOptions, validationOptions?: ValidationOptions) {
+export function IsURL(options?: IsURLOptions, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
 
     const vc: ValidationContext = new ValidationContext(
