@@ -3,6 +3,7 @@ sudo: false
 node_js:
   - "stable"
 script:
+  - npm run u
   - npm t
   - npm run d
 deploy:
