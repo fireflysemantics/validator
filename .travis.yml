@@ -4,6 +4,7 @@ node_js:
   - "stable"
 script:
   - npm i -g npm-install-peers
+  - npm i -g npm-check-updates
   - npm run u
   - npm t
   - npm run d
