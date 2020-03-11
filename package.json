@@ -45,7 +45,8 @@
     "typescript": "^3.8.3"
   },
   "peerDependencies": {
-    "@fireflysemantics/is": "*"
+    "@fireflysemantics/is": "*",
+    "@fireflysemantics/validatorts": "*"
   },
   "comments": {
     "global dependencies": {
