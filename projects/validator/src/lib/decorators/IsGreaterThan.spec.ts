@@ -1,7 +1,7 @@
 import { ValidationContext } from "../ValidationContext";
 import { IsGreaterThan } from "./IsGreaterThan";
 import { getPropertyKey } from "../utilities";
-import { validateProperty, validate } from "../utilities";
+import { validateProperty, validate } from "../validate";
 
 class IsGreaterThanTest0 {
   @IsGreaterThan(30)
