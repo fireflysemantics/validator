@@ -1,7 +1,8 @@
 import { IsDefined } from "./IsDefined"
 import { IfValid } from "./IfValid"
 import { ObjectErrors } from "../ObjectErrors"
-import { getPropertyKey, validateProperty } from "../utilities"
+import { getPropertyKey } from "../utilities"
+import { validateProperty } from "../validate"
 
 describe("IfValid Validation", () => {
 

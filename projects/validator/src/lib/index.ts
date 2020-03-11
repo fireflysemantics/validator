@@ -7,18 +7,16 @@ export * from "./ObjectErrors"
 // ========================================================
 
 export * from "./constants"
-export { validate } from "./utilities";
-export { validateProperty } from "./utilities";
-export { getPropertyKey as getObjectPropertyKey } from "./utilities";
-export { getValidationContextSignature } from "./utilities";
+export * from "./validate";
+export * from "./utilities";
 
 // ========================================================
 // CONTAINTERS
 // ========================================================
 
-export { ValidationContext } from "./ValidationContext";
-export { ValidationError } from "./ValidationError";
-export { ObjectErrors } from './ObjectErrors'
+export * from "./ValidationContext";
+export * from "./ValidationError";
+export * from './ObjectErrors'
 
 // ========================================================
 // DECORATORS

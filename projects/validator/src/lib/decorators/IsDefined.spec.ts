@@ -1,6 +1,7 @@
 import { ValidationContainer } from "../ValidationContainer";
 import { ValidationContext } from "../ValidationContext";
-import { getPropertyKey, validate } from "../utilities";
+import { validate } from "../validate";
+import { getPropertyKey } from "../utilities";
 import { IsDefined } from "./IsDefined";
 const { getOwnPropertyNames } = Object;
 

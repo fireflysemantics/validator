@@ -1,7 +1,7 @@
 import { ValidationOptions } from "../ValidationOptions"
 import { ValidationContext } from "../ValidationContext"
 import { ValidationContainer } from "../ValidationContainer"
-import { validateProperty } from "../utilities"
+import { validateProperty } from "../validate"
 
 /**
  * Decorator that checks if the target argument is a valid property

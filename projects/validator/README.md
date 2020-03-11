@@ -151,7 +151,7 @@ After building your library with `npm run p`
 
 ## Running unit tests
 
-Run `npm t` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm t` to execute the unit tests via [Jest](https://jestjs.io/).
 
 
 # Supported Package Formats

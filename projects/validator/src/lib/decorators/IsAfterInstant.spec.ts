@@ -1,6 +1,6 @@
 import { IfValid } from "./IfValid"
 import { getPropertyKey } from "../utilities"
-import { validateProperty, validate } from "../utilities"
+import { validateProperty, validate } from "../validate"
 import { ObjectErrors } from "../ObjectErrors"
 
 import { IsDate } from "./IsDate"

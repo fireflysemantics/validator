@@ -3,7 +3,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isAfterInstant } from "@fireflysemantics/is";
-import { isDate } from "util";
+import { isDate } from "@fireflysemantics/is";
 
 /**
  * Decorator that checks if the property is after the argument.  
