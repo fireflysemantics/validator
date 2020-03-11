@@ -1,0 +1,25 @@
+{
+  "name": "validator",
+  "version": "3.0.0",
+  "description": "Typescript Validation Decorators and Executor",
+  "bugs": {
+    "url": "https://github.com/fireflysemantics/validator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fireflysemantics/validator"
+  },
+  "license": "MIT",
+  "author": "Ole Ersoy",
+  "keywords": [
+    "Typescript",
+    "Decorators",
+    "Validation",
+    "Validator"
+  ],
+  "peerDependencies": {
+    "tslib": "^1.11.1",
+    "@fireflysemantics/validatorts": "*",
+    "@fireflysemantics/is": "*"
+  }
+}
