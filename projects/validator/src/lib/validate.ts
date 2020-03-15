@@ -43,6 +43,22 @@ export function validate(target: any): ObjectErrors {
 }
 
 /**
+ * Validate multiple entity instances
+ * @param entities The array of entities to be validated.
+ * @return The `ObjectErrors` array which is empty if there are no errors
+ */
+export function validateN(entities:any[]):ObjectErrors[] {
+  const objectErrorsArray:ObjectErrors[] = [];
+  entities.forEach(e=>{
+    const oe:ObjectErrors = validate(e);
+    if (!oe.valid) {
+      objectErrorsArray.push(oe);
+    }
+  });
+  return objectErrorsArray;
+}
+
+/**
  * Validates a property contained on the object.
  * Errors are added to the ErrorContainer, unless skipErrorGeneration
  * is true.
