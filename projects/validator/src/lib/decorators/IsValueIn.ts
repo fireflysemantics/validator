@@ -31,7 +31,6 @@ export function IsValueIn(target: any[], validationOptions?: ValidationOptions) 
       validationOptions
     );
     ValidationContainer.addValidationContext(vc);
-    ValidationContainer.addValidationContext(vc);
   };
 }
 
