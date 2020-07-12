@@ -75,6 +75,7 @@ export { IsNotEqualTo } from "./decorators/IsNotEqualTo";
 export { IsNotSubString } from "./decorators/IsNotSubString";
 export { IsNotSuperString } from "./decorators/IsNotSuperString";
 export { IsNumber } from "./decorators/IsNumber";
+export { IsNumberInRange } from "./decorators/IsNumberInRange";
 export { IsNumberString } from "./decorators/IsNumberString";
 export { IsPatternMatch } from "./decorators/IsPatternMatch";
 export { IsPositive } from "./decorators/IsPositive";

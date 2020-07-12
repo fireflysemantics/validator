@@ -65,6 +65,9 @@ export class ValidationContainer {
       target.propertyName
     );
 
+    console.log("The property key is: ", key)
+    console.log("The target signature is: ", target.getSignature())
+
     const vca:ValidationContext[] = this.cache.get(key);
 
     let notAdded = true;
