@@ -1,6 +1,6 @@
 {
   "name": "@fireflysemantics/validator",
-  "version": "3.0.14",
+  "version": "3.0.16",
   "description": "Typescript Validation Decorators and Executor",
   "bugs": {
     "url": "https://github.com/fireflysemantics/validator/issues"

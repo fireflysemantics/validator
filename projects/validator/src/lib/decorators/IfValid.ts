@@ -21,7 +21,6 @@ import { validateProperty } from "../validate"
    }
    ```
  * 
- *
  * @param target The name of the property that should be valid.
  * @param validationOptions The validation options
  */
