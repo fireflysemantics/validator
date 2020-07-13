@@ -31,7 +31,8 @@ export function IsMobilePhone( target: MobilePhoneLocale, validationOptions?: Va
       validateArray,
       true,
       errorMessage,
-      validationOptions
+      validationOptions,
+      validationParameters
     )
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName)
     ValidationContainer.addValidationContext(vc)

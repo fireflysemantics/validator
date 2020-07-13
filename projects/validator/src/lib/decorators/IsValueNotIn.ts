@@ -31,7 +31,8 @@ export function IsValueNotIn(
       null,
       true,
       errorMessage,
-      validationOptions
+      validationOptions,
+      validationParameters
     )
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName)
     ValidationContainer.addValidationContext(vc)

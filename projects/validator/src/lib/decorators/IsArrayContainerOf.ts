@@ -28,7 +28,8 @@ export function IsArrayContainerOf(target: any[], validationOptions?: Validation
       null,
       true,
       errorMessage,
-      validationOptions
+      validationOptions,
+      validationParameters
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
