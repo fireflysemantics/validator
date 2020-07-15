@@ -29,12 +29,16 @@ expect(oes.errors[0].errorMessage).toContain('p0');
 
 ```
  */
-export function validate(target: any, exlude?: string[]): ObjectErrors {
+export function validate(target: any, exclude?: string[]): ObjectErrors {
   let oes: ObjectErrors = new ObjectErrors();
   const cn: string = target.constructor.name;
   const mc: MetaClass = ValidationContainer.metaClasses.get(cn);
   if (mc) {
-    const properties: string[] = mc.properties.filter(p => !exlude.includes(p))
+    let properties:string[] = mc.properties
+    if (exclude && exclude.length) {
+      properties = mc.properties.filter(p => !exclude.includes(p))
+    }
+
     properties.forEach(p => {
       if (!validateProperty(target, p, oes)) {
         oes.valid = false;
