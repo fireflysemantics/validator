@@ -3,7 +3,7 @@ import { MetaClass } from "./MetaClass"
 import { ValidationContext } from "./ValidationContext";
 import { ValidationError } from "./ValidationError";
 import { isArrayEmpty, isString } from "@fireflysemantics/is";
-import { ObjectErrors } from "./ObjectErrors"; 
+import { ObjectErrors } from "./ObjectErrors";
 import { getPropertyKey } from "./utilities"
 
 /**
@@ -12,6 +12,7 @@ import { getPropertyKey } from "./utilities"
  * Errors are collected by the {@link ErrorContainer}.
  *
  * @param target The object being validated.
+ * @param exlude Array of property values to exclude.
  * @return The {@link ObjectErrors} instance
  * @example
 ```
@@ -28,12 +29,13 @@ expect(oes.errors[0].errorMessage).toContain('p0');
 
 ```
  */
-export function validate(target: any): ObjectErrors {
+export function validate(target: any, exlude?: string[]): ObjectErrors {
   let oes: ObjectErrors = new ObjectErrors();
   const cn: string = target.constructor.name;
   const mc: MetaClass = ValidationContainer.metaClasses.get(cn);
   if (mc) {
-    mc.properties.forEach(p => {
+    const properties: string[] = mc.properties.filter(p => !exlude.includes(p))
+    properties.forEach(p => {
       if (!validateProperty(target, p, oes)) {
         oes.valid = false;
       }
@@ -47,10 +49,10 @@ export function validate(target: any): ObjectErrors {
  * @param entities The array of entities to be validated.
  * @return The `ObjectErrors` array which is empty if there are no errors
  */
-export function validateN(entities:any[]):ObjectErrors[] {
-  const objectErrorsArray:ObjectErrors[] = [];
-  entities.forEach(e=>{
-    const oe:ObjectErrors = validate(e);
+export function validateN(entities: any[], exlude?: string[]): ObjectErrors[] {
+  const objectErrorsArray: ObjectErrors[] = [];
+  entities.forEach(e => {
+    const oe: ObjectErrors = validate(e, exlude);
     if (!oe.valid) {
       objectErrorsArray.push(oe);
     }
@@ -73,18 +75,18 @@ export function validateN(entities:any[]):ObjectErrors[] {
 export function validateProperty(
   o: any,
   propertyName: string,
-  oes?:ObjectErrors,
+  oes?: ObjectErrors,
   skipErrorGeneration: boolean = false
 ): boolean {
   let valid = true;
   const key = getPropertyKey(o, propertyName);
   const vca: ValidationContext[] = ValidationContainer.cache.get(key);
- 
+
   if (!vca) {
     const errorMessage: string = `A validation context array for the key 
     ${key} does not exist.`;
     throw new Error(errorMessage);
-  } 
+  }
 
   const propertyValue = o[propertyName];
   vca.every((vc: ValidationContext) => {
@@ -104,12 +106,12 @@ export function validateProperty(
         );
         if (oes) {
           oes.addValidationError(ve);
-          oes.valid = false;  
+          oes.valid = false;
         }
       }
     } else {
       valid = vc.validateValue(vc, o);
-      
+
       if (!valid && !skipErrorGeneration) {
         const ve: ValidationError = new ValidationError(
           vc,
@@ -119,7 +121,7 @@ export function validateProperty(
         );
         if (oes) {
           oes.addValidationError(ve);
-          oes.valid = false;  
+          oes.valid = false;
         }
       }
     }

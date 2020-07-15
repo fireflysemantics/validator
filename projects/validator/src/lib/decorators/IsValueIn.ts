@@ -74,7 +74,11 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should not be in the target array";
+
+  let target:any[] = vc.validationParameters[0];
+  target = target.map(v=>v.trim()+" ")
+
+  const messageLiteral: string = `should be in [ ${target} ]`;
 
   if (o[vc.propertyName] instanceof Array) {
     return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
