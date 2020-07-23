@@ -12,7 +12,7 @@ import { getPropertyKey } from "./utilities"
  * Errors are collected by the {@link ErrorContainer}.
  *
  * @param target The object being validated.
- * @param exlude Array of property values to exclude.
+ * @param exclude Array of property values to exclude from validation.
  * @return The {@link ObjectErrors} instance
  * @example
 ```
@@ -51,11 +51,12 @@ export function validate(target: any, exclude?: string[]): ObjectErrors {
 /**
  * Validate multiple entity instances
  * @param entities The array of entities to be validated.
+ * @param exclude Array of property values to exclude from validation.
  * @return The `ObjectErrors` array which is empty if there are no errors
  */
-export function validateN(entities: any[], exlude?: string[]): ObjectErrors[] {
+export function validateN( entities: any[], exlude?: string[]): ObjectErrors[] {
   const objectErrorsArray: ObjectErrors[] = [];
-  entities.forEach(e => {
+  entities.forEach( e => {
     const oe: ObjectErrors = validate(e, exlude);
     if (!oe.valid) {
       objectErrorsArray.push(oe);
@@ -94,6 +95,11 @@ export function validateProperty(
 
   const propertyValue = o[propertyName];
   vca.every((vc: ValidationContext) => {
+
+    if (vc.validationOptions && vc.validationOptions.skipErrorGeneration ) {
+      vc.skipErrorGeneration = vc.validationOptions.skipErrorGeneration
+    }
+
     if (propertyValue instanceof Array) {
       const result: Number[] = vc.validateArray(vc, propertyValue);
       if (
