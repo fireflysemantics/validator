@@ -13,6 +13,7 @@ class IsDefinedInvalid {
   @IsDefined() p0: any = null;
 }
 
+
 const IDV: any = new IsDefinedValid();
 const IDI: any = new IsDefinedInvalid();
 
@@ -31,9 +32,9 @@ describe("IsDefined Validation", () => {
       expect(vc.validateValue(vc, IDV)).toBeTruthy();
     });
   });
-    
+
   it(`should return false when using the 
-      ValidationContext.validate method to check invalid values`, () => {    
+      ValidationContext.validate method to check invalid values`, () => {
     Object.getOwnPropertyNames(IDI).forEach(pn => {
       const key: string = getPropertyKey(IDI, pn);
       const validators = ValidationContainer.cache.get(key);
@@ -44,8 +45,19 @@ describe("IsDefined Validation", () => {
   });
 });
 
-it(`should create an error when using validate`, ()=>{
+it(`should create an error when using validate`, () => {
   let IDI = new IsDefinedInvalid();
   let e = validate(IDI);
   expect(e.valid).toBeFalsy();
+  expect(e.errors.length).toEqual(1)
 });
+
+class IsDefinedInvalidSkipErrorMessage {
+  @IsDefined({ skipErrorGeneration: true }) p0: any = null;
+}
+
+test("It should skip error generation when declared in options", ()=>{
+  let IDI = new IsDefinedInvalidSkipErrorMessage();
+  let e = validate(IDI);
+  expect(e.errors.length).toEqual(0)
+})

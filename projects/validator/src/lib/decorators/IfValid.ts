@@ -41,7 +41,7 @@ export function IfValid(target: string, validationOptions?: ValidationOptions) {
       validationOptions,
       validationParameters,
       null,
-      true
+      false
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);

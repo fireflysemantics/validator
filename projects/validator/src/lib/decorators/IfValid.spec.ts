@@ -29,7 +29,7 @@ describe("IfValid Validation", () => {
     expect(oes.getErrors(key_p0)).toBeUndefined();
     expect(oes.getErrors(key_p1).length).toEqual(1);
 
-    
+//  console.log("THE IF VALID ERROR IS ", oes.getErrors(key_p1)[0])    
     expect(oes.getErrors(key_p1)[0].vc.decorator).toEqual("IfValid");
 
     //Verify that p0 is invalid

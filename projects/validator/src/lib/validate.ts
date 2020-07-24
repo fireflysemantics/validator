@@ -34,7 +34,7 @@ export function validate(target: any, exclude?: string[]): ObjectErrors {
   const cn: string = target.constructor.name;
   const mc: MetaClass = ValidationContainer.metaClasses.get(cn);
   if (mc) {
-    let properties:string[] = mc.properties
+    let properties: string[] = mc.properties
     if (exclude && exclude.length) {
       properties = mc.properties.filter(p => !exclude.includes(p))
     }
@@ -54,9 +54,9 @@ export function validate(target: any, exclude?: string[]): ObjectErrors {
  * @param exclude Array of property values to exclude from validation.
  * @return The `ObjectErrors` array which is empty if there are no errors
  */
-export function validateN( entities: any[], exlude?: string[]): ObjectErrors[] {
+export function validateN(entities: any[], exlude?: string[]): ObjectErrors[] {
   const objectErrorsArray: ObjectErrors[] = [];
-  entities.forEach( e => {
+  entities.forEach(e => {
     const oe: ObjectErrors = validate(e, exlude);
     if (!oe.valid) {
       objectErrorsArray.push(oe);
@@ -96,8 +96,8 @@ export function validateProperty(
   const propertyValue = o[propertyName];
   vca.every((vc: ValidationContext) => {
 
-    if (vc.validationOptions && vc.validationOptions.skipErrorGeneration ) {
-      vc.skipErrorGeneration = vc.validationOptions.skipErrorGeneration
+    if (vc.validationOptions && vc.validationOptions.skipErrorGeneration) {
+      vc.skipErrorGeneration = true
     }
 
     if (propertyValue instanceof Array) {
@@ -121,18 +121,17 @@ export function validateProperty(
       }
     } else {
       valid = vc.validateValue(vc, o);
+      if (oes) { oes.valid = valid }
 
-      if (!valid && !skipErrorGeneration) {
+      if (!valid && !skipErrorGeneration && !vc.skipErrorGeneration && oes
+      ) {
         const ve: ValidationError = new ValidationError(
           vc,
           o,
           propertyName,
           propertyValue
         );
-        if (oes) {
-          oes.addValidationError(ve);
-          oes.valid = false;
-        }
+        oes.addValidationError(ve);
       }
     }
     if (!valid && vc.stop) {
