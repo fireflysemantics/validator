@@ -1,6 +1,20 @@
 {
   "name": "@fireflysemantics/validator",
-  "version": "0.0.9",
+  "version": "0.0.11",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fireflysemantics/validator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fireflysemantics/validator.git"
+  },
+  "keywords": [
+    "Validation",
+    "Javascript",
+    "Typescript",
+    "Angular Package Format"
+  ],
   "peerDependencies": {
     "@fireflysemantics/is": "*",
     "@fireflysemantics/validatorts": "*"

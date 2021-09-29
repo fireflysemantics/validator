@@ -16,7 +16,6 @@
     "p": "cp README.md ./projects/fs-validator/ && npm run bp && npm run b && cp -r logo ./dist/fs-validator/ && cd dist/fs-validator/ && npm publish",
     "d": "typedoc --out doc --exclude **/*.spec.ts ./projects/fs-is/src/lib"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~12.1.2",
     "@angular/common": "~12.1.2",
