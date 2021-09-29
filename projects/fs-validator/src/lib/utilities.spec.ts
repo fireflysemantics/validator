@@ -17,7 +17,7 @@ describe("Utilities getValidationContextKey", () => {
     const key1 = getPropertyKey(V.constructor.name, v_p1);
     const key2 = getPropertyKey(V, v_p1);
     expect(key1).toEqual(key2);
-    let vca:Array<ValidationContext> = ValidationContainer.cache.get(key1);
+    let vca:Array<ValidationContext> = ValidationContainer.cache.get(key1)!;
     expect(vca).not.toBeNull();
   });
 });

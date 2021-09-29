@@ -34,7 +34,7 @@ export class ObjectErrors {
       vea.push(error);
       this.cache.set(key, vea);
     } else {
-      this.cache.get(key).push(error);
+      this.cache.get(key)!.push(error);
     }
   }
 
@@ -58,7 +58,7 @@ export class ObjectErrors {
    * @returns Array<ValidationErrors> The array of validation errors 
    */
   public getErrors(key: string): Array<ValidationError> {
-    return this.cache.get(key);
+    return this.cache.get(key)!;
   }
 
   /**

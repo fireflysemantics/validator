@@ -1,15 +1,9 @@
-import { IfValid } from "./IfValid"
-import { getPropertyKey } from "../utilities"
-import { validateProperty, validate } from "../validate"
-import { ObjectErrors } from "../ObjectErrors"
-
-import { IsDate } from "./IsDate"
-import { IsAfterInstant } from "./IsAfterInstant"
+import { validate } from "../validate"
 import { IsNumberInRange } from './IsNumberInRange'
 
 class SomeNumber {
   @IsNumberInRange(0,1)
-    inRange:number
+    inRange?:number
 }
 
 const so = new SomeNumber()

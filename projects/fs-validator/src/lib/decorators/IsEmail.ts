@@ -25,7 +25,7 @@ export function IsEmail(options?: IsEmailOptions, validationOptions?: Validation
       true,
       errorMessage,
       validationOptions,
-      null,
+      [],
       options
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);

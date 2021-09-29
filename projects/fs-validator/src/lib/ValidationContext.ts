@@ -52,7 +52,7 @@ export class ValidationContext {
    * Function that performs the validation of properties 
    * containing arrays.
    */
-  validateArray: ValidationArrayFunctionType;
+  validateArray: ValidationArrayFunctionType | null;
 
   /**
    * Whether validation should continue in the
@@ -75,7 +75,7 @@ export class ValidationContext {
   /**
    * Validation constraint parameters for the validation.
    */
-  validationParameters?: any[];
+  validationParameters: any[];
 
   /**
    * Validation options specific to the type of validation being performd.
@@ -95,12 +95,12 @@ export class ValidationContext {
     decorator: string,
     propertyName: string,
     validateValue: ValidationValueFunctionType,
-    validateArray: ValidationArrayFunctionType,
+    validateArray: ValidationArrayFunctionType | null,
     stop: boolean,
     errorMessage: ErrorMessageType,
-    validationOptions?: ValidationOptions,
-    validationParameters?: any[],
-    validationTypeOptions?: any, 
+    validationOptions: ValidationOptions = {},
+    validationParameters: any[] = [],
+    validationTypeOptions: any = {}, 
     skipErrorGeneration?:boolean ) {
     this.object = object;
     this.target = target;

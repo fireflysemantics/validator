@@ -23,7 +23,7 @@ describe("IsDefined Validation", () => {
       to check valid values`, () => {
     getOwnPropertyNames(IDI).forEach(pn => {
       const key: string = getPropertyKey(IDV, pn);
-      const validators = ValidationContainer.cache.get(key);
+      const validators = ValidationContainer.cache.get(key)!;
 
       const vc: ValidationContext = validators[0];
       expect(vc.propertyName).toEqual(pn);
@@ -37,7 +37,7 @@ describe("IsDefined Validation", () => {
       ValidationContext.validate method to check invalid values`, () => {
     Object.getOwnPropertyNames(IDI).forEach(pn => {
       const key: string = getPropertyKey(IDI, pn);
-      const validators = ValidationContainer.cache.get(key);
+      const validators = ValidationContainer.cache.get(key)!;
 
       const vc: ValidationContext = validators[0];
       expect(vc.validateValue(vc, IDI)).toBeFalsy();

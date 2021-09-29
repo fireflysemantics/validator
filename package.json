@@ -6,7 +6,15 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "ig": "npm install -g @jsdevtools/version-bump-prompt && npm install -g npm-check-updates && npm install -g npm-install-peers",
+    "il": "",
+    "b": "ng build fs-validator",
+    "u": "cd projects/fs-validator && ncu -u && npm i && npm-install-peers",
+    "bp": "cd projects/fs-validator && bump patch",
+    "t": "cd projects/fs-validator && npx jest",
+    "p": "cp README.md ./projects/fs-validator/ && npm run bp && npm run b && cd dvalidatort/fs-validator/ && npm publish",
+    "d": "typedoc --out doc --exclude **/*.spec.ts ./projects/fs-is/src/lib"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +27,8 @@
     "@angular/platform-browser-dynamic": "~12.1.2",
     "@angular/router": "~12.1.2",
     "@briebug/jest-schematic": "^3.1.0",
+    "@fireflysemantics/is": "^2.0.31",
+    "@fireflysemantics/validatorts": "^12.2.36",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

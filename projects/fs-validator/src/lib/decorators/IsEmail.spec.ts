@@ -23,7 +23,7 @@ describe("IsEmail Validation", () => {
       method to check valid values`, () => {
     getOwnPropertyNames(IEV).forEach(pn => {
       const key: string = getPropertyKey(IEV.constructor.name, pn);
-      const validators = ValidationContainer.cache.get(key);
+      const validators = ValidationContainer.cache.get(key)!;
 
       const vc: ValidationContext = validators[0];
       expect(vc.propertyName).toEqual(pn);
@@ -49,7 +49,7 @@ describe("IsEmail Validation", () => {
       to check invalid values`, () => {    
     Object.getOwnPropertyNames(IEI).forEach(pn => {
       const key: string = getPropertyKey(IEI, pn);
-      const validators = ValidationContainer.cache.get(key);
+      const validators = ValidationContainer.cache.get(key)!;
 
       const vc: ValidationContext = validators[0];
       expect(vc.validateValue(vc, IEI)).toBeFalsy();

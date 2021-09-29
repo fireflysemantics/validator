@@ -61,7 +61,7 @@ export function validateValue(vc: ValidationContext, o: any): boolean {
  */
 export function validateArray(vc: ValidationContext, values: any[]): Array<number> {
   const min: number = vc.validationParameters[0];
-  let max: number = null;
+  let max: number;
   if (vc.validationParameters[1] !== undefined) {
     max = vc.validationParameters[1];
   }

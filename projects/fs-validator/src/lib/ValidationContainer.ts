@@ -42,10 +42,10 @@ export class ValidationContainer {
 
     if (!isDefined(this.metaClasses.get(constructorName))) {
       this.metaClasses.set(constructorName, new MetaClass(target));
-      this.metaClasses.get(constructorName).addProperty(propertyName);
+      this.metaClasses.get(constructorName)!.addProperty(propertyName);
     }
     else {
-      this.metaClasses.get(constructorName).addProperty(propertyName);
+      this.metaClasses.get(constructorName)!.addProperty(propertyName);
     }
   }
 
@@ -65,7 +65,7 @@ export class ValidationContainer {
       target.propertyName
     );
 
-    const vca:ValidationContext[] = this.cache.get(key);
+    const vca:ValidationContext[] = this.cache.get(key)!;
 
     let notAdded = true;
 

@@ -2,6 +2,7 @@ import { ValidationOptions } from "../ValidationOptions"
 import { ValidationContext } from "../ValidationContext"
 import { ValidationContainer } from "../ValidationContainer"
 import { validateProperty } from "../validate"
+import { hasLength } from "../utilities/hasLength";
 
 /**
  * Decorator that checks if the target argument is a valid property
@@ -25,7 +26,7 @@ import { validateProperty } from "../validate"
  * @param validationOptions The validation options
  */
 export function IfValid(target: string, validationOptions?: ValidationOptions) {
-  return function(object: any, propertyName: string) {
+  return function (object: any, propertyName: string) {
     const validationParameters: any[] = [];
     validationParameters.push(target);
 
@@ -59,12 +60,15 @@ export function IfValid(target: string, validationOptions?: ValidationOptions) {
  * @param o The object containing the property referenced by the validation parameter
  */
 function validateValue(vc: ValidationContext, o: any) {
-  const target = vc.validationParameters[0];
-  return validateProperty(o, target);
+  if (hasLength(vc.validationParameters)) {
+    const target = vc.validationParameters[0];
+    return validateProperty(o, target);
+  }
+  return true
 }
 
 function errorMessage(vc: ValidationContext, o: any): string {
   return `The target property ${vc.validationParameters[0]}
-          has an invalid value therefore the validation of the 
-          property ${vc.propertyName} will not proceed.`;
+  has an invalid value therefore the validation of the 
+  property ${vc.propertyName} will not proceed.`;
 }

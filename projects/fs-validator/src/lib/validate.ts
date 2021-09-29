@@ -2,7 +2,7 @@ import { ValidationContainer } from "./ValidationContainer"
 import { MetaClass } from "./MetaClass"
 import { ValidationContext } from "./ValidationContext";
 import { ValidationError } from "./ValidationError";
-import { isArrayEmpty, isString } from "@fireflysemantics/is";
+import { isArrayEmpty } from "@fireflysemantics/is";
 import { ObjectErrors } from "./ObjectErrors";
 import { getPropertyKey } from "./utilities"
 
@@ -32,7 +32,7 @@ expect(oes.errors[0].errorMessage).toContain('p0');
 export function validate(target: any, exclude?: string[]): ObjectErrors {
   let oes: ObjectErrors = new ObjectErrors();
   const cn: string = target.constructor.name;
-  const mc: MetaClass = ValidationContainer.metaClasses.get(cn);
+  const mc: MetaClass = ValidationContainer.metaClasses.get(cn)!;
   if (mc) {
     let properties: string[] = mc.properties
     if (exclude && exclude.length) {
@@ -85,7 +85,7 @@ export function validateProperty(
 ): boolean {
   let valid = true;
   const key = getPropertyKey(o, propertyName);
-  const vca: ValidationContext[] = ValidationContainer.cache.get(key);
+  const vca: ValidationContext[] = ValidationContainer.cache.get(key)!;
 
   if (!vca) {
     const errorMessage: string = `A validation context array for the key 
@@ -101,7 +101,7 @@ export function validateProperty(
     }
 
     if (propertyValue instanceof Array) {
-      const result: Number[] = vc.validateArray(vc, propertyValue);
+      const result: Number[] = vc.validateArray!(vc, propertyValue);
       if (
         !isArrayEmpty(result) &&
         !skipErrorGeneration &&
