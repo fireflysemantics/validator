@@ -26,7 +26,7 @@ export function IsFQDN(options?: IsFQDNOptions, validationOptions?: ValidationOp
       true,
       errorMessage,
       validationOptions,
-      null,
+      undefined,
       options
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);

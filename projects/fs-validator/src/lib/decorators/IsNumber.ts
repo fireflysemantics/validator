@@ -29,7 +29,7 @@ export function IsNumber(options: IsNumberOptions = {}, validationOptions?: Vali
       true,
       errorMessage,
       validationOptions,
-      null,
+      undefined,
       options
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);

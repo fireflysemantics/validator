@@ -29,7 +29,7 @@ export function IsURL(options?: IsURLOptions, validationOptions?: ValidationOpti
       true,
       errorMessage,
       validationOptions,
-      null,
+      undefined,
       options
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
