@@ -13,7 +13,7 @@
     "u": "cd projects/fs-validator && ncu -u && npm i && npm-install-peers",
     "bp": "cd projects/fs-validator && bump patch",
     "t": "cd projects/fs-validator && npx jest",
-    "p": "cp README.md ./projects/fs-validator/ && npm run bp && npm run b && cp -r logo ./dist/fs-validator/ && cd projects/fs-validator/ && npm publish",
+    "p": "cp README.md ./projects/fs-validator/ && npm run bp && npm run b && cp -r logo ./dist/fs-validator/ && cd dist/fs-validator/ && npm publish",
     "d": "typedoc --out doc --exclude **/*.spec.ts ./projects/fs-is/src/lib"
   },
   "private": true,
