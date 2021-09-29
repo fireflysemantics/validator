@@ -1,6 +1,6 @@
 {
-  "name": "fs-validator",
-  "version": "0.0.3",
+  "name": "@fireflysemantics/validator",
+  "version": "0.0.0",
   "peerDependencies": {
     "@fireflysemantics/is": "*",
     "@fireflysemantics/validatorts": "*"
