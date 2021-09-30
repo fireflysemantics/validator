@@ -14,7 +14,7 @@
     "bp": "cd projects/fs-validator && bump patch",
     "t": "cd projects/fs-validator && npx jest",
     "p": "cp README.md ./projects/fs-validator/ && npm run bp && npm run b && cp -r logo ./dist/fs-validator/ && cd dist/fs-validator/ && npm publish",
-    "d": "typedoc --out doc --exclude **/*.spec.ts ./projects/fs-is/src/lib"
+    "d": "typedoc --out doc --exclude **/*.spec.ts ./projects/fs-validator/src/lib"
   },
   "dependencies": {
     "@angular/animations": "~12.1.2",
@@ -44,6 +44,7 @@
     "jest": "27.2.3",
     "karma-coverage": "~2.0.3",
     "ng-packagr": "^12.1.0",
+    "typedoc": "^0.22.4",
     "typescript": "~4.3.2"
   }
 }

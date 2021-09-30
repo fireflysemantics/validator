@@ -13,7 +13,9 @@
     "Validation",
     "Javascript",
     "Typescript",
-    "Angular Package Format"
+    "Angular Package Format",
+    "assert",
+    "validator"
   ],
   "peerDependencies": {
     "@fireflysemantics/is": "*",

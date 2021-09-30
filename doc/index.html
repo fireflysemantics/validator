@@ -1,0 +1,167 @@
+<!DOCTYPE html><html class="default no-js"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>@fireflysemantics/validator</title><meta name="description" content="Documentation for @fireflysemantics/validator"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@fireflysemantics/validator</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@fireflysemantics/validator</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography"><p><a href="https://travis-ci.org/fireflysemantics/validator"><img src="https://travis-ci.org/fireflysemantics/validator.svg?branch=master" alt="Build Status"></a></p>
+<p><img src="pnglogo.png" alt="Validator"></p>
+
+<a href="#validator" id="validator" style="color: inherit; text-decoration: none;">
+  <h1>Validator</h1>
+</a>
+<p>Typescript Validation Decorators and Executor.  See <a href="https://fireflysemantics.github.io/validator/doc/modules/_validator_.html">API</a> for all methods provided.</p>
+
+<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+  <h2>Install</h2>
+</a>
+<pre><code><span class="hl-4">npm</span><span class="hl-1"> </span><span class="hl-4">i</span><span class="hl-1"> -</span><span class="hl-7">S</span><span class="hl-1"> @</span><span class="hl-4">fireflysemantics</span><span class="hl-1">/</span><span class="hl-4">validator</span>
+</code></pre>
+<p>Install <code>@fireflysemantics/validator</code> peer dependencies along with the library:</p>
+<pre><code><span class="hl-4">npm</span><span class="hl-1"> </span><span class="hl-4">i</span><span class="hl-1"> -</span><span class="hl-7">S</span><span class="hl-1"> @</span><span class="hl-4">fireflysemantics</span><span class="hl-1">/</span><span class="hl-4">validatorts</span><br/><span class="hl-4">npm</span><span class="hl-1"> </span><span class="hl-4">i</span><span class="hl-1"> -</span><span class="hl-7">S</span><span class="hl-1"> @</span><span class="hl-4">fireflysemantics</span><span class="hl-1">/</span><span class="hl-4">is</span>
+</code></pre>
+<p>Note that if you are using the <code>FESM5</code> package format the <code>tslib</code> peer dependency must also be installed.</p>
+<pre><code><span class="hl-4">npm</span><span class="hl-1"> </span><span class="hl-4">i</span><span class="hl-1"> -</span><span class="hl-7">S</span><span class="hl-1"> </span><span class="hl-4">npm</span><span class="hl-1"> </span><span class="hl-4">i</span><span class="hl-1"> </span><span class="hl-4">tslib</span>
+</code></pre>
+
+<a href="#typedoc" id="typedoc" style="color: inherit; text-decoration: none;">
+  <h2>Typedoc</h2>
+</a>
+<p><a href="https://fireflysemantics.github.io/validator/doc/">Typedoc Documentation</a></p>
+
+<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+  <h2>Features</h2>
+</a>
+<ul>
+<li>Progressive validation (Only check if the date is valid if the property is non null)</li>
+<li>Cross property validation (Does the start date come before the end date?)</li>
+<li>Cross Property Conditional Validation with <code>@IfValid</code> stops cross property validation a dependent property is invalid.</li>
+<li>Access to the entire <a href="https://github.com/fireflysemantics/validator/blob/master/src/ValidationContext.ts">ValidationContext</a> enabling the customization of validation messages post validation</li>
+<li>Executes the decorators is a predictable ordered sequence</li>
+</ul>
+<p>The following decorators:</p>
+<ul>
+<li>IfValid</li>
+<li>IsAfterInstant</li>
+<li>IsAlpha</li>
+<li>IsAlphaNumeric</li>
+<li>IsArray</li>
+<li>IsArrayContainerOf</li>
+<li>IsArrayIn</li>
+<li>IsArrayNotEmpty</li>
+<li>IsArrayNotIn</li>
+<li>IsArraySizeGreaterThan</li>
+<li>IsArraySizeLessThan</li>
+<li>IsArrayUnique</li>
+<li>IsAscii</li>
+<li>IsBase64</li>
+<li>IsBeforeInstant</li>
+<li>IsBoolean</li>
+<li>IsBooleanString</li>
+<li>IsByteLength</li>
+<li>IsCreditCard</li>
+<li>IsCurrency</li>
+<li>IsDate</li>
+<li>IsDefined</li>
+<li>IsDivisibleBy</li>
+<li>IsEmail</li>
+<li>IsEmpty</li>
+<li>IsEnum</li>
+<li>IsEqualTo</li>
+<li>IsFQDN</li>
+<li>IsFullWidth</li>
+<li>IsGreaterThan</li>
+<li>IsHalfWidth</li>
+<li>IsHexColor</li>
+<li>IsHexadecimal</li>
+<li>IsIP</li>
+<li>IsISBN</li>
+<li>IsISIN</li>
+<li>IsISODateString</li>
+<li>IsInRange</li>
+<li>IsInstanceOf</li>
+<li>IsInt</li>
+<li>IsJSON</li>
+<li>IsLengthGreaterThan</li>
+<li>IsLengthLessThan</li>
+<li>IsLessThan</li>
+<li>IsLowercase</li>
+<li>IsMilitaryTime</li>
+<li>IsMobilePhone</li>
+<li>IsMongoID</li>
+<li>IsMultibyte</li>
+<li>IsNegative</li>
+<li>IsNotEmpty</li>
+<li>IsNotEqualTo</li>
+<li>IsNotSubString</li>
+<li>IsNotSuperString</li>
+<li>IsNumber</li>
+<li>IsNumberString</li>
+<li>IsPatternMatch</li>
+<li>IsPositive</li>
+<li>IsSameInstant</li>
+<li>IsString</li>
+<li>IsSubString</li>
+<li>IsSuperString</li>
+<li>IsSurrogatePair</li>
+<li>IsURL</li>
+<li>IsUUID</li>
+<li>IsUpperCase</li>
+<li>IsValueIn</li>
+<li>IsValueNotIn</li>
+<li>IsVariableWidth</li>
+</ul>
+
+<a href="#use-cases" id="use-cases" style="color: inherit; text-decoration: none;">
+  <h2>Use Cases</h2>
+</a>
+
+<a href="#progressive-validation" id="progressive-validation" style="color: inherit; text-decoration: none;">
+  <h3>Progressive Validation</h3>
+</a>
+<p><a href="https://medium.com/@ole.ersoy/minimizing-validation-noise-with-fireflysemantics-validator-efef4c95efd4">See this article for an overview of how progressive validation works.</a></p>
+<p><a href="https://stackblitz.com/edit/validator-progressive-validation">There&#39;s also a Stackblitz demo here</a>.</p>
+
+<a href="#cross-property-conditional-validation" id="cross-property-conditional-validation" style="color: inherit; text-decoration: none;">
+  <h3>Cross Property Conditional Validation</h3>
+</a>
+<p>In some cases we want to validate something else only when a corresponding property
+on the instances is valid.  For example:</p>
+<pre><code><span class="hl-0">class</span><span class="hl-1"> </span><span class="hl-2">GreaterThanCheck</span><span class="hl-1"> { </span><br/><span class="hl-1">     @</span><span class="hl-4">IsNumber</span><br/><span class="hl-1">     </span><span class="hl-4">firstNumber</span><span class="hl-1">: </span><span class="hl-2">any</span><span class="hl-1"> = </span><span class="hl-0">null</span><span class="hl-1">;</span><br/><br/><span class="hl-1">     @</span><span class="hl-3">IsGreaterThan</span><span class="hl-1">(</span><span class="hl-6">&quot;firstNumber&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">     @</span><span class="hl-3">IsNumber</span><span class="hl-1">()</span><br/><span class="hl-1">     @</span><span class="hl-3">IfValid</span><span class="hl-1">(</span><span class="hl-6">&#39;firstNumber</span><span class="hl-9">)</span><br/><span class="hl-1">     </span><span class="hl-4">secondNumber</span><span class="hl-1"> = </span><span class="hl-8">22</span><span class="hl-1">; </span><br/><span class="hl-1">}</span>
+</code></pre>
+<p>In this case the validation of <code>secondNumber</code> depends on the first number.  Thus in order to minimize validation noise, we would like to validate the <code>secondNumber</code> only if the first number is valid.  The <code>@IfValid(&#39;firstNumber)</code> ensures that this will be the case.</p>
+
+<a href="#runtime" id="runtime" style="color: inherit; text-decoration: none;">
+  <h2>Runtime</h2>
+</a>
+<p>This assumes a minimum ES2017 runtime environment.  Use core.js if you think the code will run in non compliant runtimes.  We use <code>Object.values</code>, which has an ES2017 a minimum runtime.</p>
+
+<a href="#build" id="build" style="color: inherit; text-decoration: none;">
+  <h2>Build</h2>
+</a>
+<p>Run <code>npm run c</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory.</p>
+
+<a href="#publishing" id="publishing" style="color: inherit; text-decoration: none;">
+  <h2>Publishing</h2>
+</a>
+<p>After building your library with <code>npm run p</code></p>
+
+<a href="#running-unit-tests" id="running-unit-tests" style="color: inherit; text-decoration: none;">
+  <h2>Running unit tests</h2>
+</a>
+<p>Run <code>npm t</code> to execute the unit tests via <a href="https://jestjs.io/">Jest</a>.</p>
+
+<a href="#supported-package-formats" id="supported-package-formats" style="color: inherit; text-decoration: none;">
+  <h1>Supported Package Formats</h1>
+</a>
+<p>The library is built with the Angular Package Format.  It therefore supports all these package formats (As can be seen in the provided <code>package.json</code>) and has integrated typescript definitions:</p>
+<ul>
+<li>&quot;main&quot;: &quot;bundles/fireflysemantics-validatorts.umd.js&quot;,</li>
+<li>&quot;module&quot;: &quot;fesm5/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;es2015&quot;: &quot;fesm2015/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;esm5&quot;: &quot;esm5/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;esm2015&quot;: &quot;esm2015/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;fesm5&quot;: &quot;fesm5/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;fesm2015&quot;: &quot;fesm2015/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;typings&quot;: &quot;fireflysemantics-validatorts.d.ts&quot;</li>
+</ul>
+
+<a href="#further-help" id="further-help" style="color: inherit; text-decoration: none;">
+  <h2>Further help</h2>
+</a>
+<p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://github.com/angular/angular-cli/blob/master/README.md">Angular CLI README</a>.</p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-class"><a href="classes/MetaClass.html" class="tsd-kind-icon">Meta<wbr/>Class</a></li><li class="tsd-kind-class"><a href="classes/ObjectErrors.html" class="tsd-kind-icon">Object<wbr/>Errors</a></li><li class="tsd-kind-class"><a href="classes/ValidationContext.html" class="tsd-kind-icon">Validation<wbr/>Context</a></li><li class="tsd-kind-class"><a href="classes/ValidationError.html" class="tsd-kind-icon">Validation<wbr/>Error</a></li><li class="tsd-kind-type-alias"><a href="modules.html#ErrorMessageType" class="tsd-kind-icon">Error<wbr/>Message<wbr/>Type</a></li><li class="tsd-kind-type-alias"><a href="modules.html#ValidationArrayFunctionType" class="tsd-kind-icon">Validation<wbr/>Array<wbr/>Function<wbr/>Type</a></li><li class="tsd-kind-type-alias"><a href="modules.html#ValidationValueFunctionType" class="tsd-kind-icon">Validation<wbr/>Value<wbr/>Function<wbr/>Type</a></li><li class="tsd-kind-variable"><a href="modules.html#PREFIX_EACH" class="tsd-kind-icon">PREFIX_<wbr/>EACH</a></li><li class="tsd-kind-variable"><a href="modules.html#PREFIX_SINGLE" class="tsd-kind-icon">PREFIX_<wbr/>SINGLE</a></li><li class="tsd-kind-function"><a href="modules.html#IfValid" class="tsd-kind-icon">If<wbr/>Valid</a></li><li class="tsd-kind-function"><a href="modules.html#IsAfterInstant" class="tsd-kind-icon">Is<wbr/>After<wbr/>Instant</a></li><li class="tsd-kind-function"><a href="modules.html#IsAlpha" class="tsd-kind-icon">Is<wbr/>Alpha</a></li><li class="tsd-kind-function"><a href="modules.html#IsAlphaNumeric" class="tsd-kind-icon">Is<wbr/>Alpha<wbr/>Numeric</a></li><li class="tsd-kind-function"><a href="modules.html#IsArray" class="tsd-kind-icon">Is<wbr/>Array</a></li><li class="tsd-kind-function"><a href="modules.html#IsArrayContainerOf" class="tsd-kind-icon">Is<wbr/>Array<wbr/>Container<wbr/>Of</a></li><li class="tsd-kind-function"><a href="modules.html#IsArrayIn" class="tsd-kind-icon">Is<wbr/>Array<wbr/>In</a></li><li class="tsd-kind-function"><a href="modules.html#IsArrayNotEmpty" class="tsd-kind-icon">Is<wbr/>Array<wbr/>Not<wbr/>Empty</a></li><li class="tsd-kind-function"><a href="modules.html#IsArrayNotIn" class="tsd-kind-icon">Is<wbr/>Array<wbr/>Not<wbr/>In</a></li><li class="tsd-kind-function"><a href="modules.html#IsArraySizeGreaterThan" class="tsd-kind-icon">Is<wbr/>Array<wbr/>Size<wbr/>Greater<wbr/>Than</a></li><li class="tsd-kind-function"><a href="modules.html#IsArraySizeLessThan" class="tsd-kind-icon">Is<wbr/>Array<wbr/>Size<wbr/>Less<wbr/>Than</a></li><li class="tsd-kind-function"><a href="modules.html#IsAscii" class="tsd-kind-icon">Is<wbr/>Ascii</a></li><li class="tsd-kind-function"><a href="modules.html#IsBase64" class="tsd-kind-icon">Is<wbr/>Base64</a></li><li class="tsd-kind-function"><a href="modules.html#IsBeforeInstant" class="tsd-kind-icon">Is<wbr/>Before<wbr/>Instant</a></li><li class="tsd-kind-function"><a href="modules.html#IsBoolean" class="tsd-kind-icon">Is<wbr/>Boolean</a></li><li class="tsd-kind-function"><a href="modules.html#IsBooleanString" class="tsd-kind-icon">Is<wbr/>Boolean<wbr/>String</a></li><li class="tsd-kind-function"><a href="modules.html#IsByteLength" class="tsd-kind-icon">Is<wbr/>Byte<wbr/>Length</a></li><li class="tsd-kind-function"><a href="modules.html#IsCreditCard" class="tsd-kind-icon">Is<wbr/>Credit<wbr/>Card</a></li><li class="tsd-kind-function"><a href="modules.html#IsCurrency" class="tsd-kind-icon">Is<wbr/>Currency</a></li><li class="tsd-kind-function"><a href="modules.html#IsDate" class="tsd-kind-icon">Is<wbr/>Date</a></li><li class="tsd-kind-function"><a href="modules.html#IsDefined" class="tsd-kind-icon">Is<wbr/>Defined</a></li><li class="tsd-kind-function"><a href="modules.html#IsDivisibleBy" class="tsd-kind-icon">Is<wbr/>Divisible<wbr/>By</a></li><li class="tsd-kind-function"><a href="modules.html#IsEmail" class="tsd-kind-icon">Is<wbr/>Email</a></li><li class="tsd-kind-function"><a href="modules.html#IsEmpty" class="tsd-kind-icon">Is<wbr/>Empty</a></li><li class="tsd-kind-function"><a href="modules.html#IsEnum" class="tsd-kind-icon">Is<wbr/>Enum</a></li><li class="tsd-kind-function"><a href="modules.html#IsEqualTo" class="tsd-kind-icon">Is<wbr/>Equal<wbr/>To</a></li><li class="tsd-kind-function"><a href="modules.html#IsFQDN" class="tsd-kind-icon">IsFQDN</a></li><li class="tsd-kind-function"><a href="modules.html#IsFullWidth" class="tsd-kind-icon">Is<wbr/>Full<wbr/>Width</a></li><li class="tsd-kind-function"><a href="modules.html#IsGreaterThan" class="tsd-kind-icon">Is<wbr/>Greater<wbr/>Than</a></li><li class="tsd-kind-function"><a href="modules.html#IsHalfWidth" class="tsd-kind-icon">Is<wbr/>Half<wbr/>Width</a></li><li class="tsd-kind-function"><a href="modules.html#IsHexColor" class="tsd-kind-icon">Is<wbr/>Hex<wbr/>Color</a></li><li class="tsd-kind-function"><a href="modules.html#IsHexadecimal" class="tsd-kind-icon">Is<wbr/>Hexadecimal</a></li><li class="tsd-kind-function"><a href="modules.html#IsIP" class="tsd-kind-icon">IsIP</a></li><li class="tsd-kind-function"><a href="modules.html#IsISBN" class="tsd-kind-icon">IsISBN</a></li><li class="tsd-kind-function"><a href="modules.html#IsISIN" class="tsd-kind-icon">IsISIN</a></li><li class="tsd-kind-function"><a href="modules.html#IsISODateString" class="tsd-kind-icon">IsISODate<wbr/>String</a></li><li class="tsd-kind-function"><a href="modules.html#IsInRange" class="tsd-kind-icon">Is<wbr/>In<wbr/>Range</a></li><li class="tsd-kind-function"><a href="modules.html#IsInstanceOf" class="tsd-kind-icon">Is<wbr/>Instance<wbr/>Of</a></li><li class="tsd-kind-function"><a href="modules.html#IsInt" class="tsd-kind-icon">Is<wbr/>Int</a></li><li class="tsd-kind-function"><a href="modules.html#IsJSON" class="tsd-kind-icon">IsJSON</a></li><li class="tsd-kind-function"><a href="modules.html#IsLengthGreaterThan" class="tsd-kind-icon">Is<wbr/>Length<wbr/>Greater<wbr/>Than</a></li><li class="tsd-kind-function"><a href="modules.html#IsLengthLessThan" class="tsd-kind-icon">Is<wbr/>Length<wbr/>Less<wbr/>Than</a></li><li class="tsd-kind-function"><a href="modules.html#IsLessThan" class="tsd-kind-icon">Is<wbr/>Less<wbr/>Than</a></li><li class="tsd-kind-function"><a href="modules.html#IsLowercase" class="tsd-kind-icon">Is<wbr/>Lowercase</a></li><li class="tsd-kind-function"><a href="modules.html#IsMilitaryTime" class="tsd-kind-icon">Is<wbr/>Military<wbr/>Time</a></li><li class="tsd-kind-function"><a href="modules.html#IsMobilePhone" class="tsd-kind-icon">Is<wbr/>Mobile<wbr/>Phone</a></li><li class="tsd-kind-function"><a href="modules.html#IsMultibyte" class="tsd-kind-icon">Is<wbr/>Multibyte</a></li><li class="tsd-kind-function"><a href="modules.html#IsNegative" class="tsd-kind-icon">Is<wbr/>Negative</a></li><li class="tsd-kind-function"><a href="modules.html#IsNotEmpty" class="tsd-kind-icon">Is<wbr/>Not<wbr/>Empty</a></li><li class="tsd-kind-function"><a href="modules.html#IsNotEqualTo" class="tsd-kind-icon">Is<wbr/>Not<wbr/>Equal<wbr/>To</a></li><li class="tsd-kind-function"><a href="modules.html#IsNotSubString" class="tsd-kind-icon">Is<wbr/>Not<wbr/>Sub<wbr/>String</a></li><li class="tsd-kind-function"><a href="modules.html#IsNotSuperString" class="tsd-kind-icon">Is<wbr/>Not<wbr/>Super<wbr/>String</a></li><li class="tsd-kind-function"><a href="modules.html#IsNumber" class="tsd-kind-icon">Is<wbr/>Number</a></li><li class="tsd-kind-function"><a href="modules.html#IsNumberInRange" class="tsd-kind-icon">Is<wbr/>Number<wbr/>In<wbr/>Range</a></li><li class="tsd-kind-function"><a href="modules.html#IsNumberString" class="tsd-kind-icon">Is<wbr/>Number<wbr/>String</a></li><li class="tsd-kind-function"><a href="modules.html#IsPatternMatch" class="tsd-kind-icon">Is<wbr/>Pattern<wbr/>Match</a></li><li class="tsd-kind-function"><a href="modules.html#IsPositive" class="tsd-kind-icon">Is<wbr/>Positive</a></li><li class="tsd-kind-function"><a href="modules.html#IsSameInstant" class="tsd-kind-icon">Is<wbr/>Same<wbr/>Instant</a></li><li class="tsd-kind-function"><a href="modules.html#IsString" class="tsd-kind-icon">Is<wbr/>String</a></li><li class="tsd-kind-function"><a href="modules.html#IsSubString" class="tsd-kind-icon">Is<wbr/>Sub<wbr/>String</a></li><li class="tsd-kind-function"><a href="modules.html#IsSuperString" class="tsd-kind-icon">Is<wbr/>Super<wbr/>String</a></li><li class="tsd-kind-function"><a href="modules.html#IsSurrogatePair" class="tsd-kind-icon">Is<wbr/>Surrogate<wbr/>Pair</a></li><li class="tsd-kind-function"><a href="modules.html#IsURL" class="tsd-kind-icon">IsURL</a></li><li class="tsd-kind-function"><a href="modules.html#IsUUID" class="tsd-kind-icon">IsUUID</a></li><li class="tsd-kind-function"><a href="modules.html#IsUpperCase" class="tsd-kind-icon">Is<wbr/>Upper<wbr/>Case</a></li><li class="tsd-kind-function"><a href="modules.html#IsValueIn" class="tsd-kind-icon">Is<wbr/>Value<wbr/>In</a></li><li class="tsd-kind-function"><a href="modules.html#IsValueNotIn" class="tsd-kind-icon">Is<wbr/>Value<wbr/>Not<wbr/>In</a></li><li class="tsd-kind-function"><a href="modules.html#IsVariableWidth" class="tsd-kind-icon">Is<wbr/>Variable<wbr/>Width</a></li><li class="tsd-kind-function"><a href="modules.html#getPropertyKey" class="tsd-kind-icon">get<wbr/>Property<wbr/>Key</a></li><li class="tsd-kind-function"><a href="modules.html#getValidationContextSignature" class="tsd-kind-icon">get<wbr/>Validation<wbr/>Context<wbr/>Signature</a></li><li class="tsd-kind-function"><a href="modules.html#validate" class="tsd-kind-icon">validate</a></li><li class="tsd-kind-function"><a href="modules.html#validateN" class="tsd-kind-icon">validateN</a></li><li class="tsd-kind-function"><a href="modules.html#validateProperty" class="tsd-kind-icon">validate<wbr/>Property</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
