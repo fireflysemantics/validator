@@ -2,10 +2,10 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isPositive } from "@fireflysemantics/is";
+import { isPositiveFinite } from "@fireflysemantics/validatorts";
 
 /**
- * Decorator that checks if the property is positive.  
+ * Decorator that checks if the property is positive finite.  
  * 
  * See {@link isPositive} for a description of the method
  * performing the validation.
@@ -39,7 +39,7 @@ export function IsPositive(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isPositive}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isPositive(o[vc.propertyName]);
+  return !!isPositiveFinite(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<number> {
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isPositive(v)) {
+    if (!isPositiveFinite(v).value) {
       errorIndex.push(i);
     }
   });

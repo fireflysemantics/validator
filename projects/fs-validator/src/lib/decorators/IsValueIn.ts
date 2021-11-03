@@ -1,15 +1,12 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isIn } from "@fireflysemantics/is";
+import { isInArray } from "@fireflysemantics/validatorts";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
  * Decorator that checks if the array value
- * is not in the array of values.
- * 
- * See {@link isIn} for a description of the method
- * performing the validation.
+ * is in the array of values.
  * 
  * @param validationOptions The validation options
  */
@@ -25,7 +22,7 @@ export function IsValueIn(target: any[], validationOptions?: ValidationOptions) 
       IsValueIn.name,
       propertyName,
       validateValue,
-      null,
+      validateArray,
       true,
       errorMessage,
       validationOptions,
@@ -37,7 +34,7 @@ export function IsValueIn(target: any[], validationOptions?: ValidationOptions) 
 }
 
 /**
- * Value is valid if it passes the {@link isIn} check.
+ * Value is valid if it is in the target array.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
@@ -45,7 +42,7 @@ export function IsValueIn(target: any[], validationOptions?: ValidationOptions) 
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return isIn(o[vc.propertyName], target);
+  return !!isInArray(o[vc.propertyName], target).value;
 }
 
 /**
@@ -58,7 +55,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isIn(v, target)) {
+    if (!isInArray(v, target).value) {
       errorIndex.push(i);
     }
   });

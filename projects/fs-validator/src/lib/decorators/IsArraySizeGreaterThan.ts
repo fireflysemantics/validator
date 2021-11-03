@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isArraySizeGreaterThan } from "@fireflysemantics/is";
+import { isArraySizeGreaterThan } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the size of the array property is greater than the argument.  
@@ -44,7 +44,7 @@ export function IsArraySizeGreaterThan(target: number, validationOptions?: Valid
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const object:number = vc.validationParameters[0];
-  return isArraySizeGreaterThan(o[vc.propertyName], object);
+  return !!isArraySizeGreaterThan(o[vc.propertyName], object).value;
 }
 /**
  * 
@@ -56,7 +56,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
   const object:number = vc.validationParameters[0];
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isArraySizeGreaterThan(v, object)) {
+    if (!isArraySizeGreaterThan(v, object).value) {
       errorIndex.push(i);
     }
   });

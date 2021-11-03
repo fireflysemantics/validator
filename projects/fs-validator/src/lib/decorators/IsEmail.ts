@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isEmail, IsEmailOptions } from "@fireflysemantics/is";
+import { isEmail, IsEmailOptions } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property value is a valid email address.  
@@ -41,8 +41,9 @@ export function IsEmail(options?: IsEmailOptions, validationOptions?: Validation
  * @return The result of the call to {@link isEmail}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isEmail(o[vc.propertyName], vc.validationTypeOptions);
+  return !!isEmail(o[vc.propertyName], vc.validationTypeOptions).value;
 }
+
 /**
  * 
  * @param vc  The validation context.
@@ -52,7 +53,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isEmail(v, vc.validationTypeOptions)) {
+    if (!isEmail(v, vc.validationTypeOptions).value) {
       errorIndex.push(i);
     }
   });

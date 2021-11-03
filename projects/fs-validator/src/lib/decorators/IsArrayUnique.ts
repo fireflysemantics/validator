@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isArrayUnique } from "@fireflysemantics/is";
+import { isArrayUnique } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks that the property is an array
@@ -40,7 +40,7 @@ export function IsArrayUnique(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isArrayUnique}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isArrayUnique(o[vc.propertyName]);
+  return !!isArrayUnique(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -51,7 +51,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isArrayUnique(v)) {
+    if (!isArrayUnique(v).value) {
       errorIndex.push(i);
     }
   });

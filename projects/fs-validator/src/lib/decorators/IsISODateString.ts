@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isISODateString } from "@fireflysemantics/is";
+import { isISO8601 } from "@fireflysemantics/validatorts";
 /**
  * Decorator that checks if the property is a Date string.  
  * 
@@ -38,7 +38,7 @@ export function IsISODateString(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isISODateString}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isISODateString(o[vc.propertyName]);
+  return !!isISO8601(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -49,7 +49,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isISODateString(v)) {
+    if (!isISO8601(v).value) {
       errorIndex.push(i);
     }
   });

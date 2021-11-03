@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isCurrency, IsCurrencyOptions } from "@fireflysemantics/is";
+import { isCurrency, IsCurrencyOptions } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is currency amount.  
@@ -41,7 +41,7 @@ export function IsCurrency(options?: IsCurrencyOptions, validationOptions?: Vali
  * @return The result of the call to {@link isCurrency}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isCurrency(o[vc.propertyName], vc.validationTypeOptions);
+  return !!isCurrency(o[vc.propertyName], vc.validationTypeOptions).value;
 }
 
 /**
@@ -53,7 +53,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isCurrency(v, vc.validationTypeOptions)) {
+    if (!isCurrency(v, vc.validationTypeOptions).value) {
       errorIndex.push(i);
     }
   });

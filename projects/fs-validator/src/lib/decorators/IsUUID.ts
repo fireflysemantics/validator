@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isUUID } from "@fireflysemantics/is";
+import { isUUID } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property value
@@ -48,7 +48,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
   if (vc.validationParameters[0] !== undefined) {
     const target:3 | 4 | 5 = vc.validationParameters[0];
   }
-  return isUUID(o[vc.propertyName], target);
+  return !!isUUID(o[vc.propertyName], target).value;
 }
 
 /**
@@ -64,7 +64,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
   }
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isUUID(v, target)) {
+    if (!isUUID(v, target).value) {
       errorIndex.push(i);
     }
   });

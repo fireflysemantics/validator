@@ -2,10 +2,10 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isNumber,IsNumberOptions  } from "@fireflysemantics/is";
+import { isNumber,IsNumberOptions  } from "@fireflysemantics/validatorts";
 
 /**
- * Decorator that checks if the property is a Number.  
+ * Decorator that checks if the property is a Number.
  * 
  * See {@link IsNumberOptions}
  * for the options configuration details.
@@ -45,7 +45,7 @@ export function IsNumber(options: IsNumberOptions = {}, validationOptions?: Vali
  * @return The result of the call to {@link isNumber}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isNumber(o[vc.propertyName], vc.validationTypeOptions);
+  return !!isNumber(o[vc.propertyName], vc.validationTypeOptions).value;
 }
 /**
  * 
@@ -56,7 +56,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isNumber(v, vc.validationTypeOptions)) {
+    if (!isNumber(v, vc.validationTypeOptions).value) {
       errorIndex.push(i);
     }
   });

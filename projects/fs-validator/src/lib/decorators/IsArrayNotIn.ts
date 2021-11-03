@@ -1,15 +1,12 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isNotIn } from "@fireflysemantics/is";
+import { isArrayContainerOf } from "@fireflysemantics/validatorts";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
  * Decorator that checks if the array value
  * is not in array of allowed values.  
- * 
- * See {@link isNotIn} for a description of the method
- * performing the validation.
  * 
  * @param validationOptions The validation options
  */
@@ -45,7 +42,7 @@ export function IsArrayNotIn(target: any[], validationOptions?: ValidationOption
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return isNotIn(o[vc.propertyName], target);
+  return !!isArrayContainerOf(o[vc.propertyName], target).value;
 }
 
 /**
@@ -58,7 +55,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isNotIn(v, target)) {
+    if (!isArrayContainerOf(v, target).value) {
       errorIndex.push(i);
     }
   });

@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isAscii } from "@fireflysemantics/is";
+import { isAscii } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the string contains only letters (a-zA-Z).  
@@ -39,7 +39,7 @@ export function IsAscii(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isAscii}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isAscii(o[vc.propertyName]);
+  return !!isAscii(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isAscii(v)) {
+    if (!isAscii(v).value) {
       errorIndex.push(i);
     }
   });

@@ -5,7 +5,8 @@ import { ValidationOptions } from "./ValidationOptions";
  * and property combination is created when the run time loads
  * the class that has been annotated.
  * 
- * For example suppose we have a `name` property decorated with the 
+ * ### Example
+ * We have a `name` property decorated with the 
  * the `IsAlpha` annotation like this:
  * ```
  * public class Person {
@@ -14,21 +15,22 @@ import { ValidationOptions } from "./ValidationOptions";
  * }
  * ``` 
  * 
- * When that annotation runs it creates a validation context instance
+ * When that annotation runs it creates a `ValidationContext` instance
  * with the signature `IsAlpha_Person_name` that is specific to the `Person`
- * class and the `name` property, The `ValidationContext` instance is initialized
- * with the context necessary to perform an `IsAlpha` validation on the `name` property
- * of `Person`. 
+ * class and the `name` property.  
+ * 
+ * The `ValidationContext` instance is initialized
+ * with the parameters necessary to perform an `IsAlpha` 
+ * validation on the `name` property of a `Person` instance. 
  */
 export class ValidationContext {
 
   /**
-   * An instance of the class that has been decorated.  Typescript passes
-   * in this instance when the decorated class is loaded.
+   * An instance of the class that has been decorated.
    */
   object: any;
 
-    /**
+  /**
    * Constructor function of the instance being validated.
    */
   target: Function;
@@ -56,10 +58,12 @@ export class ValidationContext {
 
   /**
    * Whether validation should continue in the
-   * event of an error.  For example is a value is undefined,
-   * then there's little point trying to apply the other validators.
+   * event of an error.  
+   * 
+   * For example is a value is undefined,
+   * then there's little point in 
+   * applying the other validators.
    */
-
   stop: boolean;
 
   /**
@@ -83,13 +87,18 @@ export class ValidationContext {
   validationTypeOptions?: any;
 
   /**
-   * Whether validation should continue in the
-   * event of an error.  For example is a value is undefined,
-   * then there's little point trying to apply the other validators.
+   * Whether validation should continue 
+   * in the event of an error.  For example 
+   * is a value is `undefined`,
+   * then there's little point 
+   * applying the other validators.
    */
   skipErrorGeneration?: boolean;
 
   constructor(
+    /**
+     * 
+     */
     object: any,
     target: Function,
     decorator: string,
@@ -125,8 +134,7 @@ export class ValidationContext {
    * {@link IfValid} annotation applied to the `purchasePrice`
    * property of a `SalesOrder` instance.
    * 
-   * @example
-   * 
+   * ### Example
    * ```ts
    * IfValid_SalesOrder_purchasePrice
    * ```

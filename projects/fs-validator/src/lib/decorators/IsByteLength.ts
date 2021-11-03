@@ -2,10 +2,13 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isByteLength } from "@fireflysemantics/is";
-import { isDefined } from "@fireflysemantics/is"; 
+import { isByteLength } from "@fireflysemantics/validatorts";
+import { isDefined } from "@fireflysemantics/validatorts"; 
 
 /**
+ * TODO ... Fix this implementation ... moved to 
+ * validatorts ... look at isByteLength from is ...
+ * 
  * Decorator that checks if the string byte length
  * is in range.  
  * 
@@ -19,7 +22,7 @@ export function IsByteLength(min: number, max?: number, validationOptions?: Vali
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(min);
-    if (isDefined(max)) {
+    if (isDefined(max).value) {
       validationParameters.push(max);
     }
     else {
@@ -53,7 +56,8 @@ export function IsByteLength(min: number, max?: number, validationOptions?: Vali
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const min:number = vc.validationParameters[0];
   const max:number = vc.validationParameters[1];
-  return isByteLength(o[vc.propertyName], min, max);
+  const options = {min, max}
+  return !!isByteLength(o[vc.propertyName], options).value;
 }
 
 /**
@@ -64,9 +68,10 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<number> {
   const min:number = vc.validationParameters[0];
   const max:number = vc.validationParameters[1];
+  const options = {min, max}
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isByteLength(v, min, max)) {
+    if (!isByteLength(v, options).value) {
       errorIndex.push(i);
     }
   });

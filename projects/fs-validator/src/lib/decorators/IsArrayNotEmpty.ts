@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isArrayNotEmpty } from "@fireflysemantics/is";
+import { isArrayEmpty } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property array is not empty.  
@@ -39,7 +39,7 @@ export function IsArrayNotEmpty(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link IsArrayNotEmpty}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isArrayNotEmpty(o[vc.propertyName]);
+  return !isArrayEmpty(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isArrayNotEmpty(v)) {
+    if (!!isArrayEmpty(v).value) {
       errorIndex.push(i);
     }
   });

@@ -1,7 +1,7 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isArrayContainerOf } from "@fireflysemantics/is";
+import { isArrayContainerOf } from "@fireflysemantics/validatorts";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
@@ -45,7 +45,7 @@ export function IsArrayContainerOf(target: any[], validationOptions?: Validation
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return isArrayContainerOf(o[vc.propertyName], target);
+  return !!isArrayContainerOf(o[vc.propertyName], target).value;
 }
 
 /**
@@ -58,7 +58,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isArrayContainerOf(v, target)) {
+    if (!isArrayContainerOf(v, target).value) {
       errorIndex.push(i);
     }
   });

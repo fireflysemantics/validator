@@ -1,7 +1,7 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isBooleanString } from "@fireflysemantics/is";
+import { isBooleanString } from "@fireflysemantics/validatorts";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
@@ -38,7 +38,7 @@ export function IsBooleanString(validationOptions?: ValidationOptions) {
  * @return True if the value is valid, false otherwise.
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isBooleanString(o[vc.propertyName]);
+  return !!isBooleanString(o[vc.propertyName].value);
 }
 
 /**
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isBooleanString(v)) {
+    if (!isBooleanString(v).value) {
       errorIndex.push(i);
     }
   });

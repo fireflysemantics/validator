@@ -9,8 +9,8 @@ import { hasLength } from "../utilities/hasLength";
  * before proceeding with the validation of the property that the
  * {@link IfValid} decorator decorates.
  *
- * The property p0 is not valid hence p1 will not be validated:
  * @example 
+ * The property p0 is not valid hence p1 will not be validated:
  * ```ts
    class IfValidNotTest1 {
    @IsDefined() 

@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isSameInstant } from "@fireflysemantics/is";
+import { isSameInstant } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is the same time moment as the argument.  
@@ -44,7 +44,7 @@ export function IsSameInstant(target: Date, validationOptions?: ValidationOption
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:Date = vc.validationParameters[0];
-  return isSameInstant(o[vc.propertyName], target);
+  return !!isSameInstant(o[vc.propertyName], target).value;
 }
 
 /**
@@ -57,7 +57,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
   const target:Date = vc.validationParameters[0];
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isSameInstant(v, target)) {
+    if (!isSameInstant(v, target).value) {
       errorIndex.push(i);
     }
   });

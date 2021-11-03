@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isFQDN, IsFQDNOptions } from "@fireflysemantics/is";
+import { isFQDN, IsFQDNOptions } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property value is
@@ -42,7 +42,7 @@ export function IsFQDN(options?: IsFQDNOptions, validationOptions?: ValidationOp
  * @return The result of the call to {@link isFQDN}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isFQDN(o[vc.propertyName], vc.validationTypeOptions);
+  return !!isFQDN(o[vc.propertyName], vc.validationTypeOptions).value;
 }
 /**
  * 
@@ -53,7 +53,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isFQDN(v, vc.validationTypeOptions)) {
+    if (!isFQDN(v, vc.validationTypeOptions).value) {
       errorIndex.push(i);
     }
   });

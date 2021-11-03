@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isArraySizeLessThan } from "@fireflysemantics/is";
+import { isArraySizeLessThan } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks that the size of the array property is less than the argument.  
@@ -44,8 +44,9 @@ export function IsArraySizeLessThan(target: number, validationOptions?: Validati
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const object:number = vc.validationParameters[0];
-  return isArraySizeLessThan(o[vc.propertyName], object);
+  return !!isArraySizeLessThan(o[vc.propertyName], object).value;
 }
+
 /**
  * 
  * @param vc  The validation context.

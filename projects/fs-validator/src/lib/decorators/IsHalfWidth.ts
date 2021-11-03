@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isHalfWidth } from "@fireflysemantics/is";
+import { isHalfWidth } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that check if the property contains any half-width chars.  
@@ -39,8 +39,9 @@ export function IsHalfWidth(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isHalfWidth}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isHalfWidth(o[vc.propertyName]);
+  return !!isHalfWidth(o[vc.propertyName]).value;
 }
+
 /**
  * 
  * @param vc  The validation context.

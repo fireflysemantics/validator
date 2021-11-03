@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isMilitaryTime } from "@fireflysemantics/is";
+import { isMilitaryTime } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the value is in military time format.  
@@ -39,7 +39,7 @@ export function IsMilitaryTime(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isMilitaryTime}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isMilitaryTime(o[vc.propertyName]);
+  return !!isMilitaryTime(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isMilitaryTime(v)) {
+    if (!isMilitaryTime(v).value) {
       errorIndex.push(i);
     }
   });

@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isSurrogatePair } from "@fireflysemantics/is";
+import { isSurrogatePair } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property contains surrogate pairs chars.  
@@ -39,7 +39,7 @@ export function IsSurrogatePair(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isSurrogatePair}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isSurrogatePair(o[vc.propertyName]);
+  return !!isSurrogatePair(o[vc.propertyName].value);
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isSurrogatePair(v)) {
+    if (!isSurrogatePair(v).value) {
       errorIndex.push(i);
     }
   });

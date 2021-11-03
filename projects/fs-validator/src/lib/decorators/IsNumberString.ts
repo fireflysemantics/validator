@@ -1,11 +1,11 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isNumberString } from "@fireflysemantics/is";
+import { isNumeric } from "@fireflysemantics/validatorts";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
- * Decorator that checks if the property is a boolean string.  
+ * Decorator that checks if the property is a number string.  
  * 
  * See {@link isNumberString} for a description of the method
  * performing the validation.
@@ -38,7 +38,7 @@ export function IsNumberString(validationOptions?: ValidationOptions) {
  * @return True if the value is valid, false otherwise.
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isNumberString(o[vc.propertyName]);
+  return !!isNumeric(o[vc.propertyName], {}).value;
 }
 
 /**
@@ -51,7 +51,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isNumberString(v)) {
+    if (!isNumeric(v, {}).value) {
       errorIndex.push(i);
     }
   });

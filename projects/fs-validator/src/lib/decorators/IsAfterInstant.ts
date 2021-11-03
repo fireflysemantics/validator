@@ -2,8 +2,8 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isAfterInstant } from "@fireflysemantics/is";
-import { isDate } from "@fireflysemantics/is";
+import { isAfter } from "@fireflysemantics/validatorts";
+import { isDate } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is after the argument.  
@@ -45,12 +45,13 @@ export function IsAfterInstant(target: Date | string, validationOptions?: Valida
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   let target = vc.validationParameters[0];
-  if ( isDate(target)) {
-    return isAfterInstant(o[vc.propertyName], target);  
-  }
+  if ( !!isDate(target).value) {
+    return !!isAfter(o[vc.propertyName], target).value
+   }
   target = o[target];
-  return isAfterInstant(o[vc.propertyName], target);  
+  return !!isAfter(o[vc.propertyName], target).value;  
 }
+
 /**
  * 
  * @param vc  The validation context.
@@ -61,7 +62,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
   const target:Date = vc.validationParameters[0];
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isAfterInstant(v, target)) {
+    if (!isAfter(v, target).value) {
       errorIndex.push(i);
     }
   });

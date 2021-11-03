@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isVariableWidth } from "@fireflysemantics/is";
+import { isVariableWidth } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that check if the property contains any half-width chars.  
@@ -39,7 +39,7 @@ export function IsVariableWidth(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isVariableWidth}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isVariableWidth(o[vc.propertyName]);
+  return !!isVariableWidth(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isVariableWidth(v)) {
+    if (!isVariableWidth(v).value) {
       errorIndex.push(i);
     }
   });

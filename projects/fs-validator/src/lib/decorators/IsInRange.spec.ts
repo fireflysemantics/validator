@@ -1,14 +1,14 @@
 import { validate } from "../validate"
-import { IsNumberInRange } from './IsNumberInRange'
+import { IsInRange } from './IsInRange'
 
 class SomeNumber {
-  @IsNumberInRange(0,1)
+  @IsInRange(0,1)
     inRange?:number
 }
 
 const so = new SomeNumber()
 
-test('IsNumberInRange', ()=>{
+test('IsInRange', ()=>{
   so.inRange = 0.5
   expect(validate(so).valid).toBeTruthy()
   so.inRange = 1

@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isLessThan } from "@fireflysemantics/is";
+import { isLessThanFinite } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property value
@@ -45,7 +45,7 @@ export function IsLessThan(target: number, validationOptions?: ValidationOptions
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:number = vc.validationParameters[0];
-  return isLessThan(o[vc.propertyName], target);
+  return !!isLessThanFinite(o[vc.propertyName], target).value;
 }
 /**
  * 
@@ -57,7 +57,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
   const target:number = vc.validationParameters[0];
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isLessThan(v, target)) {
+    if (!isLessThanFinite(v, target).value) {
       errorIndex.push(i);
     }
   });

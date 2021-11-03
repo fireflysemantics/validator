@@ -4,13 +4,13 @@ import { isString } from "@fireflysemantics/is";
  * Creates the validation context key used to
  * lookup the array of ValidationContext instances.
  * 
- * For example if the class name of the instance being
- * validated is `Order` and the property being validated is
- * `date` then the value return is `Order_date`.
+ * ### Example
+ * For a class name `Order` of the instance being
+ * validated and the property
+ * `date` the value return is `Order_date`.
  * 
- * @example 
  * ```ts
- * getValidationContextContainerKey('Order', 'date')//returns `Order_date`.
+ * getPropertyKey('Order', 'date')//returns `Order_date`.
  *
  * @param target The object or name of the object constructor
  * @param propertyName
@@ -29,13 +29,12 @@ export function getPropertyKey(
  * The signature for the decorator, class,
  * and class property combination.
  *
- * Below is a getValidationContextSignature 
- * example of what would be produced
- * when the {@link ValidationContext} were formed from the
+ * 
+ * ### Example
+ * 
+ * The {@link ValidationContext} signature formed from the
  * {@link IfValid} annotation applied to the `purchasePrice`
  * property of a `SalesOrder` instance.
- *
- * @example
  *
  * ```ts
  * IfValid_SalesOrder_purchasePrice

@@ -14,7 +14,8 @@
     "bp": "cd projects/fs-validator && bump patch",
     "t": "cd projects/fs-validator && npx jest",
     "p": "cp README.md ./projects/fs-validator/ && npm run bp && npm run b && cp -r logo ./dist/fs-validator/ && cd dist/fs-validator/ && npm publish",
-    "d": "typedoc --out doc --exclude **/*.spec.ts ./projects/fs-validator/src/lib"
+    "doc": "rm -fr doc && typedoc --entryPointStrategy expand ./projects/fs-validator/src/lib --out doc --exclude **/*.spec.ts",
+    "sdoc": "npm run doc && http-server -o doc"
   },
   "dependencies": {
     "@angular/animations": "~12.1.2",
@@ -27,7 +28,7 @@
     "@angular/router": "~12.1.2",
     "@briebug/jest-schematic": "^3.1.0",
     "@fireflysemantics/is": "^2.0.31",
-    "@fireflysemantics/validatorts": "^12.2.36",
+    "@fireflysemantics/validatorts": "^13.0.71",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isBase64 } from "@fireflysemantics/is";
+import { isBase64 } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the value is base 64 encoded.  
@@ -39,7 +39,7 @@ export function IsBase64(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isBase64}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isBase64(o[vc.propertyName]);
+  return !!isBase64(o[vc.propertyName]).value;
 }
 /**
  * 

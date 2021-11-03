@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isLengthGreaterThan } from "@fireflysemantics/is";
+import { isGreaterThanFinite } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property value
@@ -46,7 +46,7 @@ export function IsLengthGreaterThan(target: number, validationOptions?: Validati
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:number = vc.validationParameters[0];
-  return isLengthGreaterThan(o[vc.propertyName], target);
+  return !!isGreaterThanFinite(o[vc.propertyName], target).value;
 }
 /**
  * 
@@ -58,7 +58,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
   const target:number = vc.validationParameters[0];
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isLengthGreaterThan(v, target)) {
+    if (!isGreaterThanFinite(v, target).value) {
       errorIndex.push(i);
     }
   });

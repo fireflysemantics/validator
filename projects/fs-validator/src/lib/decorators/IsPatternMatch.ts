@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isMatch, isDefined } from "@fireflysemantics/is"; 
+import { isMatch, isDefined } from "@fireflysemantics/validatorts"; 
 
 /**
  * Decorator that checks if the value matches
@@ -56,7 +56,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
   if (vc.validationParameters[1] !== undefined) {
     modifiers = vc.validationParameters[1];
   }
-  return isMatch(o[vc.propertyName], pattern, modifiers);
+  return !!isMatch(o[vc.propertyName], pattern, modifiers).value;
 }
 
 /**
@@ -72,7 +72,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
   }
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isMatch(v, pattern, modifiers)) {
+    if (!isMatch(v, pattern, modifiers).value) {
       errorIndex.push(i);
     }
   });

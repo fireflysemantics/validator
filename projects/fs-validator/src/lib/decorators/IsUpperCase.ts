@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isUppercase } from "@fireflysemantics/is";
+import { isUppercase } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is lowercase.  
@@ -39,7 +39,7 @@ export function IsUpperCase(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isUppercase}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isUppercase(o[vc.propertyName]);
+  return !!isUppercase(o[vc.propertyName].value);
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isUppercase(v)) {
+    if (!isUppercase(v).value) {
       errorIndex.push(i);
     }
   });

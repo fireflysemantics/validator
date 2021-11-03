@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isString } from "@fireflysemantics/is";
+import { isString } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is a string.  
@@ -39,8 +39,9 @@ export function IsString(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isString}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isString(o[vc.propertyName]);
+  return !!isString(o[vc.propertyName]).value;
 }
+
 /**
  * 
  * @param vc  The validation context.

@@ -1,7 +1,7 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isNotEqualTo } from "@fireflysemantics/is";
+import { isNotEqualTo } from "@fireflysemantics/validatorts";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
@@ -44,7 +44,7 @@ export function IsNotEqualTo(target: any, validationOptions?: ValidationOptions)
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return isNotEqualTo(o[vc.propertyName], target);
+  return !!isNotEqualTo(o[vc.propertyName], target).value;
 }
 
 /**
@@ -57,7 +57,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isNotEqualTo(v, target)) {
+    if (!isNotEqualTo(v, target).value) {
       errorIndex.push(i);
     }
   });

@@ -1,17 +1,25 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isIn } from "@fireflysemantics/is";
+import { isArrayContainerOf } from "@fireflysemantics/validatorts";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
- * Decorator that checks if the array valued property value
- * is in the array of allowed values.  
- * 
- * See {@link arrayContains} for a description of the method
- * performing the validation.
- * 
+ * Decorator that checks if the array valued property
+ * is in the target array.
+ *   
+ * @param target The target array
  * @param validationOptions The validation options
+ * 
+ * ### Example
+ * ```
+ *  class TestIsArrayIn {
+ *     @IsArrayIn([1,2,3])
+ *      p0: any[] = [1,2]
+ *  }
+ * const IAI1 = new TestIsArrayIn()
+ * expect(validate(IAI1).valid).toBeTruthy()
+ * ```
  */
 export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) {
 
@@ -25,7 +33,7 @@ export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) 
       IsArrayIn.name,
       propertyName,
       validateValue,
-      null,
+      validateArray,
       true,
       errorMessage,
       validationOptions,
@@ -37,7 +45,8 @@ export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) 
 }
 
 /**
- * Value is valid if it passes the {@link arrayContains} check.
+ * Value is valid if the array values
+ * are in the target array.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
@@ -45,7 +54,7 @@ export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) 
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return isIn(o[vc.propertyName], target);
+  return !!isArrayContainerOf(o[vc.propertyName], target).value;
 }
 
 /**
@@ -58,7 +67,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isIn(v, target)) {
+    if (!isArrayContainerOf(v, target).value) {
       errorIndex.push(i);
     }
   });

@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isCreditCard } from "@fireflysemantics/is";
+import { isCreditCard } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the value is fits the creditcard string format pattern.  
@@ -39,8 +39,9 @@ export function IsCreditCard(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isCreditCard}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isCreditCard(o[vc.propertyName]);
+  return !!isCreditCard(o[vc.propertyName].value);
 }
+
 /**
  * 
  * @param vc  The validation context.
@@ -50,7 +51,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isCreditCard(v)) {
+    if (!isCreditCard(v).value) {
       errorIndex.push(i);
     }
   });

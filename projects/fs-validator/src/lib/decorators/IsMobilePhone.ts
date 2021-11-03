@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants"
 import { ValidationOptions } from "../ValidationOptions"
 import { ValidationContext } from "../ValidationContext"
 import { ValidationContainer } from "../ValidationContainer"
-import { isMobilePhone, MobilePhoneLocale  } from "@fireflysemantics/is"
+import { isMobilePhone, IsMobilePhoneOptions  } from "@fireflysemantics/validatorts"
 
 /**
  * Decorator that checks if the property is a mobile phone number.  
@@ -16,7 +16,7 @@ import { isMobilePhone, MobilePhoneLocale  } from "@fireflysemantics/is"
  * @param target The target locale for the phone number.
  * @param validationOptions The validation options
  */
-export function IsMobilePhone( target: MobilePhoneLocale, validationOptions?: ValidationOptions) {
+export function IsMobilePhone( target: string, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
 
     const validationParameters:any[] = []
@@ -47,9 +47,9 @@ export function IsMobilePhone( target: MobilePhoneLocale, validationOptions?: Va
  * @return The result of the call to {@link isMobilePhone}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isMobilePhone(
+  return !!isMobilePhone(
     o[vc.propertyName], 
-    vc.validationParameters[0])
+    vc.validationParameters[0]).value
 }
 
 /**

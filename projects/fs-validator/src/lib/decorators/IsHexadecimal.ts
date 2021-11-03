@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isHexadecimal } from "@fireflysemantics/is";
+import { isHexadecimal } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property value is a hexadecimal.  
@@ -39,7 +39,7 @@ export function IsHexadecimal(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isHexadecimal}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isHexadecimal(o[vc.propertyName]);
+  return !!isHexadecimal(o[vc.propertyName]).value;
 }
 
 /**
@@ -51,7 +51,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isHexadecimal(v)) {
+    if (!isHexadecimal(v).value) {
       errorIndex.push(i);
     }
   });

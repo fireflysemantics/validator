@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isInstanceOf } from "@fireflysemantics/is";
+import { isInstanceOf } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is an instance of the target argument.  
@@ -44,7 +44,7 @@ export function IsInstanceOf(target: number, validationOptions?: ValidationOptio
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return isInstanceOf(o[vc.propertyName], target);
+  return !!isInstanceOf(o[vc.propertyName], target).value;
 }
 /**
  * 
@@ -56,7 +56,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
   const target:any = vc.validationParameters[0];
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isInstanceOf(v, target)) {
+    if (!isInstanceOf(v, target).value) {
       errorIndex.push(i);
     }
   });

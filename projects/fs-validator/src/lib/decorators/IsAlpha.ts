@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isAlpha } from "@fireflysemantics/is";
+import { isAlpha } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the string contains only letters (a-zA-Z).  
@@ -39,7 +39,7 @@ export function IsAlpha(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isAlpha}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isAlpha(o[vc.propertyName]);
+  return !!isAlpha(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isAlpha(v)) {
+    if (!isAlpha(v).value) {
       errorIndex.push(i);
     }
   });

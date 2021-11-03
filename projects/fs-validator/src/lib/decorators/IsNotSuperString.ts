@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isNotSuperString } from "@fireflysemantics/is";
+import { isNotSuperString } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property value does not contain
@@ -45,7 +45,7 @@ export function IsNotSuperString(target: string, validationOptions?: ValidationO
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:string = vc.validationParameters[0];
-  return isNotSuperString( o[vc.propertyName],target);
+  return !!isNotSuperString( o[vc.propertyName],target).value;
 }
 
 /**
@@ -57,7 +57,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
   const target:string = vc.validationParameters[0];
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isNotSuperString(v, target)) {
+    if (!isNotSuperString(v, target).value) {
       errorIndex.push(i);
     }
   });

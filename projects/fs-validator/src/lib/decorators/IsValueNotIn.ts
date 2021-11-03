@@ -1,7 +1,7 @@
 import { ValidationOptions } from "../ValidationOptions"
 import { ValidationContext } from "../ValidationContext"
 import { ValidationContainer } from "../ValidationContainer"
-import { isNotIn } from "@fireflysemantics/is"
+import { isInArray } from "@fireflysemantics/validatorts";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants"
 
 /**
@@ -48,7 +48,7 @@ export function IsValueNotIn(
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0]
-  return isNotIn(o[vc.propertyName], target)
+  return !isInArray(o[vc.propertyName], target).value
 }
 
 /**
@@ -61,7 +61,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
   const errorIndex:Array<Number> = []
   values.forEach((v, i)=>{
-    if (!isNotIn(v, target)) {
+    if (!!isInArray(v, target).value) {
       errorIndex.push(i)
     }
   })

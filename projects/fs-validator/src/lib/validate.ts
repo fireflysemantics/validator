@@ -2,14 +2,12 @@ import { ValidationContainer } from "./ValidationContainer"
 import { MetaClass } from "./MetaClass"
 import { ValidationContext } from "./ValidationContext";
 import { ValidationError } from "./ValidationError";
-import { isArrayEmpty } from "@fireflysemantics/is";
+import { isArray, isArrayEmpty } from "@fireflysemantics/validatorts";
 import { ObjectErrors } from "./ObjectErrors";
 import { getPropertyKey } from "./utilities"
 
 /**
  * Validates the <code>target</code> object.
- *
- * Errors are collected by the {@link ErrorContainer}.
  *
  * @param target The object being validated.
  * @param exclude Array of property values to exclude from validation.
@@ -26,9 +24,7 @@ expect(validate(I).valid).toBeFalsy();
 const key = getPropertyKey(I, 'p0');//Invalid_p0
 expect(oes.getErrors(key).length).toBeGreaterThan(0);
 expect(oes.errors[0].errorMessage).toContain('p0');
-
-```
- */
+``` */
 export function validate(target: any, exclude?: string[]): ObjectErrors {
   let oes: ObjectErrors = new ObjectErrors();
   const cn: string = target.constructor.name;
@@ -67,12 +63,12 @@ export function validateN(entities: any[], exlude?: string[]): ObjectErrors[] {
 
 /**
  * Validates a property contained on the object.
- * Errors are added to the ErrorContainer, unless skipErrorGeneration
- * is true.
+ * Errors are added to the {@link ObjectErrors},
+ * instance, unless skipErrorGeneration is true.
  *
  * @param o The object being validated
  * @param propertyName The name of the property holding the value being validated
- * @param oes The {@link ObjectErrors} instance used to collect validation errors
+ * @param oes The {@link ObjectErrors} instance used to collect {@link ValidationError}s
  * @param skipErrorGeneration Skips the generation of validation errors
  * @return true if the property is valid, false otherwise.
  * @throws An exception if the ValidationContextContainer instance for the object and property does not exist.
@@ -83,6 +79,7 @@ export function validateProperty(
   oes?: ObjectErrors,
   skipErrorGeneration: boolean = false
 ): boolean {
+  
   let valid = true;
   const key = getPropertyKey(o, propertyName);
   const vca: ValidationContext[] = ValidationContainer.cache.get(key)!;
@@ -100,10 +97,10 @@ export function validateProperty(
       vc.skipErrorGeneration = true
     }
 
-    if (propertyValue instanceof Array) {
+    if (isArray(propertyValue).value) {
       const result: Number[] = vc.validateArray!(vc, propertyValue);
       if (
-        !isArrayEmpty(result) &&
+        !isArrayEmpty(result).value &&
         !skipErrorGeneration &&
         !vc.skipErrorGeneration
       ) {
@@ -137,7 +134,8 @@ export function validateProperty(
     if (!valid && vc.stop) {
       //Discontinue validation
       return false;
-    } else return true; //Continue validation of the property
+    }
+    else return true; //Continue validation of the property
   });
   return valid;
 }

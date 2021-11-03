@@ -2,6 +2,7 @@ import { ValidationContainer } from "../ValidationContainer";
 import { ValidationContext } from "../ValidationContext";
 import { getPropertyKey } from "../utilities";
 import { IsEmail } from "./IsEmail";
+
 const { getOwnPropertyNames } = Object;
 
 class IsEmailValid {
@@ -17,37 +18,29 @@ class IsEmailValid {
 
 const IEV: any = new IsEmailValid();
 
-describe("IsEmail Validation", () => {
-  it(`should return true when using 
-      the ValidationContext.validate 
-      method to check valid values`, () => {
-    getOwnPropertyNames(IEV).forEach(pn => {
-      const key: string = getPropertyKey(IEV.constructor.name, pn);
-      const validators = ValidationContainer.cache.get(key)!;
+class IsEmailInvalid {
+  @IsEmail() e0: string = 'null';
+  @IsEmail() e2: string = 'invalid.com';
+  @IsEmail() e4: string = '@invalid@';
+  @IsEmail() e5: string = '@invalid';
+  @IsEmail() e1: string = 'invalid@';
+  @IsEmail() e3: string = 'noone@h o t m a i l.com';
+  @IsEmail() e6: string = 'invalid@';
+}
+const IEI: any = new IsEmailInvalid();
 
-      const vc: ValidationContext = validators[0];
-      expect(vc.propertyName).toEqual(pn);
-      expect(vc.target.name).toEqual(IEV.constructor.name);
+test(`ValidationContext.validateValue`, () => {
+  getOwnPropertyNames(IEV).forEach(pn => {
+    const key: string = getPropertyKey(IEV.constructor.name, pn);
+    const vcs: ValidationContext[] = ValidationContainer.cache.get(key)!;
 
-      expect(vc.validateValue(vc, IEV)).toBeTruthy();
-    });
-  });
+    const vc: ValidationContext = vcs[0];
+    expect(vc.propertyName).toEqual(pn);
+    expect(vc.target.name).toEqual(IEV.constructor.name);
 
-  class IsEmailInvalid {
-    @IsEmail() e0: string = 'null';
-    @IsEmail() e1: string = 'invalid@';
-    @IsEmail() e2: string = 'invalid.com';
-    @IsEmail() e3: string = 'noone@h o t m a i l.com';
-    @IsEmail() e4: string = '@invalid@';
-    @IsEmail() e5: string = '@invalid';
-    @IsEmail() e6: string = 'invalid@';
-  }
-  const IEI: any = new IsEmailInvalid();  
+    expect(vc.validateValue(vc, IEV)).toBeTruthy();
 
-  it(`should return false when using the 
-      ValidationContext.validate method 
-      to check invalid values`, () => {    
-    Object.getOwnPropertyNames(IEI).forEach(pn => {
+    getOwnPropertyNames(IEI).forEach(pn => {
       const key: string = getPropertyKey(IEI, pn);
       const validators = ValidationContainer.cache.get(key)!;
 

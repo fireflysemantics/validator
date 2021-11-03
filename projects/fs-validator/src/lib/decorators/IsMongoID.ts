@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isMongoId } from "@fireflysemantics/is";
+import { isMongoId } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is a MongoID.  
@@ -39,7 +39,7 @@ export function IsMongoId(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isMongoId}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isMongoId(o[vc.propertyName]);
+  return !!isMongoId(o[vc.propertyName]).value;
 }
 
 /**
@@ -51,7 +51,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isMongoId(v)) {
+    if (!isMongoId(v).value) {
       errorIndex.push(i);
     }
   });

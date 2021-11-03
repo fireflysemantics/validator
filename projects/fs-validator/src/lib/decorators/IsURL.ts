@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isURL, IsURLOptions } from "@fireflysemantics/is";
+import { isURL, IsURLOptions } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property value a URL.  
@@ -45,7 +45,7 @@ export function IsURL(options?: IsURLOptions, validationOptions?: ValidationOpti
  * @return The result of the call to {@link isURL}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isURL(o[vc.propertyName], vc.validationTypeOptions);
+  return !!isURL(o[vc.propertyName], vc.validationTypeOptions).value;
 }
 
 /**
@@ -56,7 +56,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<number> {
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isURL(v, vc.validationTypeOptions)) {
+    if (!isURL(v, vc.validationTypeOptions).value) {
       errorIndex.push(i);
     }
   });

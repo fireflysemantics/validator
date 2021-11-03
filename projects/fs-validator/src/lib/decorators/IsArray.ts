@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isArray } from "@fireflysemantics/is";
+import { isArray } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is an Array.  
@@ -39,10 +39,13 @@ export function IsArray(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link IsArray}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isArray(o[vc.propertyName]);
+  const result = isArray(o[vc.propertyName]).value ? isArray(o[vc.propertyName]).value : false
+  if (result) {
+    return result
+  }
+  return false
 }
 /**
- * 
  * @param vc  The validation context.
  * @param values The array of values. 
  * @return An empty array if valid, an array of indexes otherwise.
@@ -50,7 +53,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isArray(v)) {
+    if (!isArray(v).value) {
       errorIndex.push(i);
     }
   });

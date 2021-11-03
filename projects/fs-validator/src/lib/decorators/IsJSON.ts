@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isJSON } from "@fireflysemantics/is";
+import { isJSON } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is a string.  
@@ -39,7 +39,7 @@ export function IsJSON(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isJSON}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isJSON(o[vc.propertyName]);
+  return !!isJSON(o[vc.propertyName], {}).value;
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isJSON(v)) {
+    if (!isJSON(v,{})) {
       errorIndex.push(i);
     }
   });

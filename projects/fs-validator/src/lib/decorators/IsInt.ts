@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isInt } from "@fireflysemantics/is";
+import { isInt } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is an integer.  
@@ -43,7 +43,7 @@ export function IsInt(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isInt}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isInt(o[vc.propertyName]);
+  return !!isInt(o[vc.propertyName], {}).value;
 }
 /**
  * 
@@ -54,7 +54,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<number> {
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isInt(v)) {
+    if (!isInt(v,{}).value ) {
       errorIndex.push(i);
     }
   });

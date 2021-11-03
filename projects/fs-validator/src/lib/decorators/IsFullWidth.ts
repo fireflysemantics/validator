@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isFullWidth } from "@fireflysemantics/is";
+import { isFullWidth } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property
@@ -41,7 +41,7 @@ export function IsFullWidth(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isFullWidth}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isFullWidth(o[vc.propertyName]);
+  return !!isFullWidth(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -52,7 +52,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isFullWidth(v)) {
+    if (!isFullWidth(v).value) {
       errorIndex.push(i);
     }
   });

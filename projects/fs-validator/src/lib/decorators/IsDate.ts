@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isDate } from "@fireflysemantics/is";
+import { isDate } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is a Date.  
@@ -39,7 +39,7 @@ export function IsDate(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isDate}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isDate(o[vc.propertyName]);
+  return !!isDate(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isDate(v)) {
+    if (!isDate(v).value) {
       errorIndex.push(i);
     }
   });

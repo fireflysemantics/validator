@@ -1,7 +1,7 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isEqualTo } from "@fireflysemantics/is";
+import { isEqualTo } from "@fireflysemantics/validatorts";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
@@ -43,7 +43,7 @@ export function IsEqualTo(target: any, validationOptions?: ValidationOptions) {
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return isEqualTo(o[vc.propertyName], target);
+  return !!isEqualTo(o[vc.propertyName], target).value;
 }
 
 /**
@@ -56,7 +56,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isEqualTo(v, target)) {
+    if (!isEqualTo(v, target).value) {
       errorIndex.push(i);
     }
   });

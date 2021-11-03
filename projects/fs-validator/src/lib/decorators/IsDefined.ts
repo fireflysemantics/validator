@@ -1,12 +1,12 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isDefined } from "@fireflysemantics/is";
+import { isDefined } from "@fireflysemantics/validatorts";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
  * Decorator that checks if the property is defined
- * (Not null or undefined).  
+ * (Not null or undefined).
  * 
  * See {@link isDefined} for a description of the method
  * performing the validation.
@@ -39,7 +39,11 @@ export function IsDefined(validationOptions?: ValidationOptions) {
  * @return True if the value is not null or undefined, false otherwise.
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isDefined(o[vc.propertyName]);
+  const result = isDefined(o[vc.propertyName]).value 
+  if (result) {
+    return result
+  } 
+  return false;
 }
 /**
  * 
@@ -50,7 +54,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isDefined(v)) {
+    if (!isDefined(v).value) {
       errorIndex.push(i);
     }
   });

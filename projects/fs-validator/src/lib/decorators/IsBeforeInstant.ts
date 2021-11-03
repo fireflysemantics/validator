@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isBeforeInstant, isDate } from "@fireflysemantics/is";
+import { isBefore, isDate } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is before the argument.
@@ -24,7 +24,7 @@ export function IsBeforeInstant(
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      isBeforeInstant.name,
+      IsBeforeInstant.name,
       propertyName,
       validateValue,
       validateArray,
@@ -48,10 +48,10 @@ export function IsBeforeInstant(
 export function validateValue(vc: ValidationContext, o: any): boolean {
   let target = vc.validationParameters[0];
   if (isDate(target)) {
-    return isBeforeInstant(o[vc.propertyName], target);
+    return !!isBefore(o[vc.propertyName], target).value;
   }
   target = o[target];
-  return isBeforeInstant(o[vc.propertyName], target);
+  return !!isBefore(o[vc.propertyName], target).value;
 }
 
 /**
@@ -67,7 +67,7 @@ export function validateArray(
   const target: Date = vc.validationParameters[0];
   const errorIndex: Array<Number> = [];
   values.forEach((v, i) => {
-    if (!isBeforeInstant(v, target)) {
+    if (!isBefore(v, target).value) {
       errorIndex.push(i);
     }
   });

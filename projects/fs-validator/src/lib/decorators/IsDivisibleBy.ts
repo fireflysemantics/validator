@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isDivisibleBy } from "@fireflysemantics/is";
+import { isDivisibleBy } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is divisible by the argument.  
@@ -44,7 +44,7 @@ export function IsDivisibleBy(target: number, validationOptions?: ValidationOpti
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:number = vc.validationParameters[0];
-  return isDivisibleBy(o[vc.propertyName], target);
+  return !!isDivisibleBy(o[vc.propertyName], target).value;
 }
 /**
  * 
@@ -56,7 +56,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
   const target:number = vc.validationParameters[0];
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isDivisibleBy(v, target)) {
+    if (!isDivisibleBy(v, target).value) {
       errorIndex.push(i);
     }
   });

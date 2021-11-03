@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isISIN } from "@fireflysemantics/is";
+import { isISIN } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is a ISIN (stock/security identifier).  
@@ -39,7 +39,7 @@ export function IsISIN(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isISIN}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isISIN(o[vc.propertyName]);
+  return !!isISIN(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -50,7 +50,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isISIN(v)) {
+    if (!isISIN(v).value) {
       errorIndex.push(i);
     }
   });

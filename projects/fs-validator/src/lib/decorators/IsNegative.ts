@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isNegative } from "@fireflysemantics/is";
+import { isNegative } from "@fireflysemantics/validatorts";
 
 /**
  * Decorator that checks if the property is negative.  
@@ -39,8 +39,9 @@ export function IsNegative(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isNegative}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isNegative(o[vc.propertyName]);
+  return !!isNegative(o[vc.propertyName]).value;
 }
+
 /**
  * 
  * @param vc  The validation context.
@@ -50,7 +51,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<number> {
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isNegative(v)) {
+    if (!isNegative(v).value) {
       errorIndex.push(i);
     }
   });

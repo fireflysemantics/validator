@@ -2,7 +2,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isLengthInRange, isDefined } from "@fireflysemantics/is"; 
+import { isInRange, isDefined } from "@fireflysemantics/validatorts"; 
 
 /**
  * Decorator that checks if the string length
@@ -56,7 +56,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
   if (vc.validationParameters[1] !== undefined) {
     max = vc.validationParameters[1];
   }
-  return isLengthInRange(o[vc.propertyName], min, max);
+  return !!isInRange(o[vc.propertyName], min, max).value;
 }
 
 /**
@@ -72,7 +72,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
   }
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isLengthInRange(v, min, max)) {
+    if (!isInRange(v, min, max)) {
       errorIndex.push(i);
     }
   });

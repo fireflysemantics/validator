@@ -1,7 +1,7 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isEmpty } from "@fireflysemantics/is";
+import { isEmpty } from "@fireflysemantics/validatorts";
 import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 
 /**
@@ -31,14 +31,16 @@ export function IsEmpty(validationOptions?: ValidationOptions) {
 }
 
 /**
+ * TODO ... Add validation options
+ * 
  * Value is valid if it passes the {@link isEmpty} check.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
  * @return True if the value is empty, false otherwise.
  */
-export function validateValue(vc:ValidationContext, o:any):boolean {
-  return isEmpty(o[vc.propertyName]);
+export function validateValue(vc:ValidationContext, o:any, ):boolean {
+  return !!isEmpty(o[vc.propertyName], {}).value;
 }
 
 /**
@@ -50,7 +52,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
   const errorIndex:Array<Number> = [];
   values.forEach((v, i)=>{
-    if (!isEmpty(v)) {
+    if (!isEmpty(v, {}).value) {
       errorIndex.push(i);
     }
   });
