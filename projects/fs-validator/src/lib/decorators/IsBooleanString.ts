@@ -20,7 +20,7 @@ export function IsBooleanString(validationOptions?: ValidationOptions) {
       IsBooleanString.name,
       propertyName,
       validateValue,
-      null,
+      undefined,
       true,
       errorMessage,
       validationOptions

@@ -24,7 +24,7 @@ export function IsEqualTo(target: any, validationOptions?: ValidationOptions) {
       IsEqualTo.name,
       propertyName,
       validateValue,
-      null,
+      undefined,
       true,
       errorMessage,
       validationOptions

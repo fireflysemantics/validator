@@ -3,6 +3,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isBase64 } from "@fireflysemantics/validatorts";
+import { errorMessageTemplate } from "..";
 
 /**
  * Decorator that checks if the value is base 64 encoded.  
@@ -66,11 +67,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-
   const messageLiteral: string = "should be base 64 encoded";
+  return  errorMessageTemplate(vc, o, messageLiteral)
 
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
 }

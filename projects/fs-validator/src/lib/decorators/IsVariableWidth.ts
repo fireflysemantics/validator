@@ -1,8 +1,8 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isVariableWidth } from "@fireflysemantics/validatorts";
+import { errorMessageTemplate } from "..";
 
 /**
  * Decorator that check if the property contains any half-width chars.  
@@ -68,9 +68,5 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 export function errorMessage(vc: ValidationContext, o: any):string {
 
   const messageLiteral: string = "should contain variable width characters";
-
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
+  return  errorMessageTemplate(vc, o, messageLiteral)
 }

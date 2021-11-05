@@ -25,7 +25,7 @@ export function IsGreaterThan(target: number | string, validationOptions?: Valid
       IsGreaterThan.name,
       propertyName,
       validateValue,
-      validateArray,
+      undefined,
       true,
       errorMessage,
       validationOptions,
@@ -49,23 +49,6 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
     target = o[target];
   }
   return !!isGreaterThanFinite(o[vc.propertyName], <number>target).value;
-}
-
-/**
- * 
- * @param vc  The validation context.
- * @param values The array of values. 
- * @return An empty array if valid, an array of indexes otherwise.
- */
-export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
-  const target:number = vc.validationParameters[0];
-  const errorIndex:Array<Number> = [];
-  values.forEach((v, i)=>{
-    if (!isGreaterThanFinite(v, target).value) {
-      errorIndex.push(i);
-    }
-  });
-  return errorIndex;
 }
 
 /**

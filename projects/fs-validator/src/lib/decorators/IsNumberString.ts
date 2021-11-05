@@ -20,7 +20,7 @@ export function IsNumberString(validationOptions?: ValidationOptions) {
       IsNumberString.name,
       propertyName,
       validateValue,
-      null,
+      undefined,
       true,
       errorMessage,
       validationOptions

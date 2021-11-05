@@ -28,7 +28,7 @@ export function IsValueNotIn(
       IsValueNotIn.name,
       propertyName,
       validateValue,
-      null,
+      undefined,
       true,
       errorMessage,
       validationOptions,

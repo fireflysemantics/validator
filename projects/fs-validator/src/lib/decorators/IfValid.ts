@@ -2,12 +2,12 @@ import { ValidationOptions } from "../ValidationOptions"
 import { ValidationContext } from "../ValidationContext"
 import { ValidationContainer } from "../ValidationContainer"
 import { validateProperty } from "../validate"
-import { hasLength } from "../utilities/hasLength";
+import { hasLength } from "../utilities/hasLength"
 
 /**
- * Decorator that checks if the target argument is a valid property
- * before proceeding with the validation of the property that the
- * {@link IfValid} decorator decorates.
+ * The {@link IfValid} decorator checks if the `target` argument 
+ * is a valid property before proceeding with the validation 
+ * of the property decorated.
  *
  * @example 
  * The property p0 is not valid hence p1 will not be validated:
@@ -36,7 +36,7 @@ export function IfValid(target: string, validationOptions?: ValidationOptions) {
       IfValid.name,
       propertyName,
       validateValue,
-      null,
+      undefined,
       true,
       errorMessage,
       validationOptions,

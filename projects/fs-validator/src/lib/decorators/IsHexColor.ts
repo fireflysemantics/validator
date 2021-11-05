@@ -1,8 +1,8 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isHexColor } from "@fireflysemantics/validatorts";
+import { errorMessageTemplate } from "..";
 
 /**
  * Decorator that checks if the property value is a hex color.  
@@ -13,8 +13,8 @@ import { isHexColor } from "@fireflysemantics/validatorts";
  * @param validationOptions The validation options
  */
 export function IsHexColor(validationOptions?: ValidationOptions) {
-  return function(object: any, propertyName: string) {
-    
+  return function (object: any, propertyName: string) {
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -38,7 +38,7 @@ export function IsHexColor(validationOptions?: ValidationOptions) {
  * @param o The object containing the property to validate.
  * @return The result of the call to {@link isHexColor}
  */
-export function validateValue(vc:ValidationContext, o:any):boolean {
+export function validateValue(vc: ValidationContext, o: any): boolean {
   return !!isHexColor(o[vc.propertyName]).value;
 }
 
@@ -48,9 +48,9 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
  * @param values The array of values. 
  * @return An empty array if valid, an array of indexes otherwise.
  */
-export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
-  const errorIndex:Array<Number> = [];
-  values.forEach((v, i)=>{
+export function validateArray(vc: ValidationContext, values: any[]): Array<Number> {
+  const errorIndex: Array<Number> = [];
+  values.forEach((v, i) => {
     if (!isHexColor(v).value) {
       errorIndex.push(i);
     }
@@ -66,12 +66,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  * @param o The object being validated
  * @return The error message. 
  */
-export function errorMessage(vc: ValidationContext, o: any):string {
-
+export function errorMessage(vc: ValidationContext, o: any): string {
   const messageLiteral: string = "should be a hex color";
-
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
+  return errorMessageTemplate(vc, o, messageLiteral)
 }

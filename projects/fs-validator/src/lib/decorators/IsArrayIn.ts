@@ -7,7 +7,7 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 /**
  * Decorator that checks if the array valued property
  * is in the target array.
- *   
+ *
  * @param target The target array
  * @param validationOptions The validation options
  * 
@@ -33,7 +33,7 @@ export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) 
       IsArrayIn.name,
       propertyName,
       validateValue,
-      validateArray,
+      undefined,
       true,
       errorMessage,
       validationOptions,
@@ -54,24 +54,7 @@ export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) 
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return !!isArrayContainerOf(o[vc.propertyName], target).value;
-}
-
-/**
- * @param vc  The validation context.
- * @param values The array of values. 
- * @return An empty array if valid, an array of indexes otherwise.
- */
-export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
-  const target:any = vc.validationParameters[0];
-
-  const errorIndex:Array<Number> = [];
-  values.forEach((v, i)=>{
-    if (!isArrayContainerOf(v, target).value) {
-      errorIndex.push(i);
-    }
-  });
-  return errorIndex;
+  return !!isArrayContainerOf(target, o[vc.propertyName] ).value;
 }
 
 /**

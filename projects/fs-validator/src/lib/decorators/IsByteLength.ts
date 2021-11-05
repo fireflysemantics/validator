@@ -4,6 +4,7 @@ import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isByteLength } from "@fireflysemantics/validatorts";
 import { isDefined } from "@fireflysemantics/validatorts"; 
+import { errorMessageTemplate } from "..";
 
 /**
  * TODO ... Fix this implementation ... moved to 
@@ -87,11 +88,6 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-
   const messageLiteral: string = `byte length should in range [${vc.validationParameters[0]}-${vc.validationParameters[1]}]`;
-
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
+  return  errorMessageTemplate(vc, o, messageLiteral)
 }

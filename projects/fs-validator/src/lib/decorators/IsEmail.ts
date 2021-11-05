@@ -1,8 +1,8 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isEmail, IsEmailOptions } from "@fireflysemantics/validatorts";
+import { errorMessageTemplate } from "..";
 
 /**
  * Decorator that checks if the property value is a valid email address.  
@@ -69,11 +69,6 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-
   const messageLiteral: string = "should be a valid email address";
-
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
+  return  errorMessageTemplate(vc, o, messageLiteral)
 }

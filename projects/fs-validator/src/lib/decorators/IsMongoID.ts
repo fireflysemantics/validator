@@ -1,8 +1,8 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isMongoId } from "@fireflysemantics/validatorts";
+import { errorMessageTemplate } from "..";
 
 /**
  * Decorator that checks if the property is a MongoID.  
@@ -67,11 +67,6 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-
   const messageLiteral: string = "should be a MongoID";
-
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
+  return  errorMessageTemplate(vc, o, messageLiteral)
 }

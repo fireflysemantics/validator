@@ -54,7 +54,7 @@ export class ValidationContext {
    * Function that performs the validation of properties 
    * containing arrays.
    */
-  validateArray: ValidationArrayFunctionType | null;
+  validateArray?: ValidationArrayFunctionType;
 
   /**
    * Whether validation should continue in the
@@ -104,7 +104,7 @@ export class ValidationContext {
     decorator: string,
     propertyName: string,
     validateValue: ValidationValueFunctionType,
-    validateArray: ValidationArrayFunctionType | null,
+    validateArray: ValidationArrayFunctionType | undefined,
     stop: boolean,
     errorMessage: ErrorMessageType,
     validationOptions: ValidationOptions = {},

@@ -97,7 +97,11 @@ export function validateProperty(
       vc.skipErrorGeneration = true
     }
 
-    if (isArray(propertyValue).value) {
+    //===================================================
+    //We only process array valued properties with 
+    //validateArray if it is defined
+    //===================================================
+    if (isArray(propertyValue).value && vc.validateArray) {
       const result: Number[] = vc.validateArray!(vc, propertyValue);
       if (
         !isArrayEmpty(result).value &&

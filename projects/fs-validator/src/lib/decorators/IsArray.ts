@@ -1,11 +1,11 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isArray } from "@fireflysemantics/validatorts";
+import { errorMessageTemplate } from "..";
 
 /**
- * Decorator that checks if the property is an Array.  
+ * Decorator that checks if the property is an Array.
  * 
  * See {@link isArray} for a description of the method
  * performing the validation.
@@ -21,7 +21,7 @@ export function IsArray(validationOptions?: ValidationOptions) {
       IsArray.name,
       propertyName,
       validateValue,
-      validateArray,
+      undefined,
       true,
       errorMessage,
       validationOptions
@@ -36,28 +36,10 @@ export function IsArray(validationOptions?: ValidationOptions) {
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
- * @return The result of the call to {@link IsArray}
+ * @return True if the property is an array
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  const result = isArray(o[vc.propertyName]).value ? isArray(o[vc.propertyName]).value : false
-  if (result) {
-    return result
-  }
-  return false
-}
-/**
- * @param vc  The validation context.
- * @param values The array of values. 
- * @return An empty array if valid, an array of indexes otherwise.
- */
-export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
-  const errorIndex:Array<Number> = [];
-  values.forEach((v, i)=>{
-    if (!isArray(v).value) {
-      errorIndex.push(i);
-    }
-  });
-  return errorIndex;
+  return !!isArray(o[vc.propertyName]).value
 }
 
 /**
@@ -69,11 +51,6 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-
   const messageLiteral: string = "should be an array";
-
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
+  return  errorMessageTemplate(vc, o, messageLiteral)
 }

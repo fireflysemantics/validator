@@ -24,7 +24,7 @@ export function IsNotEqualTo(target: any, validationOptions?: ValidationOptions)
       IsNotEqualTo.name,
       propertyName,
       validateValue,
-      null,
+      undefined,
       true,
       errorMessage,
       validationOptions,

@@ -3,6 +3,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isArraySizeLessThan } from "@fireflysemantics/validatorts";
+import { errorMessageTemplate } from "..";
 
 /**
  * Decorator that checks that the size of the array property is less than the argument.  
@@ -73,11 +74,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-
   const messageLiteral: string = `should have an array size less than ${vc.validationParameters[0]}`;
+  return  errorMessageTemplate(vc, o, messageLiteral)
 
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
 }

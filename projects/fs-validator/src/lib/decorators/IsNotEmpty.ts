@@ -21,7 +21,7 @@ export function IsNotEmpty(validationOptions?: ValidationOptions) {
       IsNotEmpty.name,
       propertyName,
       validateValue,
-      null,
+      undefined,
       true,
       errorMessage,
       validationOptions

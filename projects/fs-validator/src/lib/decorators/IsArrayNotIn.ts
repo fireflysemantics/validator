@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isArrayContainerOf } from "@fireflysemantics/validatorts";
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
+import { errorMessageTemplate } from "..";
 
 /**
  * Decorator that checks if the array value
@@ -22,7 +22,7 @@ export function IsArrayNotIn(target: any[], validationOptions?: ValidationOption
       IsArrayNotIn.name,
       propertyName,
       validateValue,
-      null,
+      undefined,
       true,
       errorMessage,
       validationOptions,
@@ -34,7 +34,7 @@ export function IsArrayNotIn(target: any[], validationOptions?: ValidationOption
 }
 
 /**
- * Value is valid if it passes the {@link isNotIn} check.
+ * Check whether the value is not in the target array
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
@@ -42,24 +42,7 @@ export function IsArrayNotIn(target: any[], validationOptions?: ValidationOption
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
-  return !!isArrayContainerOf(o[vc.propertyName], target).value;
-}
-
-/**
- * @param vc  The validation context.
- * @param values The array of values. 
- * @return An empty array if valid, an array of indexes otherwise.
- */
-export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
-  const target:any = vc.validationParameters[0];
-
-  const errorIndex:Array<Number> = [];
-  values.forEach((v, i)=>{
-    if (!isArrayContainerOf(v, target).value) {
-      errorIndex.push(i);
-    }
-  });
-  return errorIndex;
+  return !isArrayContainerOf(target,o[vc.propertyName]).value;
 }
 
 /**
@@ -72,9 +55,6 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
   const messageLiteral: string = "should not be in the target array";
+  return  errorMessageTemplate(vc, o, messageLiteral)
 
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
 }

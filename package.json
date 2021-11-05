@@ -27,7 +27,6 @@
     "@angular/platform-browser-dynamic": "~12.1.2",
     "@angular/router": "~12.1.2",
     "@briebug/jest-schematic": "^3.1.0",
-    "@fireflysemantics/is": "^2.0.31",
     "@fireflysemantics/validatorts": "^13.0.71",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",

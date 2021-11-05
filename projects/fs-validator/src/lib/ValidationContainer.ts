@@ -1,6 +1,6 @@
 import { ValidationContext } from "./ValidationContext"
 import { getPropertyKey } from "./utilities"
-import { isDefined } from "@fireflysemantics/is"
+import { isDefined } from "@fireflysemantics/validatorts"
 import { MetaClass } from "./MetaClass"
 
 /**
@@ -40,7 +40,7 @@ export class ValidationContainer {
     //The constructor name of the decorated class
     const constructorName = target.constructor.name;
 
-    if (!isDefined(this.metaClasses.get(constructorName))) {
+    if (!isDefined(this.metaClasses.get(constructorName)).value) {
       this.metaClasses.set(constructorName, new MetaClass(target));
       this.metaClasses.get(constructorName)!.addProperty(propertyName);
     }

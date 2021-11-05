@@ -1,4 +1,5 @@
-import { isString } from "@fireflysemantics/is";
+import { isString } from "@fireflysemantics/validatorts";
+import { PREFIX_EACH, PREFIX_SINGLE, ValidationContext } from ".";
 
 /**
  * Creates the validation context key used to
@@ -20,7 +21,7 @@ export function getPropertyKey(
   target: string | any,
   propertyName: string
 ): string {
-  return isString(target)
+  return isString(target).value
     ? `${target}_${propertyName}`
     : `${target.constructor.name}_${propertyName}`;
 }
@@ -46,4 +47,20 @@ export function getValidationContextSignature(
   propertyName: string
 ): string {
   return `${decorator}_${targetName}_${propertyName}`;
+}
+
+
+/**
+ * Generic message template function.
+ * 
+ * @param vc The validation context
+ * @param o The object being validated
+ * @param messageLiteral The message literal
+ * @return The error message. 
+ */
+ export function errorMessageTemplate(vc: ValidationContext, o: any, messageLiteral: string): string {
+  if (o[vc.propertyName] instanceof Array) {
+    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
+  }
+  return `${PREFIX_SINGLE} ${vc.propertyName}, ${o[vc.propertyName]}, ${messageLiteral}`;
 }

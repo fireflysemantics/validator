@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isInArray } from "@fireflysemantics/validatorts";
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
+import { errorMessageTemplate } from "..";
 
 /**
  * Decorator that checks if the array value
@@ -74,11 +74,6 @@ export function errorMessage(vc: ValidationContext, o: any):string {
 
   let target:any[] = vc.validationParameters[0];
   target = target.map(v=>v.trim()+" ")
-
   const messageLiteral: string = `should be in [ ${target} ]`;
-
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
+  return  errorMessageTemplate(vc, o, messageLiteral)
 }

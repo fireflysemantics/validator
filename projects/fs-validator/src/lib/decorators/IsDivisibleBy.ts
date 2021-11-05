@@ -3,6 +3,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isDivisibleBy } from "@fireflysemantics/validatorts";
+import { errorMessageTemplate } from "..";
 
 /**
  * Decorator that checks if the property is divisible by the argument.  
@@ -72,11 +73,7 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-
   const messageLiteral: string = `should be a divisible by ${vc.validationParameters[0]}`;
+  return  errorMessageTemplate(vc, o, messageLiteral)
 
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
 }

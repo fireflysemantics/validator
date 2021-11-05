@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isEmpty } from "@fireflysemantics/validatorts";
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
+import { errorMessageTemplate } from "..";
 
 /**
  * Decorator that checks if the property is empty.  
@@ -20,7 +20,7 @@ export function IsEmpty(validationOptions?: ValidationOptions) {
       IsEmpty.name,
       propertyName,
       validateValue,
-      null,
+      undefined,
       true,
       errorMessage,
       validationOptions
@@ -69,9 +69,6 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
   const messageLiteral: string = "should be a empty";
+  return  errorMessageTemplate(vc, o, messageLiteral)
 
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
 }

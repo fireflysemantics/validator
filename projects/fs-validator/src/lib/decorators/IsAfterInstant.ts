@@ -1,22 +1,18 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isAfter } from "@fireflysemantics/validatorts";
-import { isDate } from "@fireflysemantics/validatorts";
+import { isDate, isAfter } from "@fireflysemantics/validatorts";
+import { errorMessageTemplate } from "..";
 
 /**
- * Decorator that checks if the property is after the argument.  
+ * Decorator that checks if the property is after the argument.
  * 
- * See {@link isAfterInstant} for a description of the method
- * performing the validation.
- * 
- * @param entity The enum the value is being checked against.
+ * @param target Either a date instance or the name of the property containing the date used in the comparison.
  * @param validationOptions The validation options
  */
 export function IsAfterInstant(target: Date | string, validationOptions?: ValidationOptions) {
-  return function(object: any, propertyName: string) {
-    const validationParameters:any[] = [];
+  return function (object: any, propertyName: string) {
+    const validationParameters: any[] = [];
     validationParameters.push(target);
 
     const vc: ValidationContext = new ValidationContext(
@@ -25,7 +21,7 @@ export function IsAfterInstant(target: Date | string, validationOptions?: Valida
       IsAfterInstant.name,
       propertyName,
       validateValue,
-      validateArray,
+      undefined,
       true,
       errorMessage,
       validationOptions,
@@ -37,36 +33,28 @@ export function IsAfterInstant(target: Date | string, validationOptions?: Valida
 }
 
 /**
- * Value is valid if it passes the {@link isAfterInstant} check.
- * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
- * @return The result of the call to {@link isAfterInstant}
+ * @return The result of the date comparison
  */
-export function validateValue(vc:ValidationContext, o:any):boolean {
-  let target = vc.validationParameters[0];
-  if ( !!isDate(target).value) {
-    return !!isAfter(o[vc.propertyName], target).value
-   }
-  target = o[target];
-  return !!isAfter(o[vc.propertyName], target).value;  
-}
+export function validateValue(vc: ValidationContext, o: any): boolean {
+  let constraint = vc.validationParameters[0];
+  const after: Date = o[vc.propertyName]
 
-/**
- * 
- * @param vc  The validation context.
- * @param values The array of values. 
- * @return An empty array if valid, an array of indexes otherwise.
- */
-export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
-  const target:Date = vc.validationParameters[0];
-  const errorIndex:Array<Number> = [];
-  values.forEach((v, i)=>{
-    if (!isAfter(v, target).value) {
-      errorIndex.push(i);
-    }
-  });
-  return errorIndex;
+  if (!!isDate(constraint).value) {
+    //=========================================
+    // The target is the constraint date 
+    // to the annotation
+    //=========================================
+    return !!isAfter(after, constraint).value
+  }
+
+  //=========================================
+  // The constraint date is on
+  // another property value
+  //=========================================
+  let constraintReference: Date = o[vc.validationParameters[0]];
+  return !!isAfter(after, constraintReference).value;
 }
 
 /**
@@ -77,12 +65,8 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
  * @param o The object being validated
  * @return The error message. 
  */
-export function errorMessage(vc: ValidationContext, o: any):string {
+export function errorMessage(vc: ValidationContext, o: any): string {
 
   const messageLiteral: string = `should come after ${vc.validationParameters[0]}`;
-
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
+  return  errorMessageTemplate(vc, o, messageLiteral)
 }

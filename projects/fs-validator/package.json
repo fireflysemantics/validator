@@ -1,6 +1,6 @@
 {
   "name": "@fireflysemantics/validator",
-  "version": "0.0.11",
+  "version": "1.0.45",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/fireflysemantics/validator/issues"
@@ -18,7 +18,6 @@
     "validator"
   ],
   "peerDependencies": {
-    "@fireflysemantics/is": "*",
     "@fireflysemantics/validatorts": "*"
   },
   "dependencies": {
