@@ -5,7 +5,6 @@ import { ObjectErrors } from "../ObjectErrors"
 
 import { IsDate } from "./IsDate"
 import { IsAfterInstant } from "./IsAfterInstant"
-
   
 class IsAfterInstant1 {
   @IsDate()
