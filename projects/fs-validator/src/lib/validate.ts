@@ -1,30 +1,31 @@
-import { ValidationContainer } from "./ValidationContainer"
-import { MetaClass } from "./MetaClass"
+import { ValidationContainer } from "./ValidationContainer";
+import { MetaClass } from "./MetaClass";
 import { ValidationContext } from "./ValidationContext";
 import { ValidationError } from "./ValidationError";
 import { isArray, isArrayEmpty } from "@fireflysemantics/validatorts";
 import { ObjectErrors } from "./ObjectErrors";
-import { getPropertyKey } from "./utilities"
+import { getPropertyKey } from "./utilities";
 
 /**
  * Validates the <code>target</code> object.
+ * 
+ * ### Example
+ * ```
+ * class Invalid {
+ *     @IsDefined() p0: any = null; 
+ * }
+ * const I = new Invalid(); 
+ * let oes = validate(I);
+ * expect(oes.valid).toBeFalsy();
+ * const key = getPropertyKey(I, 'p0');//Invalid_p0
+ * expect(oes.getErrors(key).length).toBeGreaterThan(0);
+ * expect(oes.errors[0].errorMessage).toContain('p0');
+ * ``` 
  *
  * @param target The object being validated.
  * @param exclude Array of property values to exclude from validation.
  * @return The {@link ObjectErrors} instance
- * @example
-```
-class Invalid {
-  @IsDefined() p0: any = null;
-}
-const I = new Invalid();
-
-let oes = validate(I);
-expect(validate(I).valid).toBeFalsy();
-const key = getPropertyKey(I, 'p0');//Invalid_p0
-expect(oes.getErrors(key).length).toBeGreaterThan(0);
-expect(oes.errors[0].errorMessage).toContain('p0');
-``` */
+ */
 export function validate(target: any, exclude?: string[]): ObjectErrors {
   let oes: ObjectErrors = new ObjectErrors();
   const cn: string = target.constructor.name;
@@ -46,6 +47,19 @@ export function validate(target: any, exclude?: string[]): ObjectErrors {
 
 /**
  * Validate multiple entity instances
+ * 
+ * ### Example
+ * ```
+ * class Invalid {
+ *     @IsDefined() p0: any = null; 
+ * }
+ * 
+ * let entities:Invalid[] = [ new Invalid(), new Invalid() ]
+ * let oesArr:ObjectErrors[] = validateN(entities)
+ * expect(oesArr[0].valid).toBeFalsy();
+ * expect(oesArr[1].valid).toBeFalsy();
+ * ```
+ * 
  * @param entities The array of entities to be validated.
  * @param exclude Array of property values to exclude from validation.
  * @return The `ObjectErrors` array which is empty if there are no errors
@@ -65,7 +79,19 @@ export function validateN(entities: any[], exlude?: string[]): ObjectErrors[] {
  * Validates a property contained on the object.
  * Errors are added to the {@link ObjectErrors},
  * instance, unless skipErrorGeneration is true.
- *
+ * 
+ * ### Example
+ * 
+ * ```
+ * class Invalid {
+ *   @IsDefined() p0: any = null;
+ * }
+ * const I = new Invalid();
+ * let oes = new ObjectErrors();
+ * expect(validateProperty(I, 'p0', oes)).toBeFalsy();
+ * const key = getPropertyKey(I, 'p0');
+ * expect(oes.getErrors(key).length).toBeGreaterThan(0);
+ *```
  * @param o The object being validated
  * @param propertyName The name of the property holding the value being validated
  * @param oes The {@link ObjectErrors} instance used to collect {@link ValidationError}s

@@ -15,7 +15,7 @@ import { errorMessageTemplate } from "..";
  * @param modifiers The modifiers
  * @param validationOptions The validation options
  */
-export function IsPatternMatch(pattern: number, modifiers?: number, validationOptions?: ValidationOptions) {
+export function IsPatternMatch(pattern: RegExp, modifiers?: number, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(pattern);

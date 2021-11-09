@@ -6,18 +6,15 @@ import { errorMessageTemplate } from "..";
 
 /**
  * Decorator that checks if the property value
- * is less than the argument.  
+ * is an IP.
  * 
- * See {@link isIP} for a description of the method
- * performing the validation.
- * 
- * @param entity The enum the value is being checked against.
+ * @param version The IP version (Optional: 4 or 6).
  * @param validationOptions The validation options
  */
-export function IsIP(target: number, validationOptions?: ValidationOptions) {
+export function IsIP(version?: number, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
-    validationParameters.push(target);
+    validationParameters.push(version);
 
     const vc: ValidationContext = new ValidationContext(
       object,
@@ -44,11 +41,11 @@ export function IsIP(target: number, validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isIP}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  let target:any = null;
-  if (vc.validationParameters[0] !== undefined) {
-    const target:4|6 = vc.validationParameters[0];
+  let target:4|6 = vc.validationParameters[0];
+  if (target) {
+    return !!isIP(o[vc.propertyName], target.toString()).value;
   }
-  return !!isIP(o[vc.propertyName], target).value;
+  return !!isIP(o[vc.propertyName]).value;
 }
 
 /**

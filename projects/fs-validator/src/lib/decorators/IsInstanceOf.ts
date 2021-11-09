@@ -13,7 +13,7 @@ import { errorMessageTemplate } from "..";
  * @param target The target constructor that the value is being checked against.
  * @param validationOptions The validation options
  */
-export function IsInstanceOf(target: number, validationOptions?: ValidationOptions) {
+export function IsInstanceOf(target: any, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(target);

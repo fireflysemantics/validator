@@ -9,7 +9,7 @@ class TestIsArrayNotIn {
 }
 const IACO = new TestIsArrayNotIn()
 
-test("IsArrayIn", () => {
+test("IsArrayContainerOf", () => {
   let key_p0 = getPropertyKey(IACO, "p0")
   let oes = new ObjectErrors()
   validateProperty(IACO, "p0", oes)

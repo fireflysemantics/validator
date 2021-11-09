@@ -41,8 +41,8 @@ export function IsMilitaryTime(validationOptions?: ValidationOptions) {
 export function validateValue(vc:ValidationContext, o:any):boolean {
   return !!isMilitaryTime(o[vc.propertyName]).value;
 }
+
 /**
- * 
  * @param vc  The validation context.
  * @param values The array of values. 
  * @return An empty array if valid, an array of indexes otherwise.

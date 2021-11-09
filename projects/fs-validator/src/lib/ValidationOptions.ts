@@ -1,7 +1,7 @@
 import { ValidationContext } from './ValidationContext'
 
 /**
- * Options used to pass to validation decorators.
+ * Interface for the options passed to validation decorators.
  */
 export interface ValidationOptions {
     //=====================================

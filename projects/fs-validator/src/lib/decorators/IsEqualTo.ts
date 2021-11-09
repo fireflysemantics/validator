@@ -27,7 +27,8 @@ export function IsEqualTo(target: any, validationOptions?: ValidationOptions) {
       undefined,
       true,
       errorMessage,
-      validationOptions
+      validationOptions,
+      validationParameters
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);

@@ -1,7 +1,6 @@
 export * from "./MetaClass"
 export * from "./ObjectErrors"
 
-
 // ========================================================
 // Utilities
 // ========================================================
@@ -22,7 +21,10 @@ export * from './ObjectErrors'
 // DECORATORS
 // ========================================================
 
+export { IsMongoID } from './decorators/IsMongoID'
+export { IsLowerCase } from './decorators/IsLowerCase'
 export { IsDefined } from "./decorators/IsDefined";
+export { IsArrayUnique} from './decorators/IsArrayUnique'
 export { IfValid } from "./decorators/IfValid";
 export { IsAfterInstant } from "./decorators/IsAfterInstant";
 export { IsAlpha } from "./decorators/IsAlpha";
@@ -55,16 +57,14 @@ export { IsHexadecimal } from "./decorators/IsHexadecimal";
 export { IsHexColor } from "./decorators/IsHexColor";
 export { IsInRange } from "./decorators/IsInRange";
 export { IsInstanceOf } from "./decorators/IsInstanceOf";
-export { IsInt } from "./decorators/IsInt";
+export { IsInt } from './decorators/IsInt'
+export { IsIntString } from "./decorators/IsIntString";
 export { IsIP } from "./decorators/IsIP";
 export { IsISBN } from "./decorators/IsISBN";
 export { IsISIN } from "./decorators/IsISIN";
 export { IsISODateString } from "./decorators/IsISODateString";
 export { IsJSON } from "./decorators/IsJSON";
-export { IsLengthGreaterThan } from "./decorators/IsLengthGreaterThan";
-export { IsLengthLessThan } from "./decorators/IsLengthLessThan";
 export { IsLessThan } from "./decorators/IsLessThan";
-export { IsLowercase } from "./decorators/IsLowercase";
 export { IsMilitaryTime } from "./decorators/IsMilitaryTime";
 export { IsMobilePhone } from "./decorators/IsMobilePhone";
 export { IsMultibyte } from "./decorators/IsMultibyte";

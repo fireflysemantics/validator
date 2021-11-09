@@ -15,7 +15,8 @@
     "t": "cd projects/fs-validator && npx jest",
     "p": "cp README.md ./projects/fs-validator/ && npm run bp && npm run b && cp -r logo ./dist/fs-validator/ && cd dist/fs-validator/ && npm publish",
     "doc": "rm -fr doc && typedoc --entryPointStrategy expand ./projects/fs-validator/src/lib --out doc --exclude **/*.spec.ts",
-    "sdoc": "npm run doc && http-server -o doc"
+    "sdoc": "npm run doc && http-server -o doc",
+    "d": "npm run doc && node deploy.js"
   },
   "dependencies": {
     "@angular/animations": "~12.1.2",
@@ -27,7 +28,7 @@
     "@angular/platform-browser-dynamic": "~12.1.2",
     "@angular/router": "~12.1.2",
     "@briebug/jest-schematic": "^3.1.0",
-    "@fireflysemantics/validatorts": "^13.0.71",
+    "@fireflysemantics/validatorts": "^13.0.76",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
@@ -40,6 +41,7 @@
     "@types/jasmine": "~3.8.0",
     "@types/jest": "27.0.2",
     "@types/node": "^12.11.1",
+    "gh-pages": "^3.2.3",
     "jasmine-core": "~3.8.0",
     "jest": "27.2.3",
     "karma-coverage": "~2.0.3",

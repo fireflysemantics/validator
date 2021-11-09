@@ -1,7 +1,7 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isLessThanFinite } from "@fireflysemantics/validatorts";
+import { isLessThanFinite, isString } from "@fireflysemantics/validatorts";
 import { errorMessageTemplate } from "..";
 
 /**
@@ -14,7 +14,7 @@ import { errorMessageTemplate } from "..";
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options
  */
-export function IsLessThan(target: number, validationOptions?: ValidationOptions) {
+export function IsLessThan(target: number | string, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(target);
@@ -44,8 +44,11 @@ export function IsLessThan(target: number, validationOptions?: ValidationOptions
  * @return The result of the call to {@link isLessThan}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  const target:number = vc.validationParameters[0];
-  return !!isLessThanFinite(o[vc.propertyName], target).value;
+  let target:number | string = vc.validationParameters[0];
+  if (isString(target).value) {
+    target = o[target];
+  }
+  return !!isLessThanFinite(o[vc.propertyName], <number>target).value;
 }
 /**
  * 

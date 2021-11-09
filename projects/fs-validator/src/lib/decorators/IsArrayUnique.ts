@@ -1,11 +1,10 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isArrayUnique } from "@fireflysemantics/validatorts";
 import { errorMessageTemplate } from "..";
 
-/**
+/**a
  * Decorator that checks that the property is an array
  * and that it is one containing unique values.  
  * 
@@ -23,7 +22,7 @@ export function IsArrayUnique(validationOptions?: ValidationOptions) {
       IsArrayUnique.name,
       propertyName,
       validateValue,
-      validateArray,
+      undefined,
       true,
       errorMessage,
       validationOptions
@@ -42,21 +41,6 @@ export function IsArrayUnique(validationOptions?: ValidationOptions) {
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   return !!isArrayUnique(o[vc.propertyName]).value;
-}
-/**
- * 
- * @param vc  The validation context.
- * @param values The array of values. 
- * @return An empty array if valid, an array of indexes otherwise.
- */
-export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
-  const errorIndex:Array<Number> = [];
-  values.forEach((v, i)=>{
-    if (!isArrayUnique(v).value) {
-      errorIndex.push(i);
-    }
-  });
-  return errorIndex;
 }
 
 /**

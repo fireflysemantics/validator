@@ -9,18 +9,21 @@ import { hasLength } from "../utilities/hasLength"
  * is a valid property before proceeding with the validation 
  * of the property decorated.
  *
- * @example 
- * The property p0 is not valid hence p1 will not be validated:
+ * ### Example
+ *  
+ * The property `p0` is not valid and so 
+ * the `@IsDefined` annotation will not 
+ * be invoked for the `p1` property: 
  * ```ts
-   class IfValidNotTest1 {
-   @IsDefined() 
-   p0: any = null; //Property not valid
-
-   @IsDefined() 
-   @IfValid("p0")
-   p1: any = null;
-   }
-   ```
+ * class IfValidNotTest1 {
+ *    @IsDefined() 
+ *    p0: any = null; //Property not valid
+ *
+ *    @IsDefined() 
+ *    @IfValid("p0")
+ *    p1: any = null;
+ *  }
+ *  ```
  * 
  * @param target The name of the property that should be valid.
  * @param validationOptions The validation options

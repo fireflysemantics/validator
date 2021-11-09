@@ -1,0 +1,161 @@
+<!DOCTYPE html><html class="default no-js"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>@fireflysemantics/validator</title><meta name="description" content="Documentation for @fireflysemantics/validator"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@fireflysemantics/validator</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1> @fireflysemantics/validator</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography"><p><a href="https://travis-ci.org/fireflysemantics/validator"><img src="https://travis-ci.org/fireflysemantics/validator.svg?branch=master" alt="Build Status"></a></p>
+<p><img src="pnglogo.png" alt="Validator"></p>
+
+<a href="#fireflysemanticsvalidator" id="fireflysemanticsvalidator" style="color: inherit; text-decoration: none;">
+  <h1>@fireflysemantics/validator</h1>
+</a>
+<p>Typescript Validation Decorators and Executor.  See <a href="https://fireflysemantics.github.io/validator/doc/modules/_validator_.html">API</a> for all methods provided.</p>
+
+<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+  <h2>Install</h2>
+</a>
+<pre><code><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">i</span><span class="hl-1"> -</span><span class="hl-2">S</span><span class="hl-1"> @</span><span class="hl-0">fireflysemantics</span><span class="hl-1">/</span><span class="hl-0">validator</span><span class="hl-1"> @</span><span class="hl-0">fireflysemantics</span><span class="hl-1">/</span><span class="hl-0">validatorts</span><span class="hl-1"> </span><span class="hl-0">tslib</span>
+</code></pre>
+
+<a href="#typedoc" id="typedoc" style="color: inherit; text-decoration: none;">
+  <h2>Typedoc</h2>
+</a>
+<p><a href="https://fireflysemantics.github.io/validator/doc/">Typedoc Documentation</a></p>
+
+<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+  <h2>Features</h2>
+</a>
+<ul>
+<li>Progressive validation (Only check if the date is valid if the property is non null)</li>
+<li>Cross property validation (Does the start date come before the end date?)</li>
+<li>Cross Property Conditional Validation with <code>@IfValid</code> stops cross property validation a dependent property is invalid.</li>
+<li>Access to the entire <a href="https://github.com/fireflysemantics/validator/blob/master/src/ValidationContext.ts">ValidationContext</a> enabling the customization of validation messages post validation</li>
+<li>Executes the decorators is a predictable ordered sequence</li>
+</ul>
+<p>The following decorators:</p>
+<ul>
+<li>IfValid</li>
+<li>IsAfterInstant</li>
+<li>IsAlpha</li>
+<li>IsAlphaNumeric</li>
+<li>IsArray</li>
+<li>IsArrayContainerOf</li>
+<li>IsArrayIn</li>
+<li>IsArrayNotEmpty</li>
+<li>IsArrayNotIn</li>
+<li>IsArraySizeGreaterThan</li>
+<li>IsArraySizeLessThan</li>
+<li>IsArrayUnique</li>
+<li>IsAscii</li>
+<li>IsBase64</li>
+<li>IsBeforeInstant</li>
+<li>IsBoolean</li>
+<li>IsBooleanString</li>
+<li>IsByteLength</li>
+<li>IsCreditCard</li>
+<li>IsCurrency</li>
+<li>IsDate</li>
+<li>IsDefined</li>
+<li>IsDivisibleBy</li>
+<li>IsEmail</li>
+<li>IsEmpty</li>
+<li>IsEnum</li>
+<li>IsEqualTo</li>
+<li>IsFQDN</li>
+<li>IsFullWidth</li>
+<li>IsGreaterThan</li>
+<li>IsHalfWidth</li>
+<li>IsHexColor</li>
+<li>IsHexadecimal</li>
+<li>IsIP</li>
+<li>IsISBN</li>
+<li>IsISIN</li>
+<li>IsISODateString</li>
+<li>IsInRange</li>
+<li>IsInstanceOf</li>
+<li>IsInt</li>
+<li>IsJSON</li>
+<li>IsLengthGreaterThan</li>
+<li>IsLengthLessThan</li>
+<li>IsLessThan</li>
+<li>IsLowercase</li>
+<li>IsMilitaryTime</li>
+<li>IsMobilePhone</li>
+<li>IsMongoID</li>
+<li>IsMultibyte</li>
+<li>IsNegative</li>
+<li>IsNotEmpty</li>
+<li>IsNotEqualTo</li>
+<li>IsNotSubString</li>
+<li>IsNotSuperString</li>
+<li>IsNumber</li>
+<li>IsNumberString</li>
+<li>IsPatternMatch</li>
+<li>IsPositive</li>
+<li>IsSameInstant</li>
+<li>IsString</li>
+<li>IsSubString</li>
+<li>IsSuperString</li>
+<li>IsSurrogatePair</li>
+<li>IsURL</li>
+<li>IsUUID</li>
+<li>IsUpperCase</li>
+<li>IsValueIn</li>
+<li>IsValueNotIn</li>
+<li>IsVariableWidth</li>
+</ul>
+
+<a href="#use-cases" id="use-cases" style="color: inherit; text-decoration: none;">
+  <h2>Use Cases</h2>
+</a>
+
+<a href="#progressive-validation" id="progressive-validation" style="color: inherit; text-decoration: none;">
+  <h3>Progressive Validation</h3>
+</a>
+<p><a href="https://medium.com/@ole.ersoy/minimizing-validation-noise-with-fireflysemantics-validator-efef4c95efd4">See this article for an overview of how progressive validation works.</a></p>
+<p><a href="https://stackblitz.com/edit/validator-progressive-validation">There&#39;s also a Stackblitz demo here</a>.</p>
+
+<a href="#cross-property-conditional-validation" id="cross-property-conditional-validation" style="color: inherit; text-decoration: none;">
+  <h3>Cross Property Conditional Validation</h3>
+</a>
+<p>In some cases we want to validate something else only when a corresponding property
+on the instances is valid.  For example:</p>
+<pre><code><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-4">GreaterThanCheck</span><span class="hl-1"> { </span><br/><span class="hl-1">     @</span><span class="hl-0">IsNumber</span><br/><span class="hl-1">     </span><span class="hl-0">firstNumber</span><span class="hl-1">: </span><span class="hl-4">any</span><span class="hl-1"> = </span><span class="hl-3">null</span><span class="hl-1">;</span><br/><br/><span class="hl-1">     @</span><span class="hl-5">IsGreaterThan</span><span class="hl-1">(</span><span class="hl-6">&quot;firstNumber&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">     @</span><span class="hl-5">IsNumber</span><span class="hl-1">()</span><br/><span class="hl-1">     @</span><span class="hl-5">IfValid</span><span class="hl-1">(</span><span class="hl-6">&#39;firstNumber</span><span class="hl-7">)</span><br/><span class="hl-1">     </span><span class="hl-0">secondNumber</span><span class="hl-1"> = </span><span class="hl-8">22</span><span class="hl-1">; </span><br/><span class="hl-1">}</span>
+</code></pre>
+<p>In this case the validation of <code>secondNumber</code> depends on the first number.  Thus in order to minimize validation noise, we would like to validate the <code>secondNumber</code> only if the first number is valid.  The <code>@IfValid(&#39;firstNumber)</code> ensures that this will be the case.</p>
+
+<a href="#runtime" id="runtime" style="color: inherit; text-decoration: none;">
+  <h2>Runtime</h2>
+</a>
+<p>This assumes a minimum ES2017 runtime environment.  Use core.js if you think the code will run in non compliant runtimes.  We use <code>Object.values</code>, which has an ES2017 a minimum runtime.</p>
+
+<a href="#build" id="build" style="color: inherit; text-decoration: none;">
+  <h2>Build</h2>
+</a>
+<p>Run <code>npm run c</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory.</p>
+
+<a href="#publishing" id="publishing" style="color: inherit; text-decoration: none;">
+  <h2>Publishing</h2>
+</a>
+<p>After building your library with <code>npm run p</code></p>
+
+<a href="#running-unit-tests" id="running-unit-tests" style="color: inherit; text-decoration: none;">
+  <h2>Running unit tests</h2>
+</a>
+<p>Run <code>npm t</code> to execute the unit tests via <a href="https://jestjs.io/">Jest</a>.</p>
+
+<a href="#supported-package-formats" id="supported-package-formats" style="color: inherit; text-decoration: none;">
+  <h1>Supported Package Formats</h1>
+</a>
+<p>The library is built with the Angular Package Format.  It therefore supports all these package formats (As can be seen in the provided <code>package.json</code>) and has integrated typescript definitions:</p>
+<ul>
+<li>&quot;main&quot;: &quot;bundles/fireflysemantics-validatorts.umd.js&quot;,</li>
+<li>&quot;module&quot;: &quot;fesm5/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;es2015&quot;: &quot;fesm2015/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;esm5&quot;: &quot;esm5/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;esm2015&quot;: &quot;esm2015/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;fesm5&quot;: &quot;fesm5/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;fesm2015&quot;: &quot;fesm2015/fireflysemantics-validatorts.js&quot;,</li>
+<li>&quot;typings&quot;: &quot;fireflysemantics-validatorts.d.ts&quot;</li>
+</ul>
+
+<a href="#further-help" id="further-help" style="color: inherit; text-decoration: none;">
+  <h2>Further help</h2>
+</a>
+<p>To get more help on the Angular CLI use <code>ng help</code> or go check out the <a href="https://github.com/angular/angular-cli/blob/master/README.md">Angular CLI README</a>.</p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Modules</a></li><li class=" tsd-kind-module"><a href="modules/MetaClass.html">Meta<wbr/>Class</a></li><li class=" tsd-kind-module"><a href="modules/ObjectErrors.html">Object<wbr/>Errors</a></li><li class=" tsd-kind-module"><a href="modules/ValidationContainer.html">Validation<wbr/>Container</a></li><li class=" tsd-kind-module"><a href="modules/ValidationContext.html">Validation<wbr/>Context</a></li><li class=" tsd-kind-module"><a href="modules/ValidationError.html">Validation<wbr/>Error</a></li><li class=" tsd-kind-module"><a href="modules/ValidationOptions.html">Validation<wbr/>Options</a></li><li class=" tsd-kind-module"><a href="modules/constants.html">constants</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IfValid.html">decorators/<wbr/>If<wbr/>Valid</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsAfterInstant.html">decorators/<wbr/>Is<wbr/>After<wbr/>Instant</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsAlpha.html">decorators/<wbr/>Is<wbr/>Alpha</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsAlphaNumeric.html">decorators/<wbr/>Is<wbr/>Alpha<wbr/>Numeric</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsArray.html">decorators/<wbr/>Is<wbr/>Array</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsArrayContainerOf.html">decorators/<wbr/>Is<wbr/>Array<wbr/>Container<wbr/>Of</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsArrayIn.html">decorators/<wbr/>Is<wbr/>Array<wbr/>In</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsArrayNotEmpty.html">decorators/<wbr/>Is<wbr/>Array<wbr/>Not<wbr/>Empty</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsArrayNotIn.html">decorators/<wbr/>Is<wbr/>Array<wbr/>Not<wbr/>In</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsArraySizeGreaterThan.html">decorators/<wbr/>Is<wbr/>Array<wbr/>Size<wbr/>Greater<wbr/>Than</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsArraySizeLessThan.html">decorators/<wbr/>Is<wbr/>Array<wbr/>Size<wbr/>Less<wbr/>Than</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsArrayUnique.html">decorators/<wbr/>Is<wbr/>Array<wbr/>Unique</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsAscii.html">decorators/<wbr/>Is<wbr/>Ascii</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsBase64.html">decorators/<wbr/>Is<wbr/>Base64</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsBeforeInstant.html">decorators/<wbr/>Is<wbr/>Before<wbr/>Instant</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsBoolean.html">decorators/<wbr/>Is<wbr/>Boolean</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsBooleanString.html">decorators/<wbr/>Is<wbr/>Boolean<wbr/>String</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsByteLength.html">decorators/<wbr/>Is<wbr/>Byte<wbr/>Length</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsCreditCard.html">decorators/<wbr/>Is<wbr/>Credit<wbr/>Card</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsCurrency.html">decorators/<wbr/>Is<wbr/>Currency</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsDate.html">decorators/<wbr/>Is<wbr/>Date</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsDefined.html">decorators/<wbr/>Is<wbr/>Defined</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsDivisibleBy.html">decorators/<wbr/>Is<wbr/>Divisible<wbr/>By</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsEmail.html">decorators/<wbr/>Is<wbr/>Email</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsEmpty.html">decorators/<wbr/>Is<wbr/>Empty</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsEqualTo.html">decorators/<wbr/>Is<wbr/>Equal<wbr/>To</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsFQDN.html">decorators/<wbr/>IsFQDN</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsFullWidth.html">decorators/<wbr/>Is<wbr/>Full<wbr/>Width</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsGreaterThan.html">decorators/<wbr/>Is<wbr/>Greater<wbr/>Than</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsHalfWidth.html">decorators/<wbr/>Is<wbr/>Half<wbr/>Width</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsHexColor.html">decorators/<wbr/>Is<wbr/>Hex<wbr/>Color</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsHexadecimal.html">decorators/<wbr/>Is<wbr/>Hexadecimal</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsIP.html">decorators/<wbr/>IsIP</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsISBN.html">decorators/<wbr/>IsISBN</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsISIN.html">decorators/<wbr/>IsISIN</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsISODateString.html">decorators/<wbr/>IsISODate<wbr/>String</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsInRange.html">decorators/<wbr/>Is<wbr/>In<wbr/>Range</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsInstanceOf.html">decorators/<wbr/>Is<wbr/>Instance<wbr/>Of</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsInt.html">decorators/<wbr/>Is<wbr/>Int</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsJSON.html">decorators/<wbr/>IsJSON</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsLengthGreaterThan.html">decorators/<wbr/>Is<wbr/>Length<wbr/>Greater<wbr/>Than</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsLengthLessThan.html">decorators/<wbr/>Is<wbr/>Length<wbr/>Less<wbr/>Than</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsLessThan.html">decorators/<wbr/>Is<wbr/>Less<wbr/>Than</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsLowercase.html">decorators/<wbr/>Is<wbr/>Lowercase</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsMilitaryTime.html">decorators/<wbr/>Is<wbr/>Military<wbr/>Time</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsMobilePhone.html">decorators/<wbr/>Is<wbr/>Mobile<wbr/>Phone</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsMongoID.html">decorators/<wbr/>Is<wbr/>MongoID</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsMultibyte.html">decorators/<wbr/>Is<wbr/>Multibyte</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsNegative.html">decorators/<wbr/>Is<wbr/>Negative</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsNotEmpty.html">decorators/<wbr/>Is<wbr/>Not<wbr/>Empty</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsNotEqualTo.html">decorators/<wbr/>Is<wbr/>Not<wbr/>Equal<wbr/>To</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsNotSubString.html">decorators/<wbr/>Is<wbr/>Not<wbr/>Sub<wbr/>String</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsNotSuperString.html">decorators/<wbr/>Is<wbr/>Not<wbr/>Super<wbr/>String</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsNumber.html">decorators/<wbr/>Is<wbr/>Number</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsNumberString.html">decorators/<wbr/>Is<wbr/>Number<wbr/>String</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsPatternMatch.html">decorators/<wbr/>Is<wbr/>Pattern<wbr/>Match</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsPositive.html">decorators/<wbr/>Is<wbr/>Positive</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsSameInstant.html">decorators/<wbr/>Is<wbr/>Same<wbr/>Instant</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsString.html">decorators/<wbr/>Is<wbr/>String</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsSubString.html">decorators/<wbr/>Is<wbr/>Sub<wbr/>String</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsSuperString.html">decorators/<wbr/>Is<wbr/>Super<wbr/>String</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsSurrogatePair.html">decorators/<wbr/>Is<wbr/>Surrogate<wbr/>Pair</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsURL.html">decorators/<wbr/>IsURL</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsUUID.html">decorators/<wbr/>IsUUID</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsUpperCase.html">decorators/<wbr/>Is<wbr/>Upper<wbr/>Case</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsValueIn.html">decorators/<wbr/>Is<wbr/>Value<wbr/>In</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsValueNotIn.html">decorators/<wbr/>Is<wbr/>Value<wbr/>Not<wbr/>In</a></li><li class=" tsd-kind-module"><a href="modules/decorators_IsVariableWidth.html">decorators/<wbr/>Is<wbr/>Variable<wbr/>Width</a></li><li class=" tsd-kind-module"><a href="modules/index.html">index</a></li><li class=" tsd-kind-module"><a href="modules/utilities.html">utilities</a></li><li class=" tsd-kind-module"><a href="modules/utilities_hasLength.html">utilities/has<wbr/>Length</a></li><li class=" tsd-kind-module"><a href="modules/validate.html">validate</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li><li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li><li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>

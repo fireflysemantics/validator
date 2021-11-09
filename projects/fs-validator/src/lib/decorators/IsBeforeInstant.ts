@@ -14,7 +14,7 @@ import { isBefore, isDate } from "@fireflysemantics/validatorts";
  * @param validationOptions The validation options
  */
 export function IsBeforeInstant(
-  target: Date,
+  target: Date | string,
   validationOptions?: ValidationOptions
 ) {
   return function(object: any, propertyName: string) {
@@ -47,7 +47,7 @@ export function IsBeforeInstant(
  */
 export function validateValue(vc: ValidationContext, o: any): boolean {
   let target = vc.validationParameters[0];
-  if (isDate(target)) {
+  if (isDate(target).value) {
     return !!isBefore(o[vc.propertyName], target).value;
   }
   target = o[target];

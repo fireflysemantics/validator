@@ -7,9 +7,6 @@ import { errorMessageTemplate } from "..";
 /**
  * Decorator that checks if the string contains only letters (a-zA-Z).  
  * 
- * See {@link isAlpha} for a description of the method
- * performing the validation.
- * 
  * @param validationOptions The validation options
  */
 export function IsAlpha(validationOptions?: ValidationOptions) {

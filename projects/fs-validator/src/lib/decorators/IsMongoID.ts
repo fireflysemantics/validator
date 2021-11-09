@@ -12,13 +12,13 @@ import { errorMessageTemplate } from "..";
  * 
  * @param validationOptions The validation options
  */
-export function IsMongoId(validationOptions?: ValidationOptions) {
+export function IsMongoID(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsMongoId.name,
+      IsMongoID.name,
       propertyName,
       validateValue,
       validateArray,

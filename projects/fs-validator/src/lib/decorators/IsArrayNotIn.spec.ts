@@ -10,7 +10,7 @@ class TestIsArrayNotIn {
 }
 const IANI1 = new TestIsArrayNotIn()
 
-test("IsArrayIn", () => {
+test("IsArrayNotIn", () => {
   let key_p0 = getPropertyKey(IANI1, "p0")
   let oes = new ObjectErrors()
   validateProperty(IANI1, "p0", oes)

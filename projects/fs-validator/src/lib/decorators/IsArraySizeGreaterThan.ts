@@ -1,4 +1,3 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
@@ -25,7 +24,7 @@ export function IsArraySizeGreaterThan(target: number, validationOptions?: Valid
       isArraySizeGreaterThan.name,
       propertyName,
       validateValue,
-      validateArray,
+      undefined,
       true,
       errorMessage,
       validationOptions,
@@ -44,24 +43,8 @@ export function IsArraySizeGreaterThan(target: number, validationOptions?: Valid
  * @return The result of the call to {@link isArraySizeGreaterThan}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  const object:number = vc.validationParameters[0];
-  return !!isArraySizeGreaterThan(o[vc.propertyName], object).value;
-}
-/**
- * 
- * @param vc  The validation context.
- * @param values The array of values. 
- * @return An empty array if valid, an array of indexes otherwise.
- */
-export function validateArray(vc:ValidationContext, values:any[]):Array<number> {
-  const object:number = vc.validationParameters[0];
-  const errorIndex:Array<number> = [];
-  values.forEach((v, i)=>{
-    if (!isArraySizeGreaterThan(v, object).value) {
-      errorIndex.push(i);
-    }
-  });
-  return errorIndex;
+  const constraint:number = vc.validationParameters[0];
+  return !!isArraySizeGreaterThan(o[vc.propertyName], constraint).value;
 }
 
 /**

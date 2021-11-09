@@ -2,32 +2,19 @@
 
 ![Validator](pnglogo.png)
 
-# Validator
+# @fireflysemantics/validator
 
-Typescript Validation Decorators and Executor.  See [API](https://fireflysemantics.github.io/validator/doc/modules/_validator_.html) for all methods provided.
+Typescript Validation Decorators and Executor.  Click [API](https://fireflysemantics.github.io/validator/modules/validate.html) for the Validation API Typedoc.
 
 ## Install
 
 ```
-npm i -S @fireflysemantics/validator
+npm i -S @fireflysemantics/validator @fireflysemantics/validatorts tslib
 ```
 
-Install `@fireflysemantics/validator` peer dependencies along with the library:
-
-```
-npm i -S @fireflysemantics/validatorts
-npm i -S @fireflysemantics/is
-```
-
-
-Note that if you are using the `FESM5` package format the `tslib` peer dependency must also be installed.
-
-```
-npm i -S npm i tslib
-```
 ## Typedoc
 
-[Typedoc Documentation](https://fireflysemantics.github.io/validator/doc/)
+[Typedoc Documentation](https://fireflysemantics.github.io/validator/)
 
 ## Features
 
@@ -166,8 +153,3 @@ The library is built with the Angular Package Format.  It therefore supports all
 -  "fesm5": "fesm5/fireflysemantics-validatorts.js",
 -  "fesm2015": "fesm2015/fireflysemantics-validatorts.js",
 -  "typings": "fireflysemantics-validatorts.d.ts"
-
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

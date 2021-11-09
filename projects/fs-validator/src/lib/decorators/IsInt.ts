@@ -5,15 +5,8 @@ import { isInt } from "@fireflysemantics/validatorts";
 import { errorMessageTemplate } from "..";
 
 /**
- * Decorator that checks if the property is an integer.  
+ * Decorator that checks if the property is an integer.
  * 
- * See {@link IsIntOptions}
- * for the options configuration details.
- * 
- * See {@link isInt} for a description of the method
- * performing the validation.
- * 
- * @param IsIntOptions The configuration interface for the options.
  * @param validationOptions The validation options
  */
 export function IsInt(validationOptions?: ValidationOptions) {
@@ -43,7 +36,7 @@ export function IsInt(validationOptions?: ValidationOptions) {
  * @return The result of the call to {@link isInt}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  return !!isInt(o[vc.propertyName], {}).value;
+  return !!isInt(o[vc.propertyName]).value;
 }
 /**
  * 
@@ -54,7 +47,7 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
 export function validateArray(vc:ValidationContext, values:any[]):Array<number> {
   const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isInt(v,{}).value ) {
+    if (!isInt(v).value ) {
       errorIndex.push(i);
     }
   });

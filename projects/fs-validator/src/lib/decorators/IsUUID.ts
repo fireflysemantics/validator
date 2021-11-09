@@ -14,7 +14,7 @@ import { errorMessageTemplate } from "..";
  * @param target The target version number [3 | 4 | 5].
  * @param validationOptions The validation options
  */
-export function IsUUID(target: number, validationOptions?: ValidationOptions) {
+export function IsUUID(target?: 3 | 4 | 5, validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(target);

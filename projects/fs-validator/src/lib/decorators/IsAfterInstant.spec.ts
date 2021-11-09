@@ -5,75 +5,73 @@ import { ObjectErrors } from "../ObjectErrors"
 
 import { IsDate } from "./IsDate"
 import { IsAfterInstant } from "./IsAfterInstant"
-  
+
+class IsNotAfterInstant {
+  @IsAfterInstant(new Date(1))
+  after: Date = new Date(1)
+}
+const INAI = new IsNotAfterInstant()
+
+class IsNotAfterInstant1 {
+  @IsDate()
+  before: Date = new Date(1)
+
+  @IsAfterInstant("before")
+  @IfValid("before")
+  after: Date = new Date(0)
+}
+const INA1 = new IsNotAfterInstant1()
+
+
 class IsAfterInstant1 {
   @IsDate()
-  p0: Date = new Date(0)
+  before: Date = new Date(0)
 
-  @IsAfterInstant("p0")
-  @IfValid("p0")
-  p1: Date = new Date(1)
+  @IsAfterInstant("before")
+  @IfValid("before")
+  after: Date = new Date(1)
 }
-
 const IAI1 = new IsAfterInstant1()
 
-
 class IsAfterInstant2 {
-  @IsDate()
-  p0: Date = new Date(1)
-
-  @IsAfterInstant("p0")
-  @IfValid("p0")
-  p1: Date = new Date(0)
-}
-
-const IAI2 = new IsAfterInstant2()
-
-class IsAfterInstant3 {
   @IsAfterInstant(new Date(0))
   p0: Date = new Date(1)
 }
-
-const IAI3 = new IsAfterInstant3()
-
-class IsNotAfterinstant {
-  @IsAfterInstant(new Date(1))
-  p0: Date = new Date(1)
-}
-const INAI = new IsNotAfterinstant()
+const IAI2 = new IsAfterInstant2()
 
 test("IsAfterInstant", ()=>{
-  let key_p0 = getPropertyKey(INAI, "p0")
+  let key_before = getPropertyKey(INAI, "before")
+  let key_after = getPropertyKey(INAI, "after")
   let oes = new ObjectErrors()
-  validateProperty(INAI, "p0", oes)
-  expect(oes.getErrors(key_p0)).toBeDefined()
-  expect(oes.getErrors(key_p0)[0].errorMessage).toContain('p0')
+
+  validateProperty(INAI, "after", oes)
+  expect(oes.valid).toBeFalsy()
+  expect(oes.getErrors(key_after)).toBeDefined()
+  expect(oes.getErrors(key_after).length).toEqual(1)
+  expect(oes.getErrors(key_after)[0].errorMessage).toContain('after')
+
+  oes = validate(INA1)
+  expect(oes.valid).toBeFalsy()
+  expect(oes.getErrors(key_before)).toBeUndefined()
+  expect(oes.getErrors(key_after)).not.toBeNull()
 })
 
 test("IsAfterInstant", () => {
-
-  let key_p0 = getPropertyKey(IAI1, "p0")
-  let key_p1 = getPropertyKey(IAI1, "p1")
+  let key_before = getPropertyKey(IAI1, "before")
+  let key_after = getPropertyKey(IAI1, "after")
 
   let oes = new ObjectErrors()
-  validateProperty(IAI1, "p1", oes)
+  validateProperty(IAI1, "after", oes)
 
   expect(oes.valid).toBeTruthy()
-  expect(oes.getErrors(key_p0)).toBeUndefined()
-  expect(oes.getErrors(key_p1)).toBeUndefined()
+  expect(oes.getErrors(key_before)).toBeUndefined()
+  expect(oes.getErrors(key_after)).toBeUndefined()
 
   oes = validate(IAI1)
   expect(oes.valid).toBeTruthy()
 
-  expect(oes.getErrors(key_p0)).toBeUndefined()
-  expect(oes.getErrors(key_p1)).toBeUndefined()
-  key_p0 = getPropertyKey(IAI2, "p0")
-  key_p1 = getPropertyKey(IAI2, "p1")
+  expect(oes.getErrors(key_before)).toBeUndefined()
+  expect(oes.getErrors(key_after)).toBeUndefined()
 
-  oes = validate(IAI2)
-  expect(oes.valid).toBeFalsy()
-  expect(oes.getErrors(key_p0)).toBeUndefined()
-  expect(oes.getErrors(key_p1)).not.toBeNull()
-
-  expect(validate(IAI3).valid).toBeTruthy()
+  expect(validate(IAI2).valid).toBeTruthy()
 })

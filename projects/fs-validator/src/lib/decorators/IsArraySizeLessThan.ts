@@ -1,4 +1,3 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
@@ -25,7 +24,7 @@ export function IsArraySizeLessThan(target: number, validationOptions?: Validati
       IsArraySizeLessThan.name,
       propertyName,
       validateValue,
-      validateArray,
+      undefined,
       true,
       errorMessage,
       validationOptions,
@@ -41,28 +40,11 @@ export function IsArraySizeLessThan(target: number, validationOptions?: Validati
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
- * @return The result of the call to {@link isArraySizeLessThan}
+ * @return True if the array size is less than the constraint
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  const object:number = vc.validationParameters[0];
-  return !!isArraySizeLessThan(o[vc.propertyName], object).value;
-}
-
-/**
- * 
- * @param vc  The validation context.
- * @param values The array of values. 
- * @return An empty array if valid, an array of indexes otherwise.
- */
-export function validateArray(vc:ValidationContext, values:any[]):Array<number> {
-  const object:number = vc.validationParameters[0];
-  const errorIndex:Array<number> = [];
-  values.forEach((v, i)=>{
-    if (!isArraySizeLessThan(v, object)) {
-      errorIndex.push(i);
-    }
-  });
-  return errorIndex;
+  const constraint:number = vc.validationParameters[0];
+  return !!isArraySizeLessThan(o[vc.propertyName], constraint).value;
 }
 
 /**

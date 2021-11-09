@@ -7,6 +7,24 @@ import { errorMessageTemplate } from "..";
 /**
  * Decorator that checks if the property is after the argument.
  * 
+ * ### Example
+ *
+ * The property `p0` is not valid and so 
+ * the `@IsDefined` annotation will not 
+ * be invoked for the `p1` property:
+ *  
+ * ```ts
+ * class IfValidNotTest1 {
+ *    @IsAfterInstant() 
+ *    after: Date = new Date(1);
+ *
+ *    @IsDefined() 
+ *    @IfValid("p0")
+ *    p1: any = null;
+ *  }
+ *  ```
+
+ * 
  * @param target Either a date instance or the name of the property containing the date used in the comparison.
  * @param validationOptions The validation options
  */

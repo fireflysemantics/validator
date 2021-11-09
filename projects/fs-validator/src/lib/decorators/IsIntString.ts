@@ -1,36 +1,28 @@
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
-import { isGreaterThanFinite } from "@fireflysemantics/validatorts";
+import { isIntString } from "@fireflysemantics/validatorts";
 import { errorMessageTemplate } from "..";
 
 /**
- * Decorator that checks if the property value
- * is greater than the argument.  
+ * Decorator that checks if the string property is an integer.
  * 
- * See {@link isLengthGreaterThan} for 
- * a description of the method
- * performing the validation.
- * 
- * @param target The minimum length.
+ * @param IsIntOptions The configuration interface for the options.
  * @param validationOptions The validation options
  */
-export function IsLengthGreaterThan(target: number, validationOptions?: ValidationOptions) {
+export function IsIntString(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
-    const validationParameters:any[] = [];
-    validationParameters.push(target);
-
+    
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
-      IsLengthGreaterThan.name,
+      IsIntString.name,
       propertyName,
       validateValue,
       validateArray,
       true,
       errorMessage,
-      validationOptions,
-      validationParameters
+      validationOptions
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
     ValidationContainer.addValidationContext(vc);
@@ -38,27 +30,25 @@ export function IsLengthGreaterThan(target: number, validationOptions?: Validati
 }
 
 /**
- * Value is valid if it passes the {@link isLengthGreaterThan} check.
+ * Value is valid if it passes the {@link isInt} check.
  * 
  * @param vc The validation context.
  * @param o The object containing the property to validate.
- * @return The result of the call to {@link isLengthGreaterThan}
+ * @return The result of the call to {@link isInt}
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
-  const target:number = vc.validationParameters[0];
-  return !!isGreaterThanFinite(o[vc.propertyName], target).value;
+  return !!isIntString(o[vc.propertyName], {}).value;
 }
 /**
  * 
- * @param vc The validation context.
+ * @param vc  The validation context.
  * @param values The array of values. 
  * @return An empty array if valid, an array of indexes otherwise.
  */
-export function validateArray(vc:ValidationContext, values:any[]):Array<Number> {
-  const target:number = vc.validationParameters[0];
-  const errorIndex:Array<Number> = [];
+export function validateArray(vc:ValidationContext, values:any[]):Array<number> {
+  const errorIndex:Array<number> = [];
   values.forEach((v, i)=>{
-    if (!isGreaterThanFinite(v, target).value) {
+    if (!isIntString(v,{}).value ) {
       errorIndex.push(i);
     }
   });
@@ -67,14 +57,13 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
 
 /**
  * The generated error message string indicating 
- * that the value is not valid according to {@link isLengthGreaterThan}.
+ * that the value is not valid according to {@link isInt}.
  * 
  * @param vc The validation context
  * @param o The object being validated
  * @return The error message. 
  */
 export function errorMessage(vc: ValidationContext, o: any):string {
-
-  const messageLiteral: string = `should be greater than ${vc.validationParameters[0]}`;
+  const messageLiteral: string = "should be an integer";
   return  errorMessageTemplate(vc, o, messageLiteral)
 }
