@@ -2,37 +2,43 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isDate, isAfter } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the property is after the argument.
+ * Decorator that checks if the property
+ * is after the `target` constraint 
+ * instant argument.
  * 
  * ### Example
- *
- * The property `p0` is not valid and so 
- * the `@IsDefined` annotation will not 
- * be invoked for the `p1` property:
  *  
  * ```ts
- * class IfValidNotTest1 {
- *    @IsAfterInstant() 
+ * class IsAfterInstantDemo {
+ *    @IsAfterInstant(new Date(0)) 
  *    after: Date = new Date(1);
- *
- *    @IsDefined() 
- *    @IfValid("p0")
- *    p1: any = null;
- *  }
+ * }
+ * 
+ * class IsAfterInstantReferenceDemo {
+ *    before: Date = new Date(0);
+ * 
+ *    @IsAfterInstant('before') 
+ *    after: Date = new Date(1);
+ * }
  *  ```
 
  * 
- * @param target Either a date instance or the name of the property containing the date used in the comparison.
+ * @param target Either a Date instance or the name of the property containing the date used in the comparison.
  * @param validationOptions The validation options
  */
 export function IsAfterInstant(target: Date | string, validationOptions?: ValidationOptions) {
+
   return function (object: any, propertyName: string) {
     const validationParameters: any[] = [];
     validationParameters.push(target);
 
+    function messageFunction(vc: ValidationContext) {
+      return `should come after ${vc.validationParameters[0]}`;
+    }
+    
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -41,7 +47,7 @@ export function IsAfterInstant(target: Date | string, validationOptions?: Valida
       validateValue,
       undefined,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -73,18 +79,4 @@ export function validateValue(vc: ValidationContext, o: any): boolean {
   //=========================================
   let constraintReference: Date = o[vc.validationParameters[0]];
   return !!isAfter(after, constraintReference).value;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isAfterInstant}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any): string {
-
-  const messageLiteral: string = `should come after ${vc.validationParameters[0]}`;
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isNotSubString } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the property value is not a substring
@@ -19,6 +19,10 @@ export function IsNotSubString(target: string, validationOptions?: ValidationOpt
     const validationParameters:any[] = [];
     validationParameters.push(target);
 
+    function messageFunction(vc: ValidationContext) {
+      return "should not be a substring of the target"
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -27,7 +31,7 @@ export function IsNotSubString(target: string, validationOptions?: ValidationOpt
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -62,17 +66,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isNotSubString}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should not be a substring of the target";
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

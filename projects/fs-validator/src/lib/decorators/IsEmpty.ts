@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isEmpty } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the property is empty.  
@@ -14,6 +14,11 @@ import { errorMessageTemplate } from "..";
  */
 export function IsEmpty(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
+
+    function messageFunction(vc: ValidationContext) {
+      return "should be a empty"
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -22,7 +27,7 @@ export function IsEmpty(validationOptions?: ValidationOptions) {
       validateValue,
       undefined,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
@@ -57,18 +62,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isEmpty}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should be a empty";
-  return  errorMessageTemplate(vc, o, messageLiteral)
-
 }

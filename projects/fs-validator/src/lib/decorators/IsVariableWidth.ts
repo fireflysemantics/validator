@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isVariableWidth } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that check if the property contains any half-width chars.  
@@ -15,6 +15,10 @@ import { errorMessageTemplate } from "..";
 export function IsVariableWidth(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     
+    function messageFunction(vc: ValidationContext) {
+      return "should contain variable width characters";      
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -23,7 +27,7 @@ export function IsVariableWidth(validationOptions?: ValidationOptions) {
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
@@ -41,6 +45,7 @@ export function IsVariableWidth(validationOptions?: ValidationOptions) {
 export function validateValue(vc:ValidationContext, o:any):boolean {
   return !!isVariableWidth(o[vc.propertyName]).value;
 }
+
 /**
  * 
  * @param vc  The validation context.
@@ -55,18 +60,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isVariableWidth}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-
-  const messageLiteral: string = "should contain variable width characters";
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

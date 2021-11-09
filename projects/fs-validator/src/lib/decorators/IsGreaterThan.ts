@@ -1,8 +1,8 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isGreaterThanFinite, isString } from "@fireflysemantics/validatorts";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the property value
@@ -19,6 +19,10 @@ export function IsGreaterThan(target: number | string, validationOptions?: Valid
     const validationParameters:any[] = [];
     validationParameters.push(target);
 
+    function messageFunction(vc: ValidationContext) {
+      return `should be greater than ${vc.validationParameters[0]}`
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -27,7 +31,7 @@ export function IsGreaterThan(target: number | string, validationOptions?: Valid
       validateValue,
       undefined,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -49,22 +53,4 @@ export function validateValue(vc:ValidationContext, o:any):boolean {
     target = o[target];
   }
   return !!isGreaterThanFinite(o[vc.propertyName], <number>target).value;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isGreaterThan}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-
-  const messageLiteral: string = `should be greater than ${vc.validationParameters[0]}`;
-
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
 }

@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isArray } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the property is an Array.
@@ -14,7 +14,11 @@ import { errorMessageTemplate } from "..";
  */
 export function IsArray(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
-    
+
+    function messageFunction(vc: ValidationContext) {
+      return "should be an array"
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -23,7 +27,7 @@ export function IsArray(validationOptions?: ValidationOptions) {
       validateValue,
       undefined,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
@@ -40,17 +44,4 @@ export function IsArray(validationOptions?: ValidationOptions) {
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   return !!isArray(o[vc.propertyName]).value
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link IsArray}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should be an array";
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

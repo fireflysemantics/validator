@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isNotSuperString } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the property value does not contain
@@ -19,6 +19,10 @@ export function IsNotSuperString(target: string, validationOptions?: ValidationO
     const validationParameters:any[] = [];
     validationParameters.push(target);
 
+    function messageFunction(vc: ValidationContext) {
+      return "should not contain the target string"
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -27,7 +31,7 @@ export function IsNotSuperString(target: string, validationOptions?: ValidationO
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -62,17 +66,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isNotSuperString}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should not contain the target string";
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

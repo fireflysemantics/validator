@@ -1,9 +1,8 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isDivisibleBy } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the property is divisible by the argument.  
@@ -19,6 +18,11 @@ export function IsDivisibleBy(target: number, validationOptions?: ValidationOpti
     const validationParameters:any[] = [];
     validationParameters.push(target);
 
+    function messageFunction(vc: ValidationContext) {
+      return `should be a divisible by ${vc.validationParameters[0]}`
+    }
+
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -27,7 +31,7 @@ export function IsDivisibleBy(target: number, validationOptions?: ValidationOpti
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -62,18 +66,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isDivisibleBy}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = `should be a divisible by ${vc.validationParameters[0]}`;
-  return  errorMessageTemplate(vc, o, messageLiteral)
-
 }

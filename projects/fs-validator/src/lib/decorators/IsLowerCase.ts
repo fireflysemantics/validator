@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isLowercase } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the property is lowercase.  
@@ -12,6 +12,10 @@ import { errorMessageTemplate } from "..";
 export function IsLowerCase(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     
+    function messageFunction(vc: ValidationContext) {
+      return "should be lowercase"
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -20,7 +24,7 @@ export function IsLowerCase(validationOptions?: ValidationOptions) {
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
@@ -52,17 +56,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isLowercase}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should be lowercase";
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

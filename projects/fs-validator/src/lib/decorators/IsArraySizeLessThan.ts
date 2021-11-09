@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isArraySizeLessThan } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks that the size of the array property is less than the argument.  
@@ -18,6 +18,10 @@ export function IsArraySizeLessThan(target: number, validationOptions?: Validati
     const validationParameters:any[] = [];
     validationParameters.push(target);
 
+    function messageFunction(vc: ValidationContext) {
+      return `should have an array size less than ${vc.validationParameters[0]}`
+    }
+  
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -26,7 +30,7 @@ export function IsArraySizeLessThan(target: number, validationOptions?: Validati
       validateValue,
       undefined,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -45,18 +49,4 @@ export function IsArraySizeLessThan(target: number, validationOptions?: Validati
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const constraint:number = vc.validationParameters[0];
   return !!isArraySizeLessThan(o[vc.propertyName], constraint).value;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isArraySizeLessThan}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = `should have an array size less than ${vc.validationParameters[0]}`;
-  return  errorMessageTemplate(vc, o, messageLiteral)
-
 }

@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isArrayUnique } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**a
  * Decorator that checks that the property is an array
@@ -15,7 +15,11 @@ import { errorMessageTemplate } from "..";
  */
 export function IsArrayUnique(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
-    
+
+    function messageFunction(vc: ValidationContext) {
+      return "should be an array with unique values"
+    }
+      
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -24,7 +28,7 @@ export function IsArrayUnique(validationOptions?: ValidationOptions) {
       validateValue,
       undefined,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
@@ -41,17 +45,4 @@ export function IsArrayUnique(validationOptions?: ValidationOptions) {
  */
 export function validateValue(vc:ValidationContext, o:any):boolean {
   return !!isArrayUnique(o[vc.propertyName]).value;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isArrayUnique}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should be an array with unique values";
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

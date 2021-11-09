@@ -1,10 +1,9 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isByteLength } from "@fireflysemantics/validatorts";
 import { isDefined } from "@fireflysemantics/validatorts"; 
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * TODO ... Fix this implementation ... moved to 
@@ -30,6 +29,10 @@ export function IsByteLength(min: number, max?: number, validationOptions?: Vali
       validationParameters.push(Infinity);
     }
 
+    function messageFunction(vc: ValidationContext) {
+      return `byte length should in range [${vc.validationParameters[0]}-${vc.validationParameters[1]}]`
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -38,7 +41,7 @@ export function IsByteLength(min: number, max?: number, validationOptions?: Vali
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -77,17 +80,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isByteLength}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = `byte length should in range [${vc.validationParameters[0]}-${vc.validationParameters[1]}]`;
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

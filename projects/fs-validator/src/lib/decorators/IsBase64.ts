@@ -1,9 +1,8 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isBase64 } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the value is base 64 encoded.  
@@ -15,6 +14,10 @@ import { errorMessageTemplate } from "..";
  */
 export function IsBase64(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
+
+    function messageFunction(vc: ValidationContext) {
+      return "should be base 64 encoded"
+    }
     
     const vc: ValidationContext = new ValidationContext(
       object,
@@ -24,7 +27,7 @@ export function IsBase64(validationOptions?: ValidationOptions) {
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
@@ -56,18 +59,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isBase64}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should be base 64 encoded";
-  return  errorMessageTemplate(vc, o, messageLiteral)
-
 }

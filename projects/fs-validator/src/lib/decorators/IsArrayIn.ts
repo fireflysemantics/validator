@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isArrayContainerOf } from "@fireflysemantics/validatorts";
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the array valued property
@@ -22,11 +22,15 @@ import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
  * ```
  */
 export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) {
-
   const validationParameters:any[] = [];
   validationParameters.push(target);
 
   return function(object: any, propertyName: string) {
+
+    function messageFunction(vc: ValidationContext) {
+      return "should be contained in the target array"
+    }
+  
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -35,7 +39,7 @@ export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) 
       validateValue,
       undefined,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -55,21 +59,4 @@ export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) 
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
   return !!isArrayContainerOf(target, o[vc.propertyName] ).value;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link arrayContains}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should be contained in the target array";
-
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`;
 }

@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions"
 import { ValidationContext } from "../ValidationContext"
 import { ValidationContainer } from "../ValidationContainer"
 import { isInArray } from "@fireflysemantics/validatorts";
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants"
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the property value
@@ -22,6 +22,11 @@ export function IsValueNotIn(
   validationParameters.push(target)
 
   return function(object: any, propertyName: string) {
+
+    function messageFunction(vc: ValidationContext) {
+      return "should not be in the target array"
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -30,7 +35,7 @@ export function IsValueNotIn(
       validateValue,
       undefined,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     )
@@ -66,21 +71,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
     }
   })
   return errorIndex
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link IsNotIn}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should not be in the target array"
-
-  if (o[vc.propertyName] instanceof Array) {
-    return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`
-  }
-  return `${PREFIX_SINGLE} ${vc.propertyName} ${messageLiteral}`
 }

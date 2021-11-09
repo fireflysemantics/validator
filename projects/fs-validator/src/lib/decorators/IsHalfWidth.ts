@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isHalfWidth } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that check if the property contains any half-width chars.  
@@ -15,6 +15,10 @@ import { errorMessageTemplate } from "..";
 export function IsHalfWidth(validationOptions?: ValidationOptions) {
   return function(object: any, propertyName: string) {
     
+    function messageFunction(vc: ValidationContext) {
+      return "should contain half width characters"
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -23,7 +27,7 @@ export function IsHalfWidth(validationOptions?: ValidationOptions) {
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions
     );
     ValidationContainer.addMetaClassAndPropertyIfAbsent(object, propertyName);
@@ -56,17 +60,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isHalfWidth}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should contain half width characters";
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

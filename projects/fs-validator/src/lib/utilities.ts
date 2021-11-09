@@ -58,9 +58,31 @@ export function getValidationContextSignature(
  * @param messageLiteral The message literal
  * @return The error message. 
  */
- export function errorMessageTemplate(vc: ValidationContext, o: any, messageLiteral: string): string {
+export function errorMessageTemplate(vc: ValidationContext, o: any, messageLiteral: string): string {
   if (o[vc.propertyName] instanceof Array) {
     return `${PREFIX_EACH} ${vc.propertyName} ${messageLiteral}`;
   }
   return `${PREFIX_SINGLE} ${vc.propertyName}, ${o[vc.propertyName]}, ${messageLiteral}`;
+}
+
+/**
+ * The generated error message string indicating 
+ * that the value is not valid according to {@link isAfterInstant}.
+ * 
+ * @param vc The validation context
+ * @param messageFunction The message literal
+ * @return The error message. 
+ */
+export function errorMessage(messageFunction: (vc:ValidationContext)=>string) {
+  /**
+   * The generated error message string indicating 
+   * that the value is not valid according to {@link isAfterInstant}.
+   * 
+   * @param vc The validation context
+   * @param o The object being validated
+   * @return The error message. 
+   */
+  return function errorMessage(vc: ValidationContext, o: any): string {
+    return errorMessageTemplate(vc, o, messageFunction(vc))
+  }
 }

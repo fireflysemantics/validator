@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isInArray } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the array value
@@ -15,6 +15,12 @@ export function IsValueIn(target: any[], validationOptions?: ValidationOptions) 
   const validationParameters:any[] = [];
   validationParameters.push(target);
 
+  function messageFunction(vc: ValidationContext) {
+    let target:any[] = vc.validationParameters[0];
+    target = target.map(v=>v.trim()+" ")
+     return `should be in [ ${target} ]`
+  }
+
   return function(object: any, propertyName: string) {
     const vc: ValidationContext = new ValidationContext(
       object,
@@ -24,7 +30,7 @@ export function IsValueIn(target: any[], validationOptions?: ValidationOptions) 
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -60,20 +66,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isIn}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-
-  let target:any[] = vc.validationParameters[0];
-  target = target.map(v=>v.trim()+" ")
-  const messageLiteral: string = `should be in [ ${target} ]`;
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isArraySizeGreaterThan } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the size of the array property is greater than the argument.  
@@ -14,10 +14,15 @@ import { errorMessageTemplate } from "..";
  * @param validationOptions The validation options
  */
 export function IsArraySizeGreaterThan(target: number, validationOptions?: ValidationOptions) {
+
   return function(object: any, propertyName: string) {
     const validationParameters:any[] = [];
     validationParameters.push(target);
 
+    function messageFunction(vc: ValidationContext) {
+      return `should have an array size greater than ${vc.validationParameters[0]}`
+    }
+  
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -26,7 +31,7 @@ export function IsArraySizeGreaterThan(target: number, validationOptions?: Valid
       validateValue,
       undefined,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -45,17 +50,4 @@ export function IsArraySizeGreaterThan(target: number, validationOptions?: Valid
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const constraint:number = vc.validationParameters[0];
   return !!isArraySizeGreaterThan(o[vc.propertyName], constraint).value;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isArraySizeGreaterThan}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = `should have an array size greater than ${vc.validationParameters[0]}`;
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

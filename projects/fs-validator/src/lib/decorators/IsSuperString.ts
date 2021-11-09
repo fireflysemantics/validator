@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isSuperString } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the property value is a superstring
@@ -19,6 +19,10 @@ export function IsSuperString(target: string, validationOptions?: ValidationOpti
     const validationParameters:any[] = [];
     validationParameters.push(target);
 
+    function messageFunction(vc: ValidationContext) {
+      return `should be a superstring of ${vc.validationParameters[0]}`
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -27,7 +31,7 @@ export function IsSuperString(target: string, validationOptions?: ValidationOpti
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -62,17 +66,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isSuperString}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = `should be a superstring of ${vc.validationParameters[0]}`;
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

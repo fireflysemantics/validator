@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isIP } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the property value
@@ -16,6 +16,10 @@ export function IsIP(version?: number, validationOptions?: ValidationOptions) {
     const validationParameters:any[] = [];
     validationParameters.push(version);
 
+    function messageFunction(vc: ValidationContext) {
+      return "should be an IP address"
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -24,7 +28,7 @@ export function IsIP(version?: number, validationOptions?: ValidationOptions) {
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -66,17 +70,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isIP}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should be an IP address";
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

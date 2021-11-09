@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isArrayContainerOf } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * The {@link IsArrayContainerOf} decorator 
@@ -12,6 +12,10 @@ import { errorMessageTemplate } from "..";
  * @param validationOptions The validation options
  */
 export function IsArrayContainerOf(target: any[], validationOptions?: ValidationOptions) {
+
+  function messageFunction(vc: ValidationContext) {
+    return "should be a container of the target array"
+  }
 
   const validationParameters:any[] = [];
   validationParameters.push(target);
@@ -25,7 +29,7 @@ export function IsArrayContainerOf(target: any[], validationOptions?: Validation
       validateValue,
       undefined,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -42,17 +46,4 @@ export function IsArrayContainerOf(target: any[], validationOptions?: Validation
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
   return !!isArrayContainerOf(o[vc.propertyName], target).value;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isArrayContainerOf}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should be a container of the target array";
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

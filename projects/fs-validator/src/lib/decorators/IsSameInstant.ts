@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isSameInstant } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the property is the same time moment as the argument.  
@@ -18,6 +18,10 @@ export function IsSameInstant(target: Date, validationOptions?: ValidationOption
     const validationParameters:any[] = [];
     validationParameters.push(target);
 
+    function messageFunction(vc: ValidationContext) {
+      return `should equal the moment ${vc.validationParameters[0]}`
+    }
+
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -26,7 +30,7 @@ export function IsSameInstant(target: Date, validationOptions?: ValidationOption
       validateValue,
       validateArray,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -62,17 +66,4 @@ export function validateArray(vc:ValidationContext, values:any[]):Array<Number> 
     }
   });
   return errorIndex;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link isSameInstant}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = `should equal the moment ${vc.validationParameters[0]}`;
-  return  errorMessageTemplate(vc, o, messageLiteral)
 }

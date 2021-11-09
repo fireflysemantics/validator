@@ -5,8 +5,9 @@ import { validateProperty } from "../validate"
 import { hasLength } from "../utilities/hasLength"
 
 /**
- * The {@link IfValid} decorator checks if the `target` argument 
- * is a valid property before proceeding with the validation 
+ * The {@link IfValid} decorator checks whether 
+ * the `target` argument is a valid property 
+ * before proceeding with the validation 
  * of the property decorated.
  *
  * ### Example

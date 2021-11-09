@@ -2,7 +2,7 @@ import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
 import { isArrayContainerOf } from "@fireflysemantics/validatorts";
-import { errorMessageTemplate } from "..";
+import { errorMessage } from "..";
 
 /**
  * Decorator that checks if the array value
@@ -11,11 +11,15 @@ import { errorMessageTemplate } from "..";
  * @param validationOptions The validation options
  */
 export function IsArrayNotIn(target: any[], validationOptions?: ValidationOptions) {
-
   const validationParameters:any[] = [];
   validationParameters.push(target);
 
   return function(object: any, propertyName: string) {
+
+    function messageFunction(vc: ValidationContext) {
+      return "should not be in the target array"
+    }
+  
     const vc: ValidationContext = new ValidationContext(
       object,
       object.constructor,
@@ -24,7 +28,7 @@ export function IsArrayNotIn(target: any[], validationOptions?: ValidationOption
       validateValue,
       undefined,
       true,
-      errorMessage,
+      errorMessage(messageFunction),
       validationOptions,
       validationParameters
     );
@@ -43,18 +47,4 @@ export function IsArrayNotIn(target: any[], validationOptions?: ValidationOption
 export function validateValue(vc:ValidationContext, o:any):boolean {
   const target:any = vc.validationParameters[0];
   return !isArrayContainerOf(target,o[vc.propertyName]).value;
-}
-
-/**
- * The generated error message string indicating 
- * that the value is not valid according to {@link IsNotIn}.
- * 
- * @param vc The validation context
- * @param o The object being validated
- * @return The error message. 
- */
-export function errorMessage(vc: ValidationContext, o: any):string {
-  const messageLiteral: string = "should not be in the target array";
-  return  errorMessageTemplate(vc, o, messageLiteral)
-
 }
