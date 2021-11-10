@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is not equal to the argument.  
  * 
- * See {@link isNotEqualTo} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsNotEqualTo {
+ *     @IsNotEqualTo(1) 
+ *     alpha:any = '2'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

@@ -8,8 +8,13 @@ import { errorMessage } from "..";
  * Decorator that checks if the property value does not contain
  * the substring argument.  
  * 
- * See {@link isNotSuperString} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsNotSuperStringDemo {
+ *     @IsNotSuperString('ABC') 
+ *     alpha = 'AB'
+ * }
+ * ```
  * 
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options

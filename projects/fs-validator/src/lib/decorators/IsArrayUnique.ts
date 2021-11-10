@@ -8,8 +8,13 @@ import { errorMessage } from "..";
  * Decorator that checks that the property is an array
  * and that it is one containing unique values.  
  * 
- * See {@link isArrayUnique} for a description of the method
- * performing the validation.
+ * ### Example
+ * ```
+ *  class isArrayUniqueDemo {
+ *     @IsArrayUnique()
+ *      p0: any[] = [1,2,3]
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

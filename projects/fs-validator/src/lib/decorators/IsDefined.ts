@@ -5,11 +5,17 @@ import { isDefined } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
+ * 
  * Decorator that checks if the property is defined
  * (Not null or undefined).
  * 
- * See {@link isDefined} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsDefinedDemo {
+ *       @IsDefined() 
+ *       d:any = 'defined'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

@@ -8,6 +8,13 @@ import { errorMessage } from "..";
  * Decorator that checks if the array value
  * is in the array of values.
  * 
+ * ### Example
+ *``` 
+ * class IsUUIDDemo {
+ *     @IsUUID() 
+ *     alpha:string = 'A987FBC9-4BED-3078-CF07-9141BA07C9F3'
+ * }
+ * ```
  * @param validationOptions The validation options
  */
 export function IsValueIn(target: any[], validationOptions?: ValidationOptions) {

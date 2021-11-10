@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that check if the property contains any half-width chars.  
  * 
- * See {@link isHalfWidth} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsHalfWidthDemo {
+ *       @IsHalfWidth() 
+ *       e:string = '!"#$%&()<>/+=-_? ~^|.,@`{}[]'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

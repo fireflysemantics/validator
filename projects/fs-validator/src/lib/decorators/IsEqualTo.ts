@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is equal to the argument.  
  * 
- * See {@link isEqualTo} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsEqualToDemo {
+ *       @IsEqualTo('eq') 
+ *       e:string = 'eq'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

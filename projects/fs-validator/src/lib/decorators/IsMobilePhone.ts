@@ -7,11 +7,13 @@ import { errorMessage } from ".."
 /**
  * Decorator that checks if the property is a mobile phone number.  
  * 
- * See {@link MobilePhoneLocale}
- * for the locale options.
- * 
- * See {@link isMobilePhone} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsMobilePhoneDemo {
+ *     @IsMobilePhone('en-US') 
+ *     mobile:any = '19876543210'
+ * }
+ * ```
  * 
  * @param target The target locale for the phone number.
  * @param validationOptions The validation options

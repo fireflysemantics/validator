@@ -8,6 +8,14 @@ import { errorMessage } from "..";
  * Decorator that checks if the property value
  * is an IP.
  * 
+ * ### Example
+ *``` 
+ * class IsIPDemo {
+ *       @IsIP() 
+ *       e:any = '127.0.0.1'
+ * }
+ * ```
+ * 
  * @param version The IP version (Optional: 4 or 6).
  * @param validationOptions The validation options
  */

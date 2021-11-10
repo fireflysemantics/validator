@@ -12,16 +12,16 @@ import { hasLength } from "../utilities/hasLength"
  *
  * ### Example
  *  
- * The property `p0` is not valid and so 
+ * The property `checkMe` is not valid and so 
  * the `@IsDefined` annotation will not 
  * be invoked for the `p1` property: 
  * ```ts
  * class IfValidNotTest1 {
  *    @IsDefined() 
- *    p0: any = null; //Property not valid
+ *    checkMe: any = null; //Property not valid
  *
  *    @IsDefined() 
- *    @IfValid("p0")
+ *    @IfValid("checkMe")
  *    p1: any = null;
  *  }
  *  ```

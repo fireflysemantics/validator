@@ -4,11 +4,15 @@ import { ValidationContainer } from "../ValidationContainer";
 import { isISO8601 } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 /**
- * Decorator that checks if the property is a Date string.  
+ * Decorator that checks if the property is an ISO Date string.  
  * 
- * See {@link isISODateString} for a description of the method
- * performing the validation.
- * 
+ * ### Example
+ *``` 
+ * class IsISODateStringDemo {
+ *     @IsISODateString() 
+ *     date:any = '2009-05-19'
+ * }
+ * ```
  * @param validationOptions The validation options
  */
 export function IsISODateString(validationOptions?: ValidationOptions) {

@@ -7,7 +7,16 @@ import { errorMessage } from "..";
 /**
  * The {@link IsArrayContainerOf} decorator 
  * checks if the `target` argument array
- * values are contained by the decorated property.  
+ * values are contained by the decorated property.
+ *
+ * ### Example
+ *  
+ * ```ts
+ * class IsArrayContainerOfDemo {
+ *     @IsArrayContainerOf([1, 2, 3])
+ *     p0: any[] = [1, 2, 3, 4]
+ * }
+ *  ```
  * 
  * @param validationOptions The validation options
  */

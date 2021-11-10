@@ -5,7 +5,15 @@ import { isBoolean } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the property is an Array.  
+ * Decorator that checks if the property is boolean valued.  
+ * 
+ * ### Example
+ * ```
+ * class IsBooleanDemo {
+ *       @IsBoolean()
+ *       b:boolean = true
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

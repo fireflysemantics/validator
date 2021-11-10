@@ -7,8 +7,13 @@ import { errorMessage, errorMessageTemplate } from "..";
 /**
  * Decorator that checks if the property contains multibyte characters.  
  * 
- * See {@link isMultibyte} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsMultibyteDemo {
+ *     @IsMultibyte() 
+ *     alpha:any = 'ひらがな・カタカナ、．漢字'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

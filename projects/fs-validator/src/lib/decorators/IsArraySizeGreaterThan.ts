@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the size of the array property is greater than the argument.  
  * 
- * See {@link IsArraySizeGreaterThan} for a description of the method
- * performing the validation.
+ * ### Example
+ * ```
+ *  class IsArraySizeGreaterThanDemo {
+ *     @IsArraySizeGreaterThan(2)
+ *      p0: any[] = [1,2,3]
+ * }
+ * ```
  * 
  * @param target The number that the array is being checked against.
  * @param validationOptions The validation options

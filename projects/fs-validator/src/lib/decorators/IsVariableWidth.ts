@@ -7,9 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that check if the property contains any half-width chars.  
  * 
- * See {@link isVariableWidth} for a description of the method
- * performing the validation.
- * 
+ * ### Example
+ *``` 
+ * class IsValueNotInDemo {
+ *       @IsVariableWidth() 
+ *       alpha:string = 'ひらがなカタカナ漢字ABCDE'
+ * }
+ * ```
  * @param validationOptions The validation options
  */
 export function IsVariableWidth(validationOptions?: ValidationOptions) {

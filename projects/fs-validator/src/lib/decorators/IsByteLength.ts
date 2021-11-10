@@ -6,15 +6,16 @@ import { isDefined } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * TODO ... Fix this implementation ... moved to 
- * validatorts ... look at isByteLength from is ...
- * 
  * Decorator that checks if the string byte length
- * is in range.  
+ * is in range.
  * 
- * See {@link isByteLength} for a description of the method
- * performing the validation.
- * 
+ * ### Example
+ *``` 
+ * class IsByteLengthDemo {
+ *       @IsByteLength(0, 4) 
+ *       alpha:string= 'abc'
+ *}
+ * ```
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options
  */

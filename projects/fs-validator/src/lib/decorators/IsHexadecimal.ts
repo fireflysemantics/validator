@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property value is a hexadecimal.  
  * 
- * See {@link isHexadecimal} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsHexadecimalDemo {
+ *       @IsHexadecimal() 
+ *       e:string = 'deadBEEF'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

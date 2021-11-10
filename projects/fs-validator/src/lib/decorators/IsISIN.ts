@@ -7,9 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is a ISIN (stock/security identifier).  
  * 
- * See {@link isISIN} for a description of the method
- * performing the validation.
- * 
+ * ### Example
+ *``` 
+ * class IsISINDemo {
+ *     @IsISIN() 
+ *     alpha:any = 'AU0000XVGZA3'
+ * }
+ * ```
  * @param validationOptions The validation options
  */
 export function IsISIN(validationOptions?: ValidationOptions) {

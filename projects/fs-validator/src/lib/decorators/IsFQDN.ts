@@ -8,8 +8,13 @@ import { errorMessage } from "..";
  * Decorator that checks if the property value is
  * a fully qualified domain name (e.g. example.com).  
  * 
- * See {@link isFQDN} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsFQDNDemo {
+ *       @IsFQDN() 
+ *       e:string = 'example.com'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

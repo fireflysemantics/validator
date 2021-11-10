@@ -8,8 +8,12 @@ import { errorMessage } from "..";
  * Decorator that checks if the value matches
  * the pattern.  
  * 
- * See {@link isMatch} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsPatternMatchDemo {
+ *     @IsPatternMatch(/xyz/) alpha:string = 'xyz'
+ * }
+ * ```
  * 
  * @param pattern The match pattern
  * @param modifiers The modifiers

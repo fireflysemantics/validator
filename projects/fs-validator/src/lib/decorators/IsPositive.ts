@@ -7,8 +7,12 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is positive finite.  
  * 
- * See {@link isPositive} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsPositiveDemo {
+ *     @IsPositive() alpha:any = 1
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

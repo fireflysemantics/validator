@@ -7,6 +7,14 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the string property is an integer.
  * 
+ * ### Example
+ *``` 
+ * class IsIntStringDemo {
+ *       @IsIntString() 
+ *       e:any = '1'
+ * }
+ * ```
+ * 
  * @param IsIntOptions The configuration interface for the options.
  * @param validationOptions The validation options
  */

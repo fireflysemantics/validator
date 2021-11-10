@@ -7,6 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the string contains only letters (a-zA-Z).  
  * 
+ * ### Example
+ *  
+ * ```ts
+ * class IsAlphaDemo {
+ *     @IsAlpha() alpha:string = 'abc'
+ * }
+ *  ```
  * @param validationOptions The validation options
  */
 export function IsAlpha(validationOptions?: ValidationOptions) {

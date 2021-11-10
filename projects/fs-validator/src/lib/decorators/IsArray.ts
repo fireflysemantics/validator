@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is an Array.
  * 
- * See {@link isArray} for a description of the method
- * performing the validation.
+ * ### Example
+ *  
+ * ```ts
+ * class IsArrayDemo {
+ *     @isArray() alpha:any[] = [1,2,3]
+ * }
+ *  ```
  * 
  * @param validationOptions The validation options
  */

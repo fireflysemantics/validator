@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property value is a hex color.  
  * 
- * See {@link isHexColor} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsHexColorDemo {
+ *       @IsHexColor() 
+ *       e:string = 'deadBEEF'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

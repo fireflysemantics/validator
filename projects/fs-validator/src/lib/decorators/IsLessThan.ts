@@ -8,9 +8,19 @@ import { errorMessage } from "..";
  * Decorator that checks if the property value
  * is less than the argument.  
  * 
- * See {@link isLessThan} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsLessThanDemo {
+ *     @IsLessThan(30) 
+ *     secondNumber: number = 40;
+ * }
  * 
+ * class IsLessThanDemo {
+ *     firstNumber: number = 10;
+ *     @IsLessThan('firstNumber') 
+ *     secondNumber: number = 40;
+ * }
+ * ```
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options
  */

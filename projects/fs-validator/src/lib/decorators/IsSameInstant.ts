@@ -5,10 +5,15 @@ import { isSameInstant } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the property is the same time moment as the argument.  
+ * Decorator that checks if the property 
+ * is the same time moment as the argument.  
  * 
- * See {@link isSameInstant} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsPositiveDemo {
+ *     @IsPositive() alpha:any = 1
+ * }
+ * ```
  * 
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options

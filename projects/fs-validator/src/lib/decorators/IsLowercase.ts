@@ -7,6 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is lowercase.  
  * 
+ * ### Example
+ *``` 
+ * class IsLowerCaseDemo {
+ *     @IsLowerCase() 
+ *     l:any = alpha:any = 'abc'
+ * }
+ * ```
  * @param validationOptions The validation options
  */
 export function IsLowerCase(validationOptions?: ValidationOptions) {

@@ -1,4 +1,3 @@
-import { PREFIX_EACH, PREFIX_SINGLE } from "../constants";
 import { ValidationOptions } from "../ValidationOptions";
 import { ValidationContext } from "../ValidationContext";
 import { ValidationContainer } from "../ValidationContainer";
@@ -8,9 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is currency amount.  
  * 
- * See {@link isCurrency} for a description of the method
- * performing the validation.
- * 
+ * ### Example
+ *``` 
+ * class IsCurrencyDemo {
+ *       @IsCurrency() 
+ *       currency:string = '33.30'
+ * }
+ * ```
  * @param validationOptions The validation options
  */
 export function IsCurrency(options?: IsCurrencyOptions, validationOptions?: ValidationOptions) {

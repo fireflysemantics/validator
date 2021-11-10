@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the value is base 64 encoded.  
  * 
- * See {@link isBase64} for a description of the method
- * performing the validation.
+ * ### Example
+ * ```
+ * class IsBase64Demo {
+ *       @IsBase64()
+ *       p0: string = 'Zg=='
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

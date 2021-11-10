@@ -5,10 +5,16 @@ import { isAlphaNumeric } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the string contains only letters (a-zA-Z).  
+ * Decorator that checks if the string 
+ * contains only letters and numbers (a-zA-Z0-9).  
  * 
- * See {@link isAlphaNumeric} for a description of the method
- * performing the validation.
+ * ### Example
+ *  
+ * ```ts
+ * class IsAlphaNumericDemo {
+ *     @IsAlphaNumeric() alpha:string = '1a'
+ * }
+ *  ```
  * 
  * @param validationOptions The validation options
  */

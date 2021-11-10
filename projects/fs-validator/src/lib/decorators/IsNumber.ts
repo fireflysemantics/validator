@@ -7,11 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is a Number.
  * 
- * See {@link IsNumberOptions}
- * for the options configuration details.
- * 
- * See {@link isNumber} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsNumberDemo {
+ *     @IsNumber() 
+ *     alpha:number = 2 
+ * }
+ * ```
  * 
  * @param IsNumberOptions The configuration interface for the options.
  * @param validationOptions The validation options

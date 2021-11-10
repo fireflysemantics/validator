@@ -7,8 +7,14 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is a MongoID.  
  * 
- * See {@link isMongoId} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsMongoIDDemo {
+ *     @IsMongoID('en-US') 
+ *     @IsMongoID() 
+ *     id:string = '507f1f77bcf86cd799439011'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

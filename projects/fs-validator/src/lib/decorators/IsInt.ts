@@ -7,6 +7,14 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is an integer.
  * 
+ * ### Example
+ *``` 
+ * class IsIntDemo {
+ *       @IsInt() 
+ *       e:any = 1
+ * }
+ * ```
+ * 
  * @param validationOptions The validation options
  */
 export function IsInt(validationOptions?: ValidationOptions) {

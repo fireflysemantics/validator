@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is an instance of the target argument.  
  * 
- * See {@link isInstanceOf} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsInstanceOfDemo {
+ *       @IsInstanceOf(Date) 
+ *       e:Date= new Date()
+ * }
+ * ```
  * 
  * @param target The target constructor that the value is being checked against.
  * @param validationOptions The validation options

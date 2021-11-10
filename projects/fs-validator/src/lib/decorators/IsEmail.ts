@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property value is a valid email address.  
  * 
- * See {@link isEmail} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsEmailDemo {
+ *       @IsEmail() 
+ *       e:string = 'joe@example.com'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property array is not empty.  
  * 
- * See {@link isArrayNotEmpty} for a description of the method
- * performing the validation.
+ * ### Example
+ * ```
+ * class IsArrayInDemo {
+ *     @IsArrayIn([1,2,3])
+ *      p0: any[] = [1,2]
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

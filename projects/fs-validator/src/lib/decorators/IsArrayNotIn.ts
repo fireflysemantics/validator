@@ -8,6 +8,14 @@ import { errorMessage } from "..";
  * Decorator that checks if the array value
  * is not in array of allowed values.  
  * 
+ * ### Example
+ * ```
+ * class IsArrayNotInDemo {
+ *     @IsArrayIn([1,2,3])
+ *     p0: any[] = [1,2,4]
+ * }
+ * ```
+ * 
  * @param validationOptions The validation options
  */
 export function IsArrayNotIn(target: any[], validationOptions?: ValidationOptions) {

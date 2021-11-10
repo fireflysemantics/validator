@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the value is in military time format.  
  * 
- * See {@link isMilitaryTime} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsMilitaryTimeDemo {
+ *     @IsMilitaryTime() 
+ *     @IsMilitaryTime() alpha:any = '22:10'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

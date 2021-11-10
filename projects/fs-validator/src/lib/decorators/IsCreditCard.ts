@@ -5,11 +5,16 @@ import { isCreditCard } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the value is fits the creditcard string format pattern.  
+ * Decorator that checks if the value is fits 
+ * the creditcard string format pattern.  
  * 
- * See {@link isCreditCard} for a description of the method
- * performing the validation.
- * 
+ * ### Example
+ *``` 
+ * class IsCreditCardDemo {
+ *       @IsCreditCard() 
+ *       card:string = '375556917985515'
+ * }
+ * ```
  * @param validationOptions The validation options
  */
 export function IsCreditCard(validationOptions?: ValidationOptions) {

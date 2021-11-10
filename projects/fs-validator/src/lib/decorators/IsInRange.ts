@@ -5,11 +5,16 @@ import { isInRange, isDefined } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the string length
- * is in range.  
+ * Decorator that checks if the number
+ * is in range.
  * 
- * See {@link isLengthInRange} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsInRangeDemo {
+ *       @IsInRange(0,1) 
+ *       e:number= 0.5
+ * }
+ * ```
  * 
  * @param min The minimum length.
  * @param max The maximum length.

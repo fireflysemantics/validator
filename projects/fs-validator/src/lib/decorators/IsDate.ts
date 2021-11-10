@@ -7,9 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is a Date.  
  * 
- * See {@link isDate} for a description of the method
- * performing the validation.
- * 
+ * ### Example
+ *``` 
+ * class IsDateDemo {
+ *       @IsDate() 
+ *       d:Date = new Date(0)
+ * }
+ * ```
  * @param validationOptions The validation options
  */
 export function IsDate(validationOptions?: ValidationOptions) {

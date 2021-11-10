@@ -7,8 +7,20 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is before the argument.
  *
- * See {@link isBeforeInstant} for a description of the method
- * performing the validation.
+ * ### Example
+ * ```
+ * class IsBeforeInstantDemoA {
+ *       @IsBeforeInstant(new Date(1))
+ *       before: Date = new Date(0)
+ * }
+ * 
+ * class IsBeforeInstantDemoB {
+ *       @IsBeforeInstant('after')
+ *       before: Date = new Date(0)
+ * 
+ *       after: Date = new Date(1)
+ * }
+ * ```
  *
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options

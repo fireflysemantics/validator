@@ -13,12 +13,10 @@ import { errorMessage } from "..";
  * 
  * ### Example
  * ```
- *  class TestIsArrayIn {
+ * class IsArrayInDemo {
  *     @IsArrayIn([1,2,3])
  *      p0: any[] = [1,2]
- *  }
- * const IAI1 = new TestIsArrayIn()
- * expect(validate(IAI1).valid).toBeTruthy()
+ * }
  * ```
  */
 export function IsArrayIn(target: any[], validationOptions?: ValidationOptions) {

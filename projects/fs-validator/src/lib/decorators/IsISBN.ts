@@ -8,8 +8,13 @@ import { errorMessage } from "..";
  * Decorator that checks if the property value
  * is an ISBN number.  
  * 
- * See {@link isISBN} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsISBNDemo {
+ *       @IsISBN(10) 
+ *       e:any = '3-8362-2119-5'
+ * }
+ * ```
  * 
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options

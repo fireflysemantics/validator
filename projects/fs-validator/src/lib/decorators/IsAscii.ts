@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the string contains only letters (a-zA-Z).  
  * 
- * See {@link isAscii} for a description of the method
- * performing the validation.
+ * ### Example
+ * ```
+ *  class IsAsciiDemo {
+ *     @IsAscii()
+ *      p0: string = 'abc'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

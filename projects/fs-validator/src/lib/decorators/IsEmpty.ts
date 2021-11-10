@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is empty.  
  * 
- * See {@link isEmpty} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsEmptyDemo {
+ *       @IsEmpty() 
+ *       e:string = 'notempty'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

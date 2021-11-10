@@ -8,9 +8,12 @@ import { errorMessage } from "..";
  * Decorator that checks if the property value
  * is not in array of allowed values.  
  * 
- * See {@link isNotIn} for a description of the method
- * performing the validation.
- * 
+ * ### Example
+ *``` 
+ * class IsValueNotInDemo {
+ *       @IsValueNotIn([2,2]) alpha:number = 1
+ * }
+ * ```
  * @param target The array of allow values
  * @param validationOptions The validation options
  */

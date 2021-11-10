@@ -5,11 +5,17 @@ import { isNotSubString } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the property value is not a substring
+ * Decorator that checks if the
+ * property value is not a substring
  * of the argument.  
  * 
- * See {@link isNotSubString} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsNotSubStringDemo {
+ *     @IsNotSubString('AB') 
+ *     alpha = 'ABC'
+ * }
+ * ```
  * 
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options

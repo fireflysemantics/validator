@@ -5,10 +5,15 @@ import { isBooleanString } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the property is a boolean string.  
+ * Decorator that checks if the property is a boolean string.
  * 
- * See {@link isBooleanString} for a description of the method
- * performing the validation.
+ * ### Example
+ * ```
+ * class IsBooleanDemo {
+ *       @IsBoolean()
+ *       b:boolean = true
+ * }
+ * ```  
  * 
  * @param validationOptions The validation options
  */

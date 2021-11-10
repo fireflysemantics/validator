@@ -9,8 +9,13 @@ import { errorMessage } from "..";
  * value (string) contains any full-width
  * chars is defined.  
  * 
- * See {@link isFullWidth} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsFullWidthDemo {
+ *       @IsFullWidth() 
+ *       alpha:string = 'ひらがな・カタカナ、．漢字'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

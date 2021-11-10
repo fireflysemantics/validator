@@ -7,8 +7,12 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is a string.  
  * 
- * See {@link isString} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsStringDemo {
+ *     @IsString() alpha:any = '1'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

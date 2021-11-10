@@ -5,10 +5,16 @@ import { isArraySizeLessThan } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks that the size of the array property is less than the argument.  
+ * Decorator that checks that the size of 
+ * the array property is less than the argument.  
  * 
- * See {@link isArraySizeLessThan} for a description of the method
- * performing the validation.
+ * ### Example
+ * ```
+ *  class IsArraySizeLessThanDemo {
+ *     @IsArraySizeLessThan(2)
+ *      p0: any[] = [1]
+ * }
+ * ```
  * 
  * @param target The number that the array is being checked against.
  * @param validationOptions The validation options

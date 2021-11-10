@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is lowercase.  
  * 
- * See {@link isUppercase} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsUpperCaseDemo {
+ *     @IsUpperCase()
+ *     alpha:string = 'AB'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

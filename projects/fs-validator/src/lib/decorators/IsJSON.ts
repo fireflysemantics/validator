@@ -5,11 +5,15 @@ import { isJSON } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the property is a string.  
+ * Decorator that checks if the property is a JSON string.  
  * 
- * See {@link isJSON} for a description of the method
- * performing the validation.
- * 
+ * ### Example
+ *``` 
+ * class IsJSONDemo {
+ *     @IsJSON() 
+ *     date:any = '{ "key": "value" }'
+ * }
+ * ```
  * @param validationOptions The validation options
  */
 export function IsJSON(validationOptions?: ValidationOptions) {

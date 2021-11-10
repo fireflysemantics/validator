@@ -5,11 +5,17 @@ import { isSuperString } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the property value is a superstring
+ * Decorator that checks if the 
+ * property value is a superstring
  * of the argument.  
  * 
- * See {@link isSuperString} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsSuperStringDemo {
+ *     @IsSuperString('A') 
+ *     alpha:string = 'AB'
+ * }
+ * ```
  * 
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options

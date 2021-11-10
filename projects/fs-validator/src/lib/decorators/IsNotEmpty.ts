@@ -8,8 +8,13 @@ import { errorMessage } from "..";
  * Decorator that checks if the property 
  * is not empty ((!== '', !== null, !== undefined)).  
  * 
- * See {@link isNotEmpty} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsNotEmpty {
+ *     @IsNotEmpty() 
+ *     alpha:any = '2'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

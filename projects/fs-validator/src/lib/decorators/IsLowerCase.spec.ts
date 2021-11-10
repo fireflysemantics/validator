@@ -2,7 +2,7 @@ import { IsLowerCase, ObjectErrors, validate } from ".."
 
 test("IsLowerCase",()=> {
     class IsLowerCaseDemo {
-        @IsLowerCase() alpha:any = '2009-05-19'
+        @IsLowerCase() alpha:any = 'abc'
     }
     const IB = new IsLowerCaseDemo()
 

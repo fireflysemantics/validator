@@ -8,9 +8,19 @@ import { errorMessage } from "..";
  * Decorator that checks if the property value
  * is greater than the argument.  
  * 
- * See {@link isGreaterThan} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsGreaterThanDemo {
+ *       @IsGreaterThan(10) 
+ *       e:number = 20
+ * }
  * 
+ * class IsGreaterThanDemo {
+ *       firstNumber:number = 10
+ *       @IsGreaterThan('firstNumber') 
+ *       secondNumber:number = 20
+ * }
+ * ```
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options
  */

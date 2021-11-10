@@ -5,10 +5,16 @@ import { isSurrogatePair } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the property contains surrogate pairs chars.  
+ * Decorator that checks if the 
+ * property contains surrogate pairs chars.  
  * 
- * See {@link isSurrogatePair } for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsSurrogatePairDemo {
+ *     @IsSurrogatePair()
+ *     alpha:string = '𠮷野𠮷'
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

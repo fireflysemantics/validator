@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is divisible by the argument.  
  * 
- * See {@link isDivisibleBy} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsDivisibleByDemo {
+ *       @IsDivisibleBy(2) 
+ *       d:number = 10
+ * }
+ * ```
  * 
  * @param target The number that the value should be divisible by.
  * @param validationOptions The validation options

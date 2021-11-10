@@ -5,11 +5,15 @@ import { isUUID } from "@fireflysemantics/validatorts";
 import { errorMessage } from "..";
 
 /**
- * Decorator that checks if the property value
- * is less than the argument.  
+ * Decorator that checks the property is a UUID.
  * 
- * See {@link isUUID} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsUUIDDemo {
+ *     @IsUUID() 
+ *     alpha:string = 'A987FBC9-4BED-3078-CF07-9141BA07C9F3'
+ * }
+ * ```
  * 
  * @param target The target version number [3 | 4 | 5].
  * @param validationOptions The validation options

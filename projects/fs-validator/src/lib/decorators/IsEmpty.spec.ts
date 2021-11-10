@@ -1,9 +1,15 @@
-import { IsDivisibleBy, validate } from ".."
+import { IsEmpty, validate } from ".."
 
-test("IsDivisibleBy",()=> {
-    class IsDivisibleByDemo {
-        @IsDivisibleBy(2) alpha:number = 10
+test("IsEmpty",()=> {
+    class IsEmptyDemo {
+        @IsEmpty() alpha:string = ''
     }
-    const IB = new IsDivisibleByDemo()
+    class IsNotEmptyDemo {
+        @IsEmpty() alpha:string = 'notempty'
+    }
+
+    const IB = new IsEmptyDemo()
     expect(validate(IB).valid).toBeTruthy()
+    const INE = new IsNotEmptyDemo()
+    expect(validate(INE).valid).toBeFalsy()
 })

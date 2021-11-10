@@ -7,11 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property value a URL.  
  * 
- * See {@link ValidatorJS.IsURLOptions}
- * for the options configuration details.
- * 
- * See {@link isURL} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsURLDemo {
+ *     @IsURL()
+ *     alpha:string = 'example.com'
+ * }
+ * ```
  * 
  * @param entity The enum the value is being checked against.
  * @param validationOptions The validation options

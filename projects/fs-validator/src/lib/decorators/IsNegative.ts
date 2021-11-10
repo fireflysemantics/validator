@@ -7,8 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is negative.  
  * 
- * See {@link isNegative} for a description of the method
- * performing the validation.
+ * ### Example
+ *``` 
+ * class IsNegativeDemo {
+ *     @IsNegative() 
+ *     alpha:any = -1
+ * }
+ * ```
  * 
  * @param validationOptions The validation options
  */

@@ -24,7 +24,6 @@ import { errorMessage } from "..";
  *    after: Date = new Date(1);
  * }
  *  ```
-
  * 
  * @param target Either a Date instance or the name of the property containing the date used in the comparison.
  * @param validationOptions The validation options

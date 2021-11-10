@@ -7,9 +7,13 @@ import { errorMessage } from "..";
 /**
  * Decorator that checks if the property is a number string.  
  * 
- * See {@link isNumberString} for a description of the method
- * performing the validation.
- * 
+ * ### Example
+ *``` 
+ * class IsNumberStringDemo {
+ *     @IsNumberString() 
+ *     alpha:number = '2'
+ * }
+ * ```
  * @param validationOptions The validation options
  */
 export function IsNumberString(validationOptions?: ValidationOptions) {
