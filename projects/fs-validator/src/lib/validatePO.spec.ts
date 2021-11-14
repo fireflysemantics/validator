@@ -48,5 +48,4 @@ test('validate()', ()=>{
   console.log(OE)
 //  const OES:ObjectErrors[] = validateN([po])
   //console.log(OES)
-  
   })

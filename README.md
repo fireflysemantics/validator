@@ -18,6 +18,7 @@ npm i -S @fireflysemantics/validator @fireflysemantics/validatorts tslib
 
 ## Tutorials
 
+[Firefly Semantics Validator API Basics](https://developer.fireflysemantics.com/tasks/tasks--validator--fireflly-semantics-validator-api-basics)
 - [Validating Typescript Data Transfer Objects with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--validating-typescript-data-transfer-objects-with-firefly-semantics-validator)
 - [Validating Typescript Business Entities with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--validating-typescript-business-entities-with-firefly-semantics-validator%20copy)
 
