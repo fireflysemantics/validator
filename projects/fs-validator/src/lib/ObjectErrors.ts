@@ -10,7 +10,9 @@ export class ObjectErrors {
    * If valid is true, there are no errors and the 
    * errors array will be empty.
    */
-  valid: boolean = true;
+  get valid():boolean {
+    return !this.errors.length
+  };
 
   /**
    * The array of {@link ValidationError} instances.

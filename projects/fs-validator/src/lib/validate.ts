@@ -35,11 +35,8 @@ export function validate(target: any, exclude?: string[]): ObjectErrors {
     if (exclude && exclude.length) {
       properties = mc.properties.filter(p => !exclude.includes(p))
     }
-
     properties.forEach(p => {
-      if (!validateProperty(target, p, oes)) {
-        oes.valid = false;
-      }
+      validateProperty(target, p, oes)
     });
   }
   return oes;
@@ -143,12 +140,10 @@ export function validateProperty(
         );
         if (oes) {
           oes.addValidationError(ve);
-          oes.valid = false;
         }
       }
     } else {
       valid = vc.validateValue(vc, o);
-      if (oes) { oes.valid = valid }
 
       if (!valid && !skipErrorGeneration && !vc.skipErrorGeneration && oes
       ) {

@@ -11,10 +11,12 @@ test("IsISODateString",()=> {
     class IsNotISODateStringDemo {
         @IsISODateString() alpha:any = '2009/05/19'
     }
-    const INB = new IsNotISODateStringDemo()
-    expect(validate(INB).valid).toBeFalsy()
+    const INDS = new IsNotISODateStringDemo()
 
-    let oes:ObjectErrors = validate(INB)
+    expect(validate(INDS).valid).toBeFalsy()
+
+    let oes:ObjectErrors = validate(INDS)
+    //console.log(`THE OES from date string IS ${oes}`)
     expect(oes.valid).toBeFalsy()
     expect(oes.errors[0].message).toContain('2009/05/19')
     //console.log(oes.errors[0])

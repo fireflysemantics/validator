@@ -45,7 +45,6 @@ test("IsAfterInstant", ()=>{
   let oes = new ObjectErrors()
 
   validateProperty(INAI, "after", oes)
-  expect(oes.valid).toBeFalsy()
   expect(oes.getErrors(key_after)).toBeDefined()
   expect(oes.getErrors(key_after).length).toEqual(1)
   expect(oes.getErrors(key_after)[0].errorMessage).toContain('after')

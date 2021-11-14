@@ -24,7 +24,6 @@ describe("IfValid Validation", () => {
 
     let oes = new ObjectErrors();    
     validateProperty(IVT1, "p1", oes);
-    expect(oes.valid).toBeFalsy();
 
     expect(oes.getErrors(key_p0)).toBeUndefined();
     expect(oes.getErrors(key_p1).length).toEqual(1);
@@ -56,10 +55,8 @@ describe("IfValid Validation", () => {
 
     let oes = new ObjectErrors();
     validateProperty(IVT2, "p0", oes);
-    expect(oes.valid).toBeTruthy();
     expect(oes.getErrors(key_p0)).toBeUndefined();
     validateProperty(IVT2, "p1", oes);
-    expect(oes.valid).toBeFalsy();
     expect(oes.getErrors(key_p1)).not.toBeNull();
     expect(oes.getErrors(key_p1)[0].vc.decorator).toEqual("IsDefined");
   });
