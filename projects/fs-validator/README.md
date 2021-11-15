@@ -56,7 +56,9 @@ const errors: ValidationError[] = OES.errors;
 ok(errors.length == 2, 'There should be 2 ValidationErrors created');
 ```
 
-In this case the validation of `secondNumber` depends on the first number.  Thus in order to minimize validation noise, we would like to validate the `secondNumber` only if the first number is valid.  The `@IfValid('firstNumber)` ensures that this will be the case.
+In this case the validation of `secondNumber` depends on the first number.  
+
+We minimize validation noise by triggering validation of `secondNumber` only if the `firstNumber` is valid (`@IfValid('firstNumber')`).
 
 ## Tutorials
 
