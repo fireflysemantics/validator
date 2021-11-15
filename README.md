@@ -6,6 +6,8 @@
 
 Typescript Validation Decorators and Executor.  Click [API](https://fireflysemantics.github.io/validator/modules/validate.html) for the Validation API Typedoc.
 
+If you like the [@fireflysemantics/validator API](https://www.npmjs.com/package/@fireflysemantics/validator) please star our [Github Repository](https://github.com/fireflysemantics/validator).
+
 ## Install
 
 ```
