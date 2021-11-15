@@ -24,7 +24,6 @@ Use the [Stackblitz Starter Demo](https://stackblitz.com/edit/typescript-2rlubt?
 
 See the [Tutorials](https://github.com/fireflysemantics/validator#tutorials) and [Typedoc](https://fireflysemantics.github.io/validator/) for more detailed use API and use case examples.  
 
-
 ```
 import { ok } from 'assert';
 
@@ -67,6 +66,9 @@ We minimize validation noise by triggering validation of `secondNumber` only if 
 - [Validating Typescript Data Transfer Objects with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--validating-typescript-data-transfer-objects-with-firefly-semantics-validator)
 - [Validating Typescript Business Entities with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--validating-typescript-business-entities-with-firefly-semantics-validator)
 
+## Pure Validation API
+
+For the API used to implement the decorators or for pure function that validate see [@fireflysemantics/validatorts](https://www.npmjs.com/package/@fireflysemantics/validatorts).
 
 
 ## Features
