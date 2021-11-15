@@ -18,11 +18,12 @@ npm i -S @fireflysemantics/validator @fireflysemantics/validatorts tslib
 
 ## Use
 
+The [Typedoc](https://fireflysemantics.github.io/validator/) for each decorator contains usage examples.
+
 Use the [Stackblitz Starter Demo](https://stackblitz.com/edit/typescript-2rlubt?file=GreaterThanCheck.ts) for experimentation.  
 
-See the [Tutorials](https://github.com/fireflysemantics/validator#tutorials) and [Typedoc](https://fireflysemantics.github.io/validator/) for more detailed use case examples.  
+See the [Tutorials](https://github.com/fireflysemantics/validator#tutorials) and [Typedoc](https://fireflysemantics.github.io/validator/) for more detailed use API and use case examples.  
 
-The [Typedoc](https://fireflysemantics.github.io/validator/) for each decorator contains usage examples.
 
 ```
 import { ok } from 'assert';
