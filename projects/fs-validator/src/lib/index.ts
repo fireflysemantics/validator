@@ -89,3 +89,4 @@ export { IsValueIn } from "./decorators/IsValueIn";
 export { IsValueNotIn } from "./decorators/IsValueNotIn";
 export { IsVariableWidth } from "./decorators/IsVariableWidth";
 export { getPropertyKey } from './utilities';
+export * from './EntityError'
