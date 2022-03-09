@@ -4,6 +4,40 @@
 
 # @fireflysemantics/validator
 
+```
+/**
+ * Validate Todo Entities Example
+ */
+export class Todo {
+  gid?: string;
+  id?: string;
+
+  @IsString()
+  @IsDefined()
+  public title!: string;
+
+  @IsBoolean()
+  @IsDefined()
+  public completed!: boolean;
+
+  constructor(todo?: any) {
+    if (todo) {
+      Object.assign(this, todo);
+    }
+  }
+}
+
+const todo = new Todo({ completed: 'yup' });
+const todoEntities = [todo];
+const errors: EntityError[] = validateEntities(todoEntities, 'gid');
+```
+
+### Playground 
+
+https://stackblitz.com/edit/typescript-me2ddn
+
+# Introduction
+
 Typescript Validation Decorators and Executor.  Click [API](https://fireflysemantics.github.io/validator/modules/validate.html) for the Validation API Typedoc.
 
 If you like the [@fireflysemantics/validator API](https://www.npmjs.com/package/@fireflysemantics/validator) please star our [Github Repository](https://github.com/fireflysemantics/validator).

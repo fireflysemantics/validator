@@ -49,7 +49,7 @@ import { validateEntities } from './validateEntities';
   };
   
 
-test('createEntityErrors', ()=>{
+test('validateEntities', ()=>{
     const MD0 = new MasterData(md0);
     let OE: ObjectErrors = validate(MD0);
     let errors: ValidationError[] = OE.errors;
@@ -68,10 +68,8 @@ test('createEntityErrors', ()=>{
 
     expect(errors.length).toEqual(1)
   
-    const MDS = [MD1, MD2];
-    let OES: ObjectErrors[] = validateN(MDS);
-  
-    let entityErrors:EntityError[] = validateEntities(OES, 'sku')
+    const MDS = [MD1, MD2];  
+    let entityErrors:EntityError[] = validateEntities(MDS, 'sku')
     expect(entityErrors.length).toEqual(5)
   
     console.log(entityErrors);
