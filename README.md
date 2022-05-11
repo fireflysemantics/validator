@@ -4,6 +4,22 @@
 
 # @fireflysemantics/validator
 
+## Introduction
+
+Typescript Validation Decorators and Executor.  Click [API](https://fireflysemantics.github.io/validator/modules/validate.html) for the Validation API Typedoc.
+
+If you like the [@fireflysemantics/validator API](https://www.npmjs.com/package/@fireflysemantics/validator) please star our [Github Repository](https://github.com/fireflysemantics/validator).
+
+## Tutorials
+
+- [Firefly Semantics Validator API Basics](https://developer.fireflysemantics.com/tasks/tasks--validator--fireflly-semantics-validator-api-basics)
+- [Minimizing Validation Noise with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--minimizing-validation-noise-with-firefly-semantics-validator)
+- [Validating Typescript Data Transfer Objects with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--validating-typescript-data-transfer-objects-with-firefly-semantics-validator)
+- [Validating Typescript Business Entities with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--validating-typescript-business-entities-with-firefly-semantics-validator)
+- [Validating MasterData Entities with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--validating-master-data-entities-with-firefly-semantics-validator)
+
+
+## Example
 ```
 /**
  * Validate Todo Entities Example
@@ -35,12 +51,6 @@ const errors: EntityError[] = validateEntities(todoEntities, 'gid');
 ### Playground 
 
 https://stackblitz.com/edit/typescript-me2ddn
-
-# Introduction
-
-Typescript Validation Decorators and Executor.  Click [API](https://fireflysemantics.github.io/validator/modules/validate.html) for the Validation API Typedoc.
-
-If you like the [@fireflysemantics/validator API](https://www.npmjs.com/package/@fireflysemantics/validator) please star our [Github Repository](https://github.com/fireflysemantics/validator).
 
 ## Install
 
@@ -95,17 +105,6 @@ In this case the validation of `secondNumber` depends on the first number.
 
 We minimize validation noise by triggering validation of `secondNumber` only if the `firstNumber` is valid (`@IfValid('firstNumber')`).
 
-## Tutorials
-
-- [Firefly Semantics Validator API Basics](https://developer.fireflysemantics.com/tasks/tasks--validator--fireflly-semantics-validator-api-basics)
-- [Minimizing Validation Noise with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--minimizing-validation-noise-with-firefly-semantics-validator)
-- [Validating Typescript Data Transfer Objects with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--validating-typescript-data-transfer-objects-with-firefly-semantics-validator)
-- [Validating Typescript Business Entities with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--validating-typescript-business-entities-with-firefly-semantics-validator)
-- [Validating MasterData Entities with Firefly Semantics Validator](https://developer.fireflysemantics.com/tasks/tasks--validator--validating-master-data-entities-with-firefly-semantics-validator)
-
-## Pure Validation API
-
-For the API used to implement the decorators or for pure function that validate see [@fireflysemantics/validatorts](https://www.npmjs.com/package/@fireflysemantics/validatorts).
 
 
 ## Features
@@ -187,6 +186,10 @@ The following decorators:
 - IsValueIn
 - IsValueNotIn
 - IsVariableWidth
+
+## Pure Validation API
+
+For the API used to implement the decorators or for pure functions that validate see [@fireflysemantics/validatorts](https://www.npmjs.com/package/@fireflysemantics/validatorts).
 
 ## Runtime
 
